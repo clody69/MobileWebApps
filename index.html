@@ -1,1 +1,202 @@
-My github Page
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='de'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Verteidigung
+|
+Testgetriebene Softwareentwicklung von Webserver-Anwendungen auf Basis von Ruby on Rails
+</title>
+<meta content='A jQuery library for modern HTML presentations' name='description' />
+<meta content='Caleb Troughton' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='deckjs/core/deck.core.css' rel='stylesheet' />
+<link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
+<link href='deckjs/extensions/menu/deck.menu.css' rel='stylesheet' />
+<link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
+<link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
+<link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<!-- Theme CSS files (menu swaps these out) -->
+<link href='deckjs/themes/style/web-2.0.css' id='style-theme-link' rel='stylesheet' />
+<link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
+<link href='css/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<!-- Custom CSS just for this page -->
+<script src='js/modernizr.custom.js'></script>
+</head>
+<body class='deck-container'>
+<section class='slide' id='title-slide'>
+<h1>
+Verteidigung
+<div class='subtitle'>Testgetriebene Softwareentwicklung von Webserver-Anwendungen auf Basis von Ruby on Rails</div>
+</h1>
+</section>
+<section class='slide' id='toc-slide'>
+<h2>Inhalt</h2>
+<div id='toc'></div>
+</section>
+<section class='slide toc'>
+<h1>Motivation</h1>
+</section>
+<section class='slide' id='pludoni'>
+<h2>Die pludoni GmbH</h2>
+<ul>
+<li>2008 gegründet</li>
+<li>Zielgruppe sind KMU</li>
+<li>bietet Plattformen und Rahmenbedingungen für Bewerberempfehlungen</li>
+<li>z.B. ITsax.de, ITmitte.de und MINTsax.de</li>
+</ul>
+</section>
+<section class='slide'>
+<h2>Motivation</h2>
+<ul>
+<li>Verteiltes und asynchrones Arbeiten</li>
+<li>Legacy-Code verschiedener Programmierer</li>
+<li>zunehmene Komplexität, wenige Tests &rarr; Regressionsfehler</li>
+</ul>
+<ul class='slide'>
+<li>Testgetriebene Entwicklung</li>
+</ul>
+</section>
+
+<section class='slide toc'>
+<h1>Theoretische Grundlagen</h1>
+</section>
+<section class='slide toc'>
+<h2>Automatisierter dynamischer Test</h2>
+<ul>
+<li>Automatisiert - manuell</li>
+<li>dynamisch - statisch</li>
+<li>Test</li>
+</ul>
+</section>
+<section class='slide toc'>
+<h2>TDD - Testgetriebene Entwicklung</h2>
+<ul>
+<li>iterative Entwicklungstechnik</li>
+<li>bekannt durch eXtreme Programming (XP)</li>
+</ul>
+</section>
+<section class='slide red' id='red'>
+<h2>Red</h2>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">test_addition</span>
+  <span class="n">assert_equal</span> <span class="mi">3</span><span class="p">,</span> <span class="no">Adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+<pre class='test-output'>1) Error:&#x000A;test_addition(TestAdder):&#x000A;NameError: uninitialized constant TestAdder::Adder&#x000A;./test/test_adder.rb:3:in `test_addition'&#x000A;<strong class='red'>1 tests, 0 assertions, 0 failures, 1 errors</strong>&#x000A;</pre>
+</section>
+<section class='slide green' id='green'>
+<h2>Green</h2>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">3</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<pre class='test-output'>Finished in 0.000342 seconds.&#x000A;&#x000A;<strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>&#x000A;&#x000A;</pre>
+</section>
+<section class='slide refactor' id='refactor'>
+<h2>Refactor</h2>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <span class="n">args</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">sum</span><span class="p">,</span> <span class="n">item</span><span class="o">|</span>
+    <span class="n">sum</span> <span class="o">+</span> <span class="n">item</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</section>
+<section class='slide' id='circle'>
+<h2>Kreislauf</h2>
+<div class='image-wrap'><img src='imgs/rgr.jpg'/><div class='caption'>Agile Flash</div>
+</section>
+<section class='slide'>
+<h2>Vorteile</h2>
+</section>
+<section class='slide'>
+<h1>Ruby &amp; Rails</h1>
+</section>
+<section class='slide toc'>
+<h2>Ruby</h2>
+<ul>
+<li>Yukihiro Matsumoto, 1995 v.0.95, 2011 v.1.9.3</li>
+<li>Vielzahl von Implementierungen: MRI, JRuby, Rubininus, <strike>IronRuby</strike>, Blue Ruby</li>
+<li>Anstehende ISO-Standardisierung (ISO/IEC 30170)</li>
+<li>Ziel: Sprache für Menschen, nicht (nur) Maschinen</li>
+<!-- Lesbarkeit, hohes Ziel -->
+</ul>
+</section>
+<section class='slide'>
+<h2>Features</h2>
+<ul>
+<li>dynamisch typisierte Sprache (Skriptsprache)</li>
+<li>OOP, funktional, prozedural</li>
+<li><i>meta programming</i> &rarr; Erweiterung von Klassen zur Laufzeit</li>
+<!-- erlaubt sehr generische und platzsparende Programmierung -->
+</ul>
+</section>
+<section class='slide'>
+<h2>Rails</h2>
+<!-- Etwas ueber Rails sagen: 2006? -->
+<!-- MVC Web-Framework. Unterst -->
+<ul>
+<li>Konzepte: MVC-Muster, DRY, Convention over Configuration</li>
+<!-- was ist CoC, Beispiel, DRY -> Definition der Spalten -->
+<li>Full-Stack Framework</li>
+<!-- Webserver, Templating, Datenbankengine -->
+<li>Gems</li>
+<!-- Große Auswahl von Gems in einer aktiven Community -> Github Forks -->
+<li>Testen hoch priorisiert</li>
+<!-- Testen hat in der RoR C einen hohen Stellenwert -->
+<!-- Testtools liegen schon bei -->
+</ul>
+</section>
+
+<section class='slide toc' id='results'>
+<h1>Ergebnisse</h1>
+</section>
+<section class='slide toc' id='benchmark'>
+<h2>Benchmark</h2>
+</section>
+
+<section class='slide toc' id='fazit'>
+<h1>Fazit</h1>
+</section>
+<section class='slide'>
+<h2>Lessons learned</h2>
+</section>
+<section class='slide'>
+<h2>Ausblick</h2>
+</section>
+
+
+<!-- Elements -->
+<a class='deck-next-link' href='#' title='Weiter'>→</a>
+<a class='deck-prev-link' href='#' title='Zurück'>&#8592;</a>
+<p class='deck-status'>
+<span class='deck-status-current'></span>
+/
+<span class='deck-status-total'></span>
+</p>
+<a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+<script src='js/jquery.min.js'></script>
+<script src='deckjs/core/deck.core.js'></script>
+<script src='deckjs/extensions/menu/deck.menu.js'></script>
+<script src='deckjs/extensions/goto/deck.goto.js'></script>
+<script src='deckjs/extensions/status/deck.status.js'></script>
+<script src='deckjs/extensions/navigation/deck.navigation.js'></script>
+<script src='deckjs/extensions/hash/deck.hash.js'></script>
+<script src='js/main.js'></script>
+<div id='author'>Stefan Wienert</div>
+</body>
+</html>

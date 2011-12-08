@@ -1,0 +1,78 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+$logo-height: 42px;
+$logo-width: 120px;
+
+.deck-container {
+  #title-slide h1 .subtitle {
+    font-size: 50%;
+  }
+
+   .deck-status {
+    font-size: 1.3em;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .slide-footer {
+    position: absolute;
+    bottom: 20px;
+    background-image: url("../imgs/logo.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    padding-left: $logo-width + 50px;
+    height: $logo-height;
+    line-height: $logo-height;
+  }
+}
+.deck-menu .slide-footer {
+  background: none;
+}
+.deck-container section.slide {
+  background: none repeat scroll 0 0 white;
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 1px 2px 20px #ccc;
+  text-shadow: none;
+}
+
+#toc {
+  .H2 {
+    margin-left: 20px;
+    list-style: circle outside none;
+  }
+  a {
+    color: black;
+  }
+}
+
+.caption {
+  font-style: italic;
+  font-variant: small-caps;
+  text-align: center;
+  padding-top: -10px;
+}
+.deck-container pre {
+  border: 1px solid #999999;
+  border-radius: 0;
+}
+
+@import "tdd";
+@import "syntax/colorful";
+@import "fonts";
+.highlight pre{
+  font-family: "UbuntuMonoRegular", monospace;
+}
+.highlight {
+  background: transparent;
+}
+.deck-container {
+  h1, h2 {
+    font-family: "GabrielleRegular", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+  }
+}
+

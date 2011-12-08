@@ -1,0 +1,112 @@
+%section.slide.toc
+  %h1 Theoretische Grundlagen
+
+%section.slide.toc
+  %h2 Automatisierter dynamischer Test
+  %ul
+    %li Automatisiert - manuell
+    %li dynamisch - statisch
+    %li Test
+
+%section.slide.toc
+  %h2 TDD - Testgetriebene Entwicklung
+  %ul
+    %li iterative Entwicklungstechnik
+    %li bekannt durch eXtreme Programming (XP)
+
+%section.slide.red#red
+  %h2 Red
+
+
+  =pygmentize "ruby" do
+    :plain
+      def test_addition
+        assert_equal 3, Adder.add(1,2)
+      end
+  %pre.test-output
+    :preserve
+      1) Error:
+      test_addition(TestAdder):
+      NameError: uninitialized constant TestAdder::Adder
+      ./test/test_adder.rb:3:in `test_addition'
+      <strong class='red'>1 tests, 0 assertions, 0 failures, 1 errors</strong>
+
+%section.slide.green#green
+  %h2 Green
+  =pygmentize "ruby" do
+    :plain
+      class Adder
+        def self.add(a,b)
+          return 3
+        end
+      end
+  %pre.test-output
+    :preserve
+      Finished in 0.000342 seconds.
+
+      <strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>
+
+
+%section.slide.refactor#refactor
+  %h2 Refactor
+  =pygmentize "ruby" do
+    :plain
+      class Adder
+        def self.add(a,b)
+          a + b
+        end
+      end
+  =pygmentize "ruby" do
+    :plain
+      def self.add(*args)
+        args.inject(0) do |sum, item|
+          sum + item
+        end
+      end
+
+
+
+%section.slide#circle
+  %h2 Kreislauf
+  = image_tag_with_caption "imgs/rgr.jpg",  "Agile Flash"
+
+%section.slide
+  %h2 Vorteile
+
+%section.slide
+  %h1 Ruby &amp; Rails
+
+%section.slide.toc
+  %h2 Ruby
+  %ul
+    %li Yukihiro Matsumoto, 1995 v.0.95, 2011 v.1.9.3
+    %li Vielzahl von Implementierungen: MRI, JRuby, Rubininus, <strike>IronRuby</strike>, Blue Ruby
+    %li Anstehende ISO-Standardisierung (ISO/IEC 30170)
+    %li Ziel: Sprache für Menschen, nicht (nur) Maschinen
+    / Lesbarkeit, hohes Ziel
+%section.slide
+  %h2 Features
+  %ul
+    %li dynamisch typisierte Sprache (Skriptsprache)
+    %li OOP, funktional, prozedural
+    %li <i>meta programming</i> &rarr; Erweiterung von Klassen zur Laufzeit
+    / erlaubt sehr generische und platzsparende Programmierung
+
+%section.slide
+  %h2 Rails
+  / Etwas ueber Rails sagen: 2006?
+  / MVC Web-Framework. Unterst
+  %ul
+    %li Konzepte: MVC-Muster, DRY, Convention over Configuration
+    / was ist CoC, Beispiel, DRY -> Definition der Spalten
+    %li Full-Stack Framework
+    / Webserver, Templating, Datenbankengine
+    %li Gems
+    / Große Auswahl von Gems in einer aktiven Community -> Github Forks
+    %li Testen hoch priorisiert
+    / Testen hat in der RoR C einen hohen Stellenwert
+    / Testtools liegen schon bei
+
+
+
+

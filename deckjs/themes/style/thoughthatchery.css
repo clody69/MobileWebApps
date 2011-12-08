@@ -1,0 +1,59 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  color: #444;
+  line-height: 1.25;
+  background-color: #eeeeee;
+}
+
+.deck-container {
+ width: auto;
+ max-width: 864px;
+ margin: 16px auto 24px auto;
+ height: 560px;
+ font-size: 16px;
+ -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+ -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+ background: #cae19f;
+ background: -moz-linear-gradient(top, #cae19f 0%, #879f53 100%);
+ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cae19f), color-stop(100%, #879f53));
+ background: -webkit-linear-gradient(top, #cae19f 0%, #879f53 100%);
+ background: -o-linear-gradient(top, #cae19f 0%, #879f53 100%);
+ background: -ms-linear-gradient(top, #cae19f 0%, #879f53 100%);
+ background: linear-gradient(top, #cae19f 0%, #879f53 100%);
+ background-attachment: fixed;
+ color: #444;
+}
+
+.deck-container .deck-status {
+ color: #333;
+}
+
+.deck-container .th-plug {
+ font-size: 0.6666em;
+}
+
+.deck-container .th-plug {
+ position: absolute;
+ bottom: 10px;
+ left: 5px;
+ color: #eeeeee;
+ z-index: 3;
+ margin: 0;
+}
+
+.deck-container .th-plug a {
+ color: #eeeeee;
+}
+
+body > header {
+ width: 100%;
+ min-height: 32px;
+ background: #333;
+ overflow: hidden;
+ position: relative;
+ z-index: 4;
+}
