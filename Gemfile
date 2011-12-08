@@ -10,7 +10,7 @@ gem "guard"
 gem "guard-compass"
 gem 'guard-shell'
 gem "libnotify"
-
+gem "pygmentize"
 
 
 # gem "rails"

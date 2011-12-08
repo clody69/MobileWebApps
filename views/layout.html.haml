@@ -3,7 +3,7 @@
 /[if IE 7] <html class="no-js ie7" lang="en">
 /[if IE 8] <html class="no-js ie8" lang="en">
 / [if gt IE 8]><!
-%html.no-js(lang="de")
+%html.no-js(lang="en")
   / <![endif]
   %head
     %meta(charset="utf-8")
@@ -29,25 +29,31 @@
 
     / Custom CSS just for this page
     %script(src="js/modernizr.custom.js")
-  %body.deck-container
-    = render "views/slides.html.haml"
-
-    / Elements
-    %a.deck-next-link(href="#" title="Weiter") →
-    %a.deck-prev-link(href="#" title="Zurück") &#8592;
-    %p.deck-status
-      %span.deck-status-current
-      \/
-      %span.deck-status-total
-    %a.deck-permalink{:href => ".", :title => "Permalink to this slide"} #
-
-    %script(src="js/jquery.min.js")
-    %script(src="deckjs/core/deck.core.js")
-    %script(src="deckjs/extensions/menu/deck.menu.js")
-    %script(src="deckjs/extensions/goto/deck.goto.js")
-    %script(src="deckjs/extensions/status/deck.status.js")
-    %script(src="deckjs/extensions/navigation/deck.navigation.js")
-    %script(src="deckjs/extensions/hash/deck.hash.js")
-    %script(src="js/main.js")
-
-    #author=META['author']
+  %body
+    %article.deck-container
+      = render "views/slides.html.haml"
+  
+      / Elements
+      %a.deck-next-link(href="#" title="Next") →
+      %a.deck-prev-link(href="#" title="Previous") &#8592;
+      %p.deck-status
+        %span.deck-status-current
+        \/
+        %span.deck-status-total
+      %a.deck-permalink{:href => ".", :title => "Permalink to this slide"} #
+  
+      %script(src="js/jquery.min.js")
+      %script(src="deckjs/core/deck.core.js")
+      %script(src="deckjs/extensions/menu/deck.menu.js")
+      %script(src="deckjs/extensions/goto/deck.goto.js")
+      %script(src="deckjs/extensions/status/deck.status.js")
+      %script(src="deckjs/extensions/navigation/deck.navigation.js")
+      %script(src="deckjs/extensions/hash/deck.hash.js")
+      %script(src="js/main.js")
+  
+      .slide-footer
+        =META['title']
+        \-
+        =META['author']
+      /#author=META['author']
+      
