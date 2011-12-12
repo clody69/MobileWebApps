@@ -13,8 +13,8 @@ Mobile Web Applications Development
 |
 Building Mobile Web Apps using HTML5
 </title>
-<meta content='A jQuery library for modern HTML presentations' name='description' />
-<meta content='Caleb Troughton' name='author' />
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
 <meta content='width=1024, user-scalable=no' name='viewport' />
 <!-- Core and extension CSS files -->
 <link href='deckjs/core/deck.core.css' rel='stylesheet' />
@@ -30,7 +30,7 @@ Building Mobile Web Apps using HTML5
 <!-- Custom CSS just for this page -->
 <script src='js/modernizr.custom.js'></script>
 </head>
-<body>
+<body class='theme02'>
 <article class='deck-container'>
 <section class='slide' id='title-slide'>
 <h1>
@@ -39,148 +39,174 @@ Mobile Web Applications Development
 </h1>
 </section>
 <section class='slide' id='toc-slide'>
-<h2>Inhalt</h2>
+<h2>Contents</h2>
 <div id='toc'></div>
 </section>
 <section class='slide toc'>
 <h1>Lecture 1: Introduction</h1>
 </section>
-<section class='slide' id='pludoni'>
+<section class='slide'>
+<h2>The Web is Dead!</h2>
+<a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>
+<div class='image-wrap'><img class='resize' src='imgs/the-web-is-dead.jpg'/><div class='caption'>Wired August 2010</div>
+</a>
+</section>
+<section class='slide'>
 <h2>What is a Mobile Web App ?</h2>
+</section>
+<section class='slide'>
+<h2>test autobox</h2>
+<div class='autobox highlight'>
+<p>Testing autobox</p>
+fsdfsdf
+<p>prova</p>
+</div>
+<blockquote class='slide'>
+<p>A web application is</p>
+<p>
+<cite>Wikipedia</cite>
+</p>
+</blockquote>
 <img class='box' height='auto' src='imgs/twitter-web-app.jpg' />
 <p>An application-like web site that is consumable by a modern mobile device</p>
 <p class='slide'>somehow</p>
-<ul>
-<li>2008 gegründet</li>
-<li class='slide'>Zielgruppe sind KMU</li>
-<li class='slide'>bietet Plattformen und Rahmenbedingungen für Bewerberempfehlungen</li>
-<li>z.B. ITsax.de, ITmitte.de und MINTsax.de</li>
-</ul>
-</section>
-<section class='slide'>
-<h2>Motivation</h2>
-<ul>
-<li>Verteiltes und asynchrones Arbeiten</li>
-<li>Legacy-Code verschiedener Programmierer</li>
-<li>zunehmene Komplexität, wenige Tests &rarr; Regressionsfehler</li>
-</ul>
-<ul class='slide'>
-<li>Testgetriebene Entwicklung</li>
-</ul>
 </section>
 
 <section class='slide toc'>
-<h1>Theoretische Grundlagen</h1>
+<h1>Lesson 2:</h1>
 </section>
+
+<section class='slide toc' id='results'>
+<h1>Lesson 3:</h1>
+</section>
+
 <section class='slide toc'>
-<h2>Automatisierter dynamischer Test</h2>
+<h1>Templates</h1>
+</section>
+<section class='slide'>
+<h2>Text with different colors:</h2>
 <ul>
-<li>Automatisiert - manuell</li>
-<li>dynamisch - statisch</li>
-<li>Test</li>
+<li>
+This text contains
+<div class='red'>red</div>
+</li>
+<li>
+This text contains
+<div class='green'>green</div>
+</li>
+<li>
+This text contains
+<div class='blue'>blue</div>
+</li>
+<li>
+This text contains
+<div class='yellow'>yellow</div>
+</li>
 </ul>
 </section>
-<section class='slide toc'>
-<h2>TDD - Testgetriebene Entwicklung</h2>
-<ul>
-<li>iterative Entwicklungstechnik</li>
-<li>bekannt durch eXtreme Programming (XP)</li>
-</ul>
+<section class='slide'>
+<h2>An image</h2>
+<div class='autoimage highlight'>
+<a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>
+<div class='image-wrap'><img class='resize' src='imgs/the-web-is-dead.jpg'/><div class='caption'>Wired August 2010</div>
+</a>
+</div>
 </section>
-<section class='slide red' id='red'>
-<h2>Red</h2>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">test_addition</span>
-  <span class="n">assert_equal</span> <span class="mi">3</span><span class="p">,</span> <span class="no">Adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-<pre class='test-output'>1) Error:&#x000A;test_addition(TestAdder):&#x000A;NameError: uninitialized constant TestAdder::Adder&#x000A;./test/test_adder.rb:3:in `test_addition'&#x000A;<strong class='red'>1 tests, 0 assertions, 0 failures, 1 errors</strong>&#x000A;</pre>
+<section class='slide'>
+<h2>A centered image</h2>
+<div class='autoimage highlight centered'>
+<a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>
+<div class='image-wrap'><img class='resize' src='imgs/the-web-is-dead.jpg'/><div class='caption'>Wired August 2010</div>
+</a>
+</div>
 </section>
-<section class='slide green' id='green'>
-<h2>Green</h2>
+<section class='slide fill'>
+<h2>An image filling the slide</h2>
+<img src='imgs/bernina.jpg' />
+</section>
+<section class='slide'>
+<h2>Slide with code</h2>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">3</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
-<pre class='test-output'>Finished in 0.000342 seconds.&#x000A;&#x000A;<strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>&#x000A;&#x000A;</pre>
+<pre class='test-output'>Finished in 0.000342 seconds.&#x000A;&#x000A;<strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>&#x000A;</pre>
 </section>
-<section class='slide refactor' id='refactor'>
-<h2>Refactor</h2>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-<div class="highlight"><pre><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-  <span class="n">args</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">sum</span><span class="p">,</span> <span class="n">item</span><span class="o">|</span>
-    <span class="n">sum</span> <span class="o">+</span> <span class="n">item</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</section>
-<section class='slide' id='circle'>
-<h2>Kreislauf</h2>
-<div class='image-wrap'><img src='imgs/rgr.jpg'/><div class='caption'>Agile Flash</div>
-</section>
-<section class='slide'>
-<h2>Vorteile</h2>
-</section>
-<section class='slide'>
-<h1>Ruby &amp; Rails</h1>
-</section>
-<section class='slide toc'>
-<h2>Ruby</h2>
-<ul>
-<li>Yukihiro Matsumoto, 1995 v.0.95, 2011 v.1.9.3</li>
-<li>Vielzahl von Implementierungen: MRI, JRuby, Rubininus, <strike>IronRuby</strike>, Blue Ruby</li>
-<li>Anstehende ISO-Standardisierung (ISO/IEC 30170)</li>
-<li>Ziel: Sprache für Menschen, nicht (nur) Maschinen</li>
-<!-- Lesbarkeit, hohes Ziel -->
-</ul>
-</section>
-<section class='slide'>
-<h2>Features</h2>
-<ul>
-<li>dynamisch typisierte Sprache (Skriptsprache)</li>
-<li>OOP, funktional, prozedural</li>
-<li><i>meta programming</i> &rarr; Erweiterung von Klassen zur Laufzeit</li>
-<!-- erlaubt sehr generische und platzsparende Programmierung -->
-</ul>
-</section>
-<section class='slide'>
-<h2>Rails</h2>
-<!-- Etwas ueber Rails sagen: 2006? -->
-<!-- MVC Web-Framework. Unterst -->
-<ul>
-<li>Konzepte: MVC-Muster, DRY, Convention over Configuration</li>
-<!-- was ist CoC, Beispiel, DRY -> Definition der Spalten -->
-<li>Full-Stack Framework</li>
-<!-- Webserver, Templating, Datenbankengine -->
-<li>Gems</li>
-<!-- Große Auswahl von Gems in einer aktiven Community -> Github Forks -->
-<li>Testen hoch priorisiert</li>
-<!-- Testen hat in der RoR C einen hohen Stellenwert -->
-<!-- Testtools liegen schon bei -->
-</ul>
-</section>
+<section class='slide smaller'>
+<h2>Slide with code and smaller font</h2>
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Deck initialization</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">deck</span><span class="p">(</span><span class="s1">&#39;.slide&#39;</span><span class="p">);</span>
 
-<section class='slide toc' id='results'>
-<h1>Ergebnisse</h1>
-</section>
-<section class='slide toc' id='benchmark'>
-<h2>Benchmark</h2>
-</section>
 
-<section class='slide toc' id='fazit'>
-<h1>Fazit</h1>
+  <span class="nx">toc</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;ul id=&quot;toc-ul&quot;&gt;&lt;/ul&gt;&#39;</span><span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.toc h2, .toc h1&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;a /&gt;&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">())</span>
+    <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">tagName</span><span class="p">)</span>
+    <span class="nx">toc</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">)</span>
+  <span class="p">});</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toc&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">toc</span><span class="p">);</span>
+
+  <span class="nx">author</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">span</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;slide-footer&quot; /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">author</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
 </section>
 <section class='slide'>
-<h2>Lessons learned</h2>
+<h2>Testing multicolumns</h2>
+<div class='row'>
+<div class='twoColumn highlight'>
+<p>First Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+<div class='twoColumn highlight'>
+<p>Second Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+</div>
+<div class='row'>
+<div class='threeColumn highlight'>
+<p>First Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+<div class='threeColumn highlight'>
+<p>Second Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+<div class='threeColumn highlight'>
+<p>Third Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+</div>
+<div class='row'>
+<div class='threeColumn highlight'>
+<p>First Column</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+<div class='twoThirds highlight'>
+<p>Second Column spanning 2 cells</p>
+<p>Very long text to test the line wrap at the end of the column</p>
+</div>
+</div>
 </section>
 <section class='slide'>
-<h2>Ausblick</h2>
+<h2>Autobox</h2>
+<div class='autobox'>
+<p>Testing autobox</p>
+<p>with no highlight</p>
+</div>
+<div class='autobox highlight'>
+<p>Testing highlighted autobox</p>
+with multiple
+<p>lines</p>
+</div>
 </section>
 
 

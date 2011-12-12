@@ -2,11 +2,11 @@
   overflow-x: hidden;
 }
 .csstransitions.csstransforms .deck-container > .slide {
-  -webkit-transition: -webkit-transform 300ms ease-in-out;
-  -moz-transition: -moz-transform 300ms ease-in-out;
-  -ms-transition: -ms-transform 300ms ease-in-out;
-  -o-transition: -o-transform 300ms ease-in-out;
-  transition: transform 300ms ease-in-out;
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  -moz-transition: -moz-transform 500ms ease-in-out;
+  -ms-transition: -ms-transform 500ms ease-in-out;
+  -o-transition: -o-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
 }
 .csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide {
   position: absolute;
@@ -22,11 +22,11 @@
   position: relative;
   left: 0;
   top: 0;
-  -webkit-transition: -webkit-transform 300ms ease-in-out, opacity 300ms ease-in-out;
-  -moz-transition: -moz-transform 300ms ease-in-out, opacity 300ms ease-in-out;
-  -ms-transition: -ms-transform 300ms ease-in-out, opacity 300ms ease-in-out;
-  -o-transition: -o-transform 300ms ease-in-out, opacity 300ms ease-in-out;
-  transition: -webkit-transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  -webkit-transition: -webkit-transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  -moz-transition: -moz-transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  -ms-transition: -ms-transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  -o-transition: -o-transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out, opacity 500ms ease-in-out;
 }
 .csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide .deck-next, .csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide .deck-after {
   visibility: visible;

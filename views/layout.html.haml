@@ -12,8 +12,8 @@
       = META["title"]
       |
       = META["subtitle"]
-    %meta(content="A jQuery library for modern HTML presentations" name="description")
-    %meta(content="Caleb Troughton" name="author")
+    %meta(content="A course on developing mobile web applications with HTML5" name="description")
+    %meta(content="Claudio Riva" name="author")
     %meta(content="width=1024, user-scalable=no" name="viewport")
     / Core and extension CSS files
     %link(href="deckjs/core/deck.core.css" rel="stylesheet")
@@ -29,7 +29,7 @@
 
     / Custom CSS just for this page
     %script(src="js/modernizr.custom.js")
-  %body
+  %body.theme02
     %article.deck-container
       = render "views/slides.html.haml"
   
