@@ -1,0 +1,113 @@
+%section.slide.toc
+  %h1 Templates
+%section.slide
+  %h2 Text with different colors: 
+  %ul
+    %li 
+      This text contains
+      .red red
+    %li
+      This text contains
+      .green green
+    %li
+      This text contains 
+      .blue blue
+    %li
+      This text contains 
+      .yellow yellow
+      
+%section.slide
+  %h2 An image
+  .autoimage.highlight
+    %a(href="http://www.wired.com/magazine/2010/08/ff_webrip/all/1")
+      = image_tag_with_caption "the-web-is-dead.jpg",  "Wired August 2010"
+%section.slide
+  %h2 A centered image
+   
+  .autoimage.highlight.centered
+    %a(href="http://www.wired.com/magazine/2010/08/ff_webrip/all/1")
+      = image_tag_with_caption "the-web-is-dead.jpg",  "Wired August 2010"
+
+%section.slide.fill
+  %h2 An image filling the slide
+  %img(src="imgs/bernina.jpg")
+
+%section.slide
+  %h2 Slide with code
+  =pygmentize "ruby" do
+    :plain
+      class Adder
+        def self.add(a,b)
+          return 3
+        end
+      end
+  %pre.test-output
+    :preserve
+      Finished in 0.000342 seconds.
+
+      <strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>
+
+%section.slide.smaller
+  %h2 Slide with code and smaller font
+  =pygmentize "javascript" do
+    :plain
+      $(function() {
+        // Deck initialization
+        $.deck('.slide');
+      
+      
+        toc = $('<ul id="toc-ul"></ul>');
+        $('.toc h2, .toc h1').each(function(bla) {
+          id = $(this).parent().attr("id")
+          a = $('<a />').attr("href", "#" + id).html($(this).text())
+          li = $('<li />').html(a).attr("class", this.tagName)
+          toc.append(li)
+        });
+        $('#toc').html(toc);
+      
+        author = $('#author').text()
+        $('#author').remove();
+        $('section').each(function() {
+          span = $('<div class="slide-footer" />').html(author)
+          $(this).append(span);
+        });
+      });
+
+
+      
+%section.slide
+  %h2 Testing multicolumns
+  .row
+    .twoColumn.highlight
+      %p First Column
+      %p Very long text to test the line wrap at the end of the column
+    .twoColumn.highlight
+      %p Second Column
+      %p Very long text to test the line wrap at the end of the column
+  .row
+    .threeColumn.highlight
+      %p First Column
+      %p Very long text to test the line wrap at the end of the column
+    .threeColumn.highlight
+      %p Second Column
+      %p Very long text to test the line wrap at the end of the column
+    .threeColumn.highlight
+      %p Third Column
+      %p Very long text to test the line wrap at the end of the column
+  .row
+    .threeColumn.highlight
+      %p First Column
+      %p Very long text to test the line wrap at the end of the column
+    .twoThirds.highlight
+      %p Second Column spanning 2 cells
+      %p Very long text to test the line wrap at the end of the column
+%section.slide
+  %h2 Autobox
+  .autobox
+    %p Testing autobox
+    %p with no highlight
+  .autobox.highlight
+    %p Testing highlighted autobox
+    with multiple 
+    %p lines
+    
