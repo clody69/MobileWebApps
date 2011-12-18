@@ -1,7 +1,30 @@
 
 module PresentationHelper
-  def image_tag_with_caption(img_path, caption)
-    "<div class='image-wrap'><img class='resize' src='imgs/#{img_path}'/><div class='caption'>#{caption}</div>"
+  def render_slide(name)
+    content = render "slides/#{name}.html.haml"
+    if File.exist?('imgs/bg-' + name + '.jpg')
+      content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
+    end
+    content
+  end
+  def image_tag_with_caption(img_path, hsh = {})
+    h = "<div class='image-wrap'>"
+    h += "<img class='resize' src='imgs/#{img_path}' "
+    
+    if hsh[:width]
+      h += "width=#{hsh[:width]} "
+    end  
+    h+= "/>"
+    
+    if hsh[:caption]
+      h += "<div class='caption'>"
+        if hsh[:url]
+          h += "<a href='#{hsh[:url]}'>#{hsh[:caption]}</a></div>"
+        else
+          h += "#{hsh[:caption]}</div>"
+        end
+      end
+    h += "</div>"
   end
   def pygmentize(lexer,&block)
     text = capture_haml do

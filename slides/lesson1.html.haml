@@ -1,14 +1,30 @@
-%section.slide.toc
+%section.slide.section-title
   %h1 Lecture 1: Introduction
-%section.slide
-  %h2 The Web is Dead!
-  %a(href="http://www.wired.com/magazine/2010/08/ff_webrip/all/1")
-    = image_tag_with_caption "the-web-is-dead.jpg",  "Wired August 2010"
 
 %section.slide
-  %h2 What is a Mobile Web App ?
+  %header The Web is Dead!
+  .row 
+    .twoColumn
+      .autoimage
+        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+    .twoColumn
+      .autoimage.centered.slide
+        = image_tag_with_caption "mobile-applications.jpg"
+
 %section.slide
-  %h2 test autobox
+  %header An App for Every Task
+  %article
+    .row
+      .autoimage.slide
+        = image_tag_with_caption "iphone-facebook-2-application.jpg"
+
+%section.slide
+  %header What is a Mobile Web App ?
+  .autoimage.centered.slide
+    = image_tag_with_caption "mobile-applications.jpg" 
+
+%section.slide
+  %header test autobox
   .autobox.highlight
     %p Testing autobox
     fsdfsdf

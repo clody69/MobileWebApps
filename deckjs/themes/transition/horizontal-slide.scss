@@ -66,19 +66,19 @@
 		}
 
 		> .deck-previous {
-			@include translate(-200%);
-		}
-
-		> .deck-before {
 			@include translate(-400%);
 		}
 
+		> .deck-before {
+			@include translate(-600%);
+		}
+
 		> .deck-next {
-			@include translate(200%);
+			@include translate(400%);
 		}
 
 		> .deck-after {
-			@include translate(400%);
+			@include translate(600%);
 		}
 		
 		> .deck-before, > .deck-previous {

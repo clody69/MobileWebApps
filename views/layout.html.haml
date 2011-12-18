@@ -23,13 +23,17 @@
     %link(href="deckjs/extensions/status/deck.status.css" rel="stylesheet")
     %link(href="deckjs/extensions/hash/deck.hash.css" rel="stylesheet")
     / Theme CSS files (menu swaps these out)
-    %link#style-theme-link(href="deckjs/themes/style/web-2.0.css" rel="stylesheet")
+    %link#style-theme-link(href="css/course.css" rel="stylesheet")
     %link#transition-theme-link(href="deckjs/themes/transition/horizontal-slide.css" rel="stylesheet")
     %link(href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css")
 
     / Custom CSS just for this page
     %script(src="js/modernizr.custom.js")
-  %body.theme02
+  %body
+    #background
+      #bg-default.background.front.active
+      #bg-default.background.back
+
     %article.deck-container
       = render "views/slides.html.haml"
   
@@ -52,9 +56,74 @@
       %script(src="deckjs/extensions/hash/deck.scale.js")
       %script(src="js/main.js")
   
-      .slide-footer
-        =META['title']
-        \-
-        =META['author']
-      /#author=META['author']
-      
+      :javascript
+        $(document).bind('deck.change', function(event, from, to) {
+         
+          //alert('Moving from slide ' + from + ' to ' + to);
+          var f = $.deck('getSlide', from).closest('section').attr("data-background");
+          var t = $.deck('getSlide', to).closest('section').attr("data-background");
+          if (t==undefined) { t = "bg-default"; }
+          if (f==undefined) { f = "bg-default"; }
+                 
+          
+          var front = $('#background > .front').first();
+          var back = $('#background > .back').first();
+
+          if (front.hasClass('active')) {
+            if (front.attr('id') == t) { return; }
+
+            back.attr('id',t);
+            front.removeClass('active');
+            back.addClass('active');
+            front.css('opacity',0);
+          } else {
+            if (back.attr('id') == t) { return; }
+  
+            front.attr('id',t);
+            back.removeClass('active');
+            front.addClass('active');
+            front.css('opacity',1);
+          }
+          
+          //last.attr('id',active.attr('id'));
+          //last.css('opacity',1);
+          //active.remove();
+          //$("#background").append('<div class="background active" id="'+t+'" style="opacity: 0; "></div>')
+          //$("#"+t).css('opacity',1);
+          //var el = $("#"+t);
+
+          //active.removeClass('active').addClass('last');
+          //last.removeClass('last').addClass('active');
+          
+          //last.dequeue();
+          //active.dequeue();
+                 
+          //active.css('opacity',0);
+          //alert(last.attr('id'));
+          //active.fadeOut('slow');
+          //last.fadeIn('slow', function() {
+          //});
+          
+          //last.fadeIn('slow');
+          //$("#"+t).css('opacity',1);
+          //last.css('opacity',1);
+          //el = $("#"+t);
+          //el.animate({opacity: 1.0}, 1000);
+       
+          //if (t==undefined && f == undefined) {
+          //} else if (t == f) {
+          //}
+          //else if (t != undefined) {
+          //  $('#background').css("background-image", "url(" + t + ")").fadeIn('slow');
+          //} else if (t == undefined) {
+          //  $('#background').fadeOut('slow');
+          //}
+        });
+          //current = $('body').css("background-image");
+          //alert(current);
+      /.slide-footer
+      /  =META['title']
+      /  \-
+      /  =META['author']
+  
+    

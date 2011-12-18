@@ -1,12 +1,22 @@
-%section#title-slide.slide
+
+
+
+%section.slide.main-title
   %h1
     =META["title"]
-    .subtitle=META["subtitle"]
-%section#toc-slide.slide
-  %h2 Contents
-  #toc
+  %img(src="imgs/HTML5_logo.png")
+  %br
+  %h1.subtitle
+    =META["author"]
+  %h1.subtitle
+    =META["subtitle"]
 
-= render "slides/lesson1.html.haml"
-= render "slides/lesson2.html.haml"
-= render "slides/lesson3.html.haml"
-= render "slides/template.html.haml"
+/%section#toc-slide.slide
+/  %header Contents
+/  #toc
+
+= render_slide  "lesson1"
+= render_slide "lesson2"
+= render_slide "lesson3"
+
+= render_slide "template"
