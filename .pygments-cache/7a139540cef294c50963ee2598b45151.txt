@@ -1,0 +1,22 @@
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Deck initialization</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">deck</span><span class="p">(</span><span class="s1">&#39;.slide&#39;</span><span class="p">);</span>
+
+
+  <span class="nx">toc</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;ul id=&quot;toc-ul&quot;&gt;&lt;/ul&gt;&#39;</span><span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.toc h2, .toc h1&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;a /&gt;&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">())</span>
+    <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">tagName</span><span class="p">)</span>
+    <span class="nx">toc</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">)</span>
+  <span class="p">});</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toc&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">toc</span><span class="p">);</span>
+
+  <span class="nx">author</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">span</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;slide-footer&quot; /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">author</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
