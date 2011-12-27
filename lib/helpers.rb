@@ -14,6 +14,9 @@ module PresentationHelper
     if hsh[:width]
       h += "width=#{hsh[:width]} "
     end  
+    if hsh[:height]
+      h += "height=#{hsh[:height]} "
+    end  
     h+= "/>"
     
     if hsh[:caption]

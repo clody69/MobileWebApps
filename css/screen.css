@@ -1,4 +1,40 @@
-/* line 54, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
+body {
+  overflow: hidden;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  box-pack: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  box-align: center;
+}
+
+/* line 87, ../sass/screen.scss */
+body, html {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical;
+}
+
+/* line 96, ../sass/screen.scss */
 .background {
   position: absolute;
   top: 0;
@@ -11,7 +47,7 @@
   background-size: cover;
 }
 
-/* line 70, ../sass/screen.scss */
+/* line 112, ../sass/screen.scss */
 .front {
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
@@ -21,74 +57,74 @@
   z-index: -1;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .back {
   z-index: -2;
 }
 
-/* line 77, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 #bg-default {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 78, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 #bg-lesson1 {
   background-image: url("../imgs/bg-lesson1.jpg");
 }
 
-/* line 79, ../sass/screen.scss */
+/* line 121, ../sass/screen.scss */
 #bg-lesson2 {
   background-image: url("../imgs/bg-lesson2.jpg");
 }
 
-/* line 80, ../sass/screen.scss */
+/* line 122, ../sass/screen.scss */
 #bg-lesson3 {
   background-image: url("../imgs/bg-lesson3.jpg");
 }
 
-/* line 81, ../sass/screen.scss */
+/* line 123, ../sass/screen.scss */
 #bg-template {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 125, ../sass/screen.scss */
 h1, h2 {
   font-family: "Arial", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
 }
 
 @media all and (min-width: 960px) {
-  /* line 88, ../sass/screen.scss */
+  /* line 130, ../sass/screen.scss */
   .deck-container {
-    width: auto;
-    max-width: 1000px;
-    margin: 16px auto 24px auto;
-    height: 700px;
+    width: 1100px;
+    max-width: 1100px;
+    margin: 15px;
+    height: 650px;
     font-size: 30px;
   }
-  /* line 97, ../sass/screen.scss */
+  /* line 139, ../sass/screen.scss */
   .deck-container .section-title h1 {
     position: absolute;
     top: 200px;
     padding: 30px;
   }
-  /* line 103, ../sass/screen.scss */
+  /* line 145, ../sass/screen.scss */
   .deck-container .slide header {
     position: absolute;
     left: 40px;
     top: 20px;
   }
-  /* line 109, ../sass/screen.scss */
+  /* line 151, ../sass/screen.scss */
   .deck-container .slide > article {
-    margin: 20px 0;
+    margin: 70px 0;
   }
-  /* line 113, ../sass/screen.scss */
+  /* line 155, ../sass/screen.scss */
   .deck-container .slide-footer {
     padding-left: 10px;
     bottom: 15px;
     height: 20px;
     font-size: 60%;
   }
-  /* line 120, ../sass/screen.scss */
+  /* line 162, ../sass/screen.scss */
   .deck-container .deck-status {
     font-size: 90%;
     bottom: 20px;
@@ -96,7 +132,7 @@ h1, h2 {
   }
 }
 @media all and (max-width: 960px) {
-  /* line 130, ../sass/screen.scss */
+  /* line 172, ../sass/screen.scss */
   .deck-container {
     width: auto;
     max-width: 400px;
@@ -104,117 +140,118 @@ h1, h2 {
     height: 320px;
     font-size: 14px;
   }
-  /* line 138, ../sass/screen.scss */
+  /* line 180, ../sass/screen.scss */
   .deck-container .slide > article {
     margin: 20px 0;
   }
-  /* line 142, ../sass/screen.scss */
+  /* line 184, ../sass/screen.scss */
   .deck-container .slide-footer {
     padding-left: 2px;
     bottom: 8px;
     height: 10px;
     font-size: 60%;
   }
-  /* line 148, ../sass/screen.scss */
+  /* line 190, ../sass/screen.scss */
   .deck-container .deck-status {
     font-size: 70%;
     bottom: 10px;
     right: 10px;
   }
 }
-/* line 157, ../sass/screen.scss */
+/* line 199, ../sass/screen.scss */
 .blue {
   color: #0066cc;
   display: inline;
 }
 
-/* line 161, ../sass/screen.scss */
+/* line 203, ../sass/screen.scss */
 .yellow {
   color: #ffd319;
   display: inline;
 }
 
-/* line 165, ../sass/screen.scss */
+/* line 207, ../sass/screen.scss */
 .green {
   color: #008a35;
   display: inline;
 }
 
-/* line 169, ../sass/screen.scss */
+/* line 211, ../sass/screen.scss */
 .red {
   color: red;
   display: inline;
 }
 
-/* line 173, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 .black {
   color: black;
   display: inline;
 }
 
-/* line 177, ../sass/screen.scss */
+/* line 219, ../sass/screen.scss */
 .white {
   color: white;
   display: inline;
 }
 
-/* line 182, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 .left {
   float: left;
 }
 
-/* line 186, ../sass/screen.scss */
+/* line 228, ../sass/screen.scss */
 .hidden {
   visibility: hidden;
 }
 
-/* line 190, ../sass/screen.scss */
+/* line 232, ../sass/screen.scss */
 .singlespace p {
   margin-bottom: 0;
 }
 
-/* line 195, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 .deck-container {
   overflow: visible;
+  /*apply the settings only to the first element contained in .deck-container*/
 }
-/* line 199, ../sass/screen.scss */
+/* line 241, ../sass/screen.scss */
 .deck-container header {
   font-size: 150%;
 }
-/* line 200, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 .deck-container h1 {
   font-size: 200%;
 }
-/* line 201, ../sass/screen.scss */
+/* line 243, ../sass/screen.scss */
 .deck-container .subtitle {
   font-size: 130%;
 }
-/* line 202, ../sass/screen.scss */
+/* line 244, ../sass/screen.scss */
 .deck-container h2 {
   font-size: 150%;
 }
-/* line 203, ../sass/screen.scss */
+/* line 245, ../sass/screen.scss */
 .deck-container .smallest {
   font-size: 40%;
 }
-/* line 204, ../sass/screen.scss */
+/* line 246, ../sass/screen.scss */
 .deck-container .smaller {
   font-size: 60%;
 }
-/* line 205, ../sass/screen.scss */
+/* line 247, ../sass/screen.scss */
 .deck-container .larger {
   font-size: 120%;
 }
-/* line 206, ../sass/screen.scss */
+/* line 248, ../sass/screen.scss */
 .deck-container .largest {
   font-size: 150%;
 }
-/* line 207, ../sass/screen.scss */
+/* line 249, ../sass/screen.scss */
 .deck-container .big {
   font-size: 200%;
 }
-/* line 209, ../sass/screen.scss */
-.deck-container .slide {
+/* line 252, ../sass/screen.scss */
+.deck-container > .slide {
   /* Firefox */
   display: -moz-box;
   -moz-box-pack: center;
@@ -248,17 +285,17 @@ h1, h2 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 223, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 .deck-container .empty {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 227, ../sass/screen.scss */
+/* line 270, ../sass/screen.scss */
 .deck-container .section-title {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 231, ../sass/screen.scss */
+/* line 274, ../sass/screen.scss */
 .deck-container .section-title h1 {
   font-family: "Arial Black";
   color: white;
@@ -270,40 +307,37 @@ h1, h2 {
   font-variant: small-caps;
   text-shadow: black 0 2px 5px;
 }
-/* line 242, ../sass/screen.scss */
+/* line 285, ../sass/screen.scss */
 .deck-container .main-title h1 {
   position: relative;
-  color: black;
-  font-family: 'Open Sans', Arial, sans-serif;
-  text-shadow: rgba(0, 0, 0, 0.3) 2px 2px 1px;
 }
-/* line 248, ../sass/screen.scss */
+/* line 288, ../sass/screen.scss */
 .deck-container .main-title .subtitle {
   color: #666;
 }
-/* line 253, ../sass/screen.scss */
+/* line 293, ../sass/screen.scss */
 .deck-container .slide-footer {
   position: absolute;
   background-repeat: no-repeat;
   background-position: left bottom;
 }
 
-/* line 259, ../sass/screen.scss */
+/* line 299, ../sass/screen.scss */
 .deck-menu .slide-footer {
   background: none;
 }
 
-/* line 264, ../sass/screen.scss */
+/* line 304, ../sass/screen.scss */
 #toc .H2 {
   margin-left: 20px;
   list-style: circle outside none;
 }
-/* line 268, ../sass/screen.scss */
+/* line 308, ../sass/screen.scss */
 #toc a {
   color: black;
 }
 
-/* line 274, ../sass/screen.scss */
+/* line 314, ../sass/screen.scss */
 .deck-container pre {
   border: 1px solid #999999;
   border-radius: 0;
@@ -860,31 +894,31 @@ h2, h1 {
   font-style: normal;
 }
 
-/* line 284, ../sass/screen.scss */
+/* line 324, ../sass/screen.scss */
 .highlight pre {
   font-family: "UbuntuMonoRegular", monospace;
 }
 
-/* line 288, ../sass/screen.scss */
+/* line 328, ../sass/screen.scss */
 .highlight {
   background: transparent;
 }
 
-/* line 292, ../sass/screen.scss */
+/* line 332, ../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 294, ../sass/screen.scss */
+/* line 334, ../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
   margin: 10px;
   display: block;
 }
-/* line 299, ../sass/screen.scss */
+/* line 339, ../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 302, ../sass/screen.scss */
+/* line 342, ../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -904,26 +938,45 @@ h2, h1 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 307, ../sass/screen.scss */
+/* line 346, ../sass/screen.scss */
+.deck-container .justified {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: justify;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: justify;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: justify;
+  box-align: center;
+  -webkit-box-orient: inline-axis;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-flex: 0;
+}
+/* line 350, ../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 313, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 .deck-container .row {
-  width: 960px;
   margin: auto;
   overflow: hidden;
 }
-/* line 318, ../sass/screen.scss */
+/* line 361, ../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 325, ../sass/screen.scss */
+/* line 368, ../sass/screen.scss */
 .deck-container .twoColumn {
   width: 460px;
   margin: 0 10px;
@@ -931,7 +984,7 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 332, ../sass/screen.scss */
+/* line 375, ../sass/screen.scss */
 .deck-container .threeColumn {
   width: 300px;
   margin: 0 10px;
@@ -939,7 +992,7 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 339, ../sass/screen.scss */
+/* line 382, ../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 620px;
@@ -948,12 +1001,12 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 348, ../sass/screen.scss */
+/* line 391, ../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 352, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 .deck-container .autoimage .caption, .deck-container .autoimage .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -961,22 +1014,28 @@ h2, h1 {
   padding-top: -5px;
   color: black;
 }
-/* line 361, ../sass/screen.scss */
+/* line 404, ../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
-  max-height: 500px;
-  max-width: 700px;
   margin: 0px;
 }
-/* line 370, ../sass/screen.scss */
+/* line 413, ../sass/screen.scss */
+.deck-container .half {
+  width: 50%;
+}
+/* line 416, ../sass/screen.scss */
+.deck-container .quarter {
+  width: 25%;
+}
+/* line 419, ../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 378, ../sass/screen.scss */
+/* line 427, ../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border-radius: 30px;

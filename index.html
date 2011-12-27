@@ -23,10 +23,13 @@ Aalto University March 2011
 <link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
 <link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
 <link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<link href='deckjs/extensions/scale/deck.scale2.css' rel='stylesheet' />
+<!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
 <!-- Theme CSS files (menu swaps these out) -->
 <link href='css/course.css' id='style-theme-link' rel='stylesheet' />
 <link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
 <link href='css/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<script src='js/jquery.min.js'></script>
 <!-- Custom CSS just for this page -->
 <script src='js/modernizr.custom.js'></script>
 </head>
@@ -52,30 +55,108 @@ Aalto University March 2011
 <!-- %section#toc-slide.slide -->
 <!-- %header Contents -->
 <!-- #toc -->
+<style type='text/css'>
+  /*<![CDATA[*/
+    @-webkit-keyframes chromelogo-zoom-spin {
+      from { -webkit-transform: rotateX(0deg) scale(1); }
+      to { -webkit-transform: rotateX(360deg) scale(0)  ; }
+    }
+    @-webkit-keyframes chromelogo-spin {
+      from { -webkit-transform: rotate(0deg);}
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes chromelogo-zoom {
+      from { -webkit-transform: scale(1); }
+      to { -webkit-transform: scale(0); }
+    }
+    
+    @-webkit-keyframes chromelogo-move {
+      from { -webkit-transform: translate(0px, 0px); }
+      to { -webkit-transform: translate(700px,-400px); }
+    }
+    @-webkit-keyframes chromelogo-move-zoom {
+      from { -webkit-transform: translate(0px, 0px) scale(1); }
+      to { -webkit-transform: translate(700px,-400px) scale(0); }
+    }   
+    @-webkit-keyframes hide {
+      from { opacity: 0;}
+      to { opacity: 0; }
+    }
+    .chromelogo{
+      -webkit-animation:  chromelogo-spin 1s infinite linear;
+      //animation: chromelogo-spin 12s infinite cubic-bezier(0.9, 0.1, 0.1, 0.9);
+    }
+    .image_move_out {
+      -webkit-animation:  chromelogo-move-zoom 5s cubic-bezier(0.07, 0.1, 0.25, 0.9), hide 0 5s infinite;  
+    }
+    .image_hide {
+      -webkit-animation: hide 0s 6s;
+      }
+  /*]]>*/
+</style>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $("#thewebisdead").bind('click', function(event) {
+        $("#thewebisdead").addClass('chromelogo');
+        $("#thewebisdead_wrapper").addClass('image_move_out');
+        
+        
+      });
+    });
+  //]]>
+</script>
 <section data-background='bg-lesson1' class='slide section-title'>
 <h1>Lecture 1: Introduction</h1>
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>The Web is Dead!</header>
-<div class='row'>
-<div class='twoColumn'>
+<article class='justified'>
 <div class='autoimage'>
 <div class='image-wrap'><img class='resize' src='imgs/the-web-is-dead.jpg' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
 </div>
-</div>
-<div class='twoColumn'>
-<div class='autoimage centered slide'>
+<div class='slide autobox'>
 <div class='image-wrap'><img class='resize' src='imgs/mobile-applications.jpg' /></div>
 </div>
-</div>
-</div>
+</article>
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>An App for Every Task</header>
+<article class='justified'>
+<div class='slide autobox'>
+<div class='image-wrap'><img class='resize' src='imgs/iphone-facebook-2-application.jpg' /></div>
+</div>
+<div class='slide autobox'>
+<div class='image-wrap'><img class='resize' src='imgs/twitter-web-app.jpg' /></div>
+</div>
+<div class='slide autobox'>
+<div class='image-wrap'><img class='resize' src='imgs/weather-app.jpg' /></div>
+</div>
+</article>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>More Time is Spent on Mobile Apps</header>
 <article>
 <div class='row'>
-<div class='autoimage slide'>
-<div class='image-wrap'><img class='resize' src='imgs/iphone-facebook-2-application.jpg' /></div>
+<div class='twoColumn'>
+<div class='autoimage'>
+<div class='image-wrap'><img class='resize' src='imgs/mobile-app-chart.jpg' /></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autoimage'>
+<div class='image-wrap'><img class='resize' src='imgs/mobile-app-chart-2.jpg' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>The Web is Dead!</header>
+<article>
+<div id='thewebisdead_wrapper'>
+<div class='autoimage' id='thewebisdead'>
+<div class='image-wrap'><img class='resize' src='imgs/the-web-is-dead.jpg' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
 </div>
 </div>
 </article>
@@ -102,6 +183,26 @@ fsdfsdf
 <img class='box' height='auto' src='imgs/twitter-web-app.jpg' />
 <p>An application-like web site that is consumable by a modern mobile device</p>
 <p class='slide'>somehow</p>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>More Time is Spent on Mobile Apps</header>
+<article>
+<div class='row'>
+<div class='twoColumn autoimage'>
+<div class='image-wrap'><img class='resize' src='imgs/mobile-app-chart.jpg' /></div>
+</div>
+<div class='twoColumn autoimage'>
+<div class='image-wrap'><img class='resize' src='imgs/mobile-app-chart-2.jpg' /></div>
+</div>
+</div>
+</article>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>Important resources</header>
+<article>
+http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
+http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
+</article>
 </section>
 
 <section data-background='bg-lesson2' class='slide section-title'>
@@ -347,14 +448,14 @@ statements
 <span class='deck-status-total'></span>
 </p>
 <a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
-<script src='js/jquery.min.js'></script>
 <script src='deckjs/core/deck.core.js'></script>
 <script src='deckjs/extensions/menu/deck.menu.js'></script>
 <script src='deckjs/extensions/goto/deck.goto.js'></script>
 <script src='deckjs/extensions/status/deck.status.js'></script>
 <script src='deckjs/extensions/navigation/deck.navigation.js'></script>
 <script src='deckjs/extensions/hash/deck.hash.js'></script>
-<script src='deckjs/extensions/hash/deck.scale.js'></script>
+<script src='deckjs/extensions/scale/deck.scale2.js'></script>
+<!-- /%script(src="deckjs/extensions/notes/deck.notes.js") -->
 <script src='js/main.js'></script>
 <script type='text/javascript'>
   //<![CDATA[

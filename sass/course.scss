@@ -25,8 +25,8 @@
 	//background: rgb(255,255,255); /* Old browsers */
 	//background-attachment: fixed;
 	color: #3F3F3F;
-	> .slide {
-		text-shadow:1px 1px 1px rgba(255,255,255,.5);
+	.slide {
+		//text-shadow:1px 1px 1px rgba(255,255,255,.5);
 	}
 	
 	.slide {
@@ -36,6 +36,7 @@
 
     header {
       color:#0054AB;
+      text-shadow:  rgba(0, 0, 0, .3) 2px 2px 1px; 
       border-bottom:0;
 
       .cssreflections & {
@@ -46,11 +47,16 @@
     }
 		
 		h1 {
-			color:#00248B;
+			//color:#00248B;
+			color: black;
+      font-family: 'Open Sans', Arial, sans-serif;
+      text-shadow:  rgba(0, 0, 0, .3) 2px 2px 1px; 
+
 		}
 
 		h2 {
 			color:#0054AB;
+
 		}
 
 		h3 {

@@ -22,10 +22,15 @@
     %link(href="deckjs/extensions/navigation/deck.navigation.css" rel="stylesheet")
     %link(href="deckjs/extensions/status/deck.status.css" rel="stylesheet")
     %link(href="deckjs/extensions/hash/deck.hash.css" rel="stylesheet")
+    %link(href="deckjs/extensions/scale/deck.scale2.css" rel="stylesheet")
+    // %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet")
+    
     / Theme CSS files (menu swaps these out)
     %link#style-theme-link(href="css/course.css" rel="stylesheet")
     %link#transition-theme-link(href="deckjs/themes/transition/horizontal-slide.css" rel="stylesheet")
     %link(href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css")
+
+    %script(src="js/jquery.min.js")
 
     / Custom CSS just for this page
     %script(src="js/modernizr.custom.js")
@@ -45,15 +50,16 @@
         \/
         %span.deck-status-total
       %a.deck-permalink{:href => ".", :title => "Permalink to this slide"} #
-  
-      %script(src="js/jquery.min.js")
+
+
       %script(src="deckjs/core/deck.core.js")
       %script(src="deckjs/extensions/menu/deck.menu.js")
       %script(src="deckjs/extensions/goto/deck.goto.js")
       %script(src="deckjs/extensions/status/deck.status.js")
       %script(src="deckjs/extensions/navigation/deck.navigation.js")
       %script(src="deckjs/extensions/hash/deck.hash.js")
-      %script(src="deckjs/extensions/hash/deck.scale.js")
+      %script(src="deckjs/extensions/scale/deck.scale2.js")
+      //%script(src="deckjs/extensions/notes/deck.notes.js")
       %script(src="js/main.js")
   
       :javascript

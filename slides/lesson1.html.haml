@@ -1,23 +1,91 @@
+:css
+  @-webkit-keyframes chromelogo-zoom-spin {
+    from { -webkit-transform: rotateX(0deg) scale(1); }
+    to { -webkit-transform: rotateX(360deg) scale(0)  ; }
+  }
+  @-webkit-keyframes chromelogo-spin {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes chromelogo-zoom {
+    from { -webkit-transform: scale(1); }
+    to { -webkit-transform: scale(0); }
+  }
+
+  @-webkit-keyframes chromelogo-move {
+    from { -webkit-transform: translate(0px, 0px); }
+    to { -webkit-transform: translate(700px,-400px); }
+  }
+  @-webkit-keyframes chromelogo-move-zoom {
+    from { -webkit-transform: translate(0px, 0px) scale(1); }
+    to { -webkit-transform: translate(700px,-400px) scale(0); }
+  }   
+  @-webkit-keyframes hide {
+    from { opacity: 0;}
+    to { opacity: 0; }
+  }
+  .chromelogo{
+    -webkit-animation:  chromelogo-spin 1s infinite linear;
+    //animation: chromelogo-spin 12s infinite cubic-bezier(0.9, 0.1, 0.1, 0.9);
+  }
+  .image_move_out {
+    -webkit-animation:  chromelogo-move-zoom 5s cubic-bezier(0.07, 0.1, 0.25, 0.9), hide 0 5s infinite;  
+  }
+  .image_hide {
+    -webkit-animation: hide 0s 6s;
+    }
+  
+:javascript
+  $(function() {
+    $("#thewebisdead").bind('click', function(event) {
+      $("#thewebisdead").addClass('chromelogo');
+      $("#thewebisdead_wrapper").addClass('image_move_out');
+      
+      
+    });
+  });
+
 %section.slide.section-title
   %h1 Lecture 1: Introduction
 
 %section.slide
   %header The Web is Dead!
-  .row 
-    .twoColumn
-      .autoimage
-        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
-    .twoColumn
-      .autoimage.centered.slide
-        = image_tag_with_caption "mobile-applications.jpg"
+  %article.justified
+    .autoimage
+      = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+    .slide.autobox
+      = image_tag_with_caption "mobile-applications.jpg"
+
 
 %section.slide
   %header An App for Every Task
+  %article.justified
+    .slide.autobox
+      = image_tag_with_caption "iphone-facebook-2-application.jpg"
+    .slide.autobox
+      = image_tag_with_caption "twitter-web-app.jpg"
+    .slide.autobox
+      = image_tag_with_caption "weather-app.jpg"
+
+%section.slide
+  %header More Time is Spent on Mobile Apps
   %article
     .row
-      .autoimage.slide
-        = image_tag_with_caption "iphone-facebook-2-application.jpg"
+      .twoColumn
+        .autoimage
+          =image_tag_with_caption "mobile-app-chart.jpg"
+      .twoColumn
+        .autoimage
+          =image_tag_with_caption "mobile-app-chart-2.jpg"
+      
+%section.slide
+  %header The Web is Dead!
+  %article
+    #thewebisdead_wrapper
+      .autoimage#thewebisdead
+        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
 
+ 
 %section.slide
   %header What is a Mobile Web App ?
   .autoimage.centered.slide
@@ -41,5 +109,18 @@
   %p An application-like web site that is consumable by a modern mobile device
   %p.slide somehow
 
+%section.slide
+  %header More Time is Spent on Mobile Apps
+  %article
+    .row
+      .twoColumn.autoimage 
+        =image_tag_with_caption "mobile-app-chart.jpg"
+      .twoColumn.autoimage
+        =image_tag_with_caption "mobile-app-chart-2.jpg"
 
-
+%section.slide
+  %header Important resources
+  %article
+    http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
+    http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
+    
