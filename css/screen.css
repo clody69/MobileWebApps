@@ -115,7 +115,7 @@ h1, h2 {
   }
   /* line 151, ../sass/screen.scss */
   .deck-container .slide > article {
-    margin: 70px 0;
+    margin: 70px 0 0 0;
   }
   /* line 155, ../sass/screen.scss */
   .deck-container .slide-footer {
@@ -142,7 +142,7 @@ h1, h2 {
   }
   /* line 180, ../sass/screen.scss */
   .deck-container .slide > article {
-    margin: 20px 0;
+    margin: 0px 0;
   }
   /* line 184, ../sass/screen.scss */
   .deck-container .slide-footer {
@@ -1013,6 +1013,8 @@ h2, h1 {
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
+  max-height: 500px;
+  max-width: 700px;
   margin: 0px;
 }
 /* line 410, ../sass/screen.scss */

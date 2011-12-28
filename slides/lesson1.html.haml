@@ -50,11 +50,12 @@
 
 %section.slide
   %header The Web is Dead!
-  %article.justified
-    .autoimage
-      = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
-    .slide.autobox
-      = image_tag_with_caption "mobile-applications.jpg"
+  %article
+    .row
+      .twoColumn.autoimage
+        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+      .twoColumn.slide.autobox
+        = image_tag_with_caption "mobile-applications.jpg"
 
 
 %section.slide
