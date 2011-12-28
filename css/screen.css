@@ -899,26 +899,21 @@ h2, h1 {
   font-family: "UbuntuMonoRegular", monospace;
 }
 
-/* line 328, ../sass/screen.scss */
-.highlight {
-  background: transparent;
-}
-
-/* line 332, ../sass/screen.scss */
+/* line 329, ../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 334, ../sass/screen.scss */
+/* line 331, ../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
   margin: 10px;
   display: block;
 }
-/* line 339, ../sass/screen.scss */
+/* line 336, ../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 342, ../sass/screen.scss */
+/* line 339, ../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -938,7 +933,7 @@ h2, h1 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 346, ../sass/screen.scss */
+/* line 343, ../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   display: -moz-box;
@@ -958,55 +953,55 @@ h2, h1 {
   box-orient: horizontal;
   -webkit-box-flex: 0;
 }
-/* line 350, ../sass/screen.scss */
+/* line 347, ../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 356, ../sass/screen.scss */
+/* line 353, ../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 361, ../sass/screen.scss */
+/* line 358, ../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 368, ../sass/screen.scss */
+/* line 365, ../sass/screen.scss */
 .deck-container .twoColumn {
-  width: 460px;
-  margin: 0 10px;
+  width: 500px;
+  margin: 0 20px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 375, ../sass/screen.scss */
+/* line 372, ../sass/screen.scss */
 .deck-container .threeColumn {
-  width: 300px;
+  width: 320px;
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 382, ../sass/screen.scss */
+/* line 379, ../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
-  width: 620px;
+  width: 640px;
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 391, ../sass/screen.scss */
+/* line 388, ../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 395, ../sass/screen.scss */
+/* line 392, ../sass/screen.scss */
 .deck-container .autoimage .caption, .deck-container .autoimage .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -1014,34 +1009,38 @@ h2, h1 {
   padding-top: -5px;
   color: black;
 }
-/* line 404, ../sass/screen.scss */
+/* line 401, ../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
   margin: 0px;
 }
-/* line 413, ../sass/screen.scss */
+/* line 410, ../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 416, ../sass/screen.scss */
+/* line 413, ../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 419, ../sass/screen.scss */
+/* line 416, ../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 427, ../sass/screen.scss */
-.deck-container .bordered {
-  /* use in <div> tags to make a highlighted block */
+/* line 423, ../sass/screen.scss */
+.deck-container .highlight {
+  background: rgba(0, 204, 255, 0.05);
+  padding: 10px;
   border-radius: 30px;
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
-  background: rgba(0, 204, 255, 0.05);
   border: 2px solid rgba(0, 204, 255, 0.1);
-  padding: 10px;
+}
+/* line 432, ../sass/screen.scss */
+.deck-container .bordered {
+  /* use in <div> tags to make a highlighted block */
+  border: 2px solid #3f3f3f;
 }

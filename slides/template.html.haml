@@ -132,36 +132,37 @@
       
 %section.slide
   %header Testing multicolumns
-  .row
-    .twoColumn.highlight
-      %p First Column
-      %p Very long text to test the line wrap at the end of the column
-    .twoColumn.highlight
-      %p Second Column
-      %p Very long text to test the line wrap at the end of the column
-  .row
-    .threeColumn.highlight
-      %p First Column
-      %p Very long text to test the line wrap at the end of the column
-    .threeColumn.highlight
-      %p Second Column
-      %p Very long text to test the line wrap at the end of the column
-    .threeColumn.highlight
-      %p Third Column
-      %p Very long text to test the line wrap at the end of the column
-  .row
-    .threeColumn.highlight
-      %p First Column
-      %p Very long text to test the line wrap at the end of the column
-    .twoThirds.highlight
-      %p Second Column spanning 2 cells
-      %p Very long text to test the line wrap at the end of the column
+  %article
+    .row
+      .twoColumn.bordered
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .twoColumn.bordered
+        %p Second Column
+        %p Very long text to test the line wrap at the end of the column
+    .row
+      .threeColumn.bordered
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .threeColumn.bordered
+        %p Second Column
+        %p Very long text to test the line wrap at the end of the column
+      .threeColumn.bordered
+        %p Third Column
+        %p Very long text to test the line wrap at the end of the column
+    .row
+      .threeColumn
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .twoThirds
+        %p Second Column spanning 2 cells
+        %p Very long text to test the line wrap at the end of the column
 %section.slide
   %header Autobox
   .autobox
     %p Testing autobox
     %p with no highlight
-  .autobox.bordered
+  .autobox.highlight
     %p Testing highlighted autobox
     %p with multiple 
     %p lines
