@@ -1,3 +1,0 @@
-h1. Mobile Web Applications Development with HTML5
-
-This is a test
