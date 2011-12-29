@@ -1,4 +1,4 @@
-/* line 73, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 body {
   overflow: hidden;
   -webkit-box-pack: center;
@@ -11,7 +11,7 @@ body {
   box-align: center;
 }
 
-/* line 87, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 body, html {
   height: 100%;
   margin: 0px;
@@ -34,7 +34,7 @@ body, html {
   box-orient: vertical;
 }
 
-/* line 96, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 .background {
   position: absolute;
   top: 0;
@@ -47,7 +47,7 @@ body, html {
   background-size: cover;
 }
 
-/* line 112, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 .front {
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
@@ -57,43 +57,43 @@ body, html {
   z-index: -1;
 }
 
-/* line 116, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 .back {
   z-index: -2;
 }
 
-/* line 119, ../sass/screen.scss */
+/* line 114, ../sass/screen.scss */
 #bg-default {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 120, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
 #bg-lesson1 {
   background-image: url("../imgs/bg-lesson1.jpg");
 }
 
-/* line 121, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 #bg-lesson2 {
   background-image: url("../imgs/bg-lesson2.jpg");
 }
 
-/* line 122, ../sass/screen.scss */
+/* line 117, ../sass/screen.scss */
 #bg-lesson3 {
   background-image: url("../imgs/bg-lesson3.jpg");
 }
 
-/* line 123, ../sass/screen.scss */
+/* line 118, ../sass/screen.scss */
 #bg-template {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 125, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 h1, h2 {
   font-family: "Arial", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
 }
 
 @media all and (min-width: 960px) {
-  /* line 130, ../sass/screen.scss */
+  /* line 125, ../sass/screen.scss */
   .deck-container {
     width: 1100px;
     max-width: 1100px;
@@ -101,156 +101,158 @@ h1, h2 {
     height: 650px;
     font-size: 30px;
   }
-  /* line 139, ../sass/screen.scss */
+  /* line 134, ../sass/screen.scss */
   .deck-container .section-title h1 {
     position: absolute;
     top: 200px;
     padding: 30px;
   }
-  /* line 145, ../sass/screen.scss */
+  /* line 140, ../sass/screen.scss */
   .deck-container .slide header {
     position: absolute;
     left: 40px;
     top: 20px;
   }
-  /* line 151, ../sass/screen.scss */
+  /* line 146, ../sass/screen.scss */
   .deck-container .slide > article {
     margin: 70px 0 0 0;
   }
-  /* line 155, ../sass/screen.scss */
+  /* line 150, ../sass/screen.scss */
   .deck-container .slide-footer {
     padding-left: 10px;
     bottom: 15px;
     height: 20px;
     font-size: 60%;
   }
-  /* line 162, ../sass/screen.scss */
+  /* line 157, ../sass/screen.scss */
   .deck-container .deck-status {
     font-size: 90%;
     bottom: 20px;
     right: 20px;
   }
 }
-@media all and (max-width: 960px) {
-  /* line 172, ../sass/screen.scss */
+/*
+@media all and (max-width: 960px){
   .deck-container {
+  
     width: auto;
     max-width: 400px;
     margin: 8px auto 12px auto;
     height: 320px;
     font-size: 14px;
-  }
-  /* line 180, ../sass/screen.scss */
-  .deck-container .slide > article {
-    margin: 0px 0;
-  }
-  /* line 184, ../sass/screen.scss */
-  .deck-container .slide-footer {
-    padding-left: 2px;
-    bottom: 8px;
-    height: 10px;
-    font-size: 60%;
-  }
-  /* line 190, ../sass/screen.scss */
-  .deck-container .deck-status {
-    font-size: 70%;
-    bottom: 10px;
-    right: 10px;
+
+    .slide > article {
+      margin: 0px 0;
+    }
+    
+    .slide-footer {
+      padding-left: 2px;
+      bottom: 8px;
+      height: 10px;
+      font-size: 60%;
+    }
+    .deck-status {
+      font-size: 70%;
+      bottom: 10px;
+      right: 10px;
+    }
+  
   }
 }
-/* line 199, ../sass/screen.scss */
+*/
+/* line 194, ../sass/screen.scss */
 .blue {
   color: #0066cc;
   display: inline;
 }
 
-/* line 203, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 .yellow {
   color: #ffd319;
   display: inline;
 }
 
-/* line 207, ../sass/screen.scss */
+/* line 202, ../sass/screen.scss */
 .green {
   color: #008a35;
   display: inline;
 }
 
-/* line 211, ../sass/screen.scss */
+/* line 206, ../sass/screen.scss */
 .red {
   color: red;
   display: inline;
 }
 
-/* line 215, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 .black {
   color: black;
   display: inline;
 }
 
-/* line 219, ../sass/screen.scss */
+/* line 214, ../sass/screen.scss */
 .white {
   color: white;
   display: inline;
 }
 
-/* line 224, ../sass/screen.scss */
+/* line 219, ../sass/screen.scss */
 .left {
   float: left;
 }
 
-/* line 228, ../sass/screen.scss */
+/* line 223, ../sass/screen.scss */
 .hidden {
   visibility: hidden;
 }
 
-/* line 232, ../sass/screen.scss */
+/* line 227, ../sass/screen.scss */
 .singlespace p {
   margin-bottom: 0;
 }
 
-/* line 237, ../sass/screen.scss */
+/* line 232, ../sass/screen.scss */
 .deck-container {
   overflow: visible;
   /*apply the settings only to the first element contained in .deck-container*/
 }
-/* line 241, ../sass/screen.scss */
+/* line 236, ../sass/screen.scss */
 .deck-container header {
   font-size: 150%;
 }
-/* line 242, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 .deck-container h1 {
   font-size: 200%;
 }
-/* line 243, ../sass/screen.scss */
+/* line 238, ../sass/screen.scss */
 .deck-container .subtitle {
   font-size: 130%;
 }
-/* line 244, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 .deck-container h2 {
   font-size: 150%;
 }
-/* line 245, ../sass/screen.scss */
+/* line 240, ../sass/screen.scss */
 .deck-container .smallest {
   font-size: 40%;
 }
-/* line 246, ../sass/screen.scss */
+/* line 241, ../sass/screen.scss */
 .deck-container .smaller {
   font-size: 60%;
 }
-/* line 247, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 .deck-container .larger {
   font-size: 120%;
 }
-/* line 248, ../sass/screen.scss */
+/* line 243, ../sass/screen.scss */
 .deck-container .largest {
   font-size: 150%;
 }
-/* line 249, ../sass/screen.scss */
+/* line 244, ../sass/screen.scss */
 .deck-container .big {
   font-size: 200%;
 }
-/* line 252, ../sass/screen.scss */
+/* line 247, ../sass/screen.scss */
 .deck-container > .slide {
   /* Firefox */
   display: -moz-box;
@@ -285,17 +287,17 @@ h1, h2 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 266, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 .deck-container .empty {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 270, ../sass/screen.scss */
+/* line 265, ../sass/screen.scss */
 .deck-container .section-title {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 274, ../sass/screen.scss */
+/* line 269, ../sass/screen.scss */
 .deck-container .section-title h1 {
   font-family: "Arial Black";
   color: white;
@@ -307,37 +309,37 @@ h1, h2 {
   font-variant: small-caps;
   text-shadow: black 0 2px 5px;
 }
-/* line 285, ../sass/screen.scss */
+/* line 280, ../sass/screen.scss */
 .deck-container .main-title h1 {
   position: relative;
 }
-/* line 288, ../sass/screen.scss */
+/* line 283, ../sass/screen.scss */
 .deck-container .main-title .subtitle {
   color: #666;
 }
-/* line 293, ../sass/screen.scss */
+/* line 288, ../sass/screen.scss */
 .deck-container .slide-footer {
   position: absolute;
   background-repeat: no-repeat;
   background-position: left bottom;
 }
 
-/* line 299, ../sass/screen.scss */
+/* line 294, ../sass/screen.scss */
 .deck-menu .slide-footer {
   background: none;
 }
 
-/* line 304, ../sass/screen.scss */
+/* line 299, ../sass/screen.scss */
 #toc .H2 {
   margin-left: 20px;
   list-style: circle outside none;
 }
-/* line 308, ../sass/screen.scss */
+/* line 303, ../sass/screen.scss */
 #toc a {
   color: black;
 }
 
-/* line 314, ../sass/screen.scss */
+/* line 309, ../sass/screen.scss */
 .deck-container pre {
   border: 1px solid #999999;
   border-radius: 0;
@@ -894,26 +896,26 @@ h2, h1 {
   font-style: normal;
 }
 
-/* line 324, ../sass/screen.scss */
+/* line 319, ../sass/screen.scss */
 .highlight pre {
   font-family: "UbuntuMonoRegular", monospace;
 }
 
-/* line 329, ../sass/screen.scss */
+/* line 324, ../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 331, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
   margin: 10px;
   display: block;
 }
-/* line 336, ../sass/screen.scss */
+/* line 331, ../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 339, ../sass/screen.scss */
+/* line 334, ../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -933,7 +935,7 @@ h2, h1 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 343, ../sass/screen.scss */
+/* line 338, ../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   display: -moz-box;
@@ -947,31 +949,30 @@ h2, h1 {
   display: box;
   box-pack: justify;
   box-align: center;
-  -webkit-box-orient: inline-axis;
+  -webkit-box-orient: horizontal;
   -moz-box-orient: horizontal;
   -o-box-orient: horizontal;
   box-orient: horizontal;
-  -webkit-box-flex: 0;
 }
-/* line 347, ../sass/screen.scss */
+/* line 342, ../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 353, ../sass/screen.scss */
+/* line 348, ../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 358, ../sass/screen.scss */
+/* line 353, ../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 365, ../sass/screen.scss */
+/* line 360, ../sass/screen.scss */
 .deck-container .twoColumn {
   width: 500px;
   margin: 0 20px;
@@ -979,7 +980,11 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 372, ../sass/screen.scss */
+/* line 366, ../sass/screen.scss */
+.deck-container .twoColumn img {
+  max-width: 500px;
+}
+/* line 370, ../sass/screen.scss */
 .deck-container .threeColumn {
   width: 320px;
   margin: 0 10px;
@@ -987,7 +992,11 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 379, ../sass/screen.scss */
+/* line 376, ../sass/screen.scss */
+.deck-container .threeColumn img {
+  max-width: 320px;
+}
+/* line 380, ../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 640px;
@@ -996,12 +1005,16 @@ h2, h1 {
   float: left;
   display: inline;
 }
-/* line 388, ../sass/screen.scss */
+/* line 386, ../sass/screen.scss */
+.deck-container .twoThirds img {
+  max-width: 640px;
+}
+/* line 392, ../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 392, ../sass/screen.scss */
+/* line 396, ../sass/screen.scss */
 .deck-container .autoimage .caption, .deck-container .autoimage .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -1009,7 +1022,7 @@ h2, h1 {
   padding-top: -5px;
   color: black;
 }
-/* line 401, ../sass/screen.scss */
+/* line 405, ../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
@@ -1017,22 +1030,22 @@ h2, h1 {
   max-width: 700px;
   margin: 0px;
 }
-/* line 410, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 413, ../sass/screen.scss */
+/* line 417, ../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 416, ../sass/screen.scss */
+/* line 420, ../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 423, ../sass/screen.scss */
+/* line 427, ../sass/screen.scss */
 .deck-container .highlight {
   background: rgba(0, 204, 255, 0.05);
   padding: 10px;
@@ -1041,7 +1054,7 @@ h2, h1 {
   -webkit-border-radius: 30px;
   border: 2px solid rgba(0, 204, 255, 0.1);
 }
-/* line 432, ../sass/screen.scss */
+/* line 436, ../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border: 2px solid #3f3f3f;

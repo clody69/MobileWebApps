@@ -6,7 +6,7 @@ task :render do
   require "generator"
   include DeckJSBuilder
   build "views/layout.html.haml", "slides.html"
-  #build "views/site.html.haml", "index.html"
+  build "views/site.html.haml", "index.html"
 end
 
 desc "Rebuild SASS/CSS"
