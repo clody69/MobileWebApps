@@ -53,9 +53,9 @@
   %article
     .row
       .twoColumn.autoimage
-        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
       .twoColumn.slide.autobox
-        = image_tag_with_caption "mobile-applications.jpg"
+        = image_tag_with_caption "mobile-applications.jpg", :resize => true
 
 
 %section.slide
@@ -73,18 +73,16 @@
   %article
     .row
       .twoColumn
-        .autoimage
-          =image_tag_with_caption "mobile-app-chart.jpg"
+        =image_tag_with_caption "mobile-app-chart.jpg"
       .twoColumn
-        .autoimage
-          =image_tag_with_caption "mobile-app-chart-2.jpg"
+        =image_tag_with_caption "mobile-app-chart-2.jpg"
       
 %section.slide
   %header The Web is Dead!
   %article
     #thewebisdead_wrapper
       .autoimage#thewebisdead
-        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
 
  
 %section.slide
@@ -98,8 +96,7 @@
     %p Testing autobox
     fsdfsdf
     %p prova
-    
-    
+     
   %blockquote.slide
     %p A web application is
     %p

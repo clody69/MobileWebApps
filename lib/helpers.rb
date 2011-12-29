@@ -9,8 +9,11 @@ module PresentationHelper
   end
   def image_tag_with_caption(img_path, hsh = {})
     h = "<div class='image-wrap'>"
-    h += "<img class='resize' src='imgs/#{img_path}' "
+    h += "<img src='imgs/#{img_path}' "
     
+    if hsh[:resize]
+      h += "class='resize' "
+    end
     if hsh[:width]
       h += "width=#{hsh[:width]} "
     end  
