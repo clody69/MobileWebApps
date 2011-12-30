@@ -122,10 +122,13 @@ a img {
 ------------------------------------------------------------------------------*/
 
 #header-wrapper {
-  margin-bottom: 0;
-  clear: both;
-  height: 91px;
-  background: rgb(240,240,240);
+	margin-bottom: 0;
+	clear: both;
+	height: 120px;
+	background: rgb(240,240,240);
+	border-bottom: 1px solid rgb(200,200,200);
+	position: relative;
+	z-index: -1;
 }
 
 #header {
@@ -134,7 +137,7 @@ a img {
 }
 
 #header .title {
-	padding:  25px 20px 0px 0px;
+	padding:  30px 20px 0px 0px;
 	width: 100%;
 	margin: auto;	
 	font-size: 30px;
@@ -193,147 +196,28 @@ a img {
   text-decoration: none;
 }
 
-/*------------------------------------------------------------------------------
-     Sidebar
-------------------------------------------------------------------------------*/
 
-div.sidebar-shell {
-  position: relative;
-  float: right;
-  margin: 35px 0 0;
+#menu {
+	position: absolute;
+	top: 95px;
+	width: 100%;
+	z-index: 1;
+	font-size: 18px;
+	font-weight: bold;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-variant: small-caps; 
+    text-align: center;	
 }
 
-div.sidebar-module {
-  padding: 3px;
-  background: #EEE;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  display: block;
-  width: 332px;
-  margin-bottom: 20px;
-  font-size: 12px;
+#menu ul {
+	margin: 0px auto 0px auto;	
+}
+#menu li{
+	display: inline;
+	list-style-type: none;
+	margin: 0px 10px;
 }
 
-div.sidebar-module > ul {
-  background: #fafafb;
-  border: solid #CACACA;
-  border-width: 1px 1px 0px 1px;
-  margin: 0px;
-}
-
-div.sidebar-module > p {
-  background: #fafafb;
-  border: solid #CACACA;
-  border-width: 1px;
-  padding: 8px 10px;
-  margin: 0px;
-  display: block;
-  line-height: 1.4em;
-}
-
-div.sidebar-module li {
-  list-style-type: none;
-}
-
-div.sidebar-module > ul > li {
-  border-bottom: 1px solid #CACACA;
-  text-decoration: none;
-}
-
-div.sidebar-module > ul > li:hover {
-  text-decoration: none;
-}
-
-
-div.sidebar-module > ul h3 {
-  margin: 0px;
-  color: #666;
-  text-shadow: 1px 1px 0px #fff; 
-  border-bottom: 1px solid #CACACA;
-  font-size: 14px;
-  background-color: #e1e1e1;
-  background-image: -moz-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -ms-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -o-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#e1e1e1)); 
-  background-image: -webkit-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: linear-gradient(top, #f1f1f1, #e1e1e1);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#e1e1e1');
-}
-
-div.sidebar-module > ul li h3:hover,
-div.sidebar-module > ul h3.disable {
-  background-color: #e1e1e1;
-  background-image: -moz-linear-gradient(top, #e1e1e1, #d1d1d1);
-  background-image: -ms-linear-gradient(top, #e1e1e1, #d1d1d1);
-  background-image: -o-linear-gradient(top, #e1e1e1, #d1d1d1);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#e1e1e1), to(#d1d1d1));
-  background-image: -webkit-linear-gradient(top, #e1e1e1, #d1d1d1);
-  background-image: linear-gradient(top, #e1e1e1, #d1d1d1);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e1e1e1', EndColorStr='#d1d1d1');
-}
-
-
-div.sidebar-module > ul h3 a,
-div.sidebar-module > ul h3.disable span {
-  padding: 8px 0px 8px 10px;
-  color: #666;
-  display: block;
-  text-decoration: none;
-}
-
-div.sidebar-module > ul h3.disable span {
-  padding-left: 20px;
-  background-image: url(../images/active-arrow.png);
-  background-position: left center;
-  background-repeat: no-repeat;
-  cursor: default;
-}
-div.sidebar-module > ul h3:hover a {
-  text-decoration: none;
-}
-
-div.sidebar-module ul ul,
-div.sidebar-module .spacer {
-  display: block;
-  padding-bottom: 2px;
-  background-color: #FAFAFB;
-}
-
-div.sidebar-module ul ul li {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #e9ecee;
-  font-weight: bold;
-  color: #666;
-}
-
-div.sidebar-module ul ul li:hover,
-div.sidebar-module li.disable {
-  border-top: 1px solid #fafafb;
-  border-bottom: 1px solid #e5e8ea;
-  background-color: #f0f0f3;
-}
-
-div.sidebar-module li.disable {
-  background-image: url(../images/active-arrow.png);
-  background-position: left center;
-  background-repeat: no-repeat;
-}
-
-div.sidebar-module ul ul li a,
-div.sidebar-module ul ul li span {
-  padding: 6px 0px 6px 10px;
-  display: block;
-  text-decoration: none;
-}
-
-div.sidebar-module ul ul li span {
-  padding-left: 20px;
-  cursor: default;
-}
-
-/* @end */
 
 /*****************************************************************************/
 /*
@@ -482,11 +366,11 @@ div.sidebar-module ul ul li span {
     Not Footer
 ------------------------------------------------------------------------------*/
 #wrapper {
-  padding: 20px 25px;
+  padding: 50px 25px;
   overflow:hidden;
   height: auto;
   width: 920px;
-  margin: -20px auto 0;
+  margin: -40px auto 0;
   background: white;
   -webkit-box-shadow:0 5px 15px #000;
   -moz-box-shadow:0 5px 15px #000;
