@@ -53,69 +53,149 @@
   %article
     .row
       .twoColumn.autoimage
-        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
+        = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
       .twoColumn.slide.autobox
-        = image_tag_with_caption "mobile-applications.jpg", :resize => true
+        = image_tag "mobile-applications.jpg", :resize => true
 
 
 %section.slide
   %header An App for Every Task
   %article.justified
     .slide.autobox
-      = image_tag_with_caption "iphone-facebook-2-application.jpg"
+      = image_tag "iphone-facebook-2-application.jpg"
     .slide.autobox
-      = image_tag_with_caption "twitter-web-app.jpg"
+      = image_tag "twitter-web-app.jpg"
     .slide.autobox
-      = image_tag_with_caption "weather-app.jpg"
+      = image_tag "weather-app.jpg"
 
 %section.slide
   %header More Time is Spent on Mobile Apps
   %article
     .row
       .twoColumn
-        =image_tag_with_caption "mobile-app-chart.jpg"
+        =image_tag "mobile-app-chart.jpg"
       .twoColumn
-        =image_tag_with_caption "mobile-app-chart-2.jpg"
+        =image_tag "mobile-app-chart-2.jpg"
+
+      
       
 %section.slide
-  %header The Web is Dead!
+  %header Is the Web Dead ? 
   %article
-    #thewebisdead_wrapper
-      .autoimage#thewebisdead
-        = image_tag_with_caption "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
-
- 
-%section.slide
-  %header What is a Mobile Web App ?
-  .autoimage.centered.slide
-    = image_tag_with_caption "mobile-applications.jpg" 
-
-%section.slide
-  %header test autobox
-  .autobox.highlight
-    %p Testing autobox
-    fsdfsdf
-    %p prova
-     
-  %blockquote.slide
-    %p A web application is
-    %p
-      %cite Wikipedia
-
-
-  %img.box(src="imgs/twitter-web-app.jpg" height="auto")
-  %p An application-like web site that is consumable by a modern mobile device
-  %p.slide somehow
+    .row 
+      .twoColumn
+        %ul
+          %li.slide
+            If you are reading this, it's not.
+          %li.slide 
+            Wired article was read and discussed mostly on the web
+          %li.slide
+            HTML5 brings a a lot of new cool stuff for web developers
+          %li.slide
+            Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
+          %li.slide
+            Many apps are built in HTML5 and wrapped with a native shell
+      .twoColumn
+        #thewebisdead_wrapper
+          .autoimage#thewebisdead
+            = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
 
 %section.slide
-  %header More Time is Spent on Mobile Apps
+  %header Evolution of the Web (Browsers)
+  %article
+    =image_tag "evolution-web.png", :caption => "Web Evolution", :url => "http://evolutionofweb.appspot.com/"
+
+
+%section.slide
+  %header Shifting from the "Document Web" to the "App Web"
+  %article.centered
+    .row
+      .twoColumn.slide
+        %p
+          Hyperlinked documents
+        %p
+          Page reloading
+        %p 
+          Static pages
+        %p 
+          Web servers
+        %p 
+          Static content
+      .twoColumn.slide
+        %p 
+          Interactive web apps
+        %p
+          Asynchronous API calls
+        %p 
+          HTML + CSS + JS
+        %p 
+          Data hubs (web apis)
+        %p 
+          Real-time communication
+    
+      %p.slide
+        Web apps are built with open standards that are refered as "Web Technologies"
+    
+%section.slide
+  %header Mobile Web Apps
+  %article
+        
+
+%section.slide
+  %header Developing Native Apps for Multiple Platforms
+  %article 
+    .row
+      .twoColumn.autoimage
+        .slide
+          =image_tag "asymco-live-death-mobile-platforms.png", :caption => "Asymco Feb 2011", :url => "http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/"      
+      .twoColumn        
+        .slide 
+          %p We must have:
+        %ul
+          %li.slide
+            2008 - iPhone Apps
+          %li.slide
+            2009 - Android App
+          %li.slide  
+            2010 - iPad App
+          %li.slide
+            2011 - maintain them ???
+
+%section.slide
+  %header Develop, Test and Maintain
+  %article
+    =image_tag "smartphones.jpg", :resize => true
+
+%section.slide
+  %header Mobile Platforms Shares
   %article
     .row
-      .twoColumn.autoimage 
-        =image_tag_with_caption "mobile-app-chart.jpg"
-      .twoColumn.autoimage
-        =image_tag_with_caption "mobile-app-chart-2.jpg"
+      .twoColumn
+        =image_tag "smartphone-platforms-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-languages-share.png", :resize => true
 
+%section.slide
+  %header Mobile Browsers Shares
+  %article
+    .row
+      .twoColumn
+        =image_tag "smartphone-browser-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-html5-share.png", :resize => true
+
+%section.slide
+  %header HTML5     
+  %article.centered
+    HTML5 is a major revision 
+    
+    
+%section.slide
+  %header Web Apps Frameworks
+  %article
+    Jquery
+    Sencha
+    
 %section.slide
   %header Important resources
   %article

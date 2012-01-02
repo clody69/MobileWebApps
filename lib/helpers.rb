@@ -7,7 +7,7 @@ module PresentationHelper
     end
     content
   end
-  def image_tag_with_caption(img_path, hsh = {})
+  def image_tag(img_path, hsh = {})
     h = "<div class='image-wrap'>"
     h += "<img src='imgs/#{img_path}' "
     

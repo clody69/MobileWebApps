@@ -7,6 +7,7 @@ task :render do
   include DeckJSBuilder
   build "views/layout.html.haml", "slides.html"
   build "views/site.html.haml", "index.html"
+  build "views/notes.html.haml", "notes.html"
 end
 
 desc "Rebuild SASS/CSS"
