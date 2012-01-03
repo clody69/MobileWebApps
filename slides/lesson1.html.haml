@@ -52,21 +52,19 @@
   %header The Web is Dead!
   %article
     .row
-      .twoColumn.autoimage
+      .twoColumn
         = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
-      .twoColumn.slide.autobox
+      .twoColumn.slide
         = image_tag "mobile-applications.jpg", :resize => true
 
 
 %section.slide
   %header An App for Every Task
-  %article.justified
-    .slide.autobox
-      = image_tag "iphone-facebook-2-application.jpg"
-    .slide.autobox
-      = image_tag "twitter-web-app.jpg"
-    .slide.autobox
-      = image_tag "weather-app.jpg"
+  %article
+    .item
+      = image_tag "iphone-facebook-2-application.jpg", :nowrap => true
+      = image_tag "twitter-web-app.jpg", :nowrap => true
+      = image_tag "weather-app.jpg", :nowrap => true
 
 %section.slide
   %header More Time is Spent on Mobile Apps
@@ -108,31 +106,33 @@
 
 %section.slide
   %header Shifting from the "Document Web" to the "App Web"
-  %article.centered
+  %article
     .row
       .twoColumn.slide
-        %p
-          Hyperlinked documents
-        %p
-          Page reloading
-        %p 
-          Static pages
-        %p 
-          Web servers
-        %p 
-          Static content
+        .autobox
+          %p 
+            Hyperlinked documents
+          %p
+            Page reloading
+          %p 
+            Static pages
+          %p 
+            Web servers
+          %p 
+            Static content
       .twoColumn.slide
-        %p 
-          Interactive web apps
-        %p
-          Asynchronous API calls
-        %p 
-          HTML + CSS + JS
-        %p 
-          Data hubs (web apis)
-        %p 
-          Real-time communication
-    
+        .autobox
+          %p 
+            Interactive web apps
+          %p
+            Asynchronous API calls
+          %p 
+            HTML + CSS + JS
+          %p 
+            Data hubs (web apis)
+          %p 
+            Real-time communication
+    .vmargin
       %p.slide
         Web apps are built with open standards that are refered as "Web Technologies"
     
@@ -145,21 +145,22 @@
   %header Developing Native Apps for Multiple Platforms
   %article 
     .row
-      .twoColumn.autoimage
+      .twoColumn
         .slide
           =image_tag "asymco-live-death-mobile-platforms.png", :caption => "Asymco Feb 2011", :url => "http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/"      
-      .twoColumn        
-        .slide 
-          %p We must have:
-        %ul
-          %li.slide
-            2008 - iPhone Apps
-          %li.slide
-            2009 - Android App
-          %li.slide  
-            2010 - iPad App
-          %li.slide
-            2011 - maintain them ???
+      .twoColumn
+        .autobox        
+          .slide 
+            %p We must have:
+          %ul
+            %li.slide
+              2008 - iPhone Apps
+            %li.slide
+              2009 - Android App
+            %li.slide  
+              2010 - iPad App
+            %li.slide
+              2011 - maintain them ???
 
 %section.slide
   %header Develop, Test and Maintain
@@ -186,19 +187,96 @@
 
 %section.slide
   %header HTML5     
-  %article.centered
-    HTML5 is a major revision 
+  %article
+    .row
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Semantics_64.png")
+          %span 
+            %strong New semantics
+        .item
+          %img(src = "imgs/html5/HTML5_Styling_64.png")
+          %span
+            %strong CSS3
+        .item
+          %img(src = "imgs/html5/HTML5_3D_effects_64.png")
+          %span
+            %strong 3D, Graphics and Effects
+        .item
+          %img(src = "imgs/html5/HTML5_Offline_Storage_64.png")
+          %span
+            %strong Offline & Storage
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Connectivity_64.png")
+          %span
+            %strong Connectivity
+        .item
+          %img(src = "imgs/html5/HTML5_Device_Access_64.png")
+          %span
+            %strong Device Access
+        .item
+          %img(src = "imgs/html5/HTML5_Multimedia_64.png")
+          %span
+            %strong Multimedia
+        .item
+          %img(src = "imgs/html5/HTML5_Performance_64.png")
+          %span
+            %strong Performance & Integration
+       
+%section.slide
+  %header Browser Support for HTML5
+  %article
+    =image_tag "caniuse.png", :caption => "When Can I Use ...", :url => "http://caniuse.com/"
     
     
 %section.slide
-  %header Web Apps Frameworks
-  %article
-    Jquery
-    Sencha
-    
+  %header HTML5 Frameworks & Tools
+  %article.larger.centered
+    .item.emphasizebox 
+      %span
+        UI
+      =image_tag "jquery.png", :nowrap => true, :url => "http://jquerymobile.com/"
+      =image_tag "sencha.png", :nowrap => true, :url => "http://www.sencha.com/"
+      =image_tag "jqtouch.png", :nowrap => true, :url => "http://jqtouch.com/"
+      =image_tag "sproutcore.png", :nowrap => true, :url => "http://sproutcore.com/"
+    .item.emphasizebox 
+      %span
+        Helpers
+      =image_tag "backbonejs.png", :nowrap => true, :url => "http://documentcloud.github.com/backbone/"
+      =image_tag "modernizr.png", :nowrap => true, :url => "http://www.modernizr.com/"
+      =image_tag "handlebarsjs.png", :nowrap => true, :url => "http://www.handlebarsjs.com/"
+    .item.emphasizebox 
+      %span
+        Dev Tools 
+      =image_tag "coffescript.png", :nowrap => true, :url => "http://coffeescript.org/"  
+      =image_tag "sass.png", :nowrap => true, :url => "http://sass-lang.com/"
+      =image_tag "haml.png", :nowrap => true, :url => "http://haml-lang.com/"
+    .item.emphasizebox 
+      %span
+        Backend
+      =image_tag "rails.png", :nowrap => true, :url => "http://rubyonrails.org"
+      =image_tag "nodejs.png", :nowrap => true, :url => "http://nodejs.org"
+      =image_tag "django.png", :nowrap => true, :url => "https://www.djangoproject.com/"
+    .item.emphasizebox 
+      %span
+        Database
+      =image_tag "mongodb.png", :nowrap => true, :url => "http://www.mongodb.org/"
+      =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
+
+%section.slide
+  %header The Classic Web Architecture
+  
+  Show MVC is moving to client
+  
+%section.slide
+  %header Towards a New Web Architecture  
+      
 %section.slide
   %header Important resources
   %article
     http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
     http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
     
+    http://www.modernizr.com/ 
+    http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices

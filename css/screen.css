@@ -1,4 +1,4 @@
-/* line 72, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 body {
   overflow: hidden;
   -webkit-box-pack: center;
@@ -11,7 +11,7 @@ body {
   box-align: center;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 body, html {
   height: 100%;
   margin: 0px;
@@ -34,7 +34,7 @@ body, html {
   box-orient: vertical;
 }
 
-/* line 95, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .background {
   position: absolute;
   top: 0;
@@ -47,7 +47,7 @@ body, html {
   background-size: cover;
 }
 
-/* line 107, ../sass/screen.scss */
+/* line 128, ../sass/screen.scss */
 .front {
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
@@ -57,43 +57,43 @@ body, html {
   z-index: -1;
 }
 
-/* line 111, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 .back {
   z-index: -2;
 }
 
-/* line 114, ../sass/screen.scss */
+/* line 135, ../sass/screen.scss */
 #bg-default {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 115, ../sass/screen.scss */
+/* line 136, ../sass/screen.scss */
 #bg-lesson1 {
   background-image: url("../imgs/bg-lesson1.jpg");
 }
 
-/* line 116, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #bg-lesson2 {
   background-image: url("../imgs/bg-lesson2.jpg");
 }
 
-/* line 117, ../sass/screen.scss */
+/* line 138, ../sass/screen.scss */
 #bg-lesson3 {
   background-image: url("../imgs/bg-lesson3.jpg");
 }
 
-/* line 118, ../sass/screen.scss */
+/* line 139, ../sass/screen.scss */
 #bg-template {
   background-image: url("../imgs/bg-template.jpg");
 }
 
-/* line 120, ../sass/screen.scss */
+/* line 143, ../sass/screen.scss */
 h1, h2 {
   font-family: "Arial", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
 }
 
 @media all {
-  /* line 128, ../sass/screen.scss */
+  /* line 151, ../sass/screen.scss */
   .deck-container {
     width: 1100px;
     max-width: 1100px;
@@ -101,30 +101,30 @@ h1, h2 {
     height: 650px;
     font-size: 30px;
   }
-  /* line 137, ../sass/screen.scss */
+  /* line 160, ../sass/screen.scss */
   .deck-container .section-title h1 {
     position: absolute;
     top: 200px;
     padding: 30px;
   }
-  /* line 143, ../sass/screen.scss */
+  /* line 166, ../sass/screen.scss */
   .deck-container .slide header {
     position: absolute;
     left: 40px;
     top: 20px;
   }
-  /* line 149, ../sass/screen.scss */
+  /* line 172, ../sass/screen.scss */
   .deck-container .slide > article {
     margin: 70px 0 0 0;
   }
-  /* line 153, ../sass/screen.scss */
+  /* line 176, ../sass/screen.scss */
   .deck-container .slide-footer {
     padding-left: 10px;
     bottom: 15px;
     height: 20px;
     font-size: 60%;
   }
-  /* line 160, ../sass/screen.scss */
+  /* line 183, ../sass/screen.scss */
   .deck-container .deck-status {
     font-size: 70%;
     bottom: 15px;
@@ -160,99 +160,99 @@ h1, h2 {
   }
 }
 */
-/* line 197, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 .blue {
   color: #0066cc;
   display: inline;
 }
 
-/* line 201, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 .yellow {
   color: #ffd319;
   display: inline;
 }
 
-/* line 205, ../sass/screen.scss */
+/* line 228, ../sass/screen.scss */
 .green {
   color: #008a35;
   display: inline;
 }
 
-/* line 209, ../sass/screen.scss */
+/* line 232, ../sass/screen.scss */
 .red {
   color: red;
   display: inline;
 }
 
-/* line 213, ../sass/screen.scss */
+/* line 236, ../sass/screen.scss */
 .black {
   color: black;
   display: inline;
 }
 
-/* line 217, ../sass/screen.scss */
+/* line 240, ../sass/screen.scss */
 .white {
   color: white;
   display: inline;
 }
 
-/* line 222, ../sass/screen.scss */
+/* line 245, ../sass/screen.scss */
 .left {
   float: left;
 }
 
-/* line 226, ../sass/screen.scss */
+/* line 249, ../sass/screen.scss */
 .hidden {
   visibility: hidden;
 }
 
-/* line 230, ../sass/screen.scss */
+/* line 253, ../sass/screen.scss */
 .singlespace p {
   margin-bottom: 0;
 }
 
-/* line 235, ../sass/screen.scss */
+/* line 258, ../sass/screen.scss */
 .deck-container {
   overflow: visible;
   /*apply the settings only to the first element contained in .deck-container*/
 }
-/* line 239, ../sass/screen.scss */
+/* line 262, ../sass/screen.scss */
 .deck-container header {
   font-size: 150%;
 }
-/* line 240, ../sass/screen.scss */
+/* line 263, ../sass/screen.scss */
 .deck-container h1 {
   font-size: 200%;
 }
-/* line 241, ../sass/screen.scss */
+/* line 264, ../sass/screen.scss */
 .deck-container .subtitle {
   font-size: 130%;
 }
-/* line 242, ../sass/screen.scss */
+/* line 265, ../sass/screen.scss */
 .deck-container h2 {
   font-size: 150%;
 }
-/* line 243, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 .deck-container .smallest {
   font-size: 40%;
 }
-/* line 244, ../sass/screen.scss */
+/* line 267, ../sass/screen.scss */
 .deck-container .smaller {
   font-size: 60%;
 }
-/* line 245, ../sass/screen.scss */
+/* line 268, ../sass/screen.scss */
 .deck-container .larger {
   font-size: 120%;
 }
-/* line 246, ../sass/screen.scss */
+/* line 269, ../sass/screen.scss */
 .deck-container .largest {
   font-size: 150%;
 }
-/* line 247, ../sass/screen.scss */
+/* line 270, ../sass/screen.scss */
 .deck-container .big {
   font-size: 200%;
 }
-/* line 250, ../sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 .deck-container > .slide {
   /* Firefox */
   display: -moz-box;
@@ -287,17 +287,17 @@ h1, h2 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 264, ../sass/screen.scss */
+/* line 287, ../sass/screen.scss */
 .deck-container .empty {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 268, ../sass/screen.scss */
+/* line 291, ../sass/screen.scss */
 .deck-container .section-title {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 272, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 .deck-container .section-title h1 {
   font-family: "Arial Black";
   color: white;
@@ -309,37 +309,37 @@ h1, h2 {
   font-variant: small-caps;
   text-shadow: black 0 2px 5px;
 }
-/* line 283, ../sass/screen.scss */
+/* line 306, ../sass/screen.scss */
 .deck-container .main-title h1 {
   position: relative;
 }
-/* line 286, ../sass/screen.scss */
+/* line 309, ../sass/screen.scss */
 .deck-container .main-title .subtitle {
   color: #666;
 }
-/* line 291, ../sass/screen.scss */
+/* line 314, ../sass/screen.scss */
 .deck-container .slide-footer {
   position: absolute;
   background-repeat: no-repeat;
   background-position: left bottom;
 }
 
-/* line 297, ../sass/screen.scss */
+/* line 320, ../sass/screen.scss */
 .deck-menu .slide-footer {
   background: none;
 }
 
-/* line 302, ../sass/screen.scss */
+/* line 325, ../sass/screen.scss */
 #toc .H2 {
   margin-left: 20px;
   list-style: circle outside none;
 }
-/* line 306, ../sass/screen.scss */
+/* line 329, ../sass/screen.scss */
 #toc a {
   color: black;
 }
 
-/* line 312, ../sass/screen.scss */
+/* line 335, ../sass/screen.scss */
 .deck-container pre {
   border: 1px solid #999999;
   border-radius: 0;
@@ -896,26 +896,25 @@ h2, h1 {
   font-style: normal;
 }
 
-/* line 322, ../sass/screen.scss */
+/* line 345, ../sass/screen.scss */
 .highlight pre {
   font-family: "UbuntuMonoRegular", monospace;
 }
 
-/* line 327, ../sass/screen.scss */
+/* line 350, ../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 329, ../sass/screen.scss */
+/* line 352, ../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
-  margin: 10px;
   display: block;
 }
-/* line 334, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 337, ../sass/screen.scss */
+/* line 359, ../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -935,7 +934,7 @@ h2, h1 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 341, ../sass/screen.scss */
+/* line 363, ../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   display: -moz-box;
@@ -954,67 +953,131 @@ h2, h1 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 345, ../sass/screen.scss */
+/* line 367, ../sass/screen.scss */
+.deck-container .item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+/* line 371, ../sass/screen.scss */
+.deck-container .item img {
+  display: inline;
+  vertical-align: middle;
+  margin: 0px;
+}
+/* line 376, ../sass/screen.scss */
+.deck-container .item span {
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
+  padding: 0 50px;
+}
+/* line 384, ../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 351, ../sass/screen.scss */
+/* line 390, ../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 356, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 363, ../sass/screen.scss */
+/* line 402, ../sass/screen.scss */
 .deck-container .twoColumn {
-  width: 500px;
-  margin: 0 20px;
+  width: 550px;
+  margin: 0 0px;
   overflow: hidden;
   float: left;
-  display: inline;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
 }
-/* line 369, ../sass/screen.scss */
+/* line 408, ../sass/screen.scss */
 .deck-container .twoColumn img {
   max-width: 500px;
 }
-/* line 373, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 .deck-container .threeColumn {
   width: 320px;
-  margin: 0 10px;
+  margin: 0 0px;
   overflow: hidden;
   float: left;
-  display: inline;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
 }
-/* line 379, ../sass/screen.scss */
+/* line 420, ../sass/screen.scss */
 .deck-container .threeColumn img {
   max-width: 320px;
 }
-/* line 383, ../sass/screen.scss */
+/* line 425, ../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 640px;
   margin: 0 10px;
   overflow: hidden;
   float: left;
-  display: inline;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
 }
-/* line 389, ../sass/screen.scss */
+/* line 431, ../sass/screen.scss */
 .deck-container .twoThirds img {
   max-width: 640px;
 }
-/* line 395, ../sass/screen.scss */
+/* line 438, ../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 400, ../sass/screen.scss */
+/* line 444, ../sass/screen.scss */
 .deck-container .caption, .deck-container .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -1022,40 +1085,57 @@ h2, h1 {
   padding-top: -5px;
   color: black;
 }
-/* line 408, ../sass/screen.scss */
+/* line 451, ../sass/screen.scss */
+.deck-container .image-wrap {
+  margin: 0px;
+}
+/* line 453, ../sass/screen.scss */
+.deck-container .image-wrap img {
+  margin: 0px;
+}
+/* line 457, ../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
   max-height: 500px;
   max-width: 900px;
-  margin: 0px;
 }
-/* line 417, ../sass/screen.scss */
+/* line 465, ../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 420, ../sass/screen.scss */
+/* line 468, ../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 423, ../sass/screen.scss */
+/* line 471, ../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 430, ../sass/screen.scss */
-.deck-container .highlight {
+/* line 478, ../sass/screen.scss */
+.deck-container .emphasizebox {
   background: rgba(0, 204, 255, 0.05);
-  padding: 10px;
+  padding: 15px;
   border-radius: 30px;
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
   border: 2px solid rgba(0, 204, 255, 0.1);
 }
-/* line 439, ../sass/screen.scss */
+/* line 487, ../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border: 2px solid #3f3f3f;
+}
+/* line 491, ../sass/screen.scss */
+.deck-container .vmargin {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+/* line 495, ../sass/screen.scss */
+.deck-container .hmargin {
+  margin-left: 10px;
+  margin-right: 10px;
 }

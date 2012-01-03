@@ -8,7 +8,14 @@ module PresentationHelper
     content
   end
   def image_tag(img_path, hsh = {})
-    h = "<div class='image-wrap'>"
+    h = ""  
+    if not hsh[:nowrap]
+      h += "<div class='image-wrap'>"
+    end
+    
+    if not hsh[:caption] and hsh[:url]
+       h += "<a href='#{hsh[:url]}'>"
+    end
     h += "<img src='imgs/#{img_path}' "
     
     if hsh[:resize]
@@ -21,6 +28,9 @@ module PresentationHelper
       h += "height=#{hsh[:height]} "
     end  
     h+= "/>"
+    if not hsh[:caption] and hsh[:url]
+       h += "</a>"
+    end
     
     if hsh[:caption]
       h += "<div class='caption'>"
@@ -30,7 +40,10 @@ module PresentationHelper
           h += "#{hsh[:caption]}</div>"
         end
       end
-    h += "</div>"
+    if not hsh[:nowrap]
+      h += "</div>"
+    end
+    h
   end
   def pygmentize(lexer,&block)
     text = capture_haml do

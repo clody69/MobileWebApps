@@ -37,6 +37,27 @@
   -o-box-orient: vertical;
   box-orient: vertical;
 }
+@mixin box-inline-center-horizontal() {
+  /* Firefox */
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  
+  /* W3C */
+  display:box;
+  box-pack:center;
+  box-align:center;  
+  
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
 
 
 @mixin box-justify-horizontal() {
@@ -116,6 +137,8 @@ body, html {
 #bg-lesson2 { background-image: url('../imgs/bg-lesson2.jpg'); }
 #bg-lesson3 { background-image: url('../imgs/bg-lesson3.jpg'); }
 #bg-template { background-image: url('../imgs/bg-template.jpg'); }
+
+
 
 h1, h2 {
   font-family: "Arial", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
@@ -327,7 +350,6 @@ h1, h2 {
 .deck-container {
 
   .autobox {   /* Centered area with auto-adapting width */
-    margin: 10px;
     display: block;
   }
   
@@ -340,6 +362,23 @@ h1, h2 {
   }
   .justified {
     @include box-justify-horizontal();
+  }
+
+  .item {
+    display:inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    img {
+      display: inline; 
+      vertical-align: middle;
+      margin: 0px;
+    }
+    span {
+      display: inline-block;
+      text-align: right;
+      vertical-align: middle;
+      padding: 0 50px;
+    }
   }
 
   .column {
@@ -361,34 +400,38 @@ h1, h2 {
   
   /* Column Layouts - use in <div> tags to put content in columns  */
    .twoColumn {
-    width: 500px;
-    margin: 0 20px;
+    width: 550px;
+    margin: 0 0px;
     overflow: hidden;
     float: left;
-    display: inline;
+    //display: inline-block;
     img {
       max-width: 500px;
     } 
+    @include box-inline-center-horizontal();
+
   }
   .threeColumn {
     width: 320px;
-    margin: 0 10px;
+    margin: 0 0px;
     overflow: hidden;
     float: left;
-    display: inline;
+    //display: inline;
     img {
       max-width: 320px;
     } 
+    @include box-inline-center-horizontal();
   }
   .twoThirds {      /* spans two columns in a three column layout */
     width: 640px;
     margin: 0 10px;
     overflow: hidden;
     float: left;
-    display: inline;
+    //display: inline;
     img {
       max-width: 640px;
     } 
+    @include box-inline-center-horizontal();
   }
 
 
@@ -397,6 +440,7 @@ h1, h2 {
     margin: 10px;
   }
 
+
   .caption, .caption a {
     font-variant: small-caps;
     text-align: left;
@@ -404,7 +448,12 @@ h1, h2 {
     padding-top: -5px;
     color: black;
   }
-
+  .image-wrap {
+    margin: 0px;
+    img {
+      margin: 0px;
+    }
+  }
   .resize {
     width: auto !important;
     //width: 700px;
@@ -412,7 +461,6 @@ h1, h2 {
     //height: 500px;
     max-height: 500px;
     max-width: 900px;
-    margin: 0px;
   }
   .half {
     width: 50%;
@@ -427,9 +475,9 @@ h1, h2 {
     padding-top: -5px;
     color: black;
   }
-  .highlight {
+  .emphasizebox {
     background: rgba(0, 204, 255, 0.05);
-    padding: 10px;
+    padding: 15px;
     border-radius: 30px;
     -moz-border-radius: 30px;
     -webkit-border-radius: 30px;
@@ -439,8 +487,16 @@ h1, h2 {
   .bordered {     /* use in <div> tags to make a highlighted block */
     border: 2px solid rgba(63, 63, 63, 1);
   }
-  
 
+  .vmargin {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .hmargin {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
 }
 
 

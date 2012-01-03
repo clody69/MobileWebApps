@@ -113,10 +113,10 @@ Aalto University March 2011
 <header>The Web is Dead!</header>
 <article>
 <div class='row'>
-<div class='twoColumn autoimage'>
+<div class='twoColumn'>
 <div class='image-wrap'><img src='imgs/the-web-is-dead.jpg' class='resize' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
 </div>
-<div class='twoColumn slide autobox'>
+<div class='twoColumn slide'>
 <div class='image-wrap'><img src='imgs/mobile-applications.jpg' class='resize' /></div>
 </div>
 </div>
@@ -124,15 +124,11 @@ Aalto University March 2011
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>An App for Every Task</header>
-<article class='justified'>
-<div class='slide autobox'>
-<div class='image-wrap'><img src='imgs/iphone-facebook-2-application.jpg' /></div>
-</div>
-<div class='slide autobox'>
-<div class='image-wrap'><img src='imgs/twitter-web-app.jpg' /></div>
-</div>
-<div class='slide autobox'>
-<div class='image-wrap'><img src='imgs/weather-app.jpg' /></div>
+<article>
+<div class='item'>
+<img src='imgs/iphone-facebook-2-application.jpg' />
+<img src='imgs/twitter-web-app.jpg' />
+<img src='imgs/weather-app.jpg' />
 </div>
 </article>
 </section>
@@ -190,9 +186,10 @@ Many apps are built in HTML5 and wrapped with a native shell
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>Shifting from the "Document Web" to the "App Web"</header>
-<article class='centered'>
+<article>
 <div class='row'>
 <div class='twoColumn slide'>
+<div class='autobox'>
 <p>
 Hyperlinked documents
 </p>
@@ -209,7 +206,9 @@ Web servers
 Static content
 </p>
 </div>
+</div>
 <div class='twoColumn slide'>
+<div class='autobox'>
 <p>
 Interactive web apps
 </p>
@@ -226,6 +225,9 @@ Data hubs (web apis)
 Real-time communication
 </p>
 </div>
+</div>
+</div>
+<div class='vmargin'>
 <p class='slide'>
 Web apps are built with open standards that are refered as "Web Technologies"
 </p>
@@ -240,12 +242,13 @@ Web apps are built with open standards that are refered as "Web Technologies"
 <header>Developing Native Apps for Multiple Platforms</header>
 <article>
 <div class='row'>
-<div class='twoColumn autoimage'>
+<div class='twoColumn'>
 <div class='slide'>
 <div class='image-wrap'><img src='imgs/asymco-live-death-mobile-platforms.png' /><div class='caption'><a href='http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/'>Asymco Feb 2011</a></div></div>
 </div>
 </div>
 <div class='twoColumn'>
+<div class='autobox'>
 <div class='slide'>
 <p>We must have:</p>
 </div>
@@ -263,6 +266,7 @@ Web apps are built with open standards that are refered as "Web Technologies"
 2011 - maintain them ???
 </li>
 </ul>
+</div>
 </div>
 </div>
 </article>
@@ -301,22 +305,128 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>HTML5</header>
-<article class='centered'>
-HTML5 is a major revision
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='item'>
+<img src='imgs/html5/HTML5_Semantics_64.png' />
+<span>
+<strong>New semantics</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Styling_64.png' />
+<span>
+<strong>CSS3</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_3D_effects_64.png' />
+<span>
+<strong>3D, Graphics and Effects</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Offline_Storage_64.png' />
+<span>
+<strong>Offline & Storage</strong>
+</span>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='item'>
+<img src='imgs/html5/HTML5_Connectivity_64.png' />
+<span>
+<strong>Connectivity</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Device_Access_64.png' />
+<span>
+<strong>Device Access</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Multimedia_64.png' />
+<span>
+<strong>Multimedia</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Performance_64.png' />
+<span>
+<strong>Performance & Integration</strong>
+</span>
+</div>
+</div>
+</div>
 </article>
 </section>
 <section data-background='bg-lesson1' class='slide'>
-<header>Web Apps Frameworks</header>
+<header>Browser Support for HTML5</header>
 <article>
-Jquery
-Sencha
+<div class='image-wrap'><img src='imgs/caniuse.png' /><div class='caption'><a href='http://caniuse.com/'>When Can I Use ...</a></div></div>
 </article>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>HTML5 Frameworks & Tools</header>
+<article class='larger centered'>
+<div class='item emphasizebox'>
+<span>
+UI
+</span>
+<a href='http://jquerymobile.com/'><img src='imgs/jquery.png' /></a>
+<a href='http://www.sencha.com/'><img src='imgs/sencha.png' /></a>
+<a href='http://jqtouch.com/'><img src='imgs/jqtouch.png' /></a>
+<a href='http://sproutcore.com/'><img src='imgs/sproutcore.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Helpers
+</span>
+<a href='http://documentcloud.github.com/backbone/'><img src='imgs/backbonejs.png' /></a>
+<a href='http://www.modernizr.com/'><img src='imgs/modernizr.png' /></a>
+<a href='http://www.handlebarsjs.com/'><img src='imgs/handlebarsjs.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Dev Tools
+</span>
+<a href='http://coffeescript.org/'><img src='imgs/coffescript.png' /></a>
+<a href='http://sass-lang.com/'><img src='imgs/sass.png' /></a>
+<a href='http://haml-lang.com/'><img src='imgs/haml.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Backend
+</span>
+<a href='http://rubyonrails.org'><img src='imgs/rails.png' /></a>
+<a href='http://nodejs.org'><img src='imgs/nodejs.png' /></a>
+<a href='https://www.djangoproject.com/'><img src='imgs/django.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Database
+</span>
+<a href='http://www.mongodb.org/'><img src='imgs/mongodb.png' /></a>
+<a href='http://couchdb.apache.org/'><img src='imgs/couchdb.png' /></a>
+</div>
+</article>
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>The Classic Web Architecture</header>
+Show MVC is moving to client
+</section>
+<section data-background='bg-lesson1' class='slide'>
+<header>Towards a New Web Architecture</header>
 </section>
 <section data-background='bg-lesson1' class='slide'>
 <header>Important resources</header>
 <article>
 http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
 http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
+http://www.modernizr.com/
+http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 </article>
 </section>
 
@@ -517,7 +627,7 @@ This text contains
 <p>Testing autobox</p>
 <p>with no highlight</p>
 </div>
-<div class='autobox highlight'>
+<div class='emphasizebox'>
 <p>Testing highlighted autobox</p>
 <p>with multiple</p>
 <p>lines</p>
@@ -525,7 +635,7 @@ This text contains
 </section>
 <section data-background='bg-template' class='slide'>
 <header>Normal centered slide</header>
-<div class='autobox'>
+<article>
 <p>List of elements inside this box</p>
 <ul>
 <li>
@@ -541,7 +651,7 @@ This is the item number two
 This is the item number three
 </li>
 </ul>
-</div>
+</article>
 </section>
 <section data-background='bg-template' class='slide'>
 <header>Large Centered Slide</header>
