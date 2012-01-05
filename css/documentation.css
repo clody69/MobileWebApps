@@ -256,8 +256,47 @@ a img {
   font-size:13px;
   color: #636363;
   margin: 45px 0 0 0;
+  height: 130px;
+  background-color: rgb(240,240,240);
+  z-index: -1;
+  border-top: 1px solid rgb(200,200,200);
+  padding-top: 50px;	
+  min-width: 1100px;
 }
+#footer .sponsor {
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  
+  /* W3C */
+  display:box;
+  box-pack:center;
+  box-align:center;  
+  
+  -webkit-box-orient: inline-axis;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical;
 
+	
+}
+#footer .sponsor img {
+	max-width: 200px;
+	max-height: 100px;
+	height: auto !important;
+	width: auto !important;
+	-webkit-box-shadow:5px 5px 5px #888;
+	-moz-box-shadow:5px 5px 5px #888;
+  	box-shadow:5px 5px 5px #888;
+  	margin: 10px 10px 10px 10px; 
+  	vertical-align: middle;
+
+}
 #footer a:hover {
   text-decoration: underline;
 }
@@ -393,7 +432,7 @@ a img {
   overflow:hidden;
   height: auto;
   width: 920px;
-  margin: -40px auto 0;
+  margin: -40px auto -80px;
   background: white;
   -webkit-box-shadow:0 5px 15px #000;
   -moz-box-shadow:0 5px 15px #000;
