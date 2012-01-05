@@ -162,13 +162,17 @@
             %li.slide
               2011 - maintain them ???
 
+
 %section.slide
   %header Develop, Test and Maintain
   %article
     =image_tag "smartphones.jpg", :resize => true
 
 %section.slide
-  %header Mobile Platforms Shares
+  %header 
+    Smartphone Platforms Shares 
+    .smaller.inline
+      (units shipped Q4 2011)
   %article
     .row
       .twoColumn
@@ -177,7 +181,10 @@
         =image_tag "smartphone-languages-share.png", :resize => true
 
 %section.slide
-  %header Mobile Browsers Shares
+  %header 
+    Smartphone Browsers Shares
+    .smaller.inline
+      (units shipped Q4 2011)
   %article
     .row
       .twoColumn
@@ -229,7 +236,8 @@
   %article
     =image_tag "caniuse.png", :caption => "When Can I Use ...", :url => "http://caniuse.com/"
     
-    
+
+
 %section.slide
   %header HTML5 Frameworks & Tools
   %article.larger.centered
@@ -271,7 +279,39 @@
   
 %section.slide
   %header Towards a New Web Architecture  
-      
+
+
+%section.slide
+  %header jQuery Example
+  %article.smaller
+    .code_block
+      :coderay_raw
+        #!html
+        <!DOCTYPE html> 
+        <html> 
+          <head> 
+          <title>Hello World</title> 
+          <meta name="viewport" content="width=device-width, initial-scale=1"> 
+          <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+          <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+          <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+        </head> 
+        <body> 
+          <div data-role="page">
+            <div data-role="header">
+              <h1>My Title</h1>
+            </div><!-- /header -->
+            <ul data-role="listview" data-inset="true" data-filter="true">
+              <li><a href="#">Acura</a></li>
+              <li><a href="#">Audi</a></li>
+              <li><a href="#">BMW</a></li>
+              <li><a href="#">Cadillac</a></li>
+              <li><a href="#">Ferrari</a></li>
+            </ul>
+          </div><!-- /page -->
+        </body>
+        </html>
+  
 %section.slide
   %header Important resources
   %article

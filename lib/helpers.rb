@@ -1,12 +1,10 @@
 
 module PresentationHelper
-  def render_slide(name)
-    content = render "slides/#{name}.html.haml"
-    if File.exist?('imgs/bg-' + name + '.jpg')
-      content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
-    end
-    content
+  
+  def example_header_tag(title, name)
+    h = "<h1>#{title}"    
   end
+
   def image_tag(img_path, hsh = {})
     h = ""  
     if not hsh[:nowrap]

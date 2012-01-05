@@ -1,25 +1,58 @@
 require "haml"
 require "yaml"
 require "helpers"
+require "haml-coderay"
+require "coderay"
+
+Haml::Filters::CodeRay.encoder_options = {:css => :class}
+
 module DeckJSBuilder
   MAIN_DIR = File.join File.dirname(__FILE__), ".."
 
   include PresentationHelper
   META = YAML.load_file File.join(MAIN_DIR, "meta.yml")
 
-  def render(path,b=binding)
-    path = File.join MAIN_DIR, path
-    Haml::Engine.new(IO.read(path), :ugly => true).render(b)
+  def render(file, layout='', b=binding)
+    file = File.join MAIN_DIR, file
+    
+    content = Haml::Engine.new(IO.read(file), :ugly => true).render(b)
+    
+    name = File.basename(file,'.haml.html')
+    
+    if File.exist?('imgs/bg-' + name + '.jpg')
+      content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
+    end
+    
+    if layout != ''
+      layout = File.join MAIN_DIR, layout
+      Haml::Engine.new(IO.read(layout), :ugly => true).render(b,{}) {
+      content
+      }
+    else
+      content
+    end
   end
-  def build(from_file, to_file)
-    text = render from_file, binding
-    write_to = File.join MAIN_DIR, to_file
+  
+  def build(file, layout, output="")
+    
+    text = render file, layout, binding
+    if output == ""
+      write_to = File.join MAIN_DIR, file.sub('.haml','')     
+    else
+      write_to = File.join MAIN_DIR, output     
+    end
+    
     File.open(write_to,"w+") {|f| f.write text}
-    puts "[#{Time.now.strftime("%H:%M:%S")}] written #{write_to}"
+    puts "[#{Time.now.strftime("%H:%M:%S")}] written #{write_to} #{binding.to_s}"
   end
 
   def css
     puts `bundle exec compass compile #{MAIN_DIR} 2>&1`
+  end
+
+  def print_coderay_css(file)
+    write_to = File.join MAIN_DIR, file
+    File.open(write_to, "w+") {|f| f.write CodeRay::Encoders[:html]::CSS.new.stylesheet}
   end
 end
 

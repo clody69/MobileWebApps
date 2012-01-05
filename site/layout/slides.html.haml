@@ -24,7 +24,8 @@
     %link(href="deckjs/extensions/hash/deck.hash.css" rel="stylesheet")
     //%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet")
     // %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet")
-    
+    %link(href="css/coderay_dark.css" rel="stylesheet")
+   
     / Theme CSS files (menu swaps these out)
     %link#style-theme-link(href="css/course.css" rel="stylesheet")
     %link#transition-theme-link(href="deckjs/themes/transition/horizontal-slide.css" rel="stylesheet")
@@ -40,7 +41,7 @@
       #bg-default.background.back
 
     %article.deck-container
-      = render "views/slides.html.haml"
+      = yield
   
       / Elements
       %a.deck-next-link(href="#" title="Next") →
@@ -50,7 +51,6 @@
         \/
         %span.deck-status-total
       %a.deck-permalink{:href => ".", :title => "Permalink to this slide"} #
-
 
       %script(src="deckjs/core/deck.core.js")
       %script(src="deckjs/extensions/menu/deck.menu.js")

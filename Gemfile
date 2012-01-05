@@ -11,6 +11,7 @@ gem "guard-compass"
 gem 'guard-shell'
 gem "libnotify"
 gem "pygmentize"
+gem "haml-coderay"
 
 
 # gem "rails"

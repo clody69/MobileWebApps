@@ -37,11 +37,6 @@ h2 {
   margin: 2em auto 1em;
 }
 
-  body.api .content h2 {
-    background: transparent url(../images/crud-sprite.png) left 2px no-repeat;
-    padding-left: 22px;
-  }
-
 h2 span.step {
   color: #666;
 }
@@ -105,6 +100,16 @@ a img {
   border: 0px;
 }
 
+
+/* Common */
+.left {float: left;}
+.inline {display: inline;}
+.right {float: right;}
+.smallest {font-size: 40%;}
+.smaller {font-size: 60%;}
+.larger { font-size: 120%;}
+.largest { font-size: 150%;}
+.big {font-size: 200%;}
 
 /* Lectures */
 
@@ -380,7 +385,7 @@ a img {
   border-radius:20px;
 }
 
-.content {
+.contenr-wrapper {
   width: 100%;
   position: relative;
   float: left;
@@ -388,24 +393,24 @@ a img {
   z-index: 2;
 }
 
-.content dl {
+.contenr-wrapper dl {
   margin-left: 10px;
 }
 
-.content dt {
+.contenr-wrapper dt {
   color: #666;
 }
 
-.content ul,
-.content ol {
+.contenr-wrapper ul,
+.contenr-wrapper ol {
   margin-left: 1.5em;
 }
 
-.content ul {
+.contenr-wrapper ul {
   list-style-type: disc;
 }
 
-.content img {
+.contenr-wrapper img {
   max-width: 100%;
   border: 1px solid #dddddd;
   -webkit-box-shadow: 1px 1px 3px #ddd;
@@ -414,19 +419,19 @@ a img {
 }
 
 
-.content .description {
+.contenr-wrapper .description {
   margin-left: 20px;
 }
 
-.content .verseblock-content {
+.contenr-wrapper .verseblock-content {
   padding: 3px;
 }
 
-.content .verseblock-content,
-.content .sectionbody .dlist dt,
-.content p > tt,
-.content dl code,
-.content ul code,
+.contenr-wrapper .verseblock-content,
+.contenr-wrapper .sectionbody .dlist dt,
+.contenr-wrapper p > tt,
+.contenr-wrapper dl code,
+.contenr-wrapper ul code,
 p code {
   font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
   color: #52595d;
@@ -442,15 +447,15 @@ p code {
   display: inline-block;
 }
 
-.content .sectionbody .dlist dt {
+.contenr-wrapper .sectionbody .dlist dt {
   margin-top: 10px;
 }
 
-.content .verseblock-content {
+.contenr-wrapper .verseblock-content {
   padding: 3px;
 }
 
-.content .intro {
+.contenr-wrapper .intro {
   color: #868686;
 }
 /* @end */
@@ -461,157 +466,6 @@ p code {
 
 code {white-space: nowrap;}
 
-pre {
-  border: 1px solid #cacaca;
-  line-height: 1.2em;
-  font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-  padding: 10px;
-  overflow:auto;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background-color: #FAFAFB;
-  color: #393939;
-  margin: 0px;
-}
-
-ul + pre {
-  margin-top: 1em;
-}
-
-pre code {white-space: pre;}
-
-pre span.comment {color: #aaa;}
-
-pre.headers {
-  margin-bottom: 0;
-  border-bottom-width: 0;
-  -webkit-border-radius: 3px 3px 0 0;
-  -moz-border-radius: 3px 3px 0 0;
-  border-radius: 3px 3px 0 0;
-  color: #666;
-  background-color: #f1f1f1;
-  background-image: -moz-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -ms-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -o-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#e1e1e1)); 
-  background-image: -webkit-linear-gradient(top, #f1f1f1, #e1e1e1); 
-  background-image: linear-gradient(top, #f1f1f1, #e1e1e1);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#e1e1e1');
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-pre.no-response {
-  -webkit-border-radius: 3px 3px;
-  -moz-border-radius: 3px 3px;
-  border-radius: 3px 3px;
-  border-bottom: 1px solid #CACACA;
-}
-
-pre.headers + pre.highlight {
-  -webkit-border-radius: 0 0 3px 3px;
-  -moz-border-radius: 0 0 3px 3px;
-  border-radius: 0 0 3px 3px;
-}
-
-pre.highlight {
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:3px;
-  background-color: #FAFAFB;
-}
-
-pre.terminal {
-  background-color: #444;
-  color: #fff;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border: 2px solid #DEDEDE;
-  position: relative;
-  padding: 10px;
-  text-shadow: none;
-  background-image: none;
-  filter: none;
-}
-
-pre.terminal em {
-  color: #f9fe64;
-}
-
-span.codeline {
-  display: block;
-  position: relative;
-}
-
-span.codeline:hover {
-  background-color: #292929;
-  margin: 0px;
-  padding-left: 3px;
-  margin-left: -3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  color: #666666;
-}
-
-span.codeline span {
-  display: inline-block;
-  font-size: 10px;
-  color: #fff;
-  padding: 0 0.3em 0.05em;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  text-indent: -9999px;
-  background-image: url(../images/qmark.png);
-  background-repeat: no-repeat;
-  background-position: 1px 3px;
-  max-width: 8px;
-  min-width: 8px;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
-  cursor: default;
-}
-
-span.codeline span:hover {
-  display: inline-block;
-  text-indent: 0px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background: #000;
-  border: 1px solid #292929;
-  max-width: 1000px;
-}
-
-span.codeline:hover em {
-  color: #666666;
-}
-
-pre.bootcamp {
-  white-space: normal;
-  margin-left: -10px;
-  background-image: none;
-}
-
-span.bash-output {
-  color: #63e463;
-  display: block;
-  position: relative;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
-}
-
-/* end */
 
 /*------------------------------------------------------------------------------
     More Info Expander

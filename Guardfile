@@ -9,7 +9,7 @@ end
 #   watch('file/path') { `command(s)` }
 #
 guard 'shell' do
-  watch(/(slides|views)\/(.*).haml/) {|m|
+  watch(/site\/(examples|slides|views|layout)\/(.*).haml/) {|m|
     fullpath = m[0]
     unless m[2][0] == "."
       puts "Rebuilding index.html..."

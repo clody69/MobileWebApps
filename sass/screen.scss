@@ -171,6 +171,7 @@ h1, h2 {
     
     .slide > article {
       margin: 70px 0 0 0;
+      z-index: 4 !important;
     }
 
     .slide-footer {
@@ -246,6 +247,13 @@ h1, h2 {
   float: left;
 }
 
+.inline {
+  display: inline;
+}
+
+.right {
+  float: right;
+}
 .hidden {
   visibility: hidden;
 }
@@ -332,19 +340,17 @@ h1, h2 {
 }
 
 
+
 .deck-container pre {
   border: 1px solid #999999;
   border-radius: 0;
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+  padding: 5px;
 }
 
 
-
-@import "tdd";
-@import "syntax/colorful";
-@import "fonts";
-.highlight pre{
-  font-family: "UbuntuMonoRegular", monospace;
-
+.CodeRay .code pre{
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
 }
 
 .deck-container {

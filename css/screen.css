@@ -116,15 +116,16 @@ h1, h2 {
   /* line 172, ../sass/screen.scss */
   .deck-container .slide > article {
     margin: 70px 0 0 0;
+    z-index: 4 !important;
   }
-  /* line 176, ../sass/screen.scss */
+  /* line 177, ../sass/screen.scss */
   .deck-container .slide-footer {
     padding-left: 10px;
     bottom: 15px;
     height: 20px;
     font-size: 60%;
   }
-  /* line 183, ../sass/screen.scss */
+  /* line 184, ../sass/screen.scss */
   .deck-container .deck-status {
     font-size: 70%;
     bottom: 15px;
@@ -160,99 +161,109 @@ h1, h2 {
   }
 }
 */
-/* line 220, ../sass/screen.scss */
+/* line 221, ../sass/screen.scss */
 .blue {
   color: #0066cc;
   display: inline;
 }
 
-/* line 224, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 .yellow {
   color: #ffd319;
   display: inline;
 }
 
-/* line 228, ../sass/screen.scss */
+/* line 229, ../sass/screen.scss */
 .green {
   color: #008a35;
   display: inline;
 }
 
-/* line 232, ../sass/screen.scss */
+/* line 233, ../sass/screen.scss */
 .red {
   color: red;
   display: inline;
 }
 
-/* line 236, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 .black {
   color: black;
   display: inline;
 }
 
-/* line 240, ../sass/screen.scss */
+/* line 241, ../sass/screen.scss */
 .white {
   color: white;
   display: inline;
 }
 
-/* line 245, ../sass/screen.scss */
+/* line 246, ../sass/screen.scss */
 .left {
   float: left;
 }
 
-/* line 249, ../sass/screen.scss */
+/* line 250, ../sass/screen.scss */
+.inline {
+  display: inline;
+}
+
+/* line 254, ../sass/screen.scss */
+.right {
+  float: right;
+}
+
+/* line 257, ../sass/screen.scss */
 .hidden {
   visibility: hidden;
 }
 
-/* line 253, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 .singlespace p {
   margin-bottom: 0;
 }
 
-/* line 258, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 .deck-container {
   overflow: visible;
   /*apply the settings only to the first element contained in .deck-container*/
 }
-/* line 262, ../sass/screen.scss */
+/* line 270, ../sass/screen.scss */
 .deck-container header {
   font-size: 150%;
 }
-/* line 263, ../sass/screen.scss */
+/* line 271, ../sass/screen.scss */
 .deck-container h1 {
   font-size: 200%;
 }
-/* line 264, ../sass/screen.scss */
+/* line 272, ../sass/screen.scss */
 .deck-container .subtitle {
   font-size: 130%;
 }
-/* line 265, ../sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 .deck-container h2 {
   font-size: 150%;
 }
-/* line 266, ../sass/screen.scss */
+/* line 274, ../sass/screen.scss */
 .deck-container .smallest {
   font-size: 40%;
 }
-/* line 267, ../sass/screen.scss */
+/* line 275, ../sass/screen.scss */
 .deck-container .smaller {
   font-size: 60%;
 }
-/* line 268, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 .deck-container .larger {
   font-size: 120%;
 }
-/* line 269, ../sass/screen.scss */
+/* line 277, ../sass/screen.scss */
 .deck-container .largest {
   font-size: 150%;
 }
-/* line 270, ../sass/screen.scss */
+/* line 278, ../sass/screen.scss */
 .deck-container .big {
   font-size: 200%;
 }
-/* line 273, ../sass/screen.scss */
+/* line 281, ../sass/screen.scss */
 .deck-container > .slide {
   /* Firefox */
   display: -moz-box;
@@ -287,17 +298,17 @@ h1, h2 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 287, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 .deck-container .empty {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 291, ../sass/screen.scss */
+/* line 299, ../sass/screen.scss */
 .deck-container .section-title {
   background-color: transparent;
   box-shadow: none;
 }
-/* line 295, ../sass/screen.scss */
+/* line 303, ../sass/screen.scss */
 .deck-container .section-title h1 {
   font-family: "Arial Black";
   color: white;
@@ -309,612 +320,63 @@ h1, h2 {
   font-variant: small-caps;
   text-shadow: black 0 2px 5px;
 }
-/* line 306, ../sass/screen.scss */
+/* line 314, ../sass/screen.scss */
 .deck-container .main-title h1 {
   position: relative;
 }
-/* line 309, ../sass/screen.scss */
+/* line 317, ../sass/screen.scss */
 .deck-container .main-title .subtitle {
   color: #666;
 }
-/* line 314, ../sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 .deck-container .slide-footer {
   position: absolute;
   background-repeat: no-repeat;
   background-position: left bottom;
 }
 
-/* line 320, ../sass/screen.scss */
+/* line 328, ../sass/screen.scss */
 .deck-menu .slide-footer {
   background: none;
 }
 
-/* line 325, ../sass/screen.scss */
+/* line 333, ../sass/screen.scss */
 #toc .H2 {
   margin-left: 20px;
   list-style: circle outside none;
 }
-/* line 329, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 #toc a {
   color: black;
 }
 
-/* line 335, ../sass/screen.scss */
+/* line 344, ../sass/screen.scss */
 .deck-container pre {
   border: 1px solid #999999;
   border-radius: 0;
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+  padding: 5px;
 }
 
-/* line 6, ../sass/_tdd.scss */
-h2, h1 {
-  text-shadow: 0px -1px #444444;
+/* line 352, ../sass/screen.scss */
+.CodeRay .code pre {
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
 }
 
-/* line 11, ../sass/_tdd.scss */
-.deck-container .red, .deck-container .green, .deck-container .refactor {
-  box-shadow: none;
-}
-/* line 13, ../sass/_tdd.scss */
-.deck-container .red h2, .deck-container .green h2, .deck-container .refactor h2 {
-  text-shadow: 0px -1px black;
-  color: white;
-}
-/* line 18, ../sass/_tdd.scss */
-.deck-container section.slide.red {
-  background: #bf3030;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bf3030), color-stop(100%, #962626));
-  background-image: -webkit-linear-gradient(#bf3030, #962626);
-  background-image: -moz-linear-gradient(#bf3030, #962626);
-  background-image: -o-linear-gradient(#bf3030, #962626);
-  background-image: -ms-linear-gradient(#bf3030, #962626);
-  background-image: linear-gradient(#bf3030, #962626);
-}
-/* line 22, ../sass/_tdd.scss */
-.deck-container section.slide.green {
-  background: #0d8800;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d8800), color-stop(100%, #085500));
-  background-image: -webkit-linear-gradient(#0d8800, #085500);
-  background-image: -moz-linear-gradient(#0d8800, #085500);
-  background-image: -o-linear-gradient(#0d8800, #085500);
-  background-image: -ms-linear-gradient(#0d8800, #085500);
-  background-image: linear-gradient(#0d8800, #085500);
-}
-/* line 26, ../sass/_tdd.scss */
-.deck-container section.slide.refactor {
-  background: #666670;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #666670), color-stop(100%, #4e4e55));
-  background-image: -webkit-linear-gradient(#666670, #4e4e55);
-  background-image: -moz-linear-gradient(#666670, #4e4e55);
-  background-image: -o-linear-gradient(#666670, #4e4e55);
-  background-image: -ms-linear-gradient(#666670, #4e4e55);
-  background-image: linear-gradient(#666670, #4e4e55);
-}
-
-/* line 32, ../sass/_tdd.scss */
-#circle img {
-  max-height: 500px;
-}
-
-/* line 36, ../sass/_tdd.scss */
-.test-output {
-  font-size: 90%;
-}
-/* line 38, ../sass/_tdd.scss */
-.test-output strong.red {
-  color: #bf3030;
-  font-weight: normal;
-}
-/* line 42, ../sass/_tdd.scss */
-.test-output strong.green {
-  color: #0d8800;
-  font-weight: normal;
-}
-
-/* line 1, ../sass/syntax/colorful.scss */
-.highlight .hll {
-  background-color: #ffffcc;
-}
-
-/* line 2, ../sass/syntax/colorful.scss */
-.highlight {
-  background: #ffffff;
-}
-
-/* line 3, ../sass/syntax/colorful.scss */
-.highlight .c {
-  color: #808080;
-}
-
-/* Comment */
-/* line 4, ../sass/syntax/colorful.scss */
-.highlight .err {
-  color: #F00000;
-  background-color: #F0A0A0;
-}
-
-/* Error */
-/* line 5, ../sass/syntax/colorful.scss */
-.highlight .k {
-  color: #008000;
-  font-weight: bold;
-}
-
-/* Keyword */
-/* line 6, ../sass/syntax/colorful.scss */
-.highlight .o {
-  color: #303030;
-}
-
-/* Operator */
-/* line 7, ../sass/syntax/colorful.scss */
-.highlight .cm {
-  color: #808080;
-}
-
-/* Comment.Multiline */
-/* line 8, ../sass/syntax/colorful.scss */
-.highlight .cp {
-  color: #507090;
-}
-
-/* Comment.Preproc */
-/* line 9, ../sass/syntax/colorful.scss */
-.highlight .c1 {
-  color: #808080;
-}
-
-/* Comment.Single */
-/* line 10, ../sass/syntax/colorful.scss */
-.highlight .cs {
-  color: #cc0000;
-  font-weight: bold;
-}
-
-/* Comment.Special */
-/* line 11, ../sass/syntax/colorful.scss */
-.highlight .gd {
-  color: #A00000;
-}
-
-/* Generic.Deleted */
-/* line 12, ../sass/syntax/colorful.scss */
-.highlight .ge {
-  font-style: italic;
-}
-
-/* Generic.Emph */
-/* line 13, ../sass/syntax/colorful.scss */
-.highlight .gr {
-  color: #FF0000;
-}
-
-/* Generic.Error */
-/* line 14, ../sass/syntax/colorful.scss */
-.highlight .gh {
-  color: #000080;
-  font-weight: bold;
-}
-
-/* Generic.Heading */
-/* line 15, ../sass/syntax/colorful.scss */
-.highlight .gi {
-  color: #00A000;
-}
-
-/* Generic.Inserted */
-/* line 16, ../sass/syntax/colorful.scss */
-.highlight .go {
-  color: #808080;
-}
-
-/* Generic.Output */
-/* line 17, ../sass/syntax/colorful.scss */
-.highlight .gp {
-  color: #c65d09;
-  font-weight: bold;
-}
-
-/* Generic.Prompt */
-/* line 18, ../sass/syntax/colorful.scss */
-.highlight .gs {
-  font-weight: bold;
-}
-
-/* Generic.Strong */
-/* line 19, ../sass/syntax/colorful.scss */
-.highlight .gu {
-  color: #800080;
-  font-weight: bold;
-}
-
-/* Generic.Subheading */
-/* line 20, ../sass/syntax/colorful.scss */
-.highlight .gt {
-  color: #0040D0;
-}
-
-/* Generic.Traceback */
-/* line 21, ../sass/syntax/colorful.scss */
-.highlight .kc {
-  color: #008000;
-  font-weight: bold;
-}
-
-/* Keyword.Constant */
-/* line 22, ../sass/syntax/colorful.scss */
-.highlight .kd {
-  color: #008000;
-  font-weight: bold;
-}
-
-/* Keyword.Declaration */
-/* line 23, ../sass/syntax/colorful.scss */
-.highlight .kn {
-  color: #008000;
-  font-weight: bold;
-}
-
-/* Keyword.Namespace */
-/* line 24, ../sass/syntax/colorful.scss */
-.highlight .kp {
-  color: #003080;
-  font-weight: bold;
-}
-
-/* Keyword.Pseudo */
-/* line 25, ../sass/syntax/colorful.scss */
-.highlight .kr {
-  color: #008000;
-  font-weight: bold;
-}
-
-/* Keyword.Reserved */
-/* line 26, ../sass/syntax/colorful.scss */
-.highlight .kt {
-  color: #303090;
-  font-weight: bold;
-}
-
-/* Keyword.Type */
-/* line 27, ../sass/syntax/colorful.scss */
-.highlight .m {
-  color: #6000E0;
-  font-weight: bold;
-}
-
-/* Literal.Number */
-/* line 28, ../sass/syntax/colorful.scss */
-.highlight .s {
-  background-color: #fff0f0;
-}
-
-/* Literal.String */
-/* line 29, ../sass/syntax/colorful.scss */
-.highlight .na {
-  color: #0000C0;
-}
-
-/* Name.Attribute */
-/* line 30, ../sass/syntax/colorful.scss */
-.highlight .nb {
-  color: #007020;
-}
-
-/* Name.Builtin */
-/* line 31, ../sass/syntax/colorful.scss */
-.highlight .nc {
-  color: #B00060;
-  font-weight: bold;
-}
-
-/* Name.Class */
-/* line 32, ../sass/syntax/colorful.scss */
-.highlight .no {
-  color: #003060;
-  font-weight: bold;
-}
-
-/* Name.Constant */
-/* line 33, ../sass/syntax/colorful.scss */
-.highlight .nd {
-  color: #505050;
-  font-weight: bold;
-}
-
-/* Name.Decorator */
-/* line 34, ../sass/syntax/colorful.scss */
-.highlight .ni {
-  color: #800000;
-  font-weight: bold;
-}
-
-/* Name.Entity */
-/* line 35, ../sass/syntax/colorful.scss */
-.highlight .ne {
-  color: #F00000;
-  font-weight: bold;
-}
-
-/* Name.Exception */
-/* line 36, ../sass/syntax/colorful.scss */
-.highlight .nf {
-  color: #0060B0;
-  font-weight: bold;
-}
-
-/* Name.Function */
-/* line 37, ../sass/syntax/colorful.scss */
-.highlight .nl {
-  color: #907000;
-  font-weight: bold;
-}
-
-/* Name.Label */
-/* line 38, ../sass/syntax/colorful.scss */
-.highlight .nn {
-  color: #0e84b5;
-  font-weight: bold;
-}
-
-/* Name.Namespace */
-/* line 39, ../sass/syntax/colorful.scss */
-.highlight .nt {
-  color: #007000;
-}
-
-/* Name.Tag */
-/* line 40, ../sass/syntax/colorful.scss */
-.highlight .nv {
-  color: #906030;
-}
-
-/* Name.Variable */
-/* line 41, ../sass/syntax/colorful.scss */
-.highlight .ow {
-  color: #000000;
-  font-weight: bold;
-}
-
-/* Operator.Word */
-/* line 42, ../sass/syntax/colorful.scss */
-.highlight .w {
-  color: #bbbbbb;
-}
-
-/* Text.Whitespace */
-/* line 43, ../sass/syntax/colorful.scss */
-.highlight .mf {
-  color: #6000E0;
-  font-weight: bold;
-}
-
-/* Literal.Number.Float */
-/* line 44, ../sass/syntax/colorful.scss */
-.highlight .mh {
-  color: #005080;
-  font-weight: bold;
-}
-
-/* Literal.Number.Hex */
-/* line 45, ../sass/syntax/colorful.scss */
-.highlight .mi {
-  color: #0000D0;
-  font-weight: bold;
-}
-
-/* Literal.Number.Integer */
-/* line 46, ../sass/syntax/colorful.scss */
-.highlight .mo {
-  color: #4000E0;
-  font-weight: bold;
-}
-
-/* Literal.Number.Oct */
-/* line 47, ../sass/syntax/colorful.scss */
-.highlight .sb {
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Backtick */
-/* line 48, ../sass/syntax/colorful.scss */
-.highlight .sc {
-  color: #0040D0;
-}
-
-/* Literal.String.Char */
-/* line 49, ../sass/syntax/colorful.scss */
-.highlight .sd {
-  color: #D04020;
-}
-
-/* Literal.String.Doc */
-/* line 50, ../sass/syntax/colorful.scss */
-.highlight .s2 {
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Double */
-/* line 51, ../sass/syntax/colorful.scss */
-.highlight .se {
-  color: #606060;
-  font-weight: bold;
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Escape */
-/* line 52, ../sass/syntax/colorful.scss */
-.highlight .sh {
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Heredoc */
-/* line 53, ../sass/syntax/colorful.scss */
-.highlight .si {
-  background-color: #e0e0e0;
-}
-
-/* Literal.String.Interpol */
-/* line 54, ../sass/syntax/colorful.scss */
-.highlight .sx {
-  color: #D02000;
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Other */
-/* line 55, ../sass/syntax/colorful.scss */
-.highlight .sr {
-  color: #000000;
-  background-color: #fff0ff;
-}
-
-/* Literal.String.Regex */
-/* line 56, ../sass/syntax/colorful.scss */
-.highlight .s1 {
-  background-color: #fff0f0;
-}
-
-/* Literal.String.Single */
-/* line 57, ../sass/syntax/colorful.scss */
-.highlight .ss {
-  color: #A06000;
-}
-
-/* Literal.String.Symbol */
-/* line 58, ../sass/syntax/colorful.scss */
-.highlight .bp {
-  color: #007020;
-}
-
-/* Name.Builtin.Pseudo */
-/* line 59, ../sass/syntax/colorful.scss */
-.highlight .vc {
-  color: #306090;
-}
-
-/* Name.Variable.Class */
-/* line 60, ../sass/syntax/colorful.scss */
-.highlight .vg {
-  color: #d07000;
-  font-weight: bold;
-}
-
-/* Name.Variable.Global */
-/* line 61, ../sass/syntax/colorful.scss */
-.highlight .vi {
-  color: #3030B0;
-}
-
-/* Name.Variable.Instance */
-/* line 62, ../sass/syntax/colorful.scss */
-.highlight .il {
-  color: #0000D0;
-  font-weight: bold;
-}
-
-/* Literal.Number.Integer.Long */
-/* Generated by Font Squirrel (http://www.fontsquirrel.com) on October 23, 2011 06:41:27 AM America/New_York */
-@font-face {
-  font-family: 'UbuntuMonoRegular';
-  src: url("fonts/ubuntu/UbuntuMono-R-webfont.eot");
-  src: url("fonts/ubuntu/UbuntuMono-R-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/ubuntu/UbuntuMono-R-webfont.woff") format("woff"), url("fonts/ubuntu/UbuntuMono-R-webfont.ttf") format("truetype"), url("fonts/ubuntu/UbuntuMono-R-webfont.svg#UbuntuMonoRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'UbuntuMonoItalic';
-  src: url("fonts/ubuntu/UbuntuMono-RI-webfont.eot");
-  src: url("fonts/ubuntu/UbuntuMono-RI-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/ubuntu/UbuntuMono-RI-webfont.woff") format("woff"), url("fonts/ubuntu/UbuntuMono-RI-webfont.ttf") format("truetype"), url("fonts/ubuntu/UbuntuMono-RI-webfont.svg#UbuntuMonoItalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'UbuntuMonoBold';
-  src: url("fonts/ubuntu/UbuntuMono-B-webfont.eot");
-  src: url("fonts/ubuntu/UbuntuMono-B-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/ubuntu/UbuntuMono-B-webfont.woff") format("woff"), url("fonts/ubuntu/UbuntuMono-B-webfont.ttf") format("truetype"), url("fonts/ubuntu/UbuntuMono-B-webfont.svg#UbuntuMonoBold") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'UbuntuMonoBoldItalic';
-  src: url("fonts/ubuntu/UbuntuMono-BI-webfont.eot");
-  src: url("fonts/ubuntu/UbuntuMono-BI-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/ubuntu/UbuntuMono-BI-webfont.woff") format("woff"), url("fonts/ubuntu/UbuntuMono-BI-webfont.ttf") format("truetype"), url("fonts/ubuntu/UbuntuMono-BI-webfont.svg#UbuntuMonoBoldItalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Generated by Font Squirrel (http://www.fontsquirrel.com) on October 23, 2011 08:17:36 AM America/New_York */
-@font-face {
-  font-family: 'BevanRegular';
-  src: url("fonts/bevan/Bevan-webfont.eot");
-  src: url("fonts/bevan/Bevan-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/bevan/Bevan-webfont.woff") format("woff"), url("fonts/bevan/Bevan-webfont.ttf") format("truetype"), url("fonts/bevan/Bevan-webfont.svg#BevanRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Generated by Font Squirrel (http://www.fontsquirrel.com) on October 23, 2011 08:24:12 AM America/New_York */
-@font-face {
-  font-family: 'TeXGyreBonumRegular';
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-regular-webfont.eot");
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/tex-gyre-bonum/texgyrebonum-regular-webfont.woff") format("woff"), url("fonts/tex-gyre-bonum/texgyrebonum-regular-webfont.ttf") format("truetype"), url("fonts/tex-gyre-bonum/texgyrebonum-regular-webfont.svg#TeXGyreBonumRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeXGyreBonumItalic';
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-italic-webfont.eot");
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-italic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/tex-gyre-bonum/texgyrebonum-italic-webfont.woff") format("woff"), url("fonts/tex-gyre-bonum/texgyrebonum-italic-webfont.ttf") format("truetype"), url("fonts/tex-gyre-bonum/texgyrebonum-italic-webfont.svg#TeXGyreBonumItalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeXGyreBonumBold';
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-bold-webfont.eot");
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/tex-gyre-bonum/texgyrebonum-bold-webfont.woff") format("woff"), url("fonts/tex-gyre-bonum/texgyrebonum-bold-webfont.ttf") format("truetype"), url("fonts/tex-gyre-bonum/texgyrebonum-bold-webfont.svg#TeXGyreBonumBold") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TeXGyreBonumBoldItalic';
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-bolditalic-webfont.eot");
-  src: url("fonts/tex-gyre-bonum/texgyrebonum-bolditalic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/tex-gyre-bonum/texgyrebonum-bolditalic-webfont.woff") format("woff"), url("fonts/tex-gyre-bonum/texgyrebonum-bolditalic-webfont.ttf") format("truetype"), url("fonts/tex-gyre-bonum/texgyrebonum-bolditalic-webfont.svg#TeXGyreBonumBoldItalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Generated by Font Squirrel (http://www.fontsquirrel.com) on October 23, 2011 08:27:23 AM America/New_York */
-@font-face {
-  font-family: 'GabrielleRegular';
-  src: url("fonts/gabrielle/Gabrielle-webfont.eot");
-  src: url("fonts/gabrielle/Gabrielle-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/gabrielle/Gabrielle-webfont.woff") format("woff"), url("fonts/gabrielle/Gabrielle-webfont.ttf") format("truetype"), url("fonts/gabrielle/Gabrielle-webfont.svg#GabrielleRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* line 345, ../sass/screen.scss */
-.highlight pre {
-  font-family: "UbuntuMonoRegular", monospace;
-}
-
-/* line 350, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 352, ../sass/screen.scss */
+/* line 358, ../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
   display: block;
 }
-/* line 356, ../sass/screen.scss */
+/* line 362, ../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 359, ../sass/screen.scss */
+/* line 365, ../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -934,7 +396,7 @@ h2, h1 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 363, ../sass/screen.scss */
+/* line 369, ../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   display: -moz-box;
@@ -953,44 +415,44 @@ h2, h1 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 367, ../sass/screen.scss */
+/* line 373, ../sass/screen.scss */
 .deck-container .item {
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 10px;
 }
-/* line 371, ../sass/screen.scss */
+/* line 377, ../sass/screen.scss */
 .deck-container .item img {
   display: inline;
   vertical-align: middle;
   margin: 0px;
 }
-/* line 376, ../sass/screen.scss */
+/* line 382, ../sass/screen.scss */
 .deck-container .item span {
   display: inline-block;
   text-align: right;
   vertical-align: middle;
   padding: 0 50px;
 }
-/* line 384, ../sass/screen.scss */
+/* line 390, ../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 390, ../sass/screen.scss */
+/* line 396, ../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 395, ../sass/screen.scss */
+/* line 401, ../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 402, ../sass/screen.scss */
+/* line 408, ../sass/screen.scss */
 .deck-container .twoColumn {
   width: 550px;
   margin: 0 0px;
@@ -1013,11 +475,11 @@ h2, h1 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 408, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 .deck-container .twoColumn img {
   max-width: 500px;
 }
-/* line 414, ../sass/screen.scss */
+/* line 420, ../sass/screen.scss */
 .deck-container .threeColumn {
   width: 320px;
   margin: 0 0px;
@@ -1040,11 +502,11 @@ h2, h1 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 420, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 .deck-container .threeColumn img {
   max-width: 320px;
 }
-/* line 425, ../sass/screen.scss */
+/* line 431, ../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 640px;
@@ -1068,16 +530,16 @@ h2, h1 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 431, ../sass/screen.scss */
+/* line 437, ../sass/screen.scss */
 .deck-container .twoThirds img {
   max-width: 640px;
 }
-/* line 438, ../sass/screen.scss */
+/* line 444, ../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 444, ../sass/screen.scss */
+/* line 450, ../sass/screen.scss */
 .deck-container .caption, .deck-container .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -1085,37 +547,37 @@ h2, h1 {
   padding-top: -5px;
   color: black;
 }
-/* line 451, ../sass/screen.scss */
+/* line 457, ../sass/screen.scss */
 .deck-container .image-wrap {
   margin: 0px;
 }
-/* line 453, ../sass/screen.scss */
+/* line 459, ../sass/screen.scss */
 .deck-container .image-wrap img {
   margin: 0px;
 }
-/* line 457, ../sass/screen.scss */
+/* line 463, ../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
   max-height: 500px;
   max-width: 900px;
 }
-/* line 465, ../sass/screen.scss */
+/* line 471, ../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 468, ../sass/screen.scss */
+/* line 474, ../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 471, ../sass/screen.scss */
+/* line 477, ../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 478, ../sass/screen.scss */
+/* line 484, ../sass/screen.scss */
 .deck-container .emphasizebox {
   background: rgba(0, 204, 255, 0.05);
   padding: 15px;
@@ -1124,17 +586,17 @@ h2, h1 {
   -webkit-border-radius: 30px;
   border: 2px solid rgba(0, 204, 255, 0.1);
 }
-/* line 487, ../sass/screen.scss */
+/* line 493, ../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border: 2px solid #3f3f3f;
 }
-/* line 491, ../sass/screen.scss */
+/* line 497, ../sass/screen.scss */
 .deck-container .vmargin {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 495, ../sass/screen.scss */
+/* line 501, ../sass/screen.scss */
 .deck-container .hmargin {
   margin-left: 10px;
   margin-right: 10px;

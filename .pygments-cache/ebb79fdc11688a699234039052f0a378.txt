@@ -1,6 +1,0 @@
-<div class="highlight"><pre><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-  <span class="n">args</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">sum</span><span class="p">,</span> <span class="n">item</span><span class="o">|</span>
-    <span class="n">sum</span> <span class="o">+</span> <span class="n">item</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>

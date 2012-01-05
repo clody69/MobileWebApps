@@ -25,6 +25,7 @@ Aalto University March 2011
 <link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
 <!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
 <!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
+<link href='css/coderay_dark.css' rel='stylesheet' />
 <!-- Theme CSS files (menu swaps these out) -->
 <link href='css/course.css' id='style-theme-link' rel='stylesheet' />
 <link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
@@ -106,10 +107,10 @@ Aalto University March 2011
     });
   //]]>
 </script>
-<section data-background='bg-lesson1' class='slide section-title'>
+<section class='slide section-title'>
 <h1>Lecture 1: Introduction</h1>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>The Web is Dead!</header>
 <article>
 <div class='row'>
@@ -122,7 +123,7 @@ Aalto University March 2011
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>An App for Every Task</header>
 <article>
 <div class='item'>
@@ -132,7 +133,7 @@ Aalto University March 2011
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>More Time is Spent on Mobile Apps</header>
 <article>
 <div class='row'>
@@ -145,7 +146,7 @@ Aalto University March 2011
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Is the Web Dead ?</header>
 <article>
 <div class='row'>
@@ -178,13 +179,13 @@ Many apps are built in HTML5 and wrapped with a native shell
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Evolution of the Web (Browsers)</header>
 <article>
 <div class='image-wrap'><img src='imgs/evolution-web.png' /><div class='caption'><a href='http://evolutionofweb.appspot.com/'>Web Evolution</a></div></div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Shifting from the "Document Web" to the "App Web"</header>
 <article>
 <div class='row'>
@@ -234,11 +235,11 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Mobile Web Apps</header>
 <article></article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Developing Native Apps for Multiple Platforms</header>
 <article>
 <div class='row'>
@@ -271,14 +272,19 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Develop, Test and Maintain</header>
 <article>
 <div class='image-wrap'><img src='imgs/smartphones.jpg' class='resize' /></div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
-<header>Mobile Platforms Shares</header>
+<section class='slide'>
+<header>
+Smartphone Platforms Shares
+<div class='smaller inline'>
+(units shipped Q4 2011)
+</div>
+</header>
 <article>
 <div class='row'>
 <div class='twoColumn'>
@@ -290,8 +296,13 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
-<header>Mobile Browsers Shares</header>
+<section class='slide'>
+<header>
+Smartphone Browsers Shares
+<div class='smaller inline'>
+(units shipped Q4 2011)
+</div>
+</header>
 <article>
 <div class='row'>
 <div class='twoColumn'>
@@ -303,7 +314,7 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>HTML5</header>
 <article>
 <div class='row'>
@@ -362,13 +373,13 @@ Web apps are built with open standards that are refered as "Web Technologies"
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Browser Support for HTML5</header>
 <article>
 <div class='image-wrap'><img src='imgs/caniuse.png' /><div class='caption'><a href='http://caniuse.com/'>When Can I Use ...</a></div></div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>HTML5 Frameworks & Tools</header>
 <article class='larger centered'>
 <div class='item emphasizebox'>
@@ -413,14 +424,24 @@ Database
 </div>
 </article>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>The Classic Web Architecture</header>
 Show MVC is moving to client
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
 <header>Towards a New Web Architecture</header>
 </section>
-<section data-background='bg-lesson1' class='slide'>
+<section class='slide'>
+<header>jQuery Example</header>
+<article class='smaller'>
+<div class='code_block'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">&lt;!DOCTYPE html&gt;</span> &#x000A;<span class="tag">&lt;html&gt;</span> &#x000A;  <span class="tag">&lt;head&gt;</span> &#x000A;  <span class="tag">&lt;title&gt;</span>Hello World<span class="tag">&lt;/title&gt;</span> &#x000A;  <span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span> &#x000A;  <span class="tag">&lt;link</span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>&#x000A;  <span class="tag">&lt;script</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>&#x000A;  <span class="tag">&lt;script</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>&#x000A;<span class="tag">&lt;/head&gt;</span> &#x000A;<span class="tag">&lt;body&gt;</span> &#x000A;  <span class="tag">&lt;div</span> <span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;    <span class="tag">&lt;div</span> <span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;      <span class="tag">&lt;h1&gt;</span>My Title<span class="tag">&lt;/h1&gt;</span>&#x000A;    <span class="tag">&lt;/div&gt;</span><span class="comment">&lt;!-- /header --&gt;</span>&#x000A;    <span class="tag">&lt;ul</span> <span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-inset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-filter</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;      <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Acura<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;      <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Audi<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;      <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>BMW<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;      <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Cadillac<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;      <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Ferrari<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;    <span class="tag">&lt;/ul&gt;</span>&#x000A;  <span class="tag">&lt;/div&gt;</span><span class="comment">&lt;!-- /page --&gt;</span>&#x000A;<span class="tag">&lt;/body&gt;</span>&#x000A;<span class="tag">&lt;/html&gt;</span>&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
 <header>Important resources</header>
 <article>
 http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
@@ -430,11 +451,11 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 </article>
 </section>
 
-<section data-background='bg-lesson2' class='slide section-title'>
+<section class='slide section-title'>
 <h1>Lesson 2:</h1>
 </section>
 
-<section data-background='bg-lesson3' class='slide section-title'>
+<section class='slide section-title'>
 <h1>Lesson 3:</h1>
 </section>
 
@@ -451,10 +472,10 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
     }
   /*]]>*/
 </style>
-<section data-background='bg-template' class='slide section-title'>
+<section class='slide section-title'>
 <h1>Templates</h1>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Example of a standard slide</header>
 <article>
 <p>This shows the basic slide format with paragraphs of text</p>
@@ -462,7 +483,7 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 <p>The content is also vertically centered</p>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Example of singlespaced paragraphs</header>
 <article class='singlespace'>
 <p>This shows a list of items</p>
@@ -470,7 +491,7 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 <p>The paragraphs are single spaced</p>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Example of a standard slide with bullet points</header>
 <article>
 <ul>
@@ -482,7 +503,7 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 </ul>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Text examples</header>
 <article>
 <h2>h2 header</h2>
@@ -502,7 +523,7 @@ Ordered List:
 </ol>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Text with different colors and sizes:</header>
 <article>
 <div class='autobox'>
@@ -535,7 +556,7 @@ This text contains
 </div>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>An image with caption</header>
 <article>
 <div class='autoimage'>
@@ -543,7 +564,7 @@ This text contains
 </div>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Slide with code</header>
 <article>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
@@ -555,7 +576,7 @@ This text contains
 <pre class='test-output'>Finished in 0.000342 seconds.&#x000A;&#x000A;<strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>&#x000A;</pre>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Slide with code and smaller font</header>
 <article class='smaller'>
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -582,7 +603,7 @@ This text contains
 </pre></div>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Testing multicolumns</header>
 <article>
 <div class='row'>
@@ -621,7 +642,7 @@ This text contains
 </div>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Autobox</header>
 <div class='autobox'>
 <p>Testing autobox</p>
@@ -633,7 +654,7 @@ This text contains
 <p>lines</p>
 </div>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Normal centered slide</header>
 <article>
 <p>List of elements inside this box</p>
@@ -653,7 +674,7 @@ This is the item number three
 </ul>
 </article>
 </section>
-<section data-background='bg-template' class='slide'>
+<section class='slide'>
 <header>Large Centered Slide</header>
 <div class='autobox centered largest'>
 <p>Testing a very large centered text with multiple lines</p>
