@@ -122,6 +122,24 @@ a img {
 	height: 200px;
 
 }
+/* Examples */
+
+.code_block {
+  clear: both;
+  margin: 12px 0px;
+}
+.code_header {
+	position: relative;
+	background-color: #E0E0E0;
+	font-size: 12px;
+	padding: 4px 7px;
+	border: solid 1px #B6B6B6;
+	border-bottom: none;
+	border-image: initial;
+	font-family: Verdana, Helvetica, Arial;
+}
+
+
 /*------------------------------------------------------------------------------
      Header Styles
 ------------------------------------------------------------------------------*/
@@ -385,7 +403,7 @@ a img {
   border-radius:20px;
 }
 
-.contenr-wrapper {
+.content-wrapper {
   width: 100%;
   position: relative;
   float: left;
@@ -393,24 +411,24 @@ a img {
   z-index: 2;
 }
 
-.contenr-wrapper dl {
+.content-wrapper dl {
   margin-left: 10px;
 }
 
-.contenr-wrapper dt {
+.content-wrapper dt {
   color: #666;
 }
 
-.contenr-wrapper ul,
-.contenr-wrapper ol {
+.content-wrapper ul,
+.content-wrapper ol {
   margin-left: 1.5em;
 }
 
-.contenr-wrapper ul {
+.content-wrapper ul {
   list-style-type: disc;
 }
 
-.contenr-wrapper img {
+.content-wrapper img {
   max-width: 100%;
   border: 1px solid #dddddd;
   -webkit-box-shadow: 1px 1px 3px #ddd;
@@ -419,19 +437,19 @@ a img {
 }
 
 
-.contenr-wrapper .description {
+.content-wrapper .description {
   margin-left: 20px;
 }
 
-.contenr-wrapper .verseblock-content {
+.content-wrapper .verseblock-content {
   padding: 3px;
 }
 
-.contenr-wrapper .verseblock-content,
-.contenr-wrapper .sectionbody .dlist dt,
-.contenr-wrapper p > tt,
-.contenr-wrapper dl code,
-.contenr-wrapper ul code,
+.content-wrapper .verseblock-content,
+.content-wrapper .sectionbody .dlist dt,
+.content-wrapper p > tt,
+.content-wrapper dl code,
+.content-wrapper ul code,
 p code {
   font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
   color: #52595d;
@@ -447,15 +465,15 @@ p code {
   display: inline-block;
 }
 
-.contenr-wrapper .sectionbody .dlist dt {
+.content-wrapper .sectionbody .dlist dt {
   margin-top: 10px;
 }
 
-.contenr-wrapper .verseblock-content {
+.content-wrapper .verseblock-content {
   padding: 3px;
 }
 
-.contenr-wrapper .intro {
+.content-wrapper .intro {
   color: #868686;
 }
 /* @end */

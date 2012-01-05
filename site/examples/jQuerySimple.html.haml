@@ -1,26 +1,9 @@
-:css
-  .code_block {
-    clear: both;
-    margin: 12px 0px;
-  }
-  .code_header {
-    position: relative;
-    background-color: #E0E0E0;
-    font-size: 12px;
-    padding: 4px 7px;
-    border: solid 1px #B6B6B6;
-    border-bottom: none;
-    border-image: initial;
-    font-family: Verdana, Helvetica, Arial;
-  }
 
-%h1 
-  jQuery Simple
-  .right.inline.smaller
-    %a(src="#")
-      Browse Source Code
-    
-Example
+=example_header_tag "jQuery Simple", "jQuerySimple"
+
+
+This example demonstrates how to create a basic web app using jQuery Mobile. It shows a simpl listview with few items. 
+
 .code_block
   .code_header
     jQuerySimple/index.html
@@ -38,7 +21,7 @@ Example
     <body> 
       <div data-role="page">
         <div data-role="header">
-          <h1>My Title</h1>
+          <h1>List of cars</h1>
         </div><!-- /header -->
         <ul data-role="listview" data-inset="true" data-filter="true">
           <li><a href="#">Acura</a></li>

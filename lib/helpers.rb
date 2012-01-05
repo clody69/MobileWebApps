@@ -1,8 +1,16 @@
 
 module PresentationHelper
   
+  def render_examples_list
+    h = '<ul>'
+    Dir["site/examples/*.html.haml"].each { |file| 
+      name = File.basename(file).gsub(/.html.haml/,'')
+      h += "<li><a href='#{name}.html'>#{name}</a></li>"
+    }
+    h += '</ul>'
+  end
   def example_header_tag(title, name)
-    h = "<h1>#{title}"    
+    h = "<h1>#{title}<div class='right inline smaller'><a href='https://github.com/clody69/MobileWebApps/tree/master/'+#{name}>Browse Source Code</a></div></h1>"  
   end
 
   def image_tag(img_path, hsh = {})

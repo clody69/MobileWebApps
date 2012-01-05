@@ -74,7 +74,7 @@ table.CodeRay td { padding: 2px 4px; vertical-align: top; }
 .CodeRay .integer  { color:#A4C260; }
 .CodeRay .key .char { color: #60f }
 .CodeRay .key .delimiter { color: #404 }
-.CodeRay .key { color: #606 }
+.CodeRay .key { color: #990073}
 .CodeRay .keyword { color:#CB7832 }
 .CodeRay .label { color:#970; font-weight:bold }
 .CodeRay .local-variable { color:#963 }

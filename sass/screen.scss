@@ -272,10 +272,10 @@ h1, h2 {
   .subtitle {font-size: 130%;}
   h2 {font-size: 150%;}
   .smallest {font-size: 40%;}
-  .smaller {font-size: 60%;}
-  .larger { font-size: 120%;}
+  .smaller{font-size: 60%;}
+  .larger{ font-size: 120%;}
   .largest { font-size: 150%;}
-  .big {font-size: 200%;}
+  .big{font-size: 200%;}
   
   /*apply the settings only to the first element contained in .deck-container*/
   > .slide {
@@ -341,11 +341,19 @@ h1, h2 {
 
 
 
-.deck-container pre {
-  border: 1px solid #999999;
-  border-radius: 0;
-  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
-  padding: 5px;
+.deck-container{
+  pre {
+    border: 1px solid #999999;
+    border-radius: 0;
+    font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+    padding: 5px;
+    font-size: 18px;
+  }
+  .smallest pre{font-size: 11px;}
+  .smaller pre {font-size: 14px;}
+  .larger pre { font-size: 20px;}
+  .largest pre { font-size: 25px;}
+  .big pre {font-size: 30px;}
 }
 
 
