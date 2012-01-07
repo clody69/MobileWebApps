@@ -92,10 +92,14 @@
   transform: rotate(3deg);
 }
 /* line 114, ../sass/course.scss */
+.deck-container .slide .terminal {
+  font-family: monospace, prestige;
+}
+/* line 118, ../sass/course.scss */
 .deck-container .slide code {
   color: #789;
 }
-/* line 118, ../sass/course.scss */
+/* line 122, ../sass/course.scss */
 .deck-container .slide blockquote {
   font-family: "Hoefler Text", Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
   font-size: 2em;
@@ -106,13 +110,13 @@
   border: 1px solid #cde;
   z-index: auto;
 }
-/* line 128, ../sass/course.scss */
+/* line 132, ../sass/course.scss */
 .borderradius .deck-container .slide blockquote {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 133, ../sass/course.scss */
+/* line 137, ../sass/course.scss */
 .boxshadow .deck-container .slide blockquote > :first-child:before {
   content: "";
   position: absolute;
@@ -123,7 +127,7 @@
   left: 0;
   right: 0;
 }
-/* line 144, ../sass/course.scss */
+/* line 148, ../sass/course.scss */
 .boxshadow .deck-container .slide blockquote:after {
   content: "";
   position: absolute;
@@ -138,18 +142,18 @@
   -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
-/* line 158, ../sass/course.scss */
+/* line 162, ../sass/course.scss */
 .deck-container .slide blockquote p {
   margin: 0;
 }
-/* line 162, ../sass/course.scss */
+/* line 166, ../sass/course.scss */
 .deck-container .slide blockquote cite {
   font-size: .5em;
   font-style: normal;
   font-weight: bold;
   color: #888;
 }
-/* line 169, ../sass/course.scss */
+/* line 173, ../sass/course.scss */
 .deck-container .slide blockquote:before {
   content: "“";
   position: absolute;
@@ -160,59 +164,59 @@
   color: #ccf0f0;
   z-index: 1;
 }
-/* line 181, ../sass/course.scss */
+/* line 185, ../sass/course.scss */
 .deck-container .slide ::-moz-selection {
   background: #08455f;
   color: #fff;
 }
-/* line 182, ../sass/course.scss */
+/* line 186, ../sass/course.scss */
 .deck-container .slide ::selection {
   background: #08455f;
   color: #fff;
 }
-/* line 185, ../sass/course.scss */
+/* line 189, ../sass/course.scss */
 .deck-container .slide a, .deck-container .slide a:hover, .deck-container .slide a:focus, .deck-container .slide a:active, .deck-container .slide a:visited {
   color: #599;
   text-decoration: none;
 }
-/* line 190, ../sass/course.scss */
+/* line 194, ../sass/course.scss */
 .deck-container .slide a:hover, .deck-container .slide a:focus {
   text-decoration: underline;
 }
-/* line 196, ../sass/course.scss */
+/* line 200, ../sass/course.scss */
 .deck-container .deck-prev-link, .deck-container .deck-next-link {
   background: #fff;
   opacity: 0.5;
 }
-/* line 200, ../sass/course.scss */
+/* line 204, ../sass/course.scss */
 .deck-container .deck-prev-link, .deck-container .deck-prev-link:hover, .deck-container .deck-prev-link:focus, .deck-container .deck-prev-link:active, .deck-container .deck-prev-link:visited, .deck-container .deck-next-link, .deck-container .deck-next-link:hover, .deck-container .deck-next-link:focus, .deck-container .deck-next-link:active, .deck-container .deck-next-link:visited {
   color: #599;
 }
-/* line 204, ../sass/course.scss */
+/* line 208, ../sass/course.scss */
 .deck-container .deck-prev-link:hover, .deck-container .deck-prev-link:focus, .deck-container .deck-next-link:hover, .deck-container .deck-next-link:focus {
   opacity: 1;
   text-decoration: none;
 }
-/* line 210, ../sass/course.scss */
+/* line 214, ../sass/course.scss */
 .deck-container .deck-status {
   font-size: 0.6666em;
 }
-/* line 215, ../sass/course.scss */
+/* line 219, ../sass/course.scss */
 .deck-container.deck-menu .slide {
   background: transparent;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 219, ../sass/course.scss */
+/* line 223, ../sass/course.scss */
 .rgba .deck-container.deck-menu .slide {
   background: rgba(0, 0, 0, 0.1);
 }
-/* line 223, ../sass/course.scss */
+/* line 227, ../sass/course.scss */
 .deck-container.deck-menu .slide.deck-current, .rgba .deck-container.deck-menu .slide.deck-current, .no-touch .deck-container.deck-menu .slide:hover {
   background: #fff;
 }
-/* line 229, ../sass/course.scss */
+/* line 233, ../sass/course.scss */
 .deck-container .goto-form {
   background: #fff;
   border: 1px solid #cde;
@@ -220,7 +224,7 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 234, ../sass/course.scss */
+/* line 238, ../sass/course.scss */
 .boxshadow .deck-container .goto-form {
   -webkit-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;

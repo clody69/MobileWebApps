@@ -1,6 +1,12 @@
 
 module PresentationHelper
   
+  def html5_websockets_tag(title="WebSockets")
+    h= '<img src = "imgs/html5/HTML5_Connectivity_64.png">'
+    h += title
+    h += '</img>'
+  end
+  
   def render_examples_list
     h = '<ul>'
     Dir["site/examples/*.html.haml"].each { |file| 

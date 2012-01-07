@@ -167,6 +167,12 @@ h1, h2 {
       position: absolute;
       left: 40px;
       top: 20px;
+      img {
+        float: left;
+        max-height: 1em;
+        margin: 0 .5em 0 0;
+        vertical-align: center;
+      }
     }
     
     .slide > article {
@@ -242,6 +248,12 @@ h1, h2 {
   color: white;
   display: inline;
 }
+.gray {
+  color: gray;
+  display: inline;
+  margin: 0px;
+}
+
 
 .left {
   float: left;
@@ -258,10 +270,9 @@ h1, h2 {
   visibility: hidden;
 }
 
-.singlespace p {
+.singlespace, .singlespace p {
   margin-bottom: 0;
 }
-
 
 .deck-container {
 

@@ -500,6 +500,88 @@ http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 <section class='slide section-title'>
 <h1>Lesson 3:</h1>
 </section>
+<section class='slide'>
+<header>
+Push Technology
+</header>
+<article>
+<p>HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication</p>
+<p>Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring</p>
+<div class='singlespace'>
+<p>Workarounds</p>
+</div>
+<ul>
+<li>Frequent requests (=> excessive load on the server)</li>
+<li>Long polling (=> keep many connections open in waiting state)</li>
+<li>Flash XMLSocket relays</li>
+</ul>
+<p>Library hiding complexity: socket.io</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+</header>
+<article>
+<blockquote>
+<p class='smallest'>
+Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
+</p>
+</blockquote>
+<div class='code_block larger'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Socket object</span>&#x000A;<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://echo.websocket.org</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">// Callbacks</span>&#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { alert(event.data); }&#x000A;socket.<span class="function">onclose</span> = <span class="keyword">function</span>(event) { alert(<span class="string"><span class="delimiter">'</span><span class="content">closed</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+</header>
+<article>
+Websockets interface:
+<ul>
+<li>
+<strong class='red'>
+onopen
+</strong>
+: callback when the socket is ready
+</li>
+<li>
+<strong class='red'>
+onmessage
+</strong>
+: callback when a message is received on the socket
+</li>
+<li>
+<strong class='red'>
+onclose
+</strong>
+: callback when the socket is closed
+</li>
+</ul>
+<p>
+Messages are in UTF-8:
+<div class='centered'>
+<div class='terminal larger'>
+"
+<div class='gray'>
+\x00
+</div>
+Hello World
+<div class='gray'>
+\xFF
+</div>
+"
+</div>
+</div>
+</p>
+<div class="CodeRay">
+  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);</pre></div>
+</div>
+</article>
+</section>
 
 <style type='text/css'>
   /*<![CDATA[*/
@@ -596,6 +678,17 @@ This text contains
 <p class='largest'>Largest text</p>
 <p class='big'>Big text</p>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>Example of a quote</header>
+<article>
+<blockquote>
+<p>This is a quote about nothing</p>
+<p>
+<cite>From myself</cite>
+</p>
+</blockquote>
 </article>
 </section>
 <section class='slide'>
