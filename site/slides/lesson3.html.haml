@@ -53,15 +53,13 @@
         \: callback when the socket is closed
     %p
       Messages are in UTF-8:
-      .centered
-        .terminal.larger
-          "
-          .gray
-            \\x00
-          Hello World
-          .gray
-            \\xFF
-          "
+      .centered.terminal.larger
+        "
+        .gray> \\x00
+        Hello World
+        .gray> \\xFF
+        "
+
     :coderay_raw
       #!javascript
       socket.send('Hello World');
