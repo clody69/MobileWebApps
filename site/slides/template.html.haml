@@ -1,0 +1,200 @@
+:css
+  .template{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url("imgs/bernina.jpg");
+    background-size: cover;
+    background-color: transparent;
+    width: 100%;
+  }
+  
+
+%section.slide.section-title
+  %h1 Templates
+
+%section.slide
+  %header Example of a standard slide 
+  %article
+    %p This shows the basic slide format with paragraphs of text
+    %p The content of each paragraph is using one line and wraps when the text is too long
+    %p The content is also vertically centered
+
+%section.slide
+  %header Example of singlespaced paragraphs
+  %article.singlespace
+    %p This shows a list of items
+    %p Each item is a paragraph
+    %p The paragraphs are single spaced
+    
+%section.slide
+  %header Example of a standard slide with bullet points
+  %article
+    %ul
+      %li This show a basic slide with content aligned on the left
+      %li Each sentence is a separte %li item
+      %li The content is alligned top left 
+      %li The width of the content space is fixed at 80% of the slice width
+      %li This shows a very long text that will be wrapped multiple times. This shows a very long text that will be wrapped multiple times. This shows a very long text that will be wrapped multiple times.
+      
+%section.slide
+  %header Text examples
+  %article  
+    %h2 h2 header
+    %h3 h3 header
+    %p paragraph text
+    Unordered List:
+    %ul
+      %li Item1
+      %li Item2
+      %li Item3
+    Ordered List:
+    %ol
+      %li Item1
+      %li Item2
+      %li Item3
+     
+%section.slide
+  %header Text with different colors and sizes: 
+  %article
+    .autobox
+      %ul
+        %li 
+          This text contains
+          .red red
+        %li
+          This text contains
+          .green green
+        %li
+          This text contains 
+          .blue blue
+        %li
+          This text contains 
+          .yellow yellow
+    .autobox.singlespace
+      %p.smallest Smallest text
+      %p.smaller Smaller text
+      %p Normal text
+      %p.larger Larger text
+      %p.largest Largest text
+      %p.big Big text 
+
+%section.slide
+  %header Example of a quote
+  %article
+    %blockquote
+      %p This is a quote about nothing
+      %p
+        %cite From myself
+        
+%section.slide
+  %header An image with caption
+  %article
+    .autoimage
+      = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1"
+
+
+%section.slide
+  %header Slide with code
+  %article
+    =pygmentize "ruby" do
+      :plain
+        class Adder
+          def self.add(a,b)
+            return 3
+          end
+        end
+    %pre.test-output
+      :preserve
+        Finished in 0.000342 seconds.
+  
+        <strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>
+
+%section.slide
+  %header Slide with code and smaller font
+  %article.smaller
+    =pygmentize "javascript" do
+      :plain
+        $(function() {
+          // Deck initialization
+          $.deck('.slide');
+        
+        
+          toc = $('<ul id="toc-ul"></ul>');
+          $('.toc h2, .toc h1').each(function(bla) {
+            id = $(this).parent().attr("id")
+            a = $('<a />').attr("href", "#" + id).html($(this).text())
+            li = $('<li />').html(a).attr("class", this.tagName)
+            toc.append(li)
+          });
+          $('#toc').html(toc);
+        
+          author = $('#author').text()
+          $('#author').remove();
+          $('section').each(function() {
+            span = $('<div class="slide-footer" />').html(author)
+            $(this).append(span);
+          });
+        });
+        
+      
+%section.slide
+  %header Testing multicolumns
+  %article
+    .row
+      .twoColumn.bordered
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .twoColumn.bordered
+        %p Second Column
+        %p Very long text to test the line wrap at the end of the column
+    .row
+      .threeColumn.bordered
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .threeColumn.bordered
+        %p Second Column
+        %p Very long text to test the line wrap at the end of the column
+      .threeColumn.bordered
+        %p Third Column
+        %p Very long text to test the line wrap at the end of the column
+    .row
+      .threeColumn
+        %p First Column
+        %p Very long text to test the line wrap at the end of the column
+      .twoThirds
+        %p Second Column spanning 2 cells
+        %p Very long text to test the line wrap at the end of the column
+%section.slide
+  %header Autobox
+  .autobox
+    %p Testing autobox
+    %p with no highlight
+  .emphasizebox
+    %p Testing highlighted autobox
+    %p with multiple 
+    %p lines
+%section.slide
+  %header Normal centered slide
+  %article
+    %p List of elements inside this box
+    %ul
+      %li 
+        %strong Item1: 
+        This is the item number one
+      %li
+        %strong Item2:
+        This is the item number two
+      %li
+        %strong Item3: 
+        This is the item number three
+
+%section.slide
+  %header Large Centered Slide
+  .autobox.centered.largest
+    %p Testing a very large centered text with multiple lines
+    %p 
+      This is used to show 
+      %strong important
+      statements
+      

@@ -1,0 +1,638 @@
+/* line 93, ../../sass/screen.scss */
+body {
+  overflow: hidden;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  box-pack: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  box-align: center;
+}
+
+/* line 107, ../../sass/screen.scss */
+body, html {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical;
+}
+
+/* line 116, ../../sass/screen.scss */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* line 128, ../../sass/screen.scss */
+.front {
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  z-index: -1;
+}
+
+/* line 132, ../../sass/screen.scss */
+.back {
+  z-index: -2;
+}
+
+/* line 135, ../../sass/screen.scss */
+#bg-default {
+  background-image: url("../imgs/bg-template.jpg");
+}
+
+/* line 136, ../../sass/screen.scss */
+#bg-lesson1 {
+  background-image: url("../imgs/bg-lesson1.jpg");
+}
+
+/* line 137, ../../sass/screen.scss */
+#bg-lesson2 {
+  background-image: url("../imgs/bg-lesson2.jpg");
+}
+
+/* line 138, ../../sass/screen.scss */
+#bg-lesson3 {
+  background-image: url("../imgs/bg-lesson3.jpg");
+}
+
+/* line 139, ../../sass/screen.scss */
+#bg-template {
+  background-image: url("../imgs/bg-template.jpg");
+}
+
+/* line 143, ../../sass/screen.scss */
+h1, h2 {
+  font-family: "Arial", "Hoefler Text",Constantia,Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+}
+
+@media all {
+  /* line 151, ../../sass/screen.scss */
+  .deck-container {
+    width: 1100px;
+    max-width: 1100px;
+    margin: 15px;
+    height: 650px;
+    font-size: 30px;
+  }
+  /* line 160, ../../sass/screen.scss */
+  .deck-container .section-title h1 {
+    position: absolute;
+    top: 200px;
+    padding: 30px;
+  }
+  /* line 166, ../../sass/screen.scss */
+  .deck-container .slide header {
+    position: absolute;
+    left: 40px;
+    top: 20px;
+  }
+  /* line 170, ../../sass/screen.scss */
+  .deck-container .slide header img {
+    float: left;
+    max-height: 1em;
+    margin: 0 .5em 0 0;
+    vertical-align: center;
+  }
+  /* line 178, ../../sass/screen.scss */
+  .deck-container .slide > article {
+    margin: 70px 0 0 0;
+    z-index: 4 !important;
+  }
+  /* line 183, ../../sass/screen.scss */
+  .deck-container .slide-footer {
+    padding-left: 10px;
+    bottom: 15px;
+    height: 20px;
+    font-size: 60%;
+  }
+  /* line 190, ../../sass/screen.scss */
+  .deck-container .deck-status {
+    font-size: 70%;
+    bottom: 15px;
+    right: 20px;
+  }
+}
+/*
+@media all and (max-width: 960px){
+  .deck-container {
+  
+    width: auto;
+    max-width: 400px;
+    margin: 8px auto 12px auto;
+    height: 320px;
+    font-size: 14px;
+
+    .slide > article {
+      margin: 0px 0;
+    }
+    
+    .slide-footer {
+      padding-left: 2px;
+      bottom: 8px;
+      height: 10px;
+      font-size: 60%;
+    }
+    .deck-status {
+      font-size: 70%;
+      bottom: 10px;
+      right: 10px;
+    }
+  
+  }
+}
+*/
+/* line 228, ../../sass/screen.scss */
+.blue {
+  color: #0066cc;
+  display: inline;
+}
+
+/* line 232, ../../sass/screen.scss */
+.yellow {
+  color: #ffd319;
+  display: inline;
+}
+
+/* line 236, ../../sass/screen.scss */
+.green {
+  color: #008a35;
+  display: inline;
+}
+
+/* line 240, ../../sass/screen.scss */
+.red {
+  color: red;
+  display: inline;
+}
+
+/* line 244, ../../sass/screen.scss */
+.black {
+  color: black;
+  display: inline;
+}
+
+/* line 248, ../../sass/screen.scss */
+.white {
+  color: white;
+  display: inline;
+}
+
+/* line 252, ../../sass/screen.scss */
+.gray {
+  color: gray;
+  display: inline;
+  margin: 0px;
+}
+
+/* line 259, ../../sass/screen.scss */
+.left {
+  float: left;
+}
+
+/* line 263, ../../sass/screen.scss */
+.inline {
+  display: inline;
+}
+
+/* line 267, ../../sass/screen.scss */
+.right {
+  float: right;
+}
+
+/* line 270, ../../sass/screen.scss */
+.hidden {
+  visibility: hidden;
+}
+
+/* line 274, ../../sass/screen.scss */
+.singlespace, .singlespace p {
+  margin-bottom: 0;
+}
+
+/* line 278, ../../sass/screen.scss */
+.deck-container {
+  overflow: visible;
+  /*apply the settings only to the first element contained in .deck-container*/
+}
+/* line 282, ../../sass/screen.scss */
+.deck-container header {
+  font-size: 150%;
+}
+/* line 283, ../../sass/screen.scss */
+.deck-container h1 {
+  font-size: 200%;
+}
+/* line 284, ../../sass/screen.scss */
+.deck-container .subtitle {
+  font-size: 130%;
+}
+/* line 285, ../../sass/screen.scss */
+.deck-container h2 {
+  font-size: 150%;
+}
+/* line 286, ../../sass/screen.scss */
+.deck-container .smallest {
+  font-size: 40%;
+}
+/* line 287, ../../sass/screen.scss */
+.deck-container .smaller {
+  font-size: 60%;
+}
+/* line 288, ../../sass/screen.scss */
+.deck-container .larger {
+  font-size: 120%;
+}
+/* line 289, ../../sass/screen.scss */
+.deck-container .largest {
+  font-size: 150%;
+}
+/* line 290, ../../sass/screen.scss */
+.deck-container .big {
+  font-size: 200%;
+}
+/* line 293, ../../sass/screen.scss */
+.deck-container > .slide {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-shadow: 0 5px 15px black;
+  -moz-box-shadow: 0 5px 15px black;
+  box-shadow: 0 5px 15px black;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  -moz-background-clip: padding;
+  /* Firefox 3.6 */
+  -webkit-background-clip: padding;
+  /* Safari 4? Chrome 6? */
+  background-clip: padding-box;
+  /* Firefox 4, Safari 5, Opera 10, IE 9 */
+  background-color: white;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 307, ../../sass/screen.scss */
+.deck-container .empty {
+  background-color: transparent;
+  box-shadow: none;
+}
+/* line 311, ../../sass/screen.scss */
+.deck-container .section-title {
+  background-color: transparent;
+  box-shadow: none;
+}
+/* line 315, ../../sass/screen.scss */
+.deck-container .section-title h1 {
+  font-family: "Arial Black";
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  text-align: left;
+  font-variant: small-caps;
+  text-shadow: black 0 2px 5px;
+}
+/* line 326, ../../sass/screen.scss */
+.deck-container .main-title h1 {
+  position: relative;
+}
+/* line 329, ../../sass/screen.scss */
+.deck-container .main-title .subtitle {
+  color: #666;
+}
+/* line 334, ../../sass/screen.scss */
+.deck-container .slide-footer {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+/* line 340, ../../sass/screen.scss */
+.deck-menu .slide-footer {
+  background: none;
+}
+
+/* line 345, ../../sass/screen.scss */
+#toc .H2 {
+  margin-left: 20px;
+  list-style: circle outside none;
+}
+/* line 349, ../../sass/screen.scss */
+#toc a {
+  color: black;
+}
+
+/* line 357, ../../sass/screen.scss */
+.deck-container pre {
+  border: 1px solid #999999;
+  border-radius: 0;
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+  padding: 5px;
+  font-size: 18px;
+}
+/* line 364, ../../sass/screen.scss */
+.deck-container .smallest pre {
+  font-size: 11px;
+}
+/* line 365, ../../sass/screen.scss */
+.deck-container .smaller pre {
+  font-size: 14px;
+}
+/* line 366, ../../sass/screen.scss */
+.deck-container .larger pre {
+  font-size: 20px;
+}
+/* line 367, ../../sass/screen.scss */
+.deck-container .largest pre {
+  font-size: 25px;
+}
+/* line 368, ../../sass/screen.scss */
+.deck-container .big pre {
+  font-size: 30px;
+}
+
+/* line 372, ../../sass/screen.scss */
+.CodeRay .code pre {
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+}
+
+/* line 376, ../../sass/screen.scss */
+.deck-container {
+  /* Column Layouts - use in <div> tags to put content in columns  */
+}
+/* line 378, ../../sass/screen.scss */
+.deck-container .autobox {
+  /* Centered area with auto-adapting width */
+  display: block;
+}
+/* line 382, ../../sass/screen.scss */
+.deck-container .autoslide {
+  text-align: left;
+}
+/* line 385, ../../sass/screen.scss */
+.deck-container .centered {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical;
+  text-align: center;
+}
+/* line 389, ../../sass/screen.scss */
+.deck-container .justified {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: justify;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: justify;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: justify;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
+/* line 393, ../../sass/screen.scss */
+.deck-container .item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+/* line 397, ../../sass/screen.scss */
+.deck-container .item img {
+  display: inline;
+  vertical-align: middle;
+  margin: 0px;
+}
+/* line 402, ../../sass/screen.scss */
+.deck-container .item span {
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
+  padding: 0 50px;
+}
+/* line 410, ../../sass/screen.scss */
+.deck-container .column {
+  margin: 0 10px;
+  overflow: hidden;
+  float: left;
+  display: inline;
+}
+/* line 416, ../../sass/screen.scss */
+.deck-container .row {
+  margin: auto;
+  overflow: hidden;
+}
+/* line 421, ../../sass/screen.scss */
+.deck-container .row .row {
+  margin: 0 -10px;
+  width: auto;
+  display: inline-block;
+}
+/* line 428, ../../sass/screen.scss */
+.deck-container .twoColumn {
+  width: 550px;
+  margin: 0 0px;
+  overflow: hidden;
+  float: left;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
+/* line 434, ../../sass/screen.scss */
+.deck-container .twoColumn img {
+  max-width: 500px;
+}
+/* line 440, ../../sass/screen.scss */
+.deck-container .threeColumn {
+  width: 320px;
+  margin: 0 0px;
+  overflow: hidden;
+  float: left;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
+/* line 446, ../../sass/screen.scss */
+.deck-container .threeColumn img {
+  max-width: 320px;
+}
+/* line 451, ../../sass/screen.scss */
+.deck-container .twoThirds {
+  /* spans two columns in a three column layout */
+  width: 640px;
+  margin: 0 10px;
+  overflow: hidden;
+  float: left;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
+/* line 457, ../../sass/screen.scss */
+.deck-container .twoThirds img {
+  max-width: 640px;
+}
+/* line 464, ../../sass/screen.scss */
+.deck-container .autoimage {
+  display: inline-block;
+  margin: 10px;
+}
+/* line 470, ../../sass/screen.scss */
+.deck-container .caption, .deck-container .caption a {
+  font-variant: small-caps;
+  text-align: left;
+  font-size: 80%;
+  padding-top: -5px;
+  color: black;
+}
+/* line 477, ../../sass/screen.scss */
+.deck-container .image-wrap {
+  margin: 0px;
+}
+/* line 479, ../../sass/screen.scss */
+.deck-container .image-wrap img {
+  margin: 0px;
+}
+/* line 483, ../../sass/screen.scss */
+.deck-container .resize {
+  width: auto !important;
+  height: auto !important;
+  max-height: 500px;
+  max-width: 900px;
+}
+/* line 491, ../../sass/screen.scss */
+.deck-container .half {
+  width: 50%;
+}
+/* line 494, ../../sass/screen.scss */
+.deck-container .quarter {
+  width: 25%;
+}
+/* line 497, ../../sass/screen.scss */
+.deck-container .caption {
+  font-variant: small-caps;
+  text-align: left;
+  padding-top: -5px;
+  color: black;
+}
+/* line 504, ../../sass/screen.scss */
+.deck-container .emphasizebox {
+  background: rgba(0, 204, 255, 0.05);
+  padding: 15px;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border: 2px solid rgba(0, 204, 255, 0.1);
+}
+/* line 513, ../../sass/screen.scss */
+.deck-container .bordered {
+  /* use in <div> tags to make a highlighted block */
+  border: 2px solid #3f3f3f;
+}
+/* line 517, ../../sass/screen.scss */
+.deck-container .vmargin {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+/* line 521, ../../sass/screen.scss */
+.deck-container .hmargin {
+  margin-left: 10px;
+  margin-right: 10px;
+}

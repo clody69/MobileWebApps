@@ -1,0 +1,384 @@
+:css
+  @-webkit-keyframes chromelogo-zoom-spin {
+    from { -webkit-transform: rotateX(0deg) scale(1); }
+    to { -webkit-transform: rotateX(360deg) scale(0)  ; }
+  }
+  @-webkit-keyframes chromelogo-spin {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes chromelogo-zoom {
+    from { -webkit-transform: scale(1); }
+    to { -webkit-transform: scale(0); }
+  }
+
+  @-webkit-keyframes chromelogo-move {
+    from { -webkit-transform: translate(0px, 0px); }
+    to { -webkit-transform: translate(700px,-400px); }
+  }
+  @-webkit-keyframes chromelogo-move-zoom {
+    from { -webkit-transform: translate(0px, 0px) scale(1); }
+    to { -webkit-transform: translate(700px,-400px) scale(0); }
+  }   
+  @-webkit-keyframes hide {
+    from { opacity: 0;}
+    to { opacity: 0; }
+  }
+  .chromelogo{
+    -webkit-animation:  chromelogo-spin 1s infinite linear;
+    //animation: chromelogo-spin 12s infinite cubic-bezier(0.9, 0.1, 0.1, 0.9);
+  }
+  .image_move_out {
+    -webkit-animation:  chromelogo-move-zoom 5s cubic-bezier(0.07, 0.1, 0.25, 0.9), hide 0 5s infinite;  
+  }
+  .image_hide {
+    -webkit-animation: hide 0s 6s;
+    }
+  
+:javascript
+  $(function() {
+    $("#thewebisdead").bind('click', function(event) {
+      $("#thewebisdead").addClass('chromelogo');
+      $("#thewebisdead_wrapper").addClass('image_move_out');
+      
+      
+    });
+  });
+
+%section.slide.section-title
+  %h1 Lecture 1: Introduction
+
+%section.slide
+  %header The Web is Dead!
+  %article
+    .row
+      .twoColumn
+        = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
+      .twoColumn.slide
+        = image_tag "mobile-applications.jpg", :resize => true
+
+
+%section.slide
+  %header An App for Every Task
+  %article
+    .item
+      = image_tag "iphone-facebook-2-application.jpg", :nowrap => true
+      = image_tag "twitter-web-app.jpg", :nowrap => true
+      = image_tag "weather-app.jpg", :nowrap => true
+
+%section.slide
+  %header More Time is Spent on Mobile Apps
+  %article
+    .row
+      .twoColumn
+        =image_tag "mobile-app-chart.jpg"
+      .twoColumn
+        =image_tag "mobile-app-chart-2.jpg"
+
+      
+      
+%section.slide
+  %header Is the Web Dead ? 
+  %article
+    .row 
+      .twoColumn
+        %ul
+          %li.slide
+            If you are reading this, it's not.
+          %li.slide 
+            Wired article was read and discussed mostly on the web
+          %li.slide
+            HTML5 brings a a lot of new cool stuff for web developers
+          %li.slide
+            Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
+          %li.slide
+            Many apps are built in HTML5 and wrapped with a native shell
+      .twoColumn
+        #thewebisdead_wrapper
+          .autoimage#thewebisdead
+            = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
+
+%section.slide
+  %header Evolution of the Web (Browsers)
+  %article
+    =image_tag "evolution-web.png", :caption => "Web Evolution", :url => "http://evolutionofweb.appspot.com/"
+
+
+%section.slide
+  %header Shifting from the "Document Web" to the "App Web"
+  %article
+    .row
+      .twoColumn.slide
+        .autobox
+          %p 
+            Hyperlinked documents
+          %p
+            Page reloading
+          %p 
+            Static pages
+          %p 
+            Web servers
+          %p 
+            Static content
+      .twoColumn.slide
+        .autobox
+          %p 
+            Interactive web apps
+          %p
+            Asynchronous API calls
+          %p 
+            HTML + CSS + JS
+          %p 
+            Data hubs (web apis)
+          %p 
+            Real-time communication
+    .vmargin
+      %p.slide
+        Web apps are built with open standards that are refered as "Web Technologies"
+    
+%section.slide
+  %header Mobile Web Apps
+  %article
+        
+
+%section.slide
+  %header Developing Native Apps for Multiple Platforms
+  %article 
+    .row
+      .twoColumn
+        .slide
+          =image_tag "asymco-live-death-mobile-platforms.png", :caption => "Asymco Feb 2011", :url => "http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/"      
+      .twoColumn
+        .autobox        
+          .slide 
+            %p We must have:
+          %ul
+            %li.slide
+              2008 - iPhone Apps
+            %li.slide
+              2009 - Android App
+            %li.slide  
+              2010 - iPad App
+            %li.slide
+              2011 - maintain them ???
+
+
+%section.slide
+  %header Develop, Test and Maintain
+  %article
+    =image_tag "smartphones.jpg", :resize => true
+
+%section.slide
+  %header 
+    Smartphone Platforms Shares 
+    .smaller.inline
+      (units shipped Q4 2011)
+  %article
+    .row
+      .twoColumn
+        =image_tag "smartphone-platforms-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-languages-share.png", :resize => true
+
+%section.slide
+  %header 
+    Smartphone Browsers Shares
+    .smaller.inline
+      (units shipped Q4 2011)
+  %article
+    .row
+      .twoColumn
+        =image_tag "smartphone-browser-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-html5-share.png", :resize => true
+
+
+%section.slide
+  %header HTML5     
+  %article
+    .row
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Semantics_64.png")
+          %span 
+            %strong New semantics
+        .item
+          %img(src = "imgs/html5/HTML5_Styling_64.png")
+          %span
+            %strong CSS3
+        .item
+          %img(src = "imgs/html5/HTML5_3D_Effects_64.png")
+          %span
+            %strong 3D, Graphics and Effects
+        .item
+          %img(src = "imgs/html5/HTML5_Offline_Storage_64.png")
+          %span
+            %strong Offline & Storage
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Connectivity_64.png")
+          %span
+            %strong Connectivity
+        .item
+          %img(src = "imgs/html5/HTML5_Device_Access_64.png")
+          %span
+            %strong Device Access
+        .item
+          %img(src = "imgs/html5/HTML5_Multimedia_64.png")
+          %span
+            %strong Multimedia
+        .item
+          %img(src = "imgs/html5/HTML5_Performance_64.png")
+          %span
+            %strong Performance & Integration
+       
+%section.slide
+  %header Browser Support for HTML5
+  %article
+    =image_tag "caniuse.png", :caption => "When Can I Use ...", :url => "http://caniuse.com/"
+ 
+%section.slide
+  %header Test your Browser for HTML5 support
+  %article
+    =image_tag "html5test.png", :caption => "The HTML5 Test", :url => "http://html5test.com/"
+    
+
+
+%section.slide
+  %header HTML5 Frameworks & Tools
+  %article.larger.centered
+    .item.emphasizebox 
+      %span
+        UI
+      =image_tag "jquery.png", :nowrap => true, :url => "http://jquerymobile.com/"
+      =image_tag "sencha.png", :nowrap => true, :url => "http://www.sencha.com/"
+      =image_tag "jqtouch.png", :nowrap => true, :url => "http://jqtouch.com/"
+      =image_tag "sproutcore.png", :nowrap => true, :url => "http://sproutcore.com/"
+    .item.emphasizebox 
+      %span
+        Helpers
+      =image_tag "backbonejs.png", :nowrap => true, :url => "http://documentcloud.github.com/backbone/"
+      =image_tag "modernizr.png", :nowrap => true, :url => "http://www.modernizr.com/"
+      =image_tag "handlebarsjs.png", :nowrap => true, :url => "http://www.handlebarsjs.com/"
+    .item.emphasizebox 
+      %span
+        Dev Tools 
+      =image_tag "coffescript.png", :nowrap => true, :url => "http://coffeescript.org/"  
+      =image_tag "sass.png", :nowrap => true, :url => "http://sass-lang.com/"
+      =image_tag "haml.png", :nowrap => true, :url => "http://haml-lang.com/"
+    .item.emphasizebox 
+      %span
+        Backend
+      =image_tag "rails.png", :nowrap => true, :url => "http://rubyonrails.org"
+      =image_tag "nodejs.png", :nowrap => true, :url => "http://nodejs.org"
+      =image_tag "django.png", :nowrap => true, :url => "https://www.djangoproject.com/"
+    .item.emphasizebox 
+      %span
+        Database
+      =image_tag "mongodb.png", :nowrap => true, :url => "http://www.mongodb.org/"
+      =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
+
+%section.slide
+  %header The Classic Web Architecture
+  
+  Show MVC is moving to client
+  
+%section.slide
+  %header Towards a New Web Architecture  
+
+%section.slide
+  %header jQuery Example
+  %article
+    .code_block
+      :coderay_raw
+        #!html
+        <!DOCTYPE html> 
+        <html> 
+          <head> 
+          <title>Hello World</title> 
+          <meta name="viewport" content="width=device-width, initial-scale=1"> 
+          <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+          <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+          <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+        </head> 
+        <body> 
+          <div data-role="page">
+            <div data-role="header">
+              <h1>List of cars</h1>
+            </div><!-- /header -->
+            <ul data-role="listview" data-inset="true" data-filter="true">
+              <li><a href="#">Acura</a></li>
+              <li><a href="#">Audi</a></li>
+              <li><a href="#">BMW</a></li>
+              <li><a href="#">Cadillac</a></li>
+              <li><a href="#">Ferrari</a></li>
+            </ul>
+          </div><!-- /page -->
+        </body>
+        </html>
+
+%section.slide
+  %header jQuerySimple on a iPhone and iPad
+  %article
+    .row
+      .twoColumn
+        =image_tag "jQuerySimple-iphone.png", :resize => true
+      .twoColumn
+        =image_tag "jQuerySimple-ipad.png", :resize => true
+    
+
+%section.slide
+  %header Sencha Example
+  %article.smaller
+    .code_block
+      :coderay_raw
+        #!html
+        <!DOCTYPE html> 
+        <html> 
+            <head> 
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+                <title>Hello World</title> 
+                <script src="sencha-touch.js" type="text/javascript"></script> 
+                <link href="sencha-touch.css" rel="stylesheet" type="text/css" /> 
+                 <script type="text/javascript"> 
+                    new Ext.Application({
+                        launch: function() {
+                            var cars = new Ext.data.Store({
+                                model: Ext.regModel('', {fields: ['name', 'link']}),
+                                data: [
+                                    {name: 'Acura', link:'na'},
+                                    {name: 'Audi', link:'sa'},
+                                    {name: 'BMW', link:'eu'},
+                                    {name: 'Cadillac', link:'eu'},
+                                    {name: 'Ferrari', link:'eu'}
+                                ]
+                            });
+                            new Ext.Panel({
+                                fullscreen: true,
+                                dockedItems: [{ xtype: 'toolbar', title: 'List of cars', }],
+                                items: [{ xtype: 'list', store: cars, itemTpl: '{name}' }]
+                            });
+                        }
+                    }); 
+                </script> 
+            </head> 
+            <body></body> 
+        </html>
+
+%section.slide
+  %header senchaSimple on a iPhone and iPad
+  %article
+    .row
+      .twoColumn
+        =image_tag "senchaSimple-iphone.png", :resize => true
+      .twoColumn
+        =image_tag "senchaSimple-ipad.png", :resize => true
+   
+%section.slide
+  %header Important resources
+  %article
+    http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
+    http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
+    
+    http://www.modernizr.com/ 
+    http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices

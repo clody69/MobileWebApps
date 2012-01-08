@@ -1,0 +1,68 @@
+%section.slide.section-title
+  %h1 Lesson 3: 
+
+%section.slide
+  %header 
+    Push Technology
+  %article
+    %p HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication
+    %p Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring
+    .singlespace
+      %p Workarounds
+    %ul 
+      %li Frequent requests (=> excessive load on the server)
+      %li Long polling (=> keep many connections open in waiting state)
+      %li Flash XMLSocket relays
+    %p Library hiding complexity: socket.io
+    
+%section.slide
+  %header
+    =html5_websockets_tag
+  %article
+    %blockquote
+      %p.smallest
+        Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
+    .code_block.larger
+      :coderay_raw
+        #!javascript
+        //Socket object
+        var socket = new WebSocket("ws://echo.websocket.org");
+        
+        // Callbacks
+        socket.onopen = function(event) { socket.send('Hello, WebSocket'); };
+        socket.onmessage = function(event) { alert(event.data); }
+        socket.onclose = function(event) { alert('closed'); }
+
+%section.slide
+  %header
+    =html5_websockets_tag
+  %article
+    Websockets interface:
+    %ul
+      %li
+        %strong.red
+          onopen
+        \: callback when the socket is ready
+      %li  
+        %strong.red
+          onmessage
+        \: callback when a message is received on the socket
+      %li
+        %strong.red
+          onclose
+        \: callback when the socket is closed
+    %p
+      Messages are in UTF-8:
+      .centered.terminal.larger
+        "
+        .gray> \\x00
+        Hello World
+        .gray> \\xFF
+        "
+
+    :coderay_raw
+      #!javascript
+      socket.send('Hello World');
+
+     
+       

@@ -1,0 +1,46 @@
+
+@import "compass/css3/gradient";
+$red: #bf3030;
+$green: #0d8800;
+$refactor: #666670;
+h2, h1 {
+      text-shadow: 0px -1px #444;
+}
+
+.deck-container {
+  .red, .green, .refactor {
+    box-shadow: none;
+    h2 {
+      text-shadow: 0px -1px black;
+      color: white;
+    }
+  }
+  section.slide.red {
+    background: #bf3030;
+    @include background-image(linear-gradient(color-stops($red,darken($red,10%))));
+  }
+  section.slide.green {
+    background: #0d8800;
+    @include background-image(linear-gradient(color-stops($green,darken($green,10%))));
+  }
+  section.slide.refactor {
+    background: #666670;
+    @include background-image(linear-gradient(color-stops($refactor,darken($refactor,10%))));
+  }
+}
+
+#circle img {
+  max-height: 500px;
+}
+
+.test-output {
+  font-size: 90%;
+  strong.red {
+    color: #bf3030;
+    font-weight: normal;
+  }
+  strong.green {
+    color: #0d8800;
+    font-weight: normal;
+  }
+}
