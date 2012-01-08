@@ -1,3 +1,19 @@
+h1. Course on Mobile Web Apps Development with HTML5
+
+This repository contains the site and the examples for the course. There are two branches:
+* master -> it contains the files for building the site 
+* gh-pages -> it contains the files that are published on github and visible at aaltowebapps.com
+
+h1. Setting up the environment
+
+Clone the two separate branches in two different directories: 
+* site -> it contains the master branch
+* public -> it contains the gh-pages branch
+
+Check the sym link site/public points to public
+
+
+
 h1. Readme Deck.JS Builder
 
 "Live example":http://zealot128.github.com/DeckJS-Builder/
