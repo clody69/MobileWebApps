@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignmen'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>
+Lecture 1 - Introduction
+</h1>
+<h2>Web is dead</h2>
+<p>Article was written by editor in chief Chris Anderson and said that WWW is in declide as simpler, sleeker services -the apps- are less about searching and more about getting.</p>
+A study shows that people spend more time with apps rather than on the web.
+<a href='http://www.observer.com/2010/media/wireds-web-dead-cover-if-youre-reading-ipad-you-already-know'></a>
+Web is not dying but the web document is loosing importance against interactive web apps
+<a href='http://gigaom.com/2011/12/29/the-app-internet-in-2012-defining-the-death-of-the-web/'></a>
+Reply from o'reilly
+<a href='http://www.wired.com/magazine/2010/08/ff_webrip_debate/all/1'></a>
+<h2>
+Mobile Apps Platform Fragmentation
+</h2>
+<p>
+There have been 16 total mobile platforms[1], 10 of which are still (or soon will be) on the market. Of the six that were terminated, three had replacements built by the same orchestrating company (Windows Mobile begat Windows Phone; Maemo begat MeeGo, and PalmOS eventually led to WebOS.) Only three reached end of life with no known descendant (iMode, MeeGo[2] and Symbian).
+</p>
+<p>
+Operating systems that were launched in the 1990s or early 2000s have mostly been withdrawn/replaced with the exception of Java and BREW.  ”Modern” operating systems all emerged after 2007 (following iOS). A total of eight such new OSs were introduced in four years[3].
+</p>
+<h1>Lecture x - Websockets</h1>
+<h2>Websockets</h2>
+Taken from pusher.com
+<h3>What are WebSockets?</h3>
+<p>WebSockets represent a long awaited evolution in client/server web technology. They allow a long-held single TCP socket connection to be established between the client and server which allows for bi-directional, full duplex, messages to be instantly distributed with little overhead resulting in a very low latency connection.</p>
+<p>Both the WebSocket API and the WebSocket protocol are standardised which means the web now has an agreed standard for realtime communication between Internet clients and servers. Originally considered a browser technology, WebSockets are reaching far beyond just web browsers and are becoming a cross platform standard for realtime communication between client and server. As well as native WebSocket support in browsers such as Google Chrome, Firefox, Opera and a prototype Silverlight to JavaScript bridge implementation for Internet Explorer, there are now WebSocket library implementations in Objective-C, .NET, Ruby, Java, node.js, ActionScript and many other languages.</p>
+<h3>A brief history of the web (from a developer's perspective)</h3>
+<p>The Internet wasn't built to be all that dynamic. It was conceived to be a collection of HyperText Markup Language (HTML) pages linking to one another to form a conceptual web of information. Over time the static resources increased in number and richer items, such as images, began to be part of the web fabric. Server technologies advanced allowing for dynamic server pages - pages whose content was generated based on a query.</p>
+<p>Soon the requirement to have more dynamic web pages lead to the availability of Dynamic HyperText Markup Language (DHTML) all thanks to JavaScript (let’s pretend VBScript never existed). Over the following years we saw cross frame communication in an attempt to avoid page reloads followed by HTTP Polling within frames. Things started to get interesting with the introduction of LiveConnect, then the forever frame technique, and finally, thanks to Microsoft, we ended up with the XMLHttpRequest object and therefore Asynchronous JavaScript and XML (AJAX). In turn, AJAX made XHR Long-Polling and XHR Streaming possible. But none of these solutions offered a truly standardised cross browser solution to realtime bi-directional communication between a server and a client.</p>
+<p>Then along came WebSockets.</p>
+<h3>Why WebSockets are a game-changer</h3>
+<p>Finally WebSockets represent a standard for bi-directional realtime communication between servers and clients. Firstly in web browsers, but ultimately between any server and any client. The standards first approach means that as developers we can finally create functionality that works consistently across multiple platforms. Connection limitations are no longer a problem since WebSockets represent a single TCP socket connection. Cross domain communication has been considered from day one and is dealt with within the connection handshake. This means that services such as Pusher can easily use them when offering a massively scalable realtime platform that can be used by any website, web, desktop or mobile application.</p>
+<h3>WebSockets v AJAX</h3>
+<p>WebSockets don’t make AJAX obsolete but they do supersede it as the solution of choice for true realtime functionality. AJAX should still be used for making short-lived web service calls, and if we eventually see a good uptake in CORS supporting web services, it will get even more useful. WebSockets should now be the go to standard for realtime functionality since they offer low latency bi-directional communication over a single connection. Even if a web browser doesn’t natively support the WebSocket object there are polyfill fallback options which all but guarantee any web browser can actually establish a WebSocket connection.</p>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
