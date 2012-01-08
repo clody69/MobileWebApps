@@ -19,7 +19,7 @@ module DeckJSBuilder
     
     name = File.basename(file,'.haml.html')
     
-    if File.exist?('imgs/bg-' + name + '.jpg')
+    if File.exist?('public/imgs/bg-' + name + '.jpg')
       content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
     end
     

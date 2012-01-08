@@ -1,0 +1,402 @@
+/* line 1, ../../../sass/syntax/colorful.scss */
+.highlight .hll {
+  background-color: #ffffcc;
+}
+
+/* line 2, ../../../sass/syntax/colorful.scss */
+.highlight {
+  background: #ffffff;
+}
+
+/* line 3, ../../../sass/syntax/colorful.scss */
+.highlight .c {
+  color: #808080;
+}
+
+/* Comment */
+/* line 4, ../../../sass/syntax/colorful.scss */
+.highlight .err {
+  color: #F00000;
+  background-color: #F0A0A0;
+}
+
+/* Error */
+/* line 5, ../../../sass/syntax/colorful.scss */
+.highlight .k {
+  color: #008000;
+  font-weight: bold;
+}
+
+/* Keyword */
+/* line 6, ../../../sass/syntax/colorful.scss */
+.highlight .o {
+  color: #303030;
+}
+
+/* Operator */
+/* line 7, ../../../sass/syntax/colorful.scss */
+.highlight .cm {
+  color: #808080;
+}
+
+/* Comment.Multiline */
+/* line 8, ../../../sass/syntax/colorful.scss */
+.highlight .cp {
+  color: #507090;
+}
+
+/* Comment.Preproc */
+/* line 9, ../../../sass/syntax/colorful.scss */
+.highlight .c1 {
+  color: #808080;
+}
+
+/* Comment.Single */
+/* line 10, ../../../sass/syntax/colorful.scss */
+.highlight .cs {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+/* Comment.Special */
+/* line 11, ../../../sass/syntax/colorful.scss */
+.highlight .gd {
+  color: #A00000;
+}
+
+/* Generic.Deleted */
+/* line 12, ../../../sass/syntax/colorful.scss */
+.highlight .ge {
+  font-style: italic;
+}
+
+/* Generic.Emph */
+/* line 13, ../../../sass/syntax/colorful.scss */
+.highlight .gr {
+  color: #FF0000;
+}
+
+/* Generic.Error */
+/* line 14, ../../../sass/syntax/colorful.scss */
+.highlight .gh {
+  color: #000080;
+  font-weight: bold;
+}
+
+/* Generic.Heading */
+/* line 15, ../../../sass/syntax/colorful.scss */
+.highlight .gi {
+  color: #00A000;
+}
+
+/* Generic.Inserted */
+/* line 16, ../../../sass/syntax/colorful.scss */
+.highlight .go {
+  color: #808080;
+}
+
+/* Generic.Output */
+/* line 17, ../../../sass/syntax/colorful.scss */
+.highlight .gp {
+  color: #c65d09;
+  font-weight: bold;
+}
+
+/* Generic.Prompt */
+/* line 18, ../../../sass/syntax/colorful.scss */
+.highlight .gs {
+  font-weight: bold;
+}
+
+/* Generic.Strong */
+/* line 19, ../../../sass/syntax/colorful.scss */
+.highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+/* Generic.Subheading */
+/* line 20, ../../../sass/syntax/colorful.scss */
+.highlight .gt {
+  color: #0040D0;
+}
+
+/* Generic.Traceback */
+/* line 21, ../../../sass/syntax/colorful.scss */
+.highlight .kc {
+  color: #008000;
+  font-weight: bold;
+}
+
+/* Keyword.Constant */
+/* line 22, ../../../sass/syntax/colorful.scss */
+.highlight .kd {
+  color: #008000;
+  font-weight: bold;
+}
+
+/* Keyword.Declaration */
+/* line 23, ../../../sass/syntax/colorful.scss */
+.highlight .kn {
+  color: #008000;
+  font-weight: bold;
+}
+
+/* Keyword.Namespace */
+/* line 24, ../../../sass/syntax/colorful.scss */
+.highlight .kp {
+  color: #003080;
+  font-weight: bold;
+}
+
+/* Keyword.Pseudo */
+/* line 25, ../../../sass/syntax/colorful.scss */
+.highlight .kr {
+  color: #008000;
+  font-weight: bold;
+}
+
+/* Keyword.Reserved */
+/* line 26, ../../../sass/syntax/colorful.scss */
+.highlight .kt {
+  color: #303090;
+  font-weight: bold;
+}
+
+/* Keyword.Type */
+/* line 27, ../../../sass/syntax/colorful.scss */
+.highlight .m {
+  color: #6000E0;
+  font-weight: bold;
+}
+
+/* Literal.Number */
+/* line 28, ../../../sass/syntax/colorful.scss */
+.highlight .s {
+  background-color: #fff0f0;
+}
+
+/* Literal.String */
+/* line 29, ../../../sass/syntax/colorful.scss */
+.highlight .na {
+  color: #0000C0;
+}
+
+/* Name.Attribute */
+/* line 30, ../../../sass/syntax/colorful.scss */
+.highlight .nb {
+  color: #007020;
+}
+
+/* Name.Builtin */
+/* line 31, ../../../sass/syntax/colorful.scss */
+.highlight .nc {
+  color: #B00060;
+  font-weight: bold;
+}
+
+/* Name.Class */
+/* line 32, ../../../sass/syntax/colorful.scss */
+.highlight .no {
+  color: #003060;
+  font-weight: bold;
+}
+
+/* Name.Constant */
+/* line 33, ../../../sass/syntax/colorful.scss */
+.highlight .nd {
+  color: #505050;
+  font-weight: bold;
+}
+
+/* Name.Decorator */
+/* line 34, ../../../sass/syntax/colorful.scss */
+.highlight .ni {
+  color: #800000;
+  font-weight: bold;
+}
+
+/* Name.Entity */
+/* line 35, ../../../sass/syntax/colorful.scss */
+.highlight .ne {
+  color: #F00000;
+  font-weight: bold;
+}
+
+/* Name.Exception */
+/* line 36, ../../../sass/syntax/colorful.scss */
+.highlight .nf {
+  color: #0060B0;
+  font-weight: bold;
+}
+
+/* Name.Function */
+/* line 37, ../../../sass/syntax/colorful.scss */
+.highlight .nl {
+  color: #907000;
+  font-weight: bold;
+}
+
+/* Name.Label */
+/* line 38, ../../../sass/syntax/colorful.scss */
+.highlight .nn {
+  color: #0e84b5;
+  font-weight: bold;
+}
+
+/* Name.Namespace */
+/* line 39, ../../../sass/syntax/colorful.scss */
+.highlight .nt {
+  color: #007000;
+}
+
+/* Name.Tag */
+/* line 40, ../../../sass/syntax/colorful.scss */
+.highlight .nv {
+  color: #906030;
+}
+
+/* Name.Variable */
+/* line 41, ../../../sass/syntax/colorful.scss */
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Operator.Word */
+/* line 42, ../../../sass/syntax/colorful.scss */
+.highlight .w {
+  color: #bbbbbb;
+}
+
+/* Text.Whitespace */
+/* line 43, ../../../sass/syntax/colorful.scss */
+.highlight .mf {
+  color: #6000E0;
+  font-weight: bold;
+}
+
+/* Literal.Number.Float */
+/* line 44, ../../../sass/syntax/colorful.scss */
+.highlight .mh {
+  color: #005080;
+  font-weight: bold;
+}
+
+/* Literal.Number.Hex */
+/* line 45, ../../../sass/syntax/colorful.scss */
+.highlight .mi {
+  color: #0000D0;
+  font-weight: bold;
+}
+
+/* Literal.Number.Integer */
+/* line 46, ../../../sass/syntax/colorful.scss */
+.highlight .mo {
+  color: #4000E0;
+  font-weight: bold;
+}
+
+/* Literal.Number.Oct */
+/* line 47, ../../../sass/syntax/colorful.scss */
+.highlight .sb {
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Backtick */
+/* line 48, ../../../sass/syntax/colorful.scss */
+.highlight .sc {
+  color: #0040D0;
+}
+
+/* Literal.String.Char */
+/* line 49, ../../../sass/syntax/colorful.scss */
+.highlight .sd {
+  color: #D04020;
+}
+
+/* Literal.String.Doc */
+/* line 50, ../../../sass/syntax/colorful.scss */
+.highlight .s2 {
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Double */
+/* line 51, ../../../sass/syntax/colorful.scss */
+.highlight .se {
+  color: #606060;
+  font-weight: bold;
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Escape */
+/* line 52, ../../../sass/syntax/colorful.scss */
+.highlight .sh {
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Heredoc */
+/* line 53, ../../../sass/syntax/colorful.scss */
+.highlight .si {
+  background-color: #e0e0e0;
+}
+
+/* Literal.String.Interpol */
+/* line 54, ../../../sass/syntax/colorful.scss */
+.highlight .sx {
+  color: #D02000;
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Other */
+/* line 55, ../../../sass/syntax/colorful.scss */
+.highlight .sr {
+  color: #000000;
+  background-color: #fff0ff;
+}
+
+/* Literal.String.Regex */
+/* line 56, ../../../sass/syntax/colorful.scss */
+.highlight .s1 {
+  background-color: #fff0f0;
+}
+
+/* Literal.String.Single */
+/* line 57, ../../../sass/syntax/colorful.scss */
+.highlight .ss {
+  color: #A06000;
+}
+
+/* Literal.String.Symbol */
+/* line 58, ../../../sass/syntax/colorful.scss */
+.highlight .bp {
+  color: #007020;
+}
+
+/* Name.Builtin.Pseudo */
+/* line 59, ../../../sass/syntax/colorful.scss */
+.highlight .vc {
+  color: #306090;
+}
+
+/* Name.Variable.Class */
+/* line 60, ../../../sass/syntax/colorful.scss */
+.highlight .vg {
+  color: #d07000;
+  font-weight: bold;
+}
+
+/* Name.Variable.Global */
+/* line 61, ../../../sass/syntax/colorful.scss */
+.highlight .vi {
+  color: #3030B0;
+}
+
+/* Name.Variable.Instance */
+/* line 62, ../../../sass/syntax/colorful.scss */
+.highlight .il {
+  color: #0000D0;
+  font-weight: bold;
+}
+
+/* Literal.Number.Integer.Long */
