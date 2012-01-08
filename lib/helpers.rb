@@ -16,8 +16,12 @@ module PresentationHelper
     h += '</ul>'
   end
   def example_header_tag(title, name)
-    h = "<h1>#{title}<div class='right inline smaller'><a href='https://github.com/clody69/MobileWebApps/tree/master/'+#{name}>Browse Source Code</a></div></h1>"  
+    h = "<h1>#{title}</h1>"  
+    h += "<div class='actions'><a href='examples/#{name}'>Try it</a>"
+    h += "<a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/#{name}'>Browse Source Code</a>"
+    h += "</div>"
   end
+
 
   def image_tag(img_path, hsh = {})
     h = ""  

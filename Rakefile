@@ -12,6 +12,12 @@ task :render do
   Dir["site/examples/*.html.haml"].each { |file| build file, "site/layout/site.html.haml", "public/" + File.basename(file).gsub('.haml','')}
 
   print_coderay_css "public/css/coderay.css"
+
+  %w(jQuerySimple senchaSimple websocketsEcho).each { |file| 
+    FileUtils.mkdir_p("public/examples/#{file}")
+    FileUtils.cp "../examples/#{file}/index.html", "public/examples/#{file}/index.html"
+  }
+
 end
 
 desc "Rebuild SASS/CSS"
