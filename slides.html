@@ -418,6 +418,7 @@ Dev Tools
 Backend
 </span>
 <a href='http://rubyonrails.org'><img src='imgs/rails.png' /></a>
+<a href='http://www.sinatrarb.com'><img src='imgs/sinatra.png' /></a>
 <a href='http://nodejs.org'><img src='imgs/nodejs.png' /></a>
 <a href='https://www.djangoproject.com/'><img src='imgs/django.png' /></a>
 </div>
@@ -484,6 +485,9 @@ Show MVC is moving to client
 </article>
 </section>
 <section class='slide'>
+<header>Sinatra</header>
+</section>
+<section class='slide'>
 <header>Important resources</header>
 <article>
 http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
@@ -546,7 +550,7 @@ Websockets interface:
 <strong class='red'>
 onopen
 </strong>
-: callback when the socket is ready
+: callback when the socket is ready (important!)
 </li>
 <li>
 <strong class='red'>
@@ -560,6 +564,12 @@ onclose
 </strong>
 : callback when the socket is closed
 </li>
+<li>
+<strong class='red'>
+onclose
+</strong>
+: callback when there is a communication error
+</li>
 </ul>
 <p>
 Messages are in UTF-8:
@@ -568,7 +578,53 @@ Messages are in UTF-8:
 </div>
 </p>
 <div class="CodeRay">
-  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);</pre></div>
+  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+benefits
+</header>
+<article>
+<ul>
+<li>connection handshake uses HTTP infrastructure</li>
+<li>no extra ports (works across firewalls)</li>
+<li>no overhead</li>
+<li>very low latency</li>
+<li>clean browser interface</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">Sending Data Structures</img>
+</header>
+<article>
+Websockets interface:
+</article>
+</section>
+<section class='slide'>
+<header>
+Pusher.com
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+<strong>Pusher</strong>
+is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.
+</p>
+<p>Founded in 2009. Team is 5 members.</p>
+<p>40 billion messages delivered.</p>
+<p>WebSocket as a service</p>
+<p>Using EM-WebSocket</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/pusher_diagram.png' /></div>
+</div>
 </div>
 </article>
 </section>

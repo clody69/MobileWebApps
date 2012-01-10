@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignmen'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>WebSockets Chat Pusher</h1><div class='actions'><a href='http://high-day-2495.heroku.com/'>Try it</a><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/websocketsChatPusher'>Browse Source Code</a></div>
+<p>
+This example implements a chat service using
+<a href='http://www.sinatrarb.com'>Sinatra</a>
+for the backend and
+<a href='http://pusher.com'>Pusher</a>
+for sending the notifications to the clients
+</p>
+<p>
+The client post the new messages to the REST URL
+<span class='terminal'>/say</span>
+by passing the following JSON data
+<div class='terminal'>
+{nickname: "guest", message: "Hello World"}
+</div>
+</p>
+<p>
+In the backend, the Sinatra server adds the timestamp to the message and sends it to the Pusher REST API for delivery.
+The message is sent to the
+<span class='terminal'>
+chat
+</span>
+channel with the event
+<span class='terminal'>
+say
+</span>
+The Pusher service takes care of deliverying the message to all connected clients via the web socket.
+Once the client receives the message, it is formatted and printed in the chat area
+</p>
+<p>
+This eample is live on Heroku at
+<a href='http://high-day-2495.heroku.com/'>websocketsChatPusher</a>
+How to deploy on Heroku is explained at the bottom of the page
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Gemfile
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>source &quot;http://rubygems.org&quot;&#x000A;&#x000A;gem &quot;pusher&quot;&quot;&#x000A;gem &quot;sinatra&quot;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+Terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsChatPusher/server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">pusher</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="constant">Pusher</span>.app_id = <span class="string"><span class="delimiter">'</span><span class="content">13324</span><span class="delimiter">'</span></span>&#x000A;<span class="constant">Pusher</span>.key = <span class="string"><span class="delimiter">'</span><span class="content">8dc1dcd216474ec35b02</span><span class="delimiter">'</span></span>&#x000A;<span class="constant">Pusher</span>.secret = <span class="string"><span class="delimiter">'</span><span class="content">6ae6292fa86e2a559643</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Serve the chat client</span>&#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/say</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  message = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;&#x000A;  <span class="comment">#Use the REST Pusher API so pass the message that needs to be broadcasted</span>&#x000A;  <span class="comment">#to all clients that are connected to the chat channel</span>&#x000A;  <span class="constant">Pusher</span>[<span class="string"><span class="delimiter">'</span><span class="content">chat</span><span class="delimiter">'</span></span>].trigger(<span class="string"><span class="delimiter">'</span><span class="content">say</span><span class="delimiter">'</span></span>, message)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsChatPusher/index.html
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>!!! 5&#x000A;%html&#x000A;  %head&#x000A;    %meta(charset=&quot;utf-8&quot;)&#x000A;    %meta(content=&quot;IE=edge,chrome=1&quot; http-equiv=&quot;X-UA-Compatible&quot;)&#x000A;    %meta(name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;)  &#x000A;    %link(rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css&quot;)&#x000A;    %script(type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;)&#x000A;    %script(type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js&quot;)&#x000A;    %script(src=&quot;http://js.pusher.com/1.11/pusher.min.js&quot;)&#x000A;    %title&#x000A;      WebSockets Chat&#x000A;  %body&#x000A;    :javascript&#x000A;      $(function() {&#x000A;        var pusher = new Pusher('8dc1dcd216474ec35b02'); &#x000A;        var chatChannel = pusher.subscribe('chat');&#x000A;&#x000A;        chatChannel.bind('say', function(msg) {&#x000A;          $('#console').prepend('<span class="tag">&lt;p&gt;</span>' + msg.timestamp + ' <span class="tag">&lt;strong&gt;</span>' + msg.nickname + '<span class="tag">&lt;/strong&gt;</span>: ' + msg.message + '<span class="tag">&lt;/p&gt;</span>');&#x000A;        });&#x000A;        &#x000A;        $('#send').click(function(event) {&#x000A;          event.preventDefault();&#x000A;          var msg = {nickname: $('#nickname').val(), message: $('#message').val()};&#x000A;          &#x000A;          $.post( 'http://localhost:4567/say',msg,'json');&#x000A;          $('#message').val(&quot;&quot;);&#x000A;        })  &#x000A;      });&#x000A;&#x000A;    %div(data-role=&quot;page&quot;)&#x000A;      %div(data-role = &quot;header&quot;)&#x000A;        %h1 Simple Chat&#x000A;      %input#nickname(type=&quot;text&quot; value=&quot;&quot; placeholder=&quot;Nickname&quot;)&#x000A;      %input#message(type='text' value=&quot;&quot; placeholder=&quot;Start chat here&quot;)&#x000A;      %a#send(data-role = 'button')&#x000A;        Send&#x000A;      &#x000A;      #console&#x000A;    </pre></div>
+</div>
+</div>
+<p>
+To deploy this example on Heroku you can follow the following steps.
+You must edit the index.html file and replace
+<span class='terminal'>
+localhost:4567
+</span>
+with the server URL that you create on Heroku (
+<span class='terminal'>
+high-day-2495.heroku.com
+</span>
+in the example below)
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>$ mkdir scratch/pusherapp&#x000A;$ cd scratch/pusherapp&#x000A;$ cp examples/websocketsChatPusher/* .&#x000A;$ ls&#x000A;config.ru Gemfile index.html  index.html.haml server.rb&#x000A;$ heroku create&#x000A;Creating high-day-2495... done, stack is bamboo-mri-1.9.2&#x000A;http://high-day-2495.heroku.com/ | git@heroku.com:high-day-2495.git&#x000A;Git remote heroku added&#x000A;$ git init&#x000A;Initialized empty Git repository in /scratch/pusherapp/.git/&#x000A;$ git add .&#x000A;$ git commit -m &quot;sinatra app&quot;&#x000A;[master (root-commit) 397005f] sinatra app&#x000A; 4 files changed, 117 insertions(+), 0 deletions(-)&#x000A; create mode 100644 config.ru&#x000A; create mode 100644 Gemfile&#x000A; create mode 100644 index.html&#x000A; create mode 100644 index.html.haml&#x000A; create mode 100644 server.rb&#x000A;$ git push heroku master&#x000A;Counting objects: 9, done.&#x000A;Delta compression using up to 4 threads.&#x000A;Compressing objects: 100% (8/8), done.&#x000A;Writing objects: 100% (9/9), 2.30 KiB, done.&#x000A;Total 9 (delta 2), reused 0 (delta 0)&#x000A;&#x000A;-----&gt; Heroku receiving push&#x000A;-----&gt; Ruby/Sinatra app detected&#x000A;-----&gt; Compiled slug size is 4K&#x000A;-----&gt; Launching... done, v4&#x000A;       http://high-day-2495.heroku.com deployed to Heroku&#x000A;&#x000A;To git@heroku.com:high-day-2495.git&#x000A; * [new branch]      master -&gt; master</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
