@@ -42,7 +42,7 @@
       %li
         %strong.red
           onopen
-        \: callback when the socket is ready
+        \: callback when the socket is ready (important!)
       %li  
         %strong.red
           onmessage
@@ -51,6 +51,10 @@
         %strong.red
           onclose
         \: callback when the socket is closed
+      %li
+        %strong.red
+          onclose
+        \: callback when there is a communication error
     %p
       Messages are in UTF-8:
       .centered.terminal.larger
@@ -64,5 +68,37 @@
       #!javascript
       socket.send('Hello World');
 
+%section.slide
+  %header 
+    benefits
+  %article
+    %ul
+      %li connection handshake uses HTTP infrastructure
+      %li no extra ports (works across firewalls)
+      %li no overhead
+      %li very low latency
+      %li clean browser interface
+   
+%section.slide
+  %header
+    =html5_websockets_tag "Sending Data Structures"
+  %article
+    Websockets interface:
      
-       
+%section.slide
+  %header
+    Pusher.com
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p
+            %strong Pusher 
+            is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.     
+          %p Founded in 2009. Team is 5 members.
+          %p 40 billion messages delivered.
+          %p WebSocket as a service
+          %p Using EM-WebSocket
+      .twoColumn
+        =image_tag "pusher_diagram.png"
+          

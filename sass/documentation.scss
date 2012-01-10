@@ -91,7 +91,7 @@ dd + dd {
 }
 
 span.attention,
-p.attention {
+p.attention, .attention {
   color: #e98400;
   font-style: italic;
 }
@@ -100,6 +100,10 @@ a img {
   border: 0px;
 }
 
+span.terminal, p.terminal, .terminal {
+  font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+  color: #666;
+}
 
 /* Common */
 .left {float: left;}

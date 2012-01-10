@@ -14,8 +14,11 @@ task :render do
   print_coderay_css "public/css/coderay.css"
 
   %w(jQuerySimple senchaSimple websocketsEcho).each { |file| 
-    FileUtils.mkdir_p("public/examples/#{file}")
-    FileUtils.cp "../examples/#{file}/index.html", "public/examples/#{file}/index.html"
+    dst = "public/examples/#{file}"
+    FileUtils.mkdir_p(dst)
+    FileUtils.cp_r Dir.glob("../examples/#{file}/*.html"), dst
+    FileUtils.cp_r Dir.glob("../examples/#{file}/*.css"), dst
+    FileUtils.cp_r Dir.glob("../examples/#{file}/*.js"), dst
   }
 
 end

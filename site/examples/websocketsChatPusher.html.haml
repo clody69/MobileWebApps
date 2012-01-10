@@ -1,0 +1,179 @@
+=example_header_tag "WebSockets Chat Pusher", "websocketsChatPusher", "http://high-day-2495.heroku.com/"
+
+%p
+  This example implements a chat service using 
+  %a(href="http://www.sinatrarb.com") Sinatra
+  for the backend and 
+  %a(href="http://pusher.com") Pusher
+  for sending the notifications to the clients
+
+%p 
+  The client post the new messages to the REST URL 
+  %span.terminal /say
+  by passing the following JSON data
+  .terminal
+    {nickname: "guest", message: "Hello World"}
+
+%p 
+  In the backend, the Sinatra server adds the timestamp to the message and sends it to the Pusher REST API for delivery. 
+  The message is sent to the 
+  %span.terminal 
+    chat
+  channel with the event
+  %span.terminal
+    say
+  The Pusher service takes care of deliverying the message to all connected clients via the web socket. 
+  Once the client receives the message, it is formatted and printed in the chat area
+
+%p 
+  This eample is live on Heroku at 
+  %a(href="http://high-day-2495.heroku.com/") websocketsChatPusher
+  How to deploy on Heroku is explained at the bottom of the page
+  
+.code_block
+  .code_header
+    Gemfile
+  :coderay_raw
+    #!text
+    source "http://rubygems.org"
+    
+    gem "pusher""
+    gem "sinatra"
+
+.code_block
+  .code_header
+    Terminal
+  :coderay_raw
+    #!text
+    ruby server.rb
+  
+.code_block
+  .code_header
+    websocketsChatPusher/server.rb
+  :coderay_raw
+    #!ruby
+    require 'sinatra'
+    require 'json'
+    require 'pusher'
+    
+    Pusher.app_id = '13324'
+    Pusher.key = '8dc1dcd216474ec35b02'
+    Pusher.secret = '6ae6292fa86e2a559643'
+    
+    def timestamp
+      Time.now.strftime("%H:%M:%S")
+    end
+    
+    get '/' do 
+      #Serve the chat client
+      File.read('index.html')
+    end
+    
+    post '/say' do
+      message = params.merge( {'timestamp' => timestamp}).to_json
+    
+      #Use the REST Pusher API so pass the message that needs to be broadcasted
+      #to all clients that are connected to the chat channel
+      Pusher['chat'].trigger('say', message)
+    end
+
+.code_block
+  .code_header
+    websocketsChatPusher/index.html
+  :coderay_raw
+    #!html
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, initial-scale=1")  
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %script(src="http://js.pusher.com/1.11/pusher.min.js")
+        %title
+          WebSockets Chat
+      %body
+        :javascript
+          $(function() {
+            var pusher = new Pusher('8dc1dcd216474ec35b02'); 
+            var chatChannel = pusher.subscribe('chat');
+    
+            chatChannel.bind('say', function(msg) {
+              $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
+            });
+            
+            $('#send').click(function(event) {
+              event.preventDefault();
+              var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
+              
+              $.post( 'http://localhost:4567/say',msg,'json');
+              $('#message').val("");
+            })  
+          });
+    
+        %div(data-role="page")
+          %div(data-role = "header")
+            %h1 Simple Chat
+          %input#nickname(type="text" value="" placeholder="Nickname")
+          %input#message(type='text' value="" placeholder="Start chat here")
+          %a#send(data-role = 'button')
+            Send
+          
+          #console
+        
+%p 
+  To deploy this example on Heroku you can follow the following steps. 
+  You must edit the index.html file and replace 
+  %span.terminal
+    localhost:4567
+  with the server URL that you create on Heroku (
+  %span.terminal
+    high-day-2495.heroku.com 
+  in the example below)
+   
+               
+.code_block
+  .code_header
+    Terminal
+  :coderay_raw
+    #!text
+    $ mkdir scratch/pusherapp
+    $ cd scratch/pusherapp
+    $ cp examples/websocketsChatPusher/* .
+    $ ls
+    config.ru Gemfile index.html  index.html.haml server.rb
+    $ heroku create
+    Creating high-day-2495... done, stack is bamboo-mri-1.9.2
+    http://high-day-2495.heroku.com/ | git@heroku.com:high-day-2495.git
+    Git remote heroku added
+    $ git init
+    Initialized empty Git repository in /scratch/pusherapp/.git/
+    $ git add .
+    $ git commit -m "sinatra app"
+    [master (root-commit) 397005f] sinatra app
+     4 files changed, 117 insertions(+), 0 deletions(-)
+     create mode 100644 config.ru
+     create mode 100644 Gemfile
+     create mode 100644 index.html
+     create mode 100644 index.html.haml
+     create mode 100644 server.rb
+    $ git push heroku master
+    Counting objects: 9, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (8/8), done.
+    Writing objects: 100% (9/9), 2.30 KiB, done.
+    Total 9 (delta 2), reused 0 (delta 0)
+    
+    -----> Heroku receiving push
+    -----> Ruby/Sinatra app detected
+    -----> Compiled slug size is 4K
+    -----> Launching... done, v4
+           http://high-day-2495.heroku.com deployed to Heroku
+
+    To git@heroku.com:high-day-2495.git
+     * [new branch]      master -> master
+ 
+ 
+

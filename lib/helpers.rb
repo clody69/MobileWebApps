@@ -15,9 +15,19 @@ module PresentationHelper
     }
     h += '</ul>'
   end
-  def example_header_tag(title, name)
+
+  def example_header_tag(title, name, url="")
+    if url == ""
+      if File.directory?('public/examples/#{name}')
+        url = "examples/#{name}"
+      end
+    end
+    
     h = "<h1>#{title}</h1>"  
-    h += "<div class='actions'><a href='examples/#{name}'>Try it</a>"
+    h += "<div class='actions'>"
+    if url != ""
+      h += "<a href='#{url}'>Try it</a>"
+    end
     h += "<a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/#{name}'>Browse Source Code</a>"
     h += "</div>"
   end
