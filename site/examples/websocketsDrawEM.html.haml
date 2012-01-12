@@ -1,7 +1,8 @@
-=example_header_tag "WebSockets Chat EM", "websocketsChatEM"
+=example_header_tag "WebSockets Draw EM", "websocketsDrawEM"
 
 %p
-  This example implements a chat service. The server is built with the 
+  This example implements a shared canvas where multiple clients can draw lines.
+  The communication of the mouse events happens throught the websockets. The server is built with the 
   %a(href="https://github.com/igrigorik/em-websocket") EM-Websocket
   gem and uses the channel functionality of the ruby event machine (see 
   %a(href="http://eventmachine.rubyforge.org/EventMachine/Channel.html") EventMachine::Channel
@@ -27,15 +28,11 @@
 
 .code_block
   .code_header
-    websocketsChatEM/server.rb
+    websocketsDrawEM/server.rb
   :coderay_raw
     #!ruby
     require 'em-websocket'
     require 'json'
-    
-    def timestamp
-      Time.now.strftime("%H:%M:%S")
-    end
     
     EventMachine.run {
       @channel = EM::Channel.new
@@ -55,43 +52,28 @@
           @messages.each do |message|
             ws.send message
           end
-          
-          #Broadcast the notification to all users
-          @channel.push  ({
-            "nickname" => '', 
-            "message" => "New user joined. #{@users.length} users in chat", 
-            "timestamp" => timestamp }.to_json)
        }
     
         ws.onmessage { |msg|
           
-          #Add the timestamp to the message
-          message = JSON.parse(msg).merge( {'timestamp' => timestamp}).to_json
-          
           #append the message at the end of the queue
-          @messages << message
+          @messages << msg
           @messages.shift if @messages.length > 10
     
           #Broadcast the message to all users connected to the channel
-          @channel.push message
+          @channel.push msg
         }
     
         ws.onclose { 
           @channel.unsubscribe(@users[ws.object_id])
           @users.delete(ws.object_id)
-    
-          #Broadcast the notification to all users
-          @channel.push ({
-            "nickname" => '', 
-            "message" => "One user left. #{@users.length} users in chat", 
-            "timestamp" => timestamp}.to_json)
         }
       end
     } 
 
 .code_block
   .code_header
-    websocketsChatEM/index.html.haml
+    websocketsDrawEM/index.html.haml
   :coderay_raw
     #!haml
     !!! 5
@@ -104,39 +86,51 @@
         %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
         %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
         %title
-          WebSockets Chat
+          WebSockets Drawing
       %body
         :javascript
           $(function() {
+    
             var socket = new WebSocket('ws://localhost:8080');
             
-            $('#send').click(function() {
-              var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
-              socket.send( JSON.stringify(msg) );
-              $('#message').val("");
-            })  
-            socket.onopen = function(event) { 
-              $('#console').prepend('<p>CONNECTED</p>');
-            };
+            var currentX = 0;
+            var currentY = 0;
+            var lastX;
+            var lastY;
+            var lastReceivedX;
+            var lastReceivedY;
+            
+            var ctx = $('#canvas')[0].getContext('2d');
+    
+            $('#canvas').bind('vmousemove',function(ev){
+              ev = ev || window.event;
+              currentX = ev.pageX || ev.clientX;
+              currentY = ev.pageY || ev.clientY;
+            });
+            
+            setInterval(function(){
+              if(currentX !== lastX || currentY !== lastY){
+                lastX = currentX;
+                lastY = currentY;
+                socket.send( JSON.stringify({x:currentX, y: currentY}) );
+              }
+            }, 30); // send every 300 milliseconds if position has changed
+    
             socket.onmessage = function(event) {
               var msg = $.parseJSON(event.data);
               
-              $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
-            }
-            socket.onerror = function(event) {
-              $('#console').prepend('<p>ERROR: ' + event.data + '</p>');
+              ctx.beginPath();
+              ctx.moveTo(lastReceivedX,lastReceivedY);
+              ctx.lineTo(msg.x,msg.y);
+              ctx.closePath();
+              ctx.stroke();
+              lastReceivedX = msg.x;
+              lastReceivedY = msg.y;
             }
           });
     
         %div(data-role="page")
-          %div(data-role = "header")
-            %h1 Simple Chat
-          %input#nickname(type="text" value="" placeholder="Nickname")
-          %input#message(type='text' value="" placeholder="Start chat here")
-          %a#send(data-role = 'button')
-            Send
-          
-          #console
-    
+          %canvas#canvas(width='1000' height='1000')
+   
             
                 

@@ -1,3 +1,5 @@
+=title_slide_tag("Lecture 3: Web Sockets")
+
 %section.slide.section-title
   %h1 Lesson 3: 
 
@@ -72,12 +74,36 @@
   %header 
     benefits
   %article
-    %ul
-      %li connection handshake uses HTTP infrastructure
-      %li no extra ports (works across firewalls)
-      %li no overhead
-      %li very low latency
-      %li clean browser interface
+    .row
+      .twoColumn
+        %ul
+          %li connection handshake uses HTTP infrastructure
+          %li no extra ports (works across firewalls)
+          %li no overhead
+          %li very low latency
+          %li clean browser interface
+      .twoColumn
+        %pre.smaller
+          Request URL:ws://localhost:8080/
+          Request Method:GET
+          Status Code:101 Switching Protocols
+          
+          <strong>Request Headers</strong>
+          Connection:Upgrade
+          Cookie:
+          Host:localhost:8080
+          Origin:null
+          Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
+          Sec-WebSocket-Version:13
+          Upgrade:websocket
+          (Key3):00:00:00:00:00:00:00:00
+          
+          <strong>Response Headers</strong>
+          Connection:Upgrade
+          Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
+          Upgrade:websocket
+          (Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+      
    
 %section.slide
   %header

@@ -1,6 +1,10 @@
 
 module PresentationHelper
   
+  def title_slide_tag(subtitle)
+    Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
+  end
+  
   def html5_websockets_tag(title="WebSockets")
     h= '<img src = "imgs/html5/HTML5_Connectivity_64.png">'
     h += title

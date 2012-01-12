@@ -11,7 +11,8 @@ module DeckJSBuilder
 
   include PresentationHelper
   META = YAML.load_file File.join(MAIN_DIR, "meta.yml")
-
+  title = 'ciao'
+  
   def render(file, layout='', b=binding)
     file = File.join MAIN_DIR, file
     
