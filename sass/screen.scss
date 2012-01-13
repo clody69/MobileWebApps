@@ -16,6 +16,32 @@
   box-shadow:$x $y $blur $color;
 }
 
+@mixin box-pack-align-orient($pack, $align, $orient) {
+  /* Firefox */
+  display:-moz-box;
+  -moz-box-pack:$pack;
+  -moz-box-align:$align;
+  -moz-box-orient:$orient;
+  
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:$pack;
+  -webkit-box-align:$align;
+  -webkit-box-orient:$orient;
+  
+  /* W3C */
+  display:box;
+  box-pack:$pack;
+  box-align:$align;  
+  box-orient:$orient;
+
+  /* Opera */  
+  display:box;
+  -o-box-pack:$pack;
+  -o-box-align:$align;  
+  -o-box-orient:$orient;
+  
+}
 @mixin box-center-horizontal() {
   /* Firefox */
   display:-moz-box;
@@ -162,6 +188,12 @@ h1, h2 {
         top: 200px;
         padding: 30px;
       }
+      .agenda {
+        position: absolute;
+        top: 240px;
+        right: 100px;
+        padding: 0px;
+      }
     }
     .slide header {
       position: absolute;
@@ -285,6 +317,8 @@ h1, h2 {
   h2 {font-size: 150%;}
   .smallest {font-size: 40%;}
   .smaller{font-size: 60%;}
+  .small{font-size: 80%;}
+  .large{font-size: 110%;}    
   .larger{ font-size: 120%;}
   .largest { font-size: 150%;}
   .big{font-size: 200%;}
@@ -312,15 +346,23 @@ h1, h2 {
     background-color: transparent;
     box-shadow: none;
 
+    font-family: "Arial Black";
+    color: white;
+    background-color: rgba(255,255,255, 0.2);
+    @include border-radius(30px);
+    text-align: right;
+    font-variant: small-caps; 
+    text-shadow: black 0 2px 5px;   
+    display: block; 
+        
     h1 {
+      text-align: left;
       font-family: "Arial Black";
       color: white;
-      background-color: rgba(255,255,255, 0.2);
-      @include border-radius(30px);
-      text-align: left;
       font-variant: small-caps; 
       text-shadow: black 0 2px 5px;   
     }  
+    
   }
   .main-title {
     h1 {
@@ -355,8 +397,8 @@ h1, h2 {
 
 .deck-container{
   pre {
-    border: 1px solid #999999;
-    border-radius: 0;
+    //border: 1px solid #999999;
+    //border-radius: 0;
     font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
     padding: 5px;
     font-size: 18px;

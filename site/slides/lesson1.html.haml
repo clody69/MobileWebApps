@@ -376,8 +376,277 @@
         =image_tag "senchaSimple-ipad.png", :resize => true
 
 %section.slide
-  %header Sinatra
+  %header Organization of the course
+  %article
+    %p
+      %strong.red
+        Lectures
+      \: Deep dives on the key concepts, technologies and frameworks
+    %p
+      %strong.red
+        Labs
+      \: Hands-on classes with practical exercices on selected topics
+    %p
+      %strong.red
+        Assignment
+      \: Team work on development of a web app
+    
+%section.slide
+  %header Lectures & Labs
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p Lecture 1: Introduction
+          %p Lecture 2: New semantics
+          %p Lecture 3: CSS3
+          %p Lecture 4: HTML5 Storage and Device Access
+          %p Lecture 5: Sencha
+          %p Lecture 6: Storing into the cloud
+          %p Lecture 7: Developing native apps
+      .twoColumn
+        .autobox
+          %p Lab 1: Assignment Kick-off
+          %p Lab 2: Building a mobile web app
+          %p Lab 3: Client side templating
+          %p Lab 4: 
+    
+    
+%section.slide
+  %header
+    Course Material
+  %article
 
+%section.slide
+  %header Assignment
+  %article
+    Expectations
+    Grading
+    Board
+
+%section.slide.section-title
+  %h1 The Fundamentals
+  .agenda
+    %p Git 
+    %p Javascript Refresh
+    %p MVC
+    %p Rails
+    %p Sinatra
+    %p Heroku
+
+%section.slide
+  %header Git
+  %article
+    .row.singlespace.small
+      .threeColumn
+        .autobox
+          %p Start using git
+          %pre
+            cd yourproject
+            git init
+          %pre
+            git clone git@github.com...
+          %p Add all files in a directory
+          %pre
+            git add .
+          %p Check status
+          %pre
+            git status -s
+          %p Commit 
+          %pre
+            git commit -m "First commit"
+            git commit -am "First commit"
+      .threeColumn
+        .autobox
+          %p Show all branches
+          %pre
+            git branch
+            git branch -a
+          %p Create a new branch
+          %pre
+            git branch newfeature
+          %p Switch branch
+          %pre
+            git checkout newfeature
+          %p Add a remote
+          %pre
+            git remote add <name> <url>
+          %p View the remotes
+          %pre  
+            git remote -v 
+      .threeColumn
+        .autobox
+          %p Link a local to a remote branch
+          %pre  
+            got branch --track local remote
+          %p Fetch changes from remotes
+          %pre  
+            git fetch <remote> <branch>
+          %p Push changes to remotes
+          %pre  
+            git push <remote> <branch>
+          %p Review changes between different branches
+          %pre  
+            git log origin/master ^master
+          %p Merge changes 
+          %pre  
+            git checkout master
+            git merge origin/master
+    .autobox.important.centered
+      %strong.red
+        Must Read: 
+      %a(href="http://gitref.org") Git Reference        
+%section.slide
+  %header Javascript: Asynchronous calls
+  %article
+    %p Javascript has one thread of execution
+    %p Blocking operations (e.g. network) must use callbacks
+    .larger
+      :coderay
+        #!javascript
+        var jqxhr = $.getJSON("example.json", function() {
+          alert("success");
+        });
+    %br
+    .larger 
+      :coderay
+        #!javascript
+        $('#target').click(function() {
+          alert('Handler for .click() called.');
+        });
+
+%section.slide
+  %header Javascript: Lambda Functions
+  %article
+    %p Lambda functions are created at runtime when the execution reaches that point of the flow. This allows functions to be defined conditionally
+    .row.vmargin
+      .twoColumn
+        .autobox
+          Function Declaration
+          :coderay
+            #!javascript
+            ...
+            function square(x) {
+              return x * x;
+            }
+            var b = square(2); //b gets assigned 4
+            ...
+      .twoColumn
+        .autobox
+          Function Statement
+          :coderay
+            #!javascript
+            ...
+            var square = function(x) {
+              return x * x;
+            };
+            var b = square(2); //b gets assigned 4
+            ...
+    %p Lambda functions are normal objects and can be passed as function parameters (e.g. callbacks)
+    :coderay
+      #!javascript
+      $('#target').click( square );
+
+      
+%section.slide
+  %header 
+    Javascript: Iterators (jQuery)
+  %article
+    .row 
+      .twoColumn
+        %strong.red
+          $.each
+        \: iterates over a list
+      .twoColumn
+        or a map
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+          var list = [1,2,3,4,5];
+          var a = $.each(list, function(index, value) {
+            alert(index + ": " + value);
+          }); //It produces 5 alerts
+      .twoColumn
+        :coderay
+          #!javascript
+          var map = {'a': 'b', 'c': 'd'};
+          var a = $.each(list, function(key, value) {
+            alert(key + ": " + value);
+          }); //It produces 2 alerts
+    
+    .vmargin
+      %strong.red
+        $.map
+      \: applies a function to each element of the array and maps the results into a new array
+      :coderay
+        #!javascript
+        var list = [1,2,3,4,5];
+        var a = $.map(list, function(value, index) {
+          return square(value);
+        }; // a gets [1,4,9,16,25]
+
+%section.slide
+  %header 
+    Javascript: Iterators (underscore.js) 
+  %article
+    .row 
+      .twoColumn
+        .autobox.hmargin
+          %strong.red
+            each
+          \: _.each (list, iterator, [context]) 
+          :coderay
+            #!javascript
+            _.each([1, 2, 3], function(n){ alert(n); });
+            _.each({one : 1, two : 2, three : 3}, function(n, k){ alert(n); });
+          .vmargin
+            %strong.red
+              map
+            \: _.map(list, iterator, [context]) 
+            :coderay
+              #!javascript
+              _.map({one : 1, two : 2, three : 3}, function(n, k){ return n*3; });
+              => [3, 6, 9]    
+          .vmargin
+            %strong.red
+              reduce
+            \: _.reduce(list, iter, memo, [context])    
+            :coderay
+              #!javascript
+              var sum = _.reduce([1, 2, 3], function(memo, n){ return memo + n; }, 0);
+              => 6
+      .twoColumn
+        .autobox
+          %strong.red
+            find
+          \: _.find(list, iterator, [context]) 
+          :coderay
+            #!javascript
+            _.find([1, 2, 3, 4, 5, 6], function(n){ return n % 2 == 0; });
+            => 2
+          .vmargin
+            %strong.red
+              filter
+            \: _.filter(list, iterator, [context])
+            :coderay
+              #!javascript
+              _.filter([1, 2, 3, 4, 5, 6], function(n){ return n % 2 == 0; });
+              => [2, 4, 6]
+          .vmargin
+            %strong.red
+              groupBy
+            \: _.groupBy(list, iterator) 
+            :coderay
+              #!javascript
+              _.groupBy(['one', 'two', 'three'], 'length');
+              => {3: ["one", "two"], 5: ["three"]}
+    
+%section.slide
+  %header Javascript: Closure
+  %article
+            
+    
 %section.slide
   %header Important resources
   %article

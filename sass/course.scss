@@ -63,8 +63,13 @@
 			color:#333;
 		}
 
+    .CodeRay .code pre {
+      background-color: #222;
+    }
+
+
 		pre {
-		  background: rgba(255, 204, 0, 0.02);
+		  background: #FFFFEE;
       border: 2px solid rgba(255, 204, 0, 0.3);
 			//border-color:#cde;
 			//background:#fff;
@@ -187,7 +192,6 @@
 
 		a {
 			&, &:hover, &:focus, &:active, &:visited {
-				color:#599;
 				text-decoration:none;
 			}
 
@@ -201,9 +205,6 @@
 		background:#fff;
 		opacity:0.5;
 
-		&, &:hover, &:focus, &:active, &:visited {
-			color:#599;
-		}
 
 		&:hover, &:focus {
 			opacity:1;
