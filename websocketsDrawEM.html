@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignmen'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>WebSockets Draw EM</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/websocketsDrawEM'>Browse Source Code</a></div>
+<p>
+This example implements a shared canvas where multiple clients can draw lines.
+The communication of the mouse events happens throught the websockets. The server is built with the
+<a href='https://github.com/igrigorik/em-websocket'>EM-Websocket</a>
+gem and uses the channel functionality of the ruby event machine (see
+<a href='http://eventmachine.rubyforge.org/EventMachine/Channel.html'>EventMachine::Channel</a>
+).
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Gemfile
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>source &quot;http://rubygems.org&quot;&#x000A;&#x000A;gem &quot;haml&quot;&#x000A;gem 'em-websocket'&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+Terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsDrawEM/server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">em-websocket</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="constant">EventMachine</span>.run {&#x000A;  <span class="instance-variable">@channel</span> = <span class="constant">EM</span>::<span class="constant">Channel</span>.new&#x000A;  <span class="instance-variable">@users</span> = {}&#x000A;  <span class="instance-variable">@messages</span> = []&#x000A;&#x000A;  <span class="constant">EventMachine</span>::<span class="constant">WebSocket</span>.start(<span class="symbol">:host</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">0.0.0.0</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:port</span> =&gt; <span class="integer">8080</span>) <span class="keyword">do</span> |ws|&#x000A;      &#x000A;    ws.onopen {&#x000A;      <span class="comment">#Subscribe the new user to the channel with the callback function for the push action</span>&#x000A;      new_user = <span class="instance-variable">@channel</span>.subscribe { |msg| ws.send msg }&#x000A;      &#x000A;      <span class="comment">#Add the new user to the user list</span>&#x000A;      <span class="instance-variable">@users</span>[ws.object_id] = new_user&#x000A;      &#x000A;      <span class="comment">#Push the last messages to the user</span>&#x000A;      <span class="instance-variable">@messages</span>.each <span class="keyword">do</span> |message|&#x000A;        ws.send message&#x000A;      <span class="keyword">end</span>&#x000A;   }&#x000A;&#x000A;    ws.onmessage { |msg|&#x000A;      &#x000A;      <span class="comment">#append the message at the end of the queue</span>&#x000A;      <span class="instance-variable">@messages</span> &lt;&lt; msg&#x000A;      <span class="instance-variable">@messages</span>.shift <span class="keyword">if</span> <span class="instance-variable">@messages</span>.length &gt; <span class="integer">10</span>&#x000A;&#x000A;      <span class="comment">#Broadcast the message to all users connected to the channel</span>&#x000A;      <span class="instance-variable">@channel</span>.push msg&#x000A;    }&#x000A;&#x000A;    ws.onclose { &#x000A;      <span class="instance-variable">@channel</span>.unsubscribe(<span class="instance-variable">@users</span>[ws.object_id])&#x000A;      <span class="instance-variable">@users</span>.delete(ws.object_id)&#x000A;    }&#x000A;  <span class="keyword">end</span>&#x000A;} &#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsDrawEM/index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)  &#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      WebSockets Drawing&#x000A;  <span class="tag">%body</span>&#x000A;<span class="comment">    :javascript</span>&#x000A;      <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;&#x000A;        <span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">'</span><span class="content">ws://localhost:8080</span><span class="delimiter">'</span></span>);&#x000A;        &#x000A;        <span class="keyword">var</span> currentX = <span class="integer">0</span>;&#x000A;        <span class="keyword">var</span> currentY = <span class="integer">0</span>;&#x000A;        <span class="keyword">var</span> lastX;&#x000A;        <span class="keyword">var</span> lastY;&#x000A;        <span class="keyword">var</span> lastReceivedX;&#x000A;        <span class="keyword">var</span> lastReceivedY;&#x000A;        &#x000A;        <span class="keyword">var</span> ctx = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>].getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">vmousemove</span><span class="delimiter">'</span></span>,<span class="keyword">function</span>(ev){&#x000A;          ev = ev || window.event;&#x000A;          currentX = ev.pageX || ev.clientX;&#x000A;          currentY = ev.pageY || ev.clientY;&#x000A;        });&#x000A;        &#x000A;        setInterval(<span class="keyword">function</span>(){&#x000A;          <span class="keyword">if</span>(currentX !== lastX || currentY !== lastY){&#x000A;            lastX = currentX;&#x000A;            lastY = currentY;&#x000A;            socket.send( JSON.stringify({<span class="key">x</span>:currentX, <span class="key">y</span>: currentY}) );&#x000A;          }&#x000A;        }, <span class="integer">30</span>); <span class="comment">// send every 300 milliseconds if position has changed</span>&#x000A;&#x000A;        socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) {&#x000A;          <span class="keyword">var</span> msg = <span class="predefined">$</span>.parseJSON(event.data);&#x000A;          &#x000A;          ctx.beginPath();&#x000A;          ctx.moveTo(lastReceivedX,lastReceivedY);&#x000A;          ctx.lineTo(msg.x,msg.y);&#x000A;          ctx.closePath();&#x000A;          ctx.stroke();&#x000A;          lastReceivedX = msg.x;&#x000A;          lastReceivedY = msg.y;&#x000A;        }&#x000A;      });&#x000A;&#x000A;    <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">1000</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">1000</span><span class="delimiter">'</span></span>)</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>

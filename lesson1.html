@@ -40,28 +40,6 @@ Aalto University March 2011
 <div class='background back' id='bg-default'></div>
 </div>
 <article class='deck-container'>
-<section class='slide main-title'>
-<h1>
-Mobile Web Appplications Development with HTML5
-</h1>
-<img src='imgs/HTML5_logo.png' />
-<br />
-<h1 class='subtitle'>
-Lesson 1: Introduction
-</h1>
-<br />
-<div class='smaller centered'>
-<h3>
-Claudio Riva
-</h3>
-<h3>
-Aalto University March 2011
-</h3>
-</div>
-</section>
-<!-- %section#toc-slide.slide -->
-<!-- %header Contents -->
-<!-- #toc -->
 <style type='text/css'>
   /*<![CDATA[*/
     @-webkit-keyframes chromelogo-zoom-spin {
@@ -511,7 +489,292 @@ Show MVC is moving to client
 </article>
 </section>
 <section class='slide'>
-<header>Sinatra</header>
+<header>Organization of the course</header>
+<article>
+<p>
+<strong class='red'>
+Lectures
+</strong>
+: Deep dives on the key concepts, technologies and frameworks
+</p>
+<p>
+<strong class='red'>
+Labs
+</strong>
+: Hands-on classes with practical exercices on selected topics
+</p>
+<p>
+<strong class='red'>
+Assignment
+</strong>
+: Team work on development of a web app
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>Lectures & Labs</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>Lecture 1: Introduction</p>
+<p>Lecture 2: New semantics</p>
+<p>Lecture 3: CSS3</p>
+<p>Lecture 4: HTML5 Storage and Device Access</p>
+<p>Lecture 5: Sencha</p>
+<p>Lecture 6: Storing into the cloud</p>
+<p>Lecture 7: Developing native apps</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>Lab 1: Assignment Kick-off</p>
+<p>Lab 2: Building a mobile web app</p>
+<p>Lab 3: Client side templating</p>
+<p>Lab 4:</p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Course Material
+</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Assignment</header>
+<article>
+Expectations
+Grading
+Board
+</article>
+</section>
+<section class='slide section-title'>
+<h1>The Fundamentals</h1>
+<div class='agenda'>
+<p>Git</p>
+<p>Javascript Refresh</p>
+<p>MVC</p>
+<p>Rails</p>
+<p>Sinatra</p>
+<p>Heroku</p>
+</div>
+</section>
+<section class='slide'>
+<header>Git</header>
+<article>
+<div class='row singlespace small'>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>Start using git</p>
+<pre>cd yourproject
+git init</pre>
+<pre>git clone git@github.com...</pre>
+<p>Add all files in a directory</p>
+<pre>git add .</pre>
+<p>Check status</p>
+<pre>git status -s</pre>
+<p>Commit</p>
+<pre>git commit -m "First commit"
+git commit -am "First commit"</pre>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>Show all branches</p>
+<pre>git branch
+git branch -a</pre>
+<p>Create a new branch</p>
+<pre>git branch newfeature</pre>
+<p>Switch branch</p>
+<pre>git checkout newfeature</pre>
+<p>Add a remote</p>
+<pre>git remote add <name> <url></pre>
+<p>View the remotes</p>
+<pre>git remote -v</pre>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>Link a local to a remote branch</p>
+<pre>got branch --track local remote</pre>
+<p>Fetch changes from remotes</p>
+<pre>git fetch <remote> <branch></pre>
+<p>Push changes to remotes</p>
+<pre>git push <remote> <branch></pre>
+<p>Review changes between different branches</p>
+<pre>git log origin/master ^master</pre>
+<p>Merge changes</p>
+<pre>git checkout master
+git merge origin/master</pre>
+</div>
+</div>
+</div>
+<div class='autobox important centered'>
+<strong class='red'>
+Must Read:
+</strong>
+<a href='http://gitref.org'>Git Reference</a>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Javascript: Asynchronous calls</header>
+<article>
+<p>Javascript has one thread of execution</p>
+<p>Blocking operations (e.g. network) must use callbacks</p>
+<div class='larger'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> jqxhr = <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">&quot;</span><span class="content">example.json</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;  alert(<span class="string"><span class="delimiter">&quot;</span><span class="content">success</span><span class="delimiter">&quot;</span></span>);&#x000A;});</pre></div>
+</div>
+</div>
+<br />
+<div class='larger'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#target</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>() {&#x000A;  alert(<span class="string"><span class="delimiter">'</span><span class="content">Handler for .click() called.</span><span class="delimiter">'</span></span>);&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Javascript: Lambda Functions</header>
+<article>
+<p>Lambda functions are created at runtime when the execution reaches that point of the flow. This allows functions to be defined conditionally</p>
+<div class='row vmargin'>
+<div class='twoColumn'>
+<div class='autobox'>
+Function Declaration
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;<span class="keyword">function</span> <span class="function">square</span>(x) {&#x000A;  <span class="keyword">return</span> x * x;&#x000A;}&#x000A;<span class="keyword">var</span> b = square(<span class="integer">2</span>); <span class="comment">//b gets assigned 4</span>&#x000A;...</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+Function Statement
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;<span class="keyword">var</span> <span class="function">square</span> = <span class="keyword">function</span>(x) {&#x000A;  <span class="keyword">return</span> x * x;&#x000A;};&#x000A;<span class="keyword">var</span> b = square(<span class="integer">2</span>); <span class="comment">//b gets assigned 4</span>&#x000A;...</pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Lambda functions are normal objects and can be passed as function parameters (e.g. callbacks)</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#target</span><span class="delimiter">'</span></span>).click( square );&#x000A;&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Javascript: Iterators (jQuery)
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<strong class='red'>
+$.each
+</strong>
+: iterates over a list
+</div>
+<div class='twoColumn'>
+or a map
+</div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> list = [<span class="integer">1</span>,<span class="integer">2</span>,<span class="integer">3</span>,<span class="integer">4</span>,<span class="integer">5</span>];&#x000A;<span class="keyword">var</span> a = <span class="predefined">$</span>.each(list, <span class="keyword">function</span>(index, value) {&#x000A;  alert(index + <span class="string"><span class="delimiter">&quot;</span><span class="content">: </span><span class="delimiter">&quot;</span></span> + value);&#x000A;}); <span class="comment">//It produces 5 alerts</span></pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> map = {<span class="key"><span class="delimiter">'</span><span class="content">a</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">b</span><span class="delimiter">'</span></span>, <span class="key"><span class="delimiter">'</span><span class="content">c</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">d</span><span class="delimiter">'</span></span>};&#x000A;<span class="keyword">var</span> a = <span class="predefined">$</span>.each(list, <span class="keyword">function</span>(key, value) {&#x000A;  alert(key + <span class="string"><span class="delimiter">&quot;</span><span class="content">: </span><span class="delimiter">&quot;</span></span> + value);&#x000A;}); <span class="comment">//It produces 2 alerts</span>&#x000A;</pre></div>
+</div>
+</div>
+</div>
+<div class='vmargin'>
+<strong class='red'>
+$.map
+</strong>
+: applies a function to each element of the array and maps the results into a new array
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> list = [<span class="integer">1</span>,<span class="integer">2</span>,<span class="integer">3</span>,<span class="integer">4</span>,<span class="integer">5</span>];&#x000A;<span class="keyword">var</span> a = <span class="predefined">$</span>.map(list, <span class="keyword">function</span>(value, index) {&#x000A;  <span class="keyword">return</span> square(value);&#x000A;}; <span class="comment">// a gets [1,4,9,16,25]</span>&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Javascript: Iterators (underscore.js)
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox hmargin'>
+<strong class='red'>
+each
+</strong>
+: _.each (list, iterator, [context])
+<div class="CodeRay">
+  <div class="code"><pre>_.each([<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>], <span class="keyword">function</span>(n){ alert(n); });&#x000A;_.each({<span class="key">one</span> : <span class="integer">1</span>, <span class="key">two</span> : <span class="integer">2</span>, <span class="key">three</span> : <span class="integer">3</span>}, <span class="keyword">function</span>(n, k){ alert(n); });</pre></div>
+</div>
+<div class='vmargin'>
+<strong class='red'>
+map
+</strong>
+: _.map(list, iterator, [context])
+<div class="CodeRay">
+  <div class="code"><pre>_.map({<span class="key">one</span> : <span class="integer">1</span>, <span class="key">two</span> : <span class="integer">2</span>, <span class="key">three</span> : <span class="integer">3</span>}, <span class="keyword">function</span>(n, k){ <span class="keyword">return</span> n*<span class="integer">3</span>; });&#x000A;=&gt; [<span class="integer">3</span>, <span class="integer">6</span>, <span class="integer">9</span>]    </pre></div>
+</div>
+</div>
+<div class='vmargin'>
+<strong class='red'>
+reduce
+</strong>
+: _.reduce(list, iter, memo, [context])
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> sum = _.reduce([<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>], <span class="keyword">function</span>(memo, n){ <span class="keyword">return</span> memo + n; }, <span class="integer">0</span>);&#x000A;=&gt; <span class="integer">6</span></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong class='red'>
+find
+</strong>
+: _.find(list, iterator, [context])
+<div class="CodeRay">
+  <div class="code"><pre>_.find([<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>], <span class="keyword">function</span>(n){ <span class="keyword">return</span> n % <span class="integer">2</span> == <span class="integer">0</span>; });&#x000A;=&gt; <span class="integer">2</span></pre></div>
+</div>
+<div class='vmargin'>
+<strong class='red'>
+filter
+</strong>
+: _.filter(list, iterator, [context])
+<div class="CodeRay">
+  <div class="code"><pre>_.filter([<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>], <span class="keyword">function</span>(n){ <span class="keyword">return</span> n % <span class="integer">2</span> == <span class="integer">0</span>; });&#x000A;=&gt; [<span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">6</span>]</pre></div>
+</div>
+</div>
+<div class='vmargin'>
+<strong class='red'>
+groupBy
+</strong>
+: _.groupBy(list, iterator)
+<div class="CodeRay">
+  <div class="code"><pre>_.groupBy([<span class="string"><span class="delimiter">'</span><span class="content">one</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">two</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">three</span><span class="delimiter">'</span></span>], <span class="string"><span class="delimiter">'</span><span class="content">length</span><span class="delimiter">'</span></span>);&#x000A;=&gt; {<span class="integer">3</span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">one</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">two</span><span class="delimiter">&quot;</span></span>], <span class="integer">5</span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">three</span><span class="delimiter">&quot;</span></span>]}&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Javascript: Closure</header>
+<article></article>
 </section>
 <section class='slide'>
 <header>Important resources</header>
@@ -522,440 +785,6 @@ http://www.modernizr.com/
 http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
 </article>
 </section>
-
-<section class='slide main-title'>
-<h1>
-Mobile Web Appplications Development with HTML5
-</h1>
-<img src='imgs/HTML5_logo.png' />
-<br />
-<h1 class='subtitle'>
-Lecture 2: CSS
-</h1>
-<br />
-<div class='smaller centered'>
-<h3>
-Claudio Riva
-</h3>
-<h3>
-Aalto University March 2011
-</h3>
-</div>
-</section>
-
-<section class='slide section-title'>
-<h1>Lesson 2:</h1>
-</section>
-
-<section class='slide main-title'>
-<h1>
-Mobile Web Appplications Development with HTML5
-</h1>
-<img src='imgs/HTML5_logo.png' />
-<br />
-<h1 class='subtitle'>
-Lecture 3: Web Sockets
-</h1>
-<br />
-<div class='smaller centered'>
-<h3>
-Claudio Riva
-</h3>
-<h3>
-Aalto University March 2011
-</h3>
-</div>
-</section>
-
-<section class='slide section-title'>
-<h1>Lesson 3:</h1>
-</section>
-<section class='slide'>
-<header>
-Push Technology
-</header>
-<article>
-<p>HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication</p>
-<p>Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring</p>
-<div class='singlespace'>
-<p>Workarounds</p>
-</div>
-<ul>
-<li>Frequent requests (=> excessive load on the server)</li>
-<li>Long polling (=> keep many connections open in waiting state)</li>
-<li>Flash XMLSocket relays</li>
-</ul>
-<p>Library hiding complexity: socket.io</p>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
-</header>
-<article>
-<blockquote>
-<p class='smallest'>
-Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
-</p>
-</blockquote>
-<div class='code_block larger'>
-<div class="CodeRay">
-  <div class="code"><pre><span class="comment">//Socket object</span>&#x000A;<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://echo.websocket.org</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">// Callbacks</span>&#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { alert(event.data); }&#x000A;socket.<span class="function">onclose</span> = <span class="keyword">function</span>(event) { alert(<span class="string"><span class="delimiter">'</span><span class="content">closed</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
-</header>
-<article>
-Websockets interface:
-<ul>
-<li>
-<strong class='red'>
-onopen
-</strong>
-: callback when the socket is ready (important!)
-</li>
-<li>
-<strong class='red'>
-onmessage
-</strong>
-: callback when a message is received on the socket
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when the socket is closed
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when there is a communication error
-</li>
-</ul>
-<p>
-Messages are in UTF-8:
-<div class='centered terminal larger'>
-"<div class='gray'>\\x00</div>Hello World<div class='gray'>\\xFF</div>"
-</div>
-</p>
-<div class="CodeRay">
-  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-benefits
-</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<ul>
-<li>connection handshake uses HTTP infrastructure</li>
-<li>no extra ports (works across firewalls)</li>
-<li>no overhead</li>
-<li>very low latency</li>
-<li>clean browser interface</li>
-</ul>
-</div>
-<div class='twoColumn'>
-<pre class='smaller'>Request URL:ws://localhost:8080/
-Request Method:GET
-Status Code:101 Switching Protocols
-<strong>Request Headers</strong>
-Connection:Upgrade
-Cookie:
-Host:localhost:8080
-Origin:null
-Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
-Sec-WebSocket-Version:13
-Upgrade:websocket
-(Key3):00:00:00:00:00:00:00:00
-<strong>Response Headers</strong>
-Connection:Upgrade
-Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
-Upgrade:websocket
-(Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</pre>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">Sending Data Structures</img>
-</header>
-<article>
-Websockets interface:
-</article>
-</section>
-<section class='slide'>
-<header>
-Pusher.com
-</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<div class='autobox'>
-<p>
-<strong>Pusher</strong>
-is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.
-</p>
-<p>Founded in 2009. Team is 5 members.</p>
-<p>40 billion messages delivered.</p>
-<p>WebSocket as a service</p>
-<p>Using EM-WebSocket</p>
-</div>
-</div>
-<div class='twoColumn'>
-<div class='image-wrap'><img src='imgs/pusher_diagram.png' /></div>
-</div>
-</div>
-</article>
-</section>
-
-<style type='text/css'>
-  /*<![CDATA[*/
-    .template{
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-image: url("imgs/bernina.jpg");
-      background-size: cover;
-      background-color: transparent;
-      width: 100%;
-    }
-  /*]]>*/
-</style>
-<section class='slide section-title'>
-<h1>Templates</h1>
-</section>
-<section class='slide'>
-<header>Example of a standard slide</header>
-<article>
-<p>This shows the basic slide format with paragraphs of text</p>
-<p>The content of each paragraph is using one line and wraps when the text is too long</p>
-<p>The content is also vertically centered</p>
-</article>
-</section>
-<section class='slide'>
-<header>Example of singlespaced paragraphs</header>
-<article class='singlespace'>
-<p>This shows a list of items</p>
-<p>Each item is a paragraph</p>
-<p>The paragraphs are single spaced</p>
-</article>
-</section>
-<section class='slide'>
-<header>Example of a standard slide with bullet points</header>
-<article>
-<ul>
-<li>This show a basic slide with content aligned on the left</li>
-<li>Each sentence is a separte %li item</li>
-<li>The content is alligned top left</li>
-<li>The width of the content space is fixed at 80% of the slice width</li>
-<li>This shows a very long text that will be wrapped multiple times. This shows a very long text that will be wrapped multiple times. This shows a very long text that will be wrapped multiple times.</li>
-</ul>
-</article>
-</section>
-<section class='slide'>
-<header>Text examples</header>
-<article>
-<h2>h2 header</h2>
-<h3>h3 header</h3>
-<p>paragraph text</p>
-Unordered List:
-<ul>
-<li>Item1</li>
-<li>Item2</li>
-<li>Item3</li>
-</ul>
-Ordered List:
-<ol>
-<li>Item1</li>
-<li>Item2</li>
-<li>Item3</li>
-</ol>
-</article>
-</section>
-<section class='slide'>
-<header>Text with different colors and sizes:</header>
-<article>
-<div class='autobox'>
-<ul>
-<li>
-This text contains
-<div class='red'>red</div>
-</li>
-<li>
-This text contains
-<div class='green'>green</div>
-</li>
-<li>
-This text contains
-<div class='blue'>blue</div>
-</li>
-<li>
-This text contains
-<div class='yellow'>yellow</div>
-</li>
-</ul>
-</div>
-<div class='autobox singlespace'>
-<p class='smallest'>Smallest text</p>
-<p class='smaller'>Smaller text</p>
-<p>Normal text</p>
-<p class='larger'>Larger text</p>
-<p class='largest'>Largest text</p>
-<p class='big'>Big text</p>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>Example of a quote</header>
-<article>
-<blockquote>
-<p>This is a quote about nothing</p>
-<p>
-<cite>From myself</cite>
-</p>
-</blockquote>
-</article>
-</section>
-<section class='slide'>
-<header>An image with caption</header>
-<article>
-<div class='autoimage'>
-<div class='image-wrap'><img src='imgs/the-web-is-dead.jpg' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>Slide with code</header>
-<article>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Adder</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">3</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-<pre class='test-output'>Finished in 0.000342 seconds.&#x000A;&#x000A;<strong class='green'>1 tests, 1 assertions, 0 failures, 0 errors</strong>&#x000A;</pre>
-</article>
-</section>
-<section class='slide'>
-<header>Slide with code and smaller font</header>
-<article class='smaller'>
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// Deck initialization</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">deck</span><span class="p">(</span><span class="s1">&#39;.slide&#39;</span><span class="p">);</span>
-
-
-  <span class="nx">toc</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;ul id=&quot;toc-ul&quot;&gt;&lt;/ul&gt;&#39;</span><span class="p">);</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.toc h2, .toc h1&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bla</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
-    <span class="nx">a</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;a /&gt;&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">())</span>
-    <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">tagName</span><span class="p">)</span>
-    <span class="nx">toc</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">)</span>
-  <span class="p">});</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#toc&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">toc</span><span class="p">);</span>
-
-  <span class="nx">author</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#author&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">span</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;slide-footer&quot; /&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">author</span><span class="p">)</span>
-    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
-  <span class="p">});</span>
-<span class="p">});</span>
-</pre></div>
-</article>
-</section>
-<section class='slide'>
-<header>Testing multicolumns</header>
-<article>
-<div class='row'>
-<div class='twoColumn bordered'>
-<p>First Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-<div class='twoColumn bordered'>
-<p>Second Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-</div>
-<div class='row'>
-<div class='threeColumn bordered'>
-<p>First Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-<div class='threeColumn bordered'>
-<p>Second Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-<div class='threeColumn bordered'>
-<p>Third Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-</div>
-<div class='row'>
-<div class='threeColumn'>
-<p>First Column</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-<div class='twoThirds'>
-<p>Second Column spanning 2 cells</p>
-<p>Very long text to test the line wrap at the end of the column</p>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>Autobox</header>
-<div class='autobox'>
-<p>Testing autobox</p>
-<p>with no highlight</p>
-</div>
-<div class='emphasizebox'>
-<p>Testing highlighted autobox</p>
-<p>with multiple</p>
-<p>lines</p>
-</div>
-</section>
-<section class='slide'>
-<header>Normal centered slide</header>
-<article>
-<p>List of elements inside this box</p>
-<ul>
-<li>
-<strong>Item1:</strong>
-This is the item number one
-</li>
-<li>
-<strong>Item2:</strong>
-This is the item number two
-</li>
-<li>
-<strong>Item3:</strong>
-This is the item number three
-</li>
-</ul>
-</article>
-</section>
-<section class='slide'>
-<header>Large Centered Slide</header>
-<div class='autobox centered largest'>
-<p>Testing a very large centered text with multiple lines</p>
-<p>
-This is used to show
-<strong>important</strong>
-statements
-</p>
-</div>
-</section>
-
 
 <!-- Elements -->
 <a class='deck-next-link' href='#' title='Next'>→</a>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Appplications Development with HTML5
+|
+Aalto University March 2011
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='deckjs/core/deck.core.css' rel='stylesheet' />
+<link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
+<link href='deckjs/extensions/menu/deck.menu.css' rel='stylesheet' />
+<link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
+<link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
+<link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
+<!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- Theme CSS files (menu swaps these out) -->
+<link href='css/course.css' id='style-theme-link' rel='stylesheet' />
+<link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
+<link href='css/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<script src='js/jquery.min.js'></script>
+<!-- Custom CSS just for this page -->
+<script src='js/modernizr.custom.js'></script>
+</head>
+<body>
+<div id='background'>
+<div class='background front active' id='bg-default'></div>
+<div class='background back' id='bg-default'></div>
+</div>
+<article class='deck-container'>
+<section class='slide main-title'>
+<h1>
+Mobile Web Appplications Development with HTML5
+</h1>
+<img src='imgs/HTML5_logo.png' />
+<br />
+<h1 class='subtitle'>
+Lecture 2: CSS
+</h1>
+<br />
+<div class='smaller centered'>
+<h3>
+Claudio Riva
+</h3>
+<h3>
+Aalto University March 2011
+</h3>
+</div>
+</section>
+
+<section class='slide section-title'>
+<h1>Lesson 2:</h1>
+</section>
+
+<!-- Elements -->
+<a class='deck-next-link' href='#' title='Next'>→</a>
+<a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+<p class='deck-status'>
+<span class='deck-status-current'></span>
+/
+<span class='deck-status-total'></span>
+</p>
+<a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+<script src='deckjs/core/deck.core.js'></script>
+<script src='deckjs/extensions/menu/deck.menu.js'></script>
+<script src='deckjs/extensions/goto/deck.goto.js'></script>
+<script src='deckjs/extensions/status/deck.status.js'></script>
+<script src='deckjs/extensions/navigation/deck.navigation.js'></script>
+<script src='deckjs/extensions/hash/deck.hash.js'></script>
+<!-- /%script(src="deckjs/extensions/scale/deck.scale.js") -->
+<!-- /%script(src="deckjs/extensions/notes/deck.notes.js") -->
+<script src='js/main.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(document).bind('deck.change', function(event, from, to) {
+     
+      //alert('Moving from slide ' + from + ' to ' + to);
+      var f = $.deck('getSlide', from).closest('section').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').attr("data-background");
+      if (t==undefined) { t = "bg-default"; }
+      if (f==undefined) { f = "bg-default"; }
+             
+      
+      var front = $('#background > .front').first();
+      var back = $('#background > .back').first();
+    
+      if (front.hasClass('active')) {
+        if (front.attr('id') == t) { return; }
+    
+        back.attr('id',t);
+        front.removeClass('active');
+        back.addClass('active');
+        front.css('opacity',0);
+      } else {
+        if (back.attr('id') == t) { return; }
+    
+        front.attr('id',t);
+        back.removeClass('active');
+        front.addClass('active');
+        front.css('opacity',1);
+      }
+      
+      //last.attr('id',active.attr('id'));
+      //last.css('opacity',1);
+      //active.remove();
+      //$("#background").append('<div class="background active" id="'+t+'" style="opacity: 0; "></div>')
+      //$("#"+t).css('opacity',1);
+      //var el = $("#"+t);
+    
+      //active.removeClass('active').addClass('last');
+      //last.removeClass('last').addClass('active');
+      
+      //last.dequeue();
+      //active.dequeue();
+             
+      //active.css('opacity',0);
+      //alert(last.attr('id'));
+      //active.fadeOut('slow');
+      //last.fadeIn('slow', function() {
+      //});
+      
+      //last.fadeIn('slow');
+      //$("#"+t).css('opacity',1);
+      //last.css('opacity',1);
+      //el = $("#"+t);
+      //el.animate({opacity: 1.0}, 1000);
+    
+      //if (t==undefined && f == undefined) {
+      //} else if (t == f) {
+      //}
+      //else if (t != undefined) {
+      //  $('#background').css("background-image", "url(" + t + ")").fadeIn('slow');
+      //} else if (t == undefined) {
+      //  $('#background').fadeOut('slow');
+      //}
+    });
+      //current = $('body').css("background-image");
+      //alert(current);
+  //]]>
+</script>
+<!-- .slide-footer -->
+<!-- =META['title'] -->
+<!-- \- -->
+<!-- =META['author'] -->
+</article>
+</body>
+</html>
