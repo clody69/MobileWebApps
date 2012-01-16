@@ -551,14 +551,27 @@ Grading
 Board
 </article>
 </section>
+<section class='slide'>
+<header>Disclaimer</header>
+<article>
+<ul>
+<li class='slide'>This course is a pilot</li>
+<li class='slide'>First time teaching this course</li>
+<li class='slide'>First time teaching at the Aalto Venture Garage</li>
+<li class='slide'>Timing of the lessons may be inaccurate</li>
+<li class='slide'>Exercises may be too simple or too complex</li>
+<li class='slide'>The level of the course is not calibrated</li>
+</ul>
+</article>
+</section>
 <section class='slide section-title'>
 <h1>The Fundamentals</h1>
 <div class='agenda'>
 <p>Git</p>
 <p>Javascript Refresh</p>
 <p>MVC</p>
-<p>Rails</p>
-<p>Sinatra</p>
+<p>HAML, SASS and CoffeScript</p>
+<p>Ruby, Sinatra and Rails</p>
 <p>Heroku</p>
 </div>
 </section>
@@ -774,6 +787,51 @@ groupBy
 </section>
 <section class='slide'>
 <header>Javascript: Closure</header>
+<article>
+<p>
+A closure is formed by returning a function object that was created within an execution
+context of a function call from that function call and assigning a reference to that inner
+function to a property of another object. Or by directly assigning a reference to such
+a function object to, for example, a global variable, a property of a globally accessible
+object or an object passed by reference as an argument to the outer function call (
+<a href='http://jibbering.com/faq/notes/closures'>Closures</a>
+).
+</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">closureBuilder</span>(arg1, arg2){  <span class="comment">//outer function (builder)</span>&#x000A;    <span class="keyword">var</span> localVar = <span class="integer">8</span>;&#x000A;    <span class="keyword">function</span> <span class="function">exampleReturned</span>(innerArg){  <span class="comment">//inner function </span>&#x000A;        <span class="keyword">return</span> ((arg1 + arg2)/(innerArg + localVar));&#x000A;    }&#x000A;    <span class="keyword">return</span> exampleReturned;  <span class="comment">//return a reference to the inner fucntion</span>&#x000A;}&#x000A;<span class="keyword">var</span> globalVar = closureBuilder(<span class="integer">2</span>, <span class="integer">4</span>);&#x000A;<span class="keyword">var</span> secondGlobalVar = exampleClosureForm(<span class="integer">12</span>, <span class="integer">3</span>);&#x000A;&#x000A;globalVar(<span class="integer">2</span>);   <span class="comment">//Result ?</span>&#x000A;secondGlobalVar(<span class="integer">5</span>);   <span class="comment">// Result ? </span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Javascript: Closure Example with Google Maps</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> infoWindow = <span class="keyword">new</span> google.maps.InfoWindow();&#x000A;&#x000A;<span class="keyword">function</span> <span class="function">addInfoWindow</span>(marker, id, name) {&#x000A;  google.maps.event.addListener(marker, <span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>, <span class="keyword">function</span> () {&#x000A;      infoWindow.close();&#x000A;      infoWindow.setContent(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span>+ name + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>);&#x000A;      infoWindow.open(map, marker);&#x000A;    });&#x000A;}&#x000A;&#x000A;<span class="keyword">function</span> <span class="function">addMarkers</span>(json) {&#x000A;  <span class="keyword">var</span> markers = [];&#x000A;  <span class="keyword">for</span> (i=<span class="integer">0</span>; i&lt;json.length; i++) {&#x000A;      <span class="keyword">var</span> place = json[i];&#x000A;&#x000A;      <span class="keyword">var</span> point = <span class="keyword">new</span> google.maps.LatLng(place.coordinates[<span class="integer">0</span>], place.coordinates[<span class="integer">1</span>]);      &#x000A;      <span class="keyword">var</span> marker = <span class="keyword">new</span> google.maps.Marker({<span class="key">position</span>:point, <span class="key">title</span>:place.name});&#x000A;      &#x000A;      addInfoWindow(marker, place.slug, place.name);&#x000A;      ...&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>HAML</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>SASS (SCSS)</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>CoffeScript</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Ruby</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Sinatra</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Ruby on Rails</header>
 <article></article>
 </section>
 <section class='slide'>
