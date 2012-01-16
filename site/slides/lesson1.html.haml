@@ -423,6 +423,17 @@
     Expectations
     Grading
     Board
+    
+%section.slide
+  %header Disclaimer
+  %article
+    %ul
+      %li.slide This course is a pilot
+      %li.slide First time teaching this course
+      %li.slide First time teaching at the Aalto Venture Garage
+      %li.slide Timing of the lessons may be inaccurate
+      %li.slide Exercises may be too simple or too complex
+      %li.slide The level of the course is not calibrated
 
 %section.slide.section-title
   %h1 The Fundamentals
@@ -430,8 +441,8 @@
     %p Git 
     %p Javascript Refresh
     %p MVC
-    %p Rails
-    %p Sinatra
+    %p HAML, SASS and CoffeScript
+    %p Ruby, Sinatra and Rails
     %p Heroku
 
 %section.slide
@@ -645,8 +656,80 @@
 %section.slide
   %header Javascript: Closure
   %article
+    %p
+      A closure is formed by returning a function object that was created within an execution 
+      context of a function call from that function call and assigning a reference to that inner 
+      function to a property of another object. Or by directly assigning a reference to such 
+      a function object to, for example, a global variable, a property of a globally accessible 
+      object or an object passed by reference as an argument to the outer function call (
+      %a(href="http://jibbering.com/faq/notes/closures") Closures
+      ).
+    :coderay
+      #!javascript
+      function closureBuilder(arg1, arg2){  //outer function (builder)
+          var localVar = 8;
+          function exampleReturned(innerArg){  //inner function 
+              return ((arg1 + arg2)/(innerArg + localVar));
+          }
+          return exampleReturned;  //return a reference to the inner fucntion
+      }
+      var globalVar = closureBuilder(2, 4);
+      var secondGlobalVar = exampleClosureForm(12, 3);
+
+      globalVar(2);   //Result ?
+      secondGlobalVar(5);   // Result ? 
+      
+%section.slide
+  %header Javascript: Closure Example with Google Maps
+  %article
+    :coderay
+      #!javascript  
+      var infoWindow = new google.maps.InfoWindow();
+  
+      function addInfoWindow(marker, id, name) {
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.close();
+            infoWindow.setContent('<p>'+ name + '</p>');
+            infoWindow.open(map, marker);
+          });
+      }
+      
+      function addMarkers(json) {
+        var markers = [];
+        for (i=0; i<json.length; i++) {
+            var place = json[i];
+  
+            var point = new google.maps.LatLng(place.coordinates[0], place.coordinates[1]);      
+            var marker = new google.maps.Marker({position:point, title:place.name});
             
+            addInfoWindow(marker, place.slug, place.name);
+            ...
+
+%section.slide
+  %header HAML
+  %article
+
+%section.slide
+  %header SASS (SCSS)
+  %article
     
+%section.slide
+  %header CoffeScript
+  %article
+
+%section.slide
+  %header Ruby
+  %article 
+    
+%section.slide
+  %header Sinatra
+  %article
+
+%section.slide
+  %header Ruby on Rails
+  %article
+
+
 %section.slide
   %header Important resources
   %article

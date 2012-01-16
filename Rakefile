@@ -7,6 +7,7 @@ task :render do
   include DeckJSBuilder
   #build "site/views/slides.html.haml", "site/layout/slides.html.haml", "public/slides.html"
   build "site/views/site.html.haml", "site/layout/site.html.haml", "public/index.html"
+  build "site/views/site_preview.html.haml", "site/layout/site.html.haml", "public/site.html"
   build "site/views/notes.html.haml", "site/layout/site.html.haml", "public/notes.html"
 
   Dir["site/examples/*.html.haml"].each { |file| build file, "site/layout/site.html.haml", "public/" + File.basename(file).gsub('.haml','')}

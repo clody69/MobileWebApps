@@ -1,0 +1,130 @@
+=title_slide_tag("Lecture 3: Web Sockets")
+
+%section.slide.section-title
+  %h1 Lesson 3: 
+
+%section.slide
+  %header 
+    Push Technology
+  %article
+    %p HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication
+    %p Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring
+    .singlespace
+      %p Workarounds
+    %ul 
+      %li Frequent requests (=> excessive load on the server)
+      %li Long polling (=> keep many connections open in waiting state)
+      %li Flash XMLSocket relays
+    %p Library hiding complexity: socket.io
+    
+%section.slide
+  %header
+    =html5_websockets_tag
+  %article
+    %blockquote
+      %p.smallest
+        Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
+    .code_block.larger
+      :coderay_raw
+        #!javascript
+        //Socket object
+        var socket = new WebSocket("ws://echo.websocket.org");
+        
+        // Callbacks
+        socket.onopen = function(event) { socket.send('Hello, WebSocket'); };
+        socket.onmessage = function(event) { alert(event.data); }
+        socket.onclose = function(event) { alert('closed'); }
+
+%section.slide
+  %header
+    =html5_websockets_tag
+  %article
+    Websockets interface:
+    %ul
+      %li
+        %strong.red
+          onopen
+        \: callback when the socket is ready (important!)
+      %li  
+        %strong.red
+          onmessage
+        \: callback when a message is received on the socket
+      %li
+        %strong.red
+          onclose
+        \: callback when the socket is closed
+      %li
+        %strong.red
+          onclose
+        \: callback when there is a communication error
+    %p
+      Messages are in UTF-8:
+      .centered.terminal.larger
+        "
+        .gray> \\x00
+        Hello World
+        .gray> \\xFF
+        "
+
+    :coderay_raw
+      #!javascript
+      socket.send('Hello World');
+
+%section.slide
+  %header 
+    benefits
+  %article
+    .row
+      .twoColumn
+        %ul
+          %li connection handshake uses HTTP infrastructure
+          %li no extra ports (works across firewalls)
+          %li no overhead
+          %li very low latency
+          %li clean browser interface
+      .twoColumn
+        %pre.smaller
+          Request URL:ws://localhost:8080/
+          Request Method:GET
+          Status Code:101 Switching Protocols
+          
+          <strong>Request Headers</strong>
+          Connection:Upgrade
+          Cookie:
+          Host:localhost:8080
+          Origin:null
+          Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
+          Sec-WebSocket-Version:13
+          Upgrade:websocket
+          (Key3):00:00:00:00:00:00:00:00
+          
+          <strong>Response Headers</strong>
+          Connection:Upgrade
+          Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
+          Upgrade:websocket
+          (Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+      
+   
+%section.slide
+  %header
+    =html5_websockets_tag "Sending Data Structures"
+  %article
+    Websockets interface:
+     
+%section.slide
+  %header
+    Pusher.com
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p
+            %strong Pusher 
+            is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.     
+          %p Founded in 2009. Team is 5 members.
+          %p 40 billion messages delivered.
+          %p WebSocket as a service
+          %p Using EM-WebSocket
+      .twoColumn
+        =image_tag "pusher_diagram.png"
+          
