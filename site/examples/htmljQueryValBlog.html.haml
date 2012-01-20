@@ -1,0 +1,72 @@
+=example_header_tag "Simple Blog with jQuery and validation", "htmljQueryValBlog"
+
+%p
+  This example is an extenstion of the 
+  =example_url_tag("htmljQueryBlog")
+  where we add the validation of the fields in the new entry form.
+%p
+  HTML5 supports two new attributes for validating the input fields:
+  %ul
+    %li
+      %strong required
+      \: this is an HTML attribute that can be added to the input fields to tell the browser that this input field is required for the submission of the form.
+    %li
+      %strong :invalid
+      \: this is a CSS selector that can be used for finding the input fields that have an invalid value
+
+%p
+  In our case we add the required attribute to the title field
+.code_block
+  .code_header
+    htmljQueryBlog/new.haml  
+  :coderay_raw
+    #!haml
+    %form(action="/new" method="post")
+      %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+      %textarea(name="content" rows = "5" placeholder = "Content")
+      %input(type = "email" name="email" placeholder = "Email")              
+      %button#postEntry(type = "submit") Post
+
+%p 
+  Desktop browsers implement various methods for informing the user about the errors in the form. In the case of
+  mobile browsers, it is up to the developers to decide how to present the errors. Due to the small screen size, it's not 
+  trivial to decide how to highlight the invalid fields and explain the errors. 
+%p
+  In our example we highlight in blue the fields that are required and in red the fields that are invalid. If the user
+  attempts to submit a form that contain an error we show a small error icon near the fields that are invalid.
+
+%p 
+  This is achieved by a combination of CSS and JS
+.code_block
+  .code_header
+    CSS
+  :coderay_raw
+    #!css
+    [required] {
+      border-color: #88a;
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 255, .5);
+    }
+    :invalid {
+      border-color: #e88;
+      -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+    }
+    input.invalid {
+      background: url(error.png) no-repeat 4px 6px;
+      padding-left: 30px;
+    }  
+
+.code_block
+  .code_header
+    JS
+  :coderay_raw
+    #!javascript
+    $(function() {
+      $("#postEntry").bind("click", function() {
+        $(".invalid").removeClass("invalid")
+        if ($(":invalid").length) {
+          $(":invalid").addClass("invalid");
+          return false;
+        }
+      })      
+    })
+    

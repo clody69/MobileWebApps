@@ -1,0 +1,101 @@
+=example_header_tag "Simple Blog", "htmlFormBlog"
+
+%p
+  This example implements a shared canvas where multiple clients can draw lines.
+  The communication of the mouse events happens throught the websockets. The server is built with the 
+  %a(href="https://github.com/igrigorik/em-websocket") EM-Websocket
+  gem and uses the channel functionality of the ruby event machine (see 
+  %a(href="http://eventmachine.rubyforge.org/EventMachine/Channel.html") EventMachine::Channel
+  ).
+
+
+.code_block
+  .code_header
+    Terminal
+  :coderay_raw
+    #!text
+    ruby server.rb
+  
+
+.code_block
+  .code_header
+    htmlFormBlog/server.rb
+  :coderay_raw
+    #!ruby
+    require 'sinatra'
+    require 'json'
+    
+    @@articles = []
+    
+    def timestamp
+      Time.now.strftime("%H:%M:%S")
+    end
+    
+    get '/' do 
+      File.read('index.html')
+    end
+    
+    get '/articles' do
+      content_type :json
+      {:articles => @@articles}.to_json
+    end
+    
+    post '/articles' do
+      article = params.merge( {'timestamp' => timestamp}).to_json
+      puts article
+      @@articles << article
+    end
+
+.code_block
+  .code_header
+    HTML code (in HAML format)
+  :coderay_raw
+    #!haml
+    %body
+      %h1 Post a blog entry
+      %form(action="/articles" method="post")
+        %ul
+          %li
+            %input(type = "text" name="title" id="title" placeholder="Post Title")
+          %li
+            %textarea(name="content" rows = "5" placeholder = "Content")
+          %li
+            %input(type = "email" placeholder = "Email")              
+          %li
+            %input(type = "submit" name = "Post")
+    
+.code_block
+  .code_header
+    CSS code
+  :coderay_raw
+    #!css
+    body {font-family: Arial; margin: 0px;}
+    h1 {
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #666), 
+        color-stop(1.0, #000));
+      -webkit-box-shadow: 0 0 4px #333;
+      color: #EEE; 
+      margin: 0 0 4px 0; padding: 4px; width: 100%;
+      text-align: center;
+    }
+    form ul { padding: 6px; margin: 0px; list-style-type: none; }
+    form ul li {
+      margin: 0 0 4px 0; -webkit-border-radius: 4px;
+      border: 1px solid #666; padding: 4px;
+    }
+    input, textarea {
+      -webkit-appearance: none;
+      border: 0; width: 95%;
+    }
+    form ul li.noborder { border: 0; padding: 0px;}
+    input[type=submit] {
+      border: 0;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #EEE),
+        color-stop(1.0, #AAA));
+      -webkit-border-radius: 6px;
+      -webkit-box-shadow: 0 0 4px #333;
+      width: 100%; padding: 6px;
+    } 
+    
+                
+                    

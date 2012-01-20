@@ -3,17 +3,348 @@
 %section.slide.section-title
   %h1 Lecture 2: HTML5 Forms
   .agenda
-  %p New HTML5 semantics
-  %p Building a form
-  %p Posting data to backbone model   
+    %p Our first web app
+    %p New HTML5 semantics
+    %p Towards MVC with Backbone.js
+
 %section.slide
-Start with the viewport
+  %header
+    Forms, Forms and Forms
+  %article
+    Goal of this example:
+    %ul
+      %li Create a mobile ready web page
+      %li Add a few entry forms
+      %li Style the forms with CSS
+      %li Implement the server
+      %li Rewrite the app with jQuery
 
-Introduce new elements
+%section.slide
+  %header
+    Viewport Meta Tag
+  %article
+    .row
+      .twoColumn
+        .autoimage.bordered
+          =image_tag('lesson2/firstapp-no-viewport.png')
+      .twoColumn
+        .autoimage.bordered
+          =image_tag('lesson2/firstapp-viewport.png')
+    .row
+      :coderay
+        #!html
+        <meta name="viewport" content="width=device-width; user-scalable=0;" />        
 
-Create a basic app for entering data
+%section.slide
+  %header
+    Viewport Meta Tag
+  %article
+    %ul
+      %li Introduced by Apple with the iPhone for mobile browsing
+      %li Specify exactly the dimension of the page to render
+      %li Not part of HTML5 but will be incorporated in the future
+      %li 
+        More info at 
+        %a(href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html") Safari Development
+        website.
+    :coderay
+      #!html
+      <meta name="viewport" content="width=device-width; user-scalable=0; initial-scale=1.0; maximum-sclae=1.0;" />        
 
-Create a demo like this with backbone.js
+%section.slide
+  %header 
+    Hiding the URL bar
+  %article
+    .row
+      .twoColumn
+        .autobox 
+          %p On some browser the URL bar is always visible
+          %p UI frameworks (like jQuery and Sencha) automatically hide the bar using the following tricks
+          .vmargin
+            Scroll to the top of the page after the browser has finished to load the page
+            :coderay
+              #!html
+              <body onload="window.scrollTo(0, 1);">  
+      
+          .vmargin
+            On iOS there are specific tags:
+            :coderay
+              #!html
+              <meta name="apple-mobile-web-app-capable" content="yes" />
+              <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+      .twoColumn
+        .autoimage.bordered
+          =image_tag('lesson2/firstapp-jquery.png')
 
-http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html
+%section.slide
+  %header
+    Basic Form for Posting to a Blog
+  %article.justified
+    .hmargin.smaller  
+      :coderay
+        #!haml
+        !!! 5
+        %html
+          %head
+            %meta(charset="utf-8")
+            %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+            %meta(name="viewport" content="width=device-width, initial-scale=1")
+            %title
+              Form Blog
+          %body
+            %h1 Post a blog entry
+            %form
+              %ul
+                %li
+                  %input(type = "text" name="title" id="title" placeholder="Post Title")
+                %li
+                  %textarea(name="content" rows = "5" placeholder = "Content")
+                %li
+                  %input(type = "email" placeholder = "Email")              
+                %li
+                  %input(type = "submit" name = "Post")
+    .hmargin.bordered
+      =image_tag('lesson2/blog-1.png')
+%section.slide
+  %header
+    Adding Some Style
+  %article.justified  
+    .hmargin.smaller
+      :coderay
+        #!css
+        body {font-family: Arial; margin: 0px;}
+        h1 {
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #666), 
+            color-stop(1.0, #000));
+          -webkit-box-shadow: 0 0 4px #333;
+          color: #EEE; 
+          margin: 0 0 4px 0; padding: 4px; width: 100%;
+          text-align: center;
+        }
+        form ul { padding: 6px; margin: 0px; list-style-type: none; }
+        form ul li {
+          margin: 0 0 4px 0; -webkit-border-radius: 4px;
+          border: 1px solid #666; padding: 4px;
+        }
+        input, textarea {
+          -webkit-appearance: none;
+          border: 0; width: 95%;
+        }
+        form ul li.noborder { border: 0; padding: 0px;}
+        input[type=submit] {
+          border: 0;
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #EEE),
+            color-stop(1.0, #AAA));
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 0 4px #333;
+          width: 100%; padding: 6px;
+        } 
+    .hmargin.bordered
+      =image_tag('lesson2/blog-2.png')
+      
+%section.slide
+  %header A Simple Server with Sinatra
+  %article
+    :coderay
+      #!ruby
+      require 'sinatra'
+      require 'json'
+      
+      $articles = []
+      
+      def timestamp
+        Time.now.strftime("%H:%M:%S")
+      end
+      
+      get '/' do 
+        File.read('index.html')
+      end
+
+      post '/articles' do
+        article = params.merge( {'timestamp' => timestamp}).to_json
+        $articles << article
+        puts article
+      end
+
+%section.slide
+  %header A New Design with jQuery mobile
+  %article
+    .row
+      .twoColumn
+        .hmargin.bordered
+          =image_tag('lesson2/blog-jquery.png')
+      .twoColumn
+        .hmargin.bordered
+          =image_tag('lesson2/blog-jquery-new.png')
+
+%section.slide
+  %header Sinatra Server with Templates
+  %article.small
+    :coderay
+      #!ruby
+      require 'sinatra'
+      require 'json'
+      require 'haml'
+      
+      $articles = [{:title => "Welcome", :content => "My first post", :email => "hello@blog.com", :timestamp => "1.1.2012 10:20:30"}]
+      
+      def timestamp
+        Time.now.strftime("%d.%m.%Y %H:%M:%S")
+      end
+      
+      get '/' do 
+        #Renders the haml template index.html.haml
+        #with the default layout layout.html.haml
+        haml :index, :layout => :layout
+      end
+      
+      get '/new' do 
+        haml :new
+      end
+      
+      post '/new' do
+        article = params.merge( {:timestamp => timestamp})
+        $articles << article
+        puts article
+        redirect to ("/")
+      end
+
+%section.slide
+  %header 
+    The Layout
+    %span.small
+      (
+      %span.terminal
+        'views/layout.haml'
+      )
+  %article
+    :coderay
+      #!haml
+      !!! 5
+      %html
+        %head
+          %meta(charset="utf-8")
+          %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+          %meta(name="viewport" content="width=device-width, initial-scale=1")
+          %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+          %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+          %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+          %title
+            Form Blog
+        %body
+          %div(data-role="page" id="home")
+            %div(data-role="header")
+              %h1 Our First Blog
+      
+            %div(data-role="content")
+              = yield
+              
+            %div(data-role="footer" data-position="fixed")
+              %div(data-role="navbar")
+                %ul
+                  %li
+                    %a(href="/" data-ajax="false") Posts
+                  %li
+                    %a(href="/new" data-ajax="false") New Entry      
+      
+%section.slide
+  %header The Views
+  %article
+    .autobox
+      List of posts (
+      %span.terminal
+        'views/index.haml'
+      )
+      :coderay
+        #!haml
+        %ul(data-role = "listview")
+          - $articles.each do |a|
+            %li
+              %p.ui-li-aside
+                =a[:timestamp]
+              %h3 
+                =a[:title]
+              %p
+                %strong
+                  =a[:email]
+              %p
+                =a[:content]
+    .autobox.vmargin
+      New Post Form (
+      %span.terminal
+        'views/new.haml'
+      )
+      :coderay
+        #!haml
+        %form(action="/new" method="post")
+          %input(type = "text" name="title" id="title" placeholder="Post Title")
+          %textarea(name="content" rows = "5" placeholder = "Content")
+          %input(type = "email" name="email" placeholder = "Email")              
+          %button#postEntry(type = "submit") Posts
+
+%section.slide 
+  %header Validation
+  %article
+    .row
+      .twoColumn
+        .autobox
+          CSS
+          :coderay
+            #!css
+            [required] {
+              border-color: #88a;
+              -webkit-box-shadow: 0 0 3px rgba(0, 0, 255, .5);
+            }
+            :invalid {
+              border-color: #e88;
+              -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+            }
+            input.invalid {
+              background: url(error.png) no-repeat 4px 6px;
+              padding-left: 30px;
+            }
+      .twoColumn
+        .autobox
+          JS
+          :coderay
+            #!javascript
+            $(function() {
+              $("#postEntry").bind("click", function() {
+                $(".invalid").removeClass("invalid")
+                if ($(":invalid").length) {
+                  $(":invalid").addClass("invalid");
+                  return false;
+                }
+              })      
+            })
+    .row
+      .vmargin
+        Form
+        :coderay
+          #!haml
+          %form(action="/new" method="post")
+          %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+          %textarea(name="content" rows = "5" placeholder = "Content")
+          %input(type = "email" name="email" placeholder = "Email")              
+          %button#postEntry(type = "submit") Post
+  
+%section.slide
+  %hedaer
+    List of new HTML elements
+  http://www.w3schools.com/html5/html5_form_input_types.asp
+
+%section.slide
+  %header Demo contenteditable on Blog
+  
+%section.slide
+  %article            
+    Start with the viewport
+    
+    Introduce new elements
+    
+    Create a basic app for entering data
+    
+    Create a demo like this with backbone.js
+    
+    http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html
 

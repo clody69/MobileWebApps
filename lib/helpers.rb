@@ -10,12 +10,15 @@ module PresentationHelper
     h += title
     h += '</img>'
   end
+  def example_url_tag(name)
+    "<a href='#{name}.html'>#{name}</a>"
+  end
   
   def render_examples_list
     h = '<ul>'
     Dir["site/examples/*.html.haml"].each { |file| 
       name = File.basename(file).gsub(/.html.haml/,'')
-      h += "<li><a href='#{name}.html'>#{name}</a></li>"
+      h += "<li>#{example_url_tag(name)}</li>"
     }
     h += '</ul>'
   end

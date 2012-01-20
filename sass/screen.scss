@@ -88,6 +88,7 @@
 
 @mixin box-justify-horizontal() {
   /* Firefox */
+  width: 100%;
   display:-moz-box;
   -moz-box-pack:justify;
   -moz-box-align:center;
@@ -405,6 +406,7 @@ h1, h2 {
   }
   .smallest pre{font-size: 11px;}
   .smaller pre {font-size: 14px;}
+  .small pre {font-size: 16px;}
   .larger pre { font-size: 20px;}
   .largest pre { font-size: 25px;}
   .big pre {font-size: 30px;}
