@@ -282,7 +282,7 @@ table.CodeRay td {
 
 /* line 77, ../../sass/coderay_dark.scss */
 .CodeRay .key {
-  color: #990073;
+  color: #FF55D3;
 }
 
 /* line 78, ../../sass/coderay_dark.scss */
@@ -428,7 +428,7 @@ table.CodeRay td {
 
 /* line 106, ../../sass/coderay_dark.scss */
 .CodeRay .type {
-  color: #339;
+  color: #AAF;
   font-weight: bold;
 }
 

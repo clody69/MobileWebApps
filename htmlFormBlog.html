@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Simple Blog</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmlFormBlog'>Browse Source Code</a></div>
+<p>
+This example implements a shared canvas where multiple clients can draw lines.
+The communication of the mouse events happens throught the websockets. The server is built with the
+<a href='https://github.com/igrigorik/em-websocket'>EM-Websocket</a>
+gem and uses the channel functionality of the ruby event machine (see
+<a href='http://eventmachine.rubyforge.org/EventMachine/Channel.html'>EventMachine::Channel</a>
+).
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+htmlFormBlog/server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="class-variable">@@articles</span> = []&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  {<span class="symbol">:articles</span> =&gt; <span class="class-variable">@@articles</span>}.to_json&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  article = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;  puts article&#x000A;  <span class="class-variable">@@articles</span> &lt;&lt; article&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+HTML code (in HAML format)
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>&#x000A;  <span class="tag">%h1</span> Post a blog entry&#x000A;  <span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/articles</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%ul</span>&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Post</span><span class="delimiter">&quot;</span></span>)&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+CSS code
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">body</span> {<span class="key">font-family</span>: <span class="value">Arial</span>; <span class="key">margin</span>: <span class="float">0px</span>;}&#x000A;<span class="type">h1</span> {&#x000A; <span class="key">background</span>: <span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">g</span><span class="error">r</span><span class="error">a</span><span class="error">d</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span>(<span class="value">linear</span>, <span class="value">left</span> <span class="value">top</span>, <span class="value">left</span> <span class="value">bottom</span>, <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">0</span><span class="float">.0</span>, <span class="color">#666</span>), &#x000A;    <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">1</span><span class="float">.0</span>, <span class="color">#000</span>));&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="color">#333</span>;&#x000A;  <span class="key">color</span>: <span class="color">#EEE</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="float">0</span>; <span class="key">padding</span>: <span class="float">4px</span>; <span class="key">width</span>: <span class="float">100%</span>;&#x000A;  <span class="key">text-align</span>: <span class="value">center</span>;&#x000A;}&#x000A;<span class="type">form</span> <span class="type">ul</span> { <span class="key">padding</span>: <span class="float">6px</span>; <span class="key">margin</span>: <span class="float">0px</span>; <span class="key">list-style-type</span>: <span class="value">none</span>; }&#x000A;<span class="type">form</span> <span class="type">ul</span> <span class="type">li</span> {&#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="float">0</span>; <span class="key">-webkit-border-radius</span>: <span class="float">4px</span>;&#x000A;  <span class="key">border</span>: <span class="float">1px</span> <span class="value">solid</span> <span class="color">#666</span>; <span class="key">padding</span>: <span class="float">4px</span>;&#x000A;}&#x000A;<span class="type">input</span>, <span class="type">textarea</span> {&#x000A;  <span class="key">-webkit-appearance</span>: <span class="value">none</span>;&#x000A;  <span class="key">border</span>: <span class="float">0</span>; <span class="key">width</span>: <span class="float">95%</span>;&#x000A;}&#x000A;<span class="type">form</span> <span class="type">ul</span> <span class="type">li</span><span class="class">.noborder</span> { <span class="key">border</span>: <span class="float">0</span>; <span class="key">padding</span>: <span class="float">0px</span>;}&#x000A;<span class="type">input</span>[<span class="attribute-name">type=submit</span>] {&#x000A;  <span class="key">border</span>: <span class="float">0</span>;&#x000A;  <span class="key">background</span>: <span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">g</span><span class="error">r</span><span class="error">a</span><span class="error">d</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span>(<span class="value">linear</span>, <span class="value">left</span> <span class="value">top</span>, <span class="value">left</span> <span class="value">bottom</span>, <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">0</span><span class="float">.0</span>, <span class="color">#EEE</span>),&#x000A;    <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">1</span><span class="float">.0</span>, <span class="color">#AAA</span>));&#x000A;  <span class="key">-webkit-border-radius</span>: <span class="float">6px</span>;&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="color">#333</span>;&#x000A;  <span class="key">width</span>: <span class="float">100%</span>; <span class="key">padding</span>: <span class="float">6px</span>;&#x000A;}</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>

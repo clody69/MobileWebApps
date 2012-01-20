@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Simple Blog with jQuery</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmljQueryBlog'>Browse Source Code</a></div>
+<p>
+This example implements a simple blog using jQuery Mobile. The server is implemented with Sinatra
+When a new entry is posted to the url '/new', the server appends it to the list of articles.
+There are two views that are served by the server:
+<span class='terminal'>
+index
+</span>
+and
+<span class='terminal'>
+new
+</span>
+Both the views share the same layout that renders the jQuery page.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+htmlFormBlog/server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">haml</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = [{<span class="symbol">:title</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome</span><span class="delimiter">&quot;</span></span>, &#x000A;               <span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">My first post</span><span class="delimiter">&quot;</span></span>,&#x000A;               <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">hello@blog.com</span><span class="delimiter">&quot;</span></span>,&#x000A;               <span class="symbol">:timestamp</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">1.1.2012 10:20:30</span><span class="delimiter">&quot;</span></span>}]&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d.%m.%Y %H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Renders the haml template index.html.haml</span>&#x000A;  <span class="comment">#with the default layout layout.html.haml</span>&#x000A;  haml <span class="symbol">:index</span>, <span class="symbol">:layout</span> =&gt; <span class="symbol">:layout</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  haml <span class="symbol">:new</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  article = params.merge( {<span class="symbol">:timestamp</span> =&gt; timestamp})&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;  puts article&#x000A;  redirect to (<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The layout contains the html headers and the jQuery page template. The yield functions renders the content of the view
+that is invoked by the controller.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+htmljQueryBlog/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;  <span class="tag">%body</span>&#x000A;    <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%h1</span> Our First Blog&#x000A;&#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;        = <span class="keyword">yield</span>&#x000A;        &#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;          <span class="tag">%ul</span>&#x000A;            <span class="tag">%li</span>&#x000A;              <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;            <span class="tag">%li</span>&#x000A;              <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) New Entry    &#x000A;</pre></div>
+</div>
+</div>
+<p>
+The main view is a jQuery listview where each item shows the content of the blog entry. The global variable
+<span class='terminal'>
+$articles
+</span>
+is also accessible in the haml code.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+htmljQueryBlog/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  - <span class="global-variable">$articles</span>.each <span class="keyword">do</span> |a|&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        =a[<span class="symbol">:timestamp</span>]&#x000A;      <span class="tag">%h3</span> &#x000A;        =a[<span class="symbol">:title</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          =a[<span class="symbol">:email</span>]&#x000A;      <span class="tag">%p</span> &#x000A;        =a[<span class="symbol">:content</span>]&#x000A;</pre></div>
+</div>
+</div>
+<p>
+This view contains the form for creating a new blog entry.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+htmljQueryBlog/new.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Post</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
