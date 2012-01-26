@@ -430,6 +430,10 @@ h1, h2 {
     @include box-center-horizontal();
     text-align: center;
   }
+  .centered-inline{
+    @include box-inline-center-horizontal();
+  }
+
   .justified {
     @include box-justify-horizontal();
   }

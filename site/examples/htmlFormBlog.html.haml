@@ -1,14 +1,14 @@
 =example_header_tag "Simple Blog", "htmlFormBlog"
 
 %p
-  This example implements a shared canvas where multiple clients can draw lines.
-  The communication of the mouse events happens throught the websockets. The server is built with the 
-  %a(href="https://github.com/igrigorik/em-websocket") EM-Websocket
-  gem and uses the channel functionality of the ruby event machine (see 
-  %a(href="http://eventmachine.rubyforge.org/EventMachine/Channel.html") EventMachine::Channel
-  ).
+  This example implements a simple form for posting a new entry to a blog. The server is implemented with Sinatra.
 
-
+%p
+  To run the example you can start the server in a terminal and visit the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser. You can retrieve the entries in JSON format by visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567/articles
+  
 .code_block
   .code_header
     Terminal

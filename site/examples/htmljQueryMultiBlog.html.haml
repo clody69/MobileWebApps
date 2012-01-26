@@ -1,0 +1,176 @@
+=example_header_tag "Simple Blog with jQuery and multiple pages", "htmljQueryMultiBlog"
+
+%p
+  We create a jQuery multiple page template for the example 
+  =example_url_tag("htmljQueryValEditBlog")
+  In the original examples the two pages (index.html and new.html) are loaded separatelly from the server. Now we merge them
+  in one single HTML document that contains two jQuery pages.
+
+%p 
+  The first step is to change the layout of the page. We only keep the header of the HTML document and the body simply yields 
+  what is requested in the controller. In this example we only use the controller 
+  %span.terminal
+    index
+  that always renders the view
+  %span.terminal
+    index.haml
+  
+%p Here is the layout for the views:
+  
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, initial-scale=1")
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %title
+          Form Blog
+        :css
+          [required] {
+            border-color: #88a;
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 255, .5);
+          }
+          :invalid {
+            border-color: #e88;
+            -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+          }
+          input.invalid {
+            background: url(error.png) no-repeat 4px 6px;
+            padding-left: 30px;
+          }
+          
+        :javascript
+          $(function() {
+            $("#postEntry").bind("click", function() {
+              $(".invalid").removeClass("invalid")
+              if ($(":invalid").length) {
+                $(":invalid").addClass("invalid");
+                return false;
+              }
+            });
+            $("[contenteditable]").focus(function() {
+              var $this = $(this);
+              $this.data('before', $this.html());
+              return $this;          
+            });
+            $("[contenteditable]").live('blur', function() {
+                var $this = $(this);
+                if ($this.data('before') !== $this.html()) {
+                    $this.data('before', $this.html());
+                    $this.trigger('change');
+                    //alert($this.attr('data-id'));
+                    var msg = {};
+                    msg['id'] = $this.attr('data-id');
+                    msg[$this.attr('data-name')] = $this.html();
+                    $.post('/update', msg);
+                }
+                return $this;
+            });        
+                          
+          })
+      %body
+        = yield
+
+%p 
+  The multiple page is defined below. It contains two pages with id 
+  %span.terminal
+    home
+  and
+  %span.terminal
+    new.
+
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="page" id="home")
+      = haml :header
+      
+      %div(data-role="content")
+        = haml :posts
+      
+      = haml :footer
+    
+    %div(data-role="page" id="new")
+      = haml :header
+      
+      %div(data-role="content")
+        = haml :new
+      
+      =haml :footer            
+
+%p
+  We use the following partials for rendering the header, footer and the content of each page.
+
+.code_block
+  .code_header
+    views/header.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="header")
+      %h1 Our First Blog
+
+
+.code_block
+  .code_header
+    views/footer.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="footer" data-position="fixed")
+      %div(data-role="navbar")
+        %ul
+          %li
+            %a(href="/") Posts
+          %li
+            %a(href="#new" data-transition="flip") New Entry
+        
+.code_block
+  .code_header
+    views/posts.haml  
+  :coderay_raw
+    #!haml
+    %ul(data-role = "listview")
+      - $articles.each_with_index do |a, i|
+        %li
+          %p.ui-li-aside
+            =a[:timestamp]
+          %h3(contenteditable="true" data-name="title" data-id='#{i}') 
+            =a[:title]
+          %p
+            %strong
+              =a[:email]
+          %p(contenteditable="true" data-name="content" data-id='#{i}')
+            =a[:content]
+
+.code_block
+  .code_header
+    views/new.haml  
+  :coderay_raw
+    #!haml
+    %form(action="/new" method="post")
+      %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+      %textarea(name="content" rows = "5" placeholder = "Content")
+      %input(type = "email" name="email" placeholder = "Email")              
+      %button#postEntry(type = "submit") Post
+
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

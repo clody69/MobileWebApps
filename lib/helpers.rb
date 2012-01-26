@@ -1,10 +1,18 @@
 
 module PresentationHelper
   
+  def lecture_title_tag(title, lecture)
+    "<h2>#{title} (<a href='#{lecture}.html'>Slides</a>)</h2>"
+  end
   def title_slide_tag(subtitle)
     Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
   end
   
+  def html5_semantics_tag(title="New Semantics")
+    h= '<img src = "imgs/html5/HTML5_Semantics_64.png">'
+    h += title
+    h += '</img>'
+  end
   def html5_websockets_tag(title="WebSockets")
     h= '<img src = "imgs/html5/HTML5_Connectivity_64.png">'
     h += title

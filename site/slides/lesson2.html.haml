@@ -4,8 +4,8 @@
   %h1 Lecture 2: HTML5 Forms
   .agenda
     %p Our first web app
-    %p New HTML5 semantics
-    %p Towards MVC with Backbone.js
+    %p New HTML5 Form semantics
+    %p Offline Usage
 
 %section.slide
   %header
@@ -143,7 +143,11 @@
       =image_tag('lesson2/blog-2.png')
       
 %section.slide
-  %header A Simple Server with Sinatra
+  %header 
+    A Simple Server with Sinatra
+    %span.smaller
+      =example_url_tag("htmlFormBlog")
+
   %article
     :coderay
       #!ruby
@@ -167,7 +171,10 @@
       end
 
 %section.slide
-  %header A New Design with jQuery mobile
+  %header 
+    A New Design with jQuery mobile
+    %span.smaller
+      =example_url_tag("htmljQueryBlog")
   %article
     .row
       .twoColumn
@@ -179,7 +186,7 @@
 
 %section.slide
   %header Sinatra Server with Templates
-  %article.small
+  %article.smaller
     :coderay
       #!ruby
       require 'sinatra'
@@ -203,8 +210,12 @@
       end
       
       post '/new' do
-        article = params.merge( {:timestamp => timestamp})
+        #Symbolize the params keys
+        article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }
+        
+        article[:timestamp] = timestamp
         $articles << article
+      
         puts article
         redirect to ("/")
       end
@@ -217,7 +228,7 @@
       %span.terminal
         'views/layout.haml'
       )
-  %article
+  %article.small
     :coderay
       #!haml
       !!! 5
@@ -249,6 +260,7 @@
       
 %section.slide
   %header The Views
+
   %article
     .autobox
       List of posts (
@@ -283,7 +295,10 @@
           %button#postEntry(type = "submit") Posts
 
 %section.slide 
-  %header Validation
+  %header 
+    Validation
+    %span.smaller
+      =example_url_tag("htmljQueryValBlog")
   %article
     .row
       .twoColumn
@@ -327,15 +342,252 @@
           %textarea(name="content" rows = "5" placeholder = "Content")
           %input(type = "email" name="email" placeholder = "Email")              
           %button#postEntry(type = "submit") Post
-  
+
+%section.slide
+  %header 
+    =html5_semantics_tag("New Form Input Types")
+  %article
+    .row
+      .twoColumn
+        .bordered
+          =image_tag('lesson2/textinputs-jquery.png')
+      .twoColumn
+        .autobox
+          %p
+            Overview at 
+            %a(href="http://slides.html5rocks.com/#new-form-types") HTML5 Rocks
+          %p 
+            More details at 
+            %a(href="http://www.w3schools.com/html5/html5_form_input_types.asp") W3Schools
+          %p
+            Mobile version from 
+            %a(href="http://jquerymobile.com/demos/1.0/docs/forms/forms-all.html") jQuery Mobile
+    
 %section.slide
   %hedaer
     List of new HTML elements
   http://www.w3schools.com/html5/html5_form_input_types.asp
+    
+
 
 %section.slide
-  %header Demo contenteditable on Blog
+  %header Contenteditable Attribute
+  %article
+    %p The contenteditable attribute specifies whether a user can edit the content of an element.
+    
+    %p(contenteditable='true')
+      This paragraph is editable. 
+    .vmargin
+      :coderay
+        #!html
+        <p contenteditable='true'>This paragraph is editable</p>
+    %p 
+      Supported in iOS 5 and Android Browser 3.0 (
+      %a(href="http://caniuse.com/#search=contenteditable") CanIuse
+      )   
+
+%section.slide
+  %header 
+    Editable Blog
+    %span.smaller
+      =example_url_tag("htmljQueryValEditBlog")
+  %article
+    .autobox
+      List of posts (
+      %span.terminal
+        'views/index.haml'
+      )
+      :coderay
+        #!haml
+        %ul(data-role = "listview")
+          - $articles.each_with_index do |a, i|
+            %li
+              %p.ui-li-aside
+                =a[:timestamp]
+              %h3(contenteditable="true" data-name="title" data-id='\#{i}') 
+                =a[:title]
+              %p
+                %strong
+                  =a[:email]
+              %p(contenteditable="true" data-name="content" data-id='\#{i}')
+                =a[:content]
+
+%section.slide
+  %header 
+    Editable Blog
+    %span.smaller
+      =example_url_tag("htmljQueryValEditBlog")
+      
+  %article
+    .row.small
+      .twoColumn
+        .autobox
+          javascript code
+          :coderay
+            #!javascript
+            $("[contenteditable]").focus(function() {
+              var $this = $(this);
+              $this.data('before', $this.html());
+              return $this;          
+            });
+            $("[contenteditable]").live('blur', function() {
+                var $this = $(this);
+                if ($this.data('before') !== $this.html()) {
+                    $this.data('before', $this.html());
+                    $this.trigger('change');
+                    //alert($this.attr('data-id'));
+                    var msg = {};
+                    msg['id'] = $this.attr('data-id');
+                    msg[$this.attr('data-name')] = $this.html();
+                    $.post('/update', msg);
+                }
+                return $this;
+            });        
+      .twoColumn 
+        .autobox  
+          server.rb
+          :coderay
+            #!ruby
+            post '/update' do
+              #Symbolize the params keys
+              article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }
+            
+              #Update the timestamp
+              article[:timestamp] = timestamp
+              
+              #Replace the entry in the list of articles
+              $articles[article[:id].to_i].merge!(article)
+            
+              puts $articles
+            end
+
+%section.slide
+  %header Create a multipage app with jQuery
+  %article.singlespace
+    %ul
+      %li One single HTML document can contain multiple pages
+      %li Each page must have a unique ID
+      %li The framework handles the page switching and updating the url hash
+      %li
+        Link behaviour:
+        %ul
+          %li If it's an internal page, there is a transition to that page
+          %li 
+            If it's an external page, the default behaviour is to trigger an ajax request to load the page. 
+            Only the content of the 
+            %span.terminal
+              body
+            (of of the 
+            %span.terminal
+              body-role="page"
+            if present) is injected into the DOM
+          %li 
+            If the attributes 
+            %span.terminal
+              rel="external"
+            or 
+            %span.terminal
+              data-ajax = "false"
+            are present, the link triggers a full page reload.
+            links with external attribute will cause a full page refresh
+
+%section.slide
+  %header 
+    A multipage Blog 
+    %span.smaller
+      =example_url_tag("htmljQueryMultiBlog")    
+  %article.smaller
+    .row
+      .twoColumn
+        .autobox.hmargin
+          layout.haml
+          :coderay
+            #!haml
+            %body
+              = yield
+        
+          index.haml
+          :coderay
+            #!haml
+            %div(data-role="page" id="home")
+              = haml :header
+                           
+              %div(data-role="content")
+                = haml :posts
+              
+              = haml :footer
+                  
+            %div(data-role="page" id="new")
+              = haml :header
+              
+              %div(data-role="content")
+                = haml :new
+              
+              =haml :footer      
+          new.haml
+          :coderay
+            #!haml
+            %form(action="/new" method="post")
+              %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+              %textarea(name="content" rows = "5" placeholder = "Content")
+              %input(type = "email" name="email" placeholder = "Email")              
+              %button#postEntry(type = "submit") Post
+
+      .twoColumn
+        .autobox
+          header.haml
+          :coderay
+            #!haml
+            %div(data-role="header")
+              %h1 Our First Blog
+
+          footer.haml
+          :coderay
+            #!haml
+            %div(data-role="footer" data-position="fixed")
+              %div(data-role="navbar")
+                %ul
+                  %li
+                    %a(href="/") Posts
+                  %li
+                    %a(href="#new" data-transition="flip") New Entry
+
+          posts.haml
+          :coderay
+            #!haml
+            %ul(data-role = "listview")
+              - $articles.each_with_index do |a, i|
+                %li
+                  %p.ui-li-aside
+                    =a[:timestamp]
+                  %h3(contenteditable="true" data-name="title" data-id='\#{i}') 
+                    =a[:title]
+                  %p
+                    %strong
+                      =a[:email]
+                  %p(contenteditable="true" data-name="content" data-id='\#{i}')
+                    =a[:content]
+
+          
+          
+%section.slide
+  %header Offline Usage
+  %article
+    For a web application to work offline, you need to consider three things:
+    %ul
+      %li Store user inputs through localStorage
+      %li Define which files should be cached via a manifest file
+      %li Manage connection changes with online and offline events
+
+  http://ednortonengineeringsociety.blogspot.com/2010/10/detecting-offline-status-in-html-5.html
+  http://hacks.mozilla.org/2010/01/offline-web-applications/
   
+%section.slide
+  %header
+    File API
+  %article
+    http://davidbcalhoun.com/2011/android-3-0-honeycomb-is-first-to-implement-the-device-api
+    
 %section.slide
   %article            
     Start with the viewport

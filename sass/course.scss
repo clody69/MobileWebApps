@@ -18,6 +18,11 @@
 	box-shadow:$x $y $blur $color;
 }
 
+    .CodeRay {
+      border: none;
+      background: none;
+    }
+
 
 .deck-container {
 	font-family: Lato, Ubuntu, Arial;
@@ -63,11 +68,13 @@
 			color:#333;
 		}
 
-    .CodeRay .code pre {
-      background-color: #222;
-      border: none;
-    }
 
+    .CodeRay .code pre {
+      //background-color: #222;
+      //border: none;
+      //border: 2px solid rgba(255, 204, 0, 0.3);
+      //@include border-radius(10px);
+    }
 
 		pre {
 		  background: #FFFFEE;
@@ -78,7 +85,7 @@
 			z-index:auto;
 
 			.borderradius & {
-				@include border-radius(5px);
+				@include border-radius(10px);
 			}
 
 			/* http://nicolasgallagher.com/css-drop-shadows-without-images/ */
