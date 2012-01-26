@@ -455,6 +455,25 @@ h1, h2 {
   text-align: center;
 }
 /* line 433, ../../sass/screen.scss */
+.deck-container .centered-inline {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  box-orient: horizontal;
+}
+/* line 437, ../../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   width: 100%;
@@ -474,44 +493,44 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 437, ../../sass/screen.scss */
+/* line 441, ../../sass/screen.scss */
 .deck-container .item {
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 10px;
 }
-/* line 441, ../../sass/screen.scss */
+/* line 445, ../../sass/screen.scss */
 .deck-container .item img {
   display: inline;
   vertical-align: middle;
   margin: 0px;
 }
-/* line 446, ../../sass/screen.scss */
+/* line 450, ../../sass/screen.scss */
 .deck-container .item span {
   display: inline-block;
   text-align: right;
   vertical-align: middle;
   padding: 0 50px;
 }
-/* line 454, ../../sass/screen.scss */
+/* line 458, ../../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 460, ../../sass/screen.scss */
+/* line 464, ../../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 465, ../../sass/screen.scss */
+/* line 469, ../../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 472, ../../sass/screen.scss */
+/* line 476, ../../sass/screen.scss */
 .deck-container .twoColumn {
   width: 550px;
   margin: 0 0px;
@@ -534,11 +553,11 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 478, ../../sass/screen.scss */
+/* line 482, ../../sass/screen.scss */
 .deck-container .twoColumn img {
   max-width: 500px;
 }
-/* line 484, ../../sass/screen.scss */
+/* line 488, ../../sass/screen.scss */
 .deck-container .threeColumn {
   width: 320px;
   margin: 0 0px;
@@ -561,11 +580,11 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 490, ../../sass/screen.scss */
+/* line 494, ../../sass/screen.scss */
 .deck-container .threeColumn img {
   max-width: 320px;
 }
-/* line 495, ../../sass/screen.scss */
+/* line 499, ../../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 640px;
@@ -589,16 +608,16 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 501, ../../sass/screen.scss */
+/* line 505, ../../sass/screen.scss */
 .deck-container .twoThirds img {
   max-width: 640px;
 }
-/* line 508, ../../sass/screen.scss */
+/* line 512, ../../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 514, ../../sass/screen.scss */
+/* line 518, ../../sass/screen.scss */
 .deck-container .caption, .deck-container .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -606,37 +625,37 @@ h1, h2 {
   padding-top: -5px;
   color: black;
 }
-/* line 521, ../../sass/screen.scss */
+/* line 525, ../../sass/screen.scss */
 .deck-container .image-wrap {
   margin: 0px;
 }
-/* line 523, ../../sass/screen.scss */
+/* line 527, ../../sass/screen.scss */
 .deck-container .image-wrap img {
   margin: 0px;
 }
-/* line 527, ../../sass/screen.scss */
+/* line 531, ../../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
   max-height: 500px;
   max-width: 900px;
 }
-/* line 535, ../../sass/screen.scss */
+/* line 539, ../../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 538, ../../sass/screen.scss */
+/* line 542, ../../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 541, ../../sass/screen.scss */
+/* line 545, ../../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 548, ../../sass/screen.scss */
+/* line 552, ../../sass/screen.scss */
 .deck-container .emphasizebox {
   background: rgba(0, 204, 255, 0.05);
   padding: 15px;
@@ -645,17 +664,17 @@ h1, h2 {
   -webkit-border-radius: 30px;
   border: 2px solid rgba(0, 204, 255, 0.1);
 }
-/* line 557, ../../sass/screen.scss */
+/* line 561, ../../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border: 2px solid #3f3f3f;
 }
-/* line 561, ../../sass/screen.scss */
+/* line 565, ../../sass/screen.scss */
 .deck-container .vmargin {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 565, ../../sass/screen.scss */
+/* line 569, ../../sass/screen.scss */
 .deck-container .hmargin {
   margin-left: 10px;
   margin-right: 10px;

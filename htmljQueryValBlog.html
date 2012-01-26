@@ -110,7 +110,20 @@ CSS
 JS
 </div>
 <div class="CodeRay">
-  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;  })      &#x000A;})</pre></div>
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;  })      &#x000A;})&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
 </div>
 </div>
 

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Simple Blog with jQuery, validation and editing</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmljQueryValEditBlog'>Browse Source Code</a></div>
+<p>
+This example is an extenstion of the
+<a href='htmljQueryValBlog.html'>htmljQueryValBlog</a>
+where we add the in place editing capabilities to the title and content.
+</p>
+<p>
+HTML providers the
+<span class='terminal'>
+contenteditable
+</span>
+attribute that turns any tag into an editable element by the user. Now supported on iOS 5 and Android Browser 3.0, it allows in place editing on mobile pages.
+</p>
+<p>
+In the example, we add the
+<span class='terminal'>
+contenteditable
+</span>
+attribute to the title and content fields of the blog main page
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  - <span class="global-variable">$articles</span>.each_with_index <span class="keyword">do</span> |a, i|&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        =a[<span class="symbol">:timestamp</span>]&#x000A;      <span class="tag">%h3</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>) &#x000A;        =a[<span class="symbol">:title</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          =a[<span class="symbol">:email</span>]&#x000A;      <span class="tag">%p</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>)&#x000A;        =a[<span class="symbol">:content</span>]&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the client we add the functionality for detecting when the content is changed by the user and we post the
+updates to the server.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+JS
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[contenteditable]</span><span class="delimiter">&quot;</span></span>).focus(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> <span class="predefined">$this</span> = <span class="predefined">$</span>(<span class="local-variable">this</span>);&#x000A;  <span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>, <span class="predefined">$this</span>.html());&#x000A;  <span class="keyword">return</span> <span class="predefined">$this</span>;          &#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[contenteditable]</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">blur</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="keyword">var</span> <span class="predefined">$this</span> = <span class="predefined">$</span>(<span class="local-variable">this</span>);&#x000A;    <span class="keyword">if</span> (<span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>) !== <span class="predefined">$this</span>.html()) {&#x000A;        <span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>, <span class="predefined">$this</span>.html());&#x000A;        <span class="predefined">$this</span>.trigger(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>);&#x000A;        <span class="comment">//alert($this.attr('data-id'));</span>&#x000A;        <span class="keyword">var</span> msg = {};&#x000A;        msg[<span class="string"><span class="delimiter">'</span><span class="content">id</span><span class="delimiter">'</span></span>] = <span class="predefined">$this</span>.attr(<span class="string"><span class="delimiter">'</span><span class="content">data-id</span><span class="delimiter">'</span></span>);&#x000A;        msg[<span class="predefined">$this</span>.attr(<span class="string"><span class="delimiter">'</span><span class="content">data-name</span><span class="delimiter">'</span></span>)] = <span class="predefined">$this</span>.html();&#x000A;        <span class="predefined">$</span>.post(<span class="string"><span class="delimiter">'</span><span class="content">/update</span><span class="delimiter">'</span></span>, msg);&#x000A;    }&#x000A;    <span class="keyword">return</span> <span class="predefined">$this</span>;&#x000A;});       &#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side we add the method for updating the entry
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/update</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Symbolize the params keys</span>&#x000A;  article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }&#x000A;&#x000A;  <span class="comment">#Update the timestamp</span>&#x000A;  article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;  &#x000A;  <span class="comment">#Replace the entry in the list of articles</span>&#x000A;  <span class="global-variable">$articles</span>[article[<span class="symbol">:id</span>].to_i].merge!(article)&#x000A;&#x000A;  puts <span class="global-variable">$articles</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
