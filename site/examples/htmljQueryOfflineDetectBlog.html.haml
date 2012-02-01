@@ -1,0 +1,112 @@
+=example_header_tag "Detect Offline/Online Status", "htmljQueryOfflineDetectBlog"
+
+%p
+  We introduce a method for detecting when the web app is online or offline to the example
+  =example_url_tag("htmljQueryOfflineManifestoBlog")
+  \. Our strategy is to use the manifest file for detecting if our server is reachable or not.
+  If our server is not reachable then our web app is offline.
+%p
+  We add the following rule in the FALLBACK section in the manifest file. 
+
+.code_block
+  .code_header
+    manifest.appcache
+  :coderay_raw
+    #!plain
+    ...
+    FALLBACK:
+    /ping /ping-offline.json
+
+%p 
+  In the application we try to laod the resource
+  %span.terminal<
+    \/ping
+  \. If it succeds, the following JSON content is returned from the Sinatra server:  
+  %span.terminal<
+    \"Online"
+
+%p
+  Otheriwse, if the browser if offline, the request falls back to the cached version
+  %psan.terminal<
+    \/ping-offline.json
+  that contains the JSON string:
+  %span.terminal<
+    \"Offline"
+   
+%p
+  Since we are automatically generating the manifest file, we add the fallback rule to the Manifesto array: 
+  
+  
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    ...
+    get '/manifest.appcache' do
+      headers 'Content-Type' => 'text/cache-manifest' # Must be served with this MIME type
+      cache_control :no_cache #Disable caching of manifest file, only for demo purposes
+      Manifesto.cache << "FALLBACK:\n /ping /ping-offline.json\n"
+    end
+    get '/ping' do
+      content_type :json
+      "Online".to_json
+    end
+    ...
+
+%p 
+  We place the fallback file in the public directory
+
+.code_block
+  .code_header
+    public/ping-offline.json
+  :coderay_raw
+    #!javascript
+    "Offline"
+
+%p
+  In the application, we add the JS logic for pinging our server every 10s and we show the status in the header.
+
+.code_block
+  .code_header
+    views/header.haml
+  :coderay_raw
+    #!haml
+    %div(data-role="header")
+      %h1.status 
+      %a(href="#options" data-icon="gear" class="ui-btn-right" data-transition="slidedown") Options
+  
+.code_block
+  .code_header
+    views/layout.haml
+  :coderay_raw
+    #!javascript
+    
+    $(function() {
+      function testOnline() {
+        $.getJSON('ping', function(data) {
+          $('.status').html(data);  
+        });
+      }
+
+    //Test at first page load
+    testOnline();
+
+    //Test a timer for infinite testing
+    window.setInterval(testOnline, 10000);
+
+    ...
+
+
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

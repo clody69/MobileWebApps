@@ -1,0 +1,68 @@
+=example_header_tag "Adding a manifest file for offline usage.", "htmljQueryOfflineBlog"
+
+%p
+  We turn the example
+  =example_url_tag("htmljQueryStorageBlog") 
+  into an offline application. We create a manifest file that lists all the assets the browser must cache locally to 
+  allow offline usage of the web app. 
+
+%p
+  We start by downloading locally all the assets that are required by the application, in this case the jQuery and jQuery Mobile files. 
+  We place the files in the public directory.
+  
+%p We update the layout html file to point to the local assets:
+
+.code_block
+  .code_header
+    views/layout.haml
+  :coderay_raw
+    #!haml
+    ...
+    %link(rel="stylesheet" href="jquery.mobile-1.0.1.min.css")
+    %script(type="text/javascript" src="jquery-1.7.1.min.js")
+    %script(type="text/javascript" src="jquery.mobile-1.0.1.min.js")
+    ...
+%p
+  Then, we create the manifest file and we place it the same path of the server.rb file
+  
+.code_block
+  .code_header
+    manifest.appcache  
+  :coderay_raw
+    #!plain
+    CACHE MANIFEST
+    jquery.mobile-1.0.1.min.css
+    jquery-1.7.1.min.js
+    jquery.mobile-1.0.1.min.js
+    error.png
+    /images/ajax-loader.png
+    /images/icons-18-black.png
+    /images/icons-18-white.png
+    /images/icons-36-black.png
+    /images/icons-36-white.png
+
+%p The final step is to serve the manifest file with the correct mime type. We do this by adding one route to the Sinatra server
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    get '/manifest.appcache' do
+      headers 'Content-Type' => 'text/cache-manifest' # Must be served with this MIME type
+      send_file 'manifest.appcache'
+    end
+
+%p The first time you visit the web app, the browser will download all the assets listed in the manifest file and cache them localy.
+
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

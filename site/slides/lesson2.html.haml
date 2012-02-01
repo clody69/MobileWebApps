@@ -1,23 +1,26 @@
-=title_slide_tag("Lecture 2: HTML5 Forms")
+=title_slide_tag("Lecture 2: Building a Mobile Web App")
 
 %section.slide.section-title
-  %h1 Lecture 2: HTML5 Forms
+  %h1 Lecture 2: Building a Mobile Web App
   .agenda
-    %p Our first web app
-    %p New HTML5 Form semantics
-    %p Offline Usage
+    %p Our first mobile web app
+    %p New HTML5 form semantics
+    %p Local storage
+    %p Offline usage
 
 %section.slide
   %header
-    Forms, Forms and Forms
+    Our first mobile web app
   %article
-    Goal of this example:
+    Our goal for today is:
     %ul
       %li Create a mobile ready web page
       %li Add a few entry forms
       %li Style the forms with CSS
       %li Implement the server
       %li Rewrite the app with jQuery
+      %li Add local storage
+      %li Make the app available offline
 
 %section.slide
   %header
@@ -49,7 +52,7 @@
         website.
     :coderay
       #!html
-      <meta name="viewport" content="width=device-width; user-scalable=0; initial-scale=1.0; maximum-sclae=1.0;" />        
+      <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;" />        
 
 %section.slide
   %header 
@@ -548,7 +551,7 @@
               %div(data-role="navbar")
                 %ul
                   %li
-                    %a(href="/") Posts
+                    %a(href="/" data-ajax="false") Posts
                   %li
                     %a(href="#new" data-transition="flip") New Entry
 
@@ -573,15 +576,435 @@
 %section.slide
   %header Offline Usage
   %article
-    For a web application to work offline, you need to consider three things:
+    For a web application to work offline, you need to consider the following:
     %ul
-      %li Store user inputs through localStorage
-      %li Define which files should be cached via a manifest file
-      %li Manage connection changes with online and offline events
+      %li 
+        Store required data locally through 
+        %strong localStorage
+      %li 
+        Define what files to cache locally via a 
+        %strong manifest file
+      %li 
+        Manage connection changes with 
+        %strong online and offline events
+      %li 
+        Define a 
+        %strong synchronization 
+        strategy with the data stored in the cloud
 
   http://ednortonengineeringsociety.blogspot.com/2010/10/detecting-offline-status-in-html-5.html
   http://hacks.mozilla.org/2010/01/offline-web-applications/
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Offline Storage")   
+  %article
+    %ul
+      %li Historically browsers (thin clients) do not support a way to store data.
+     
+      %li 
+        Cookies allow to attach data to the HTTP requests but:
+        %ul
+          %li Cookies are sent back and forth with every request
+          %li Cookies cannot be share across different subdomains
+          %li Limited storage (20 cookies x 4KB)
+      %li 
+        Local storage in the browser gives the advantage of:
+        %ul
+          %li Reduce number of requests to the server
+          %li Store locally static or semi static data
+          %li Enable offline usage (e.g. for mobile devices)
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Offline Storage")   
+  %article
+    HTML5 introduces two key-value storing mechanisms:
+    %ul
+      %li
+        %strong> localStorage
+        \: persistent storage across browser restarts
+      %li
+        %strong> sessionStorage
+        \: storage that resets when a browser session restarts
+    :coderay
+      #!javascript
+      //set a key
+      localStorage.myData = "Hello World";
+      localStorage.setItem('myData', "Hello World");
+      
+      //get a key
+      var data;
+      data = localStorage.myData;
+      data = localStorage.getItem('myData');
+      
+      //delete a key
+      localStorage.myData = undefined;
+      localStorage.remoteItem('myData');
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Offline Storage - Benefits")   
+  %article
+    %ul
+      %li Same origin policy
+      %li approx 5MB of storage per host
+      %li Only strings can be stored
+      %li Covert to JSON before storing
+      %li Browser provide tools for looking at the local storage
+
+%section.slide
+  %header
+    Add Options to the Blog
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p 
+            Add Options for storing:
+            %ul
+              %li Name
+              %li E-mail
+          %p The personal data is stored in the localStorage
+          %p When posting a new entry the name and email are also included.
+          
+      .twoColumn
+        .hmargin.bordered
+          =image_tag('lesson2/blog-jquery-options.png')
+    
+%section.slide
+  %header
+    Add Options to the Blog
+    %span.smaller
+      =example_url_tag("htmljQueryStorageBlog")    
+  %article.smaller
+    .autobox.hmargin
+      index.haml
+      :coderay
+        #!haml
+        ...
+        %div(data-role="page" id="options")
+        
+          =haml :options
+        
+          =haml :footer
   
+      options.haml
+      :coderay
+        #!haml
+        %div(data-role = "header" data-position="inline")
+          %a(href = "#home" data-icon="delete" data-rel="back") Cancel
+          %h1 Options
+          %a(href = "#home" data-icon="check" data-theme="b" id="saveOpt" data-rel="back") Save
+          
+        %div(data-role="content")
+          %form
+            %input(type = "text" name="name" id="optName" placeholder="Name")
+            %input(type = "email" name="email" id="optEmail" placeholder = "Email")   
+  
+      new.haml
+      :coderay
+        #!haml
+        %form
+          %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+          %textarea(name="content" rows = "5" placeholder = "Content" id="content")
+          %button#postEntry(type = "submit") Post        
+
+%section.slide
+  %header
+    Add Options to the Blog
+    %span.smaller
+      =example_url_tag("htmljQueryStorageBlog")    
+  %article.smaller
+    .autobox.hmargin
+      JS
+      :coderay
+        #!javascript
+        $(function() {
+          // Assign the options from the local storage
+          $("#optName").val(localStorage.name);
+          $("#optEmail").val(localStorage.email);
+            
+          $("#postEntry").bind("click", function() {
+            e.preventDefault();
+            $("#new .invalid").removeClass("invalid")
+            if ($("#new :invalid").length) { $("#new :invalid").addClass("invalid"); return false; }
+            var msg = {};
+            msg['title'] = $('#title').val();
+            msg['content'] = $('#content').val();
+            msg['email'] = localStorage.email;
+            msg['name'] = localStorage.name;
+            $.post('/new', msg, function() { $.mobile.changePage("/", {reloadPage: true}); });
+          });
+
+          ...          
+          //Save the options in the local storage     
+          $("#saveOpt").bind("click", function() {
+            $("#options .invalid").removeClass("invalid")
+            if ($("#options :invalid").length) {
+              $("#options :invalid").addClass("invalid");
+              return false;
+            }
+            localStorage.name = $("#optName").val();
+            localStorage.email = $("#optEmail").val();        
+          })          
+        })
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Manifest File")   
+  %article
+    %ul
+      %li The manifest file tells the browser what files to cache locally for offline usage (HTML, CSS, Javascript, images, video, etc.)
+      %li Every single resource that you want to cache must be explicitly listed (no wildcards).
+      %li The files listed in the manifest will be loaded from the local disk even if the browser is online.
+      %li If the page is loaded from the application cache (either online or offline), the browser will load the assets ONLY from the cache and ignore external resources (unless they are specified in the NETWORK section)
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Manifest File")   
+    %span.smaller
+      =example_url_tag("htmljQueryOfflineBlog")   
+  %article
+    .row
+      .twoColumn
+        .autobox
+          :coderay
+            #!html
+            <!DOCTYPE HTML>
+            <html manifest="/manifest.appcache">
+            <body>
+            ...
+            </body> </html>
+          
+          :coderay
+            #!plain
+            CACHE MANIFEST
+            # 30 January 2012
+            /index.html
+            /jquery.js
+            /main.css
+            /logo.png 
+  
+            NETWORK:
+            /api
+            
+            FALLBACK:
+            /about /offline-about.html
+          :coderay
+            #!plain
+            mime type: text/cache-manifest
+      .twoColumn
+        %ul
+          %li 
+            Recommended file extension is
+            %span.terminal>
+              \.appcache
+          %li Only HTTP GET requests are cached.
+          %li The NETWORK section contains resources that are always fetched from the network
+          %li The FALLBACK section contains resources that are fetched from the network only if the browser is online. Otherwiser the fallback version is used.
+%section.slide
+  %header
+    =html5_offline_storage_tag("Manifest File - Rules")   
+  %article
+    %ul
+      %li 
+        When a page is loaded the browser will check the manifest on the server. 
+        If it has changed, the browser will redownload all the files listed in the manifest, update the cache and fire the event 
+        %span.terminal>
+          applicationCache.onUpdateReady
+      %li The browser retains the cached assets until either the user clears the cache or you trigger an update. 
+      %li Triggering an update requires that the content of the manifest file changes (not just the assets).
+      %li Any document referencing the manifest file is cached
+      
+    %p 
+      Good explanation is available  
+      %a(href="http://html5doctor.com/go-offline-with-application-cache/") here
+
+%section.slide
+  %header
+    =html5_offline_storage_tag("Manifest File - Network Whitelisting")   
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %ul
+            %li Once the manifest file is in place, the browser will route all the requests throught that file (both online or offline).
+            %li If there is no rule in the manifest file that his matching a request, the request will fail.
+            %li In the NETWORK section, the rule '*' whitelist all the requests that are not matching the rules in the CACHE section
+      .twoColumn
+        :coderay
+          #!plain
+          CACHE MANIFEST
+          # 30 January 2012
+          /index.html
+          /jquery.js
+          /main.css
+          /logo.png 
+    
+          NETWORK:
+          /api
+          *
+          
+          FALLBACK:
+          /about /offline-about.html
+              
+%section.slide
+  %header
+    Making life easier with Manifesto
+    %span.smaller
+      =example_url_tag("htmljQueryOfflineManifestoBlog")   
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %ul
+            %li Manifesto automatically generate the manifest file by listing all files in the specified directories and subdirectories
+            %li 
+              By default it includes 
+              %span.terminal
+                \/public
+            %li It also computes a hash of the files's contents, so that if a file is changed the manifest file is automatically invalidated.
+      .twoColumn
+        .autobox
+          :coderay
+            #!ruby
+            get '/manifest.appcache' do
+              headers 'Content-Type' => 'text/cache-manifest' 
+              Manifesto.cache
+            end
+            
+          :coderay
+            #!plain
+            CACHE MANIFEST
+            # Generated by manifesto (http://github.com/johntopley/manifesto)
+            # Hash: 48c5fbdc2a7627233a5f9741fec32a77
+            /jquery.mobile.structure-1.0.1.min.css
+            /jquery.mobile.structure-1.0.1.css
+            /jquery.mobile-1.0.1.min.js
+            /jquery.mobile-1.0.1.min.css
+            /jquery.mobile-1.0.1.js
+            /jquery.mobile-1.0.1.css
+            /jquery-1.7.1.min.js
+            /images/icons-36-white.png
+            /images/icons-36-black.png
+            /images/icons-18-white.png
+            /images/icons-18-black.png
+            /images/ajax-loader.png
+            /error.png            
+
+%section.slide
+  %header How to refresh the list of posts
+  %article
+    %ul
+      %li The main HTML page of the web app is also cached (because it is referencing the manifest file)
+      %li The page will be refreshed only when the manifest file expires in the cache of the browser and is changed on the server.
+    %br 
+    %p => Dynamic updates require a new design for our blog
+
+%section.slide
+  %header The applicationCache interface
+  %article
+    .autobox
+      :coderay
+        #!javascript
+        window.applicationCache  //Main object to access the app cache
+        window.applicationCache.status //Status
+        window.applicationCache.onupdateready = function (e) {...};  //Callback        
+        window.applicationCache.update();  //Force cache update
+        window.applicationCache.swapCache();  //Swap to new cache
+    .row
+      .twoColumn
+        .autobox
+          State of the cache:
+          %ul.smaller
+            %li 0: UNCACHED
+            %li 1: IDLE
+            %li 2: CHECKING
+            %li 3: DOWNLOADING
+            %li 4: UPDATEREADY
+            %li 5: OBSOLETE
+      .twoColumn
+        .autobox
+          Event callbakcs:
+          %ul.smaller
+            %li onchecking
+            %li ondownloading
+            %li onupdateready
+            %li onobsolete
+            %li oncached
+            %li onerror
+            %li onnoupdateready
+            %li onprogress
+                       
+%section.slide
+  %header
+    Browser connectivity
+  %article
+    Mobile apps must detect if the browser is online or offline to provide the best user experience:
+    %ul 
+      %li disabling those parts of the UI that can only work online
+      %li caching offline actions
+      %li synchronizing the offline changes with the server
+
+%section.slide
+  %header
+    Detecting connectivity with the manifest 
+    %span.smaller
+      =example_url_tag("htmljQueryOfflineDetectBlog")   
+  %article
+    layout.haml
+    :coderay
+      #!javascript
+      $(function() {
+        function testOnline() {
+          $.getJSON('ping', function(data) {
+            $('.status').html(data);  
+          });
+        }
+      //Test at first page load
+      testOnline();
+      //Test a timer for infinite testing
+      window.setInterval(testOnline, 10000);
+    header.haml
+    :coderay
+      #!haml
+      %div(data-role="header")
+        %h1.status 
+        %a(href="#options" data-icon="gear" class="ui-btn-right" data-transition="slidedown") Options
+
+%section.slide
+  %header
+    Detecting connectivity with the manifest 
+    %span.smaller
+      =example_url_tag("htmljQueryOfflineDetectBlog")   
+  %article
+
+    manifest.appcache
+    :coderay
+      #!plain
+      ...
+      FALLBACK:
+      /ping /ping-offline.json  
+  
+    ping-offline.json
+    :coderay
+      #!javascript
+      "Offline"
+  
+    server.rb
+    :coderay
+      #!ruby
+      get '/manifest.appcache' do
+        headers 'Content-Type' => 'text/cache-manifest' # Must be served with this MIME type
+        cache_control :no_cache #Disable caching of manifest file, only for demo purposes
+        Manifesto.cache << "FALLBACK:\n /ping /ping-offline.json\n"
+      end
+      get '/ping' do
+        content_type :json
+        "Online".to_json
+      end
+
 %section.slide
   %header
     File API
@@ -591,8 +1014,8 @@
 %section.slide
   %article            
     Start with the viewport
-    
-    Introduce new elements
+
+    Introduce new elementsh
     
     Create a basic app for entering data
     

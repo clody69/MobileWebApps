@@ -1,0 +1,164 @@
+=example_header_tag "Adding the Options page to the Blog", "htmljQueryStorageBlog"
+
+%p
+  We add an Options page to the example 
+  =example_url_tag("htmljQueryMultiBlog") 
+  that allows the user to store his/her name and email in the local storage of the brwoser.
+  The data is stored in the localStorage so it is available after a browser restart. The fields are automatically attached
+  to each new entry that is sent to the server.
+  
+%p 
+  The first step is to add one additional page with id 
+  %span.terminal>
+    options
+  to the structure of the web app.
+
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="page" id="home")
+      = haml :header
+      
+      %div(data-role="content")
+        = haml :posts
+      
+      = haml :footer
+    
+    %div(data-role="page" id="new")
+      = haml :header
+      
+      %div(data-role="content")
+        = haml :new
+      
+      =haml :footer      
+    
+    %div(data-role="page" id="options")
+    
+      =haml :options
+    
+      =haml :footer
+  
+%p 
+  The content of the new page is defined in the following file. It contains the form for the fields that we want to store in the localStorage.
+
+.code_block
+  .code_header
+    views/options.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role = "header" data-position="inline")
+      %a(href = "#home" data-icon="delete" data-rel="back") Cancel
+      %h1 Options
+      %a(href = "#home" data-icon="check" data-theme="b" id="saveOpt" data-rel="back") Save
+      
+    %div(data-role="content")
+      %form
+        %input(type = "text" name="name" id="optName" placeholder="Name")
+        %input(type = "email" name="email" id="optEmail" placeholder = "Email")   
+
+%p
+  We also modify the page for creating a new entry (new.haml). We remove the field 
+  %span.terminal>
+    email
+  and the url for posting the form. We'll post the new entry using our own javascript. 
+  
+.code_block
+  .code_header
+    views/new.haml  
+  :coderay_raw
+    #!haml
+    %form
+      %input(type = "text" name="title" id="title" placeholder="Post Title" required)
+      %textarea(name="content" rows = "5" placeholder = "Content" id="content")
+      %button#postEntry(type = "submit") Post
+    
+%p
+  The last step is to add the javascript logic. We make the following three changes:
+  %ul
+    %li When the document is loaded and ready we copy the values of name and email into the fields of the options page.
+    %li 
+      In the handler that is invoked when creating a new entry (by clicking on the button
+      %span.terminal>
+        \#postEntry
+      ) we add the code for posting the fields to the server.
+    %li Add the logic for storing the fields in the localStorage when the options are saved 
+%p 
+  Note also the validation now is scoped to the individual pages by using the css selectors 
+  %span.terminal>
+    "#new .invalid"
+  and 
+  %span.terminal>
+    "#options .invalid"
+  
+.code_block
+  .code_header
+    views/layout.haml 
+  :coderay_raw
+    #!javascript    
+     $(function() {
+      // Assign the options from the local storage
+      $("#optName").val(localStorage.name);
+      $("#optEmail").val(localStorage.email);
+        
+      $("#postEntry").bind("click", function() {
+        e.preventDefault();
+        $("#new .invalid").removeClass("invalid")
+        if ($("#new :invalid").length) {
+          $("#new :invalid").addClass("invalid");
+          return false;
+        }
+        var msg = {};
+        msg['title'] = $('#title').val();
+        msg['content'] = $('#content').val();
+        msg['email'] = localStorage.email;
+        msg['name'] = localStorage.name;
+        $.post('/new', msg, function() {
+          $.mobile.changePage("/", {reloadPage: true});
+        });
+      });
+      $("[contenteditable]").focus(function() {
+        var $this = $(this);
+        $this.data('before', $this.html());
+        return $this;          
+      });
+      $("[contenteditable]").live('blur', function() {
+          var $this = $(this);
+          if ($this.data('before') !== $this.html()) {
+              $this.data('before', $this.html());
+              $this.trigger('change');
+              //alert($this.attr('data-id'));
+              var msg = {};
+              msg['id'] = $this.attr('data-id');
+              msg[$this.attr('data-name')] = $this.html();
+              $.post('/update', msg);
+          }
+          return $this;
+      });   
+      
+      //Save the options in the local storage     
+      $("#saveOpt").bind("click", function() {
+        $("#options .invalid").removeClass("invalid")
+        if ($("#options :invalid").length) {
+          $("#options :invalid").addClass("invalid");
+          return false;
+        }
+        localStorage.name = $("#optName").val();
+        localStorage.email = $("#optEmail").val();
+        
+      })          
+    })
+
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

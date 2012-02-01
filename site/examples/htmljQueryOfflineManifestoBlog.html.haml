@@ -1,0 +1,45 @@
+=example_header_tag "Automatic manifest file with Manifesto.", "htmljQueryOfflineManifestoBlog"
+
+%p
+  We simplify the example
+  =example_url_tag("htmljQueryOfflineBlog") 
+  by automatically generating the manifest file using 
+  %a(href="https://github.com/johntopley/manifesto") Manifesto
+
+%p 
+  We inlcude the Manifesto gem into our Gemfile and install using the command 
+  %span.terminal>
+    bundle install
+
+.code_block
+  .code_header
+    Gemfile
+  :coderay_raw
+    #!plain
+    ...
+    gem 'manifesto'
+
+%p The only change is in the Sinatra server where we invoke Manifesto for generating the manifest file:
+
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    get '/manifest.appcache' do
+      headers 'Content-Type' => 'text/cache-manifest' # Must be served with this MIME type
+      Manifesto.cache
+    end
+
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

@@ -7,6 +7,10 @@ module PresentationHelper
   def title_slide_tag(subtitle)
     Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
   end
+
+  def html5_offline_storage_tag(title="Offline Storage")
+    "<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>#{title}</img>"
+  end
   
   def html5_semantics_tag(title="New Semantics")
     h= '<img src = "imgs/html5/HTML5_Semantics_64.png">'
