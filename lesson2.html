@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 2: HTML5 Forms
+Lecture 2: Building a Mobile Web App
 </h1>
 <br />
 <div class='smaller centered'>
@@ -62,25 +62,28 @@ Aalto University March 2011
 </section>
 
 <section class='slide section-title'>
-<h1>Lecture 2: HTML5 Forms</h1>
+<h1>Lecture 2: Building a Mobile Web App</h1>
 <div class='agenda'>
-<p>Our first web app</p>
-<p>New HTML5 Form semantics</p>
-<p>Offline Usage</p>
+<p>Our first mobile web app</p>
+<p>New HTML5 form semantics</p>
+<p>Local storage</p>
+<p>Offline usage</p>
 </div>
 </section>
 <section class='slide'>
 <header>
-Forms, Forms and Forms
+Our first mobile web app
 </header>
 <article>
-Goal of this example:
+Our goal for today is:
 <ul>
 <li>Create a mobile ready web page</li>
 <li>Add a few entry forms</li>
 <li>Style the forms with CSS</li>
 <li>Implement the server</li>
 <li>Rewrite the app with jQuery</li>
+<li>Add local storage</li>
+<li>Make the app available offline</li>
 </ul>
 </article>
 </section>
@@ -124,7 +127,7 @@ website.
 </li>
 </ul>
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width; user-scalable=0; initial-scale=1.0; maximum-sclae=1.0;</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>        &#x000A;</pre></div>
+  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>        &#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -488,7 +491,7 @@ header.haml
 </div>
 footer.haml
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%ul</span>&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">flip</span><span class="delimiter">&quot;</span></span>) New Entry&#x000A;</pre></div>
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%ul</span>&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">flip</span><span class="delimiter">&quot;</span></span>) New Entry&#x000A;</pre></div>
 </div>
 posts.haml
 <div class="CodeRay">
@@ -503,15 +506,386 @@ posts.haml
 <section class='slide'>
 <header>Offline Usage</header>
 <article>
-For a web application to work offline, you need to consider three things:
+For a web application to work offline, you need to consider the following:
 <ul>
-<li>Store user inputs through localStorage</li>
-<li>Define which files should be cached via a manifest file</li>
-<li>Manage connection changes with online and offline events</li>
+<li>
+Store required data locally through
+<strong>localStorage</strong>
+</li>
+<li>
+Define what files to cache locally via a
+<strong>manifest file</strong>
+</li>
+<li>
+Manage connection changes with
+<strong>online and offline events</strong>
+</li>
+<li>
+Define a
+<strong>synchronization</strong>
+strategy with the data stored in the cloud
+</li>
 </ul>
 </article>
 http://ednortonengineeringsociety.blogspot.com/2010/10/detecting-offline-status-in-html-5.html
 http://hacks.mozilla.org/2010/01/offline-web-applications/
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage</img>
+</header>
+<article>
+<ul>
+<li>Historically browsers (thin clients) do not support a way to store data.</li>
+<li>
+Cookies allow to attach data to the HTTP requests but:
+<ul>
+<li>Cookies are sent back and forth with every request</li>
+<li>Cookies cannot be share across different subdomains</li>
+<li>Limited storage (20 cookies x 4KB)</li>
+</ul>
+</li>
+<li>
+Local storage in the browser gives the advantage of:
+<ul>
+<li>Reduce number of requests to the server</li>
+<li>Store locally static or semi static data</li>
+<li>Enable offline usage (e.g. for mobile devices)</li>
+</ul>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage</img>
+</header>
+<article>
+HTML5 introduces two key-value storing mechanisms:
+<ul>
+<li><strong>localStorage</strong>: persistent storage across browser restarts
+</li>
+<li><strong>sessionStorage</strong>: storage that resets when a browser session restarts
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//set a key</span>&#x000A;localStorage.myData = <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>;&#x000A;localStorage.setItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">//get a key</span>&#x000A;<span class="keyword">var</span> data;&#x000A;data = localStorage.myData;&#x000A;data = localStorage.getItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="comment">//delete a key</span>&#x000A;localStorage.myData = <span class="predefined-constant">undefined</span>;&#x000A;localStorage.remoteItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage - Benefits</img>
+</header>
+<article>
+<ul>
+<li>Same origin policy</li>
+<li>approx 5MB of storage per host</li>
+<li>Only strings can be stored</li>
+<li>Covert to JSON before storing</li>
+<li>Browser provide tools for looking at the local storage</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+Add Options for storing:
+<ul>
+<li>Name</li>
+<li>E-mail</li>
+</ul>
+</p>
+<p>The personal data is stored in the localStorage</p>
+<p>When posting a new entry the name and email are also included.</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-jquery-options.png' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+<span class='smaller'>
+<a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
+</span>
+</header>
+<article class='smaller'>
+<div class='autobox hmargin'>
+index.haml
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">options</span><span class="delimiter">&quot;</span></span>)&#x000A;&#x000A;  =haml <span class="symbol">:options</span>&#x000A;&#x000A;  =haml <span class="symbol">:footer</span>&#x000A;</pre></div>
+</div>
+options.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">inline</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">#home</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">delete</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">back</span><span class="delimiter">&quot;</span></span>) Cancel&#x000A;  <span class="tag">%h1</span> Options&#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">#home</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">check</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-theme</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">saveOpt</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">back</span><span class="delimiter">&quot;</span></span>) Save&#x000A;  &#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%form</span>&#x000A;    <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">optName</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">optEmail</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)   &#x000A;</pre></div>
+</div>
+new.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">required</span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Post        &#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+<span class='smaller'>
+<a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
+</span>
+</header>
+<article class='smaller'>
+<div class='autobox hmargin'>
+JS
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="comment">// Assign the options from the local storage</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optName</span><span class="delimiter">&quot;</span></span>).val(localStorage.name);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optEmail</span><span class="delimiter">&quot;</span></span>).val(localStorage.email);&#x000A;    &#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    e.preventDefault();&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new .invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).length) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>); <span class="keyword">return</span> <span class="predefined-constant">false</span>; }&#x000A;    <span class="keyword">var</span> msg = {};&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#title</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">content</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#content</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">email</span><span class="delimiter">'</span></span>] = localStorage.email;&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">name</span><span class="delimiter">'</span></span>] = localStorage.name;&#x000A;    <span class="predefined">$</span>.post(<span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span>, msg, <span class="keyword">function</span>() { <span class="predefined">$</span>.mobile.changePage(<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>, {<span class="key">reloadPage</span>: <span class="predefined-constant">true</span>}); });&#x000A;  });&#x000A;&#x000A;  ...          &#x000A;  <span class="comment">//Save the options in the local storage     </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#saveOpt</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options .invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options :invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options :invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;    localStorage.name = <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optName</span><span class="delimiter">&quot;</span></span>).val();&#x000A;    localStorage.email = <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optEmail</span><span class="delimiter">&quot;</span></span>).val();        &#x000A;  })          &#x000A;})&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File</img>
+</header>
+<article>
+<ul>
+<li>The manifest file tells the browser what files to cache locally for offline usage (HTML, CSS, Javascript, images, video, etc.)</li>
+<li>Every single resource that you want to cache must be explicitly listed (no wildcards).</li>
+<li>The files listed in the manifest will be loaded from the local disk even if the browser is online.</li>
+<li>If the page is loaded from the application cache (either online or offline), the browser will load the assets ONLY from the cache and ignore external resources (unless they are specified in the NETWORK section)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File</img>
+<span class='smaller'>
+<a href='htmljQueryOfflineBlog.html'>htmljQueryOfflineBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">&lt;!DOCTYPE HTML&gt;</span>&#x000A;<span class="tag">&lt;html</span> <span class="attribute-name">manifest</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/manifest.appcache</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;<span class="tag">&lt;body&gt;</span>&#x000A;...&#x000A;<span class="tag">&lt;/body&gt;</span> <span class="tag">&lt;/html&gt;</span>&#x000A;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# 30 January 2012&#x000A;/index.html&#x000A;/jquery.js&#x000A;/main.css&#x000A;/logo.png &#x000A;&#x000A;NETWORK:&#x000A;/api&#x000A;&#x000A;FALLBACK:&#x000A;/about /offline-about.html</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>mime type: text/cache-manifest</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>
+Recommended file extension is<span class='terminal'>
+.appcache
+</span></li>
+<li>Only HTTP GET requests are cached.</li>
+<li>The NETWORK section contains resources that are always fetched from the network</li>
+<li>The FALLBACK section contains resources that are fetched from the network only if the browser is online. Otherwiser the fallback version is used.</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File - Rules</img>
+</header>
+<article>
+<ul>
+<li>
+When a page is loaded the browser will check the manifest on the server.
+If it has changed, the browser will redownload all the files listed in the manifest, update the cache and fire the event<span class='terminal'>
+applicationCache.onUpdateReady
+</span></li>
+<li>The browser retains the cached assets until either the user clears the cache or you trigger an update.</li>
+<li>Triggering an update requires that the content of the manifest file changes (not just the assets).</li>
+<li>Any document referencing the manifest file is cached</li>
+</ul>
+<p>
+Good explanation is available
+<a href='http://html5doctor.com/go-offline-with-application-cache/'>here</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File - Network Whitelisting</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li>Once the manifest file is in place, the browser will route all the requests throught that file (both online or offline).</li>
+<li>If there is no rule in the manifest file that his matching a request, the request will fail.</li>
+<li>In the NETWORK section, the rule '*' whitelist all the requests that are not matching the rules in the CACHE section</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# 30 January 2012&#x000A;/index.html&#x000A;/jquery.js&#x000A;/main.css&#x000A;/logo.png &#x000A;&#x000A;NETWORK:&#x000A;/api&#x000A;*&#x000A;&#x000A;FALLBACK:&#x000A;/about /offline-about.html&#x000A;    </pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Making life easier with Manifesto
+<span class='smaller'>
+<a href='htmljQueryOfflineManifestoBlog.html'>htmljQueryOfflineManifestoBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li>Manifesto automatically generate the manifest file by listing all files in the specified directories and subdirectories</li>
+<li>
+By default it includes
+<span class='terminal'>
+/public
+</span>
+</li>
+<li>It also computes a hash of the files's contents, so that if a file is changed the manifest file is automatically invalidated.</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> &#x000A;  <span class="constant">Manifesto</span>.cache&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# Generated by manifesto (http://github.com/johntopley/manifesto)&#x000A;# Hash: 48c5fbdc2a7627233a5f9741fec32a77&#x000A;/jquery.mobile.structure-1.0.1.min.css&#x000A;/jquery.mobile.structure-1.0.1.css&#x000A;/jquery.mobile-1.0.1.min.js&#x000A;/jquery.mobile-1.0.1.min.css&#x000A;/jquery.mobile-1.0.1.js&#x000A;/jquery.mobile-1.0.1.css&#x000A;/jquery-1.7.1.min.js&#x000A;/images/icons-36-white.png&#x000A;/images/icons-36-black.png&#x000A;/images/icons-18-white.png&#x000A;/images/icons-18-black.png&#x000A;/images/ajax-loader.png&#x000A;/error.png            &#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>How to refresh the list of posts</header>
+<article>
+<ul>
+<li>The main HTML page of the web app is also cached (because it is referencing the manifest file)</li>
+<li>The page will be refreshed only when the manifest file expires in the cache of the browser and is changed on the server.</li>
+</ul>
+<br />
+<p>=> Dynamic updates require a new design for our blog</p>
+</article>
+</section>
+<section class='slide'>
+<header>The applicationCache interface</header>
+<article>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>window.applicationCache  <span class="comment">//Main object to access the app cache</span>&#x000A;window.applicationCache.status <span class="comment">//Status</span>&#x000A;window.applicationCache.<span class="function">onupdateready</span> = <span class="keyword">function</span> (e) {...};  <span class="comment">//Callback        </span>&#x000A;window.applicationCache.update();  <span class="comment">//Force cache update</span>&#x000A;window.applicationCache.swapCache();  <span class="comment">//Swap to new cache</span></pre></div>
+</div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+State of the cache:
+<ul class='smaller'>
+<li>0: UNCACHED</li>
+<li>1: IDLE</li>
+<li>2: CHECKING</li>
+<li>3: DOWNLOADING</li>
+<li>4: UPDATEREADY</li>
+<li>5: OBSOLETE</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+Event callbakcs:
+<ul class='smaller'>
+<li>onchecking</li>
+<li>ondownloading</li>
+<li>onupdateready</li>
+<li>onobsolete</li>
+<li>oncached</li>
+<li>onerror</li>
+<li>onnoupdateready</li>
+<li>onprogress</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Browser connectivity
+</header>
+<article>
+Mobile apps must detect if the browser is online or offline to provide the best user experience:
+<ul>
+<li>disabling those parts of the UI that can only work online</li>
+<li>caching offline actions</li>
+<li>synchronizing the offline changes with the server</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Detecting connectivity with the manifest
+<span class='smaller'>
+<a href='htmljQueryOfflineDetectBlog.html'>htmljQueryOfflineDetectBlog</a>
+</span>
+</header>
+<article>
+layout.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">function</span> <span class="function">testOnline</span>() {&#x000A;    <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">'</span><span class="content">ping</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(data) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">.status</span><span class="delimiter">'</span></span>).html(data);  &#x000A;    });&#x000A;  }&#x000A;<span class="comment">//Test at first page load</span>&#x000A;testOnline();&#x000A;<span class="comment">//Test a timer for infinite testing</span>&#x000A;window.setInterval(testOnline, <span class="integer">10000</span>);</pre></div>
+</div>
+header.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%h1</span><span class="class">.status</span> &#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#options</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gear</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui-btn-right</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">slidedown</span><span class="delimiter">&quot;</span></span>) Options&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Detecting connectivity with the manifest
+<span class='smaller'>
+<a href='htmljQueryOfflineDetectBlog.html'>htmljQueryOfflineDetectBlog</a>
+</span>
+</header>
+<article>
+manifest.appcache
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;FALLBACK:&#x000A;/ping /ping-offline.json  &#x000A;</pre></div>
+</div>
+ping-offline.json
+<div class="CodeRay">
+  <div class="code"><pre><span class="string"><span class="delimiter">&quot;</span><span class="content">Offline</span><span class="delimiter">&quot;</span></span>&#x000A;</pre></div>
+</div>
+server.rb
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  cache_control <span class="symbol">:no_cache</span> <span class="comment">#Disable caching of manifest file, only for demo purposes</span>&#x000A;  <span class="constant">Manifesto</span>.cache &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">FALLBACK:</span><span class="char">\n</span><span class="content"> /ping /ping-offline.json</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/ping</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">Online</span><span class="delimiter">&quot;</span></span>.to_json&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
 </section>
 <section class='slide'>
 <header>
@@ -524,7 +898,7 @@ http://davidbcalhoun.com/2011/android-3-0-honeycomb-is-first-to-implement-the-de
 <section class='slide'>
 <article>
 Start with the viewport
-Introduce new elements
+Introduce new elementsh
 Create a basic app for entering data
 Create a demo like this with backbone.js
 http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html

@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Detect Offline/Online Status</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmljQueryOfflineDetectBlog'>Browse Source Code</a></div>
+<p>
+We introduce a method for detecting when the web app is online or offline to the example
+<a href='htmljQueryOfflineManifestoBlog.html'>htmljQueryOfflineManifestoBlog</a>
+. Our strategy is to use the manifest file for detecting if our server is reachable or not.
+If our server is not reachable then our web app is offline.
+</p>
+<p>
+We add the following rule in the FALLBACK section in the manifest file.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+manifest.appcache
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;FALLBACK:&#x000A;/ping /ping-offline.json&#x000A;</pre></div>
+</div>
+</div>
+<p>
+In the application we try to laod the resource
+<span class='terminal'>/ping</span>
+. If it succeds, the following JSON content is returned from the Sinatra server:
+<span class='terminal'>"Online"</span>
+</p>
+<p>
+Otheriwse, if the browser if offline, the request falls back to the cached version
+<psan class='terminal'>/ping-offline.json</psan>
+that contains the JSON string:
+<span class='terminal'>"Offline"</span>
+</p>
+<p>
+Since we are automatically generating the manifest file, we add the fallback rule to the Manifesto array:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  cache_control <span class="symbol">:no_cache</span> <span class="comment">#Disable caching of manifest file, only for demo purposes</span>&#x000A;  <span class="constant">Manifesto</span>.cache &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">FALLBACK:</span><span class="char">\n</span><span class="content"> /ping /ping-offline.json</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/ping</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">Online</span><span class="delimiter">&quot;</span></span>.to_json&#x000A;<span class="keyword">end</span>&#x000A;...&#x000A;</pre></div>
+</div>
+</div>
+<p>
+We place the fallback file in the public directory
+</p>
+<div class='code_block'>
+<div class='code_header'>
+public/ping-offline.json
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="string"><span class="delimiter">&quot;</span><span class="content">Offline</span><span class="delimiter">&quot;</span></span>&#x000A;</pre></div>
+</div>
+</div>
+<p>
+In the application, we add the JS logic for pinging our server every 10s and we show the status in the header.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/header.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%h1</span><span class="class">.status</span> &#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#options</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gear</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui-btn-right</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">slidedown</span><span class="delimiter">&quot;</span></span>) Options&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">function</span> <span class="function">testOnline</span>() {&#x000A;    <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">'</span><span class="content">ping</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(data) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">.status</span><span class="delimiter">'</span></span>).html(data);  &#x000A;    });&#x000A;  }&#x000A;&#x000A;<span class="comment">//Test at first page load</span>&#x000A;testOnline();&#x000A;&#x000A;<span class="comment">//Test a timer for infinite testing</span>&#x000A;window.setInterval(testOnline, <span class="integer">10000</span>);&#x000A;&#x000A;...&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
