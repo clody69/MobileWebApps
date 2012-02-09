@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Client templating with Handlerbars.js</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/templateHanderlbarsBlog'>Browse Source Code</a></div>
+<p>
+In this example we experiment with the client-side templating mechanism of
+<a href='http://www.handlebarsjs.com'>Handlerbars.js</a>
+As a starting point we use the example
+<a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
+and we modify the way the list of post entries is generated. Instead of generating the list on the server side,
+we do the following:
+<ol>
+<li>Create a template of one entry using Haml and Handlebar.js</li>
+<li>Compile and store the template on the client side</li>
+<li>Fill the template with the JSON data from the server</li>
+<li>Render the template using jQuery</li>
+</ol>
+</p>
+<p>
+The first step is to download the latest Handlerbars.js javascript code from
+<a href='https://github.com/wycats/handlebars.js/downloads'>here</a>
+(we download the full script, not just the runtime) and store it in the<span class='terminal'>
+<!-- public -->
+</span>directory.
+</p>
+<p>
+Then we add the script in the head of the HTML document:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">handlebars-1.0.0.beta.6.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;    ...</pre></div>
+</div>
+</div>
+<p>
+By reusing the code in the old<span class='terminal'>
+views/posts.haml
+</span>we create the handlerbar.js template in the following file:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/templates.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%script</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">articles</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/x-handlebars-template</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;    {{#articles}}  &#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        {{timestamp}}&#x000A;      <span class="tag">%h3</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">{{id}}</span><span class="delimiter">'</span></span>) &#x000A;        {{title}}&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          {{email}}&#x000A;      <span class="tag">%p</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">{{id}}</span><span class="delimiter">'</span></span>)&#x000A;        {{content}}&#x000A;    {{/articles}}&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The Mustache notation<span class='terminal'>
+{{#articles}}  ...  {{/articles}}
+</span>allows us to iterate the array of articles and for each item we generate the HTML code for rendering the post entry.
+The notation<span class='terminal'>
+{{expression}}
+</span>allows us to access the hash values of the items that we are iterating over(i.e. timestamp, title, email, etc).
+</p>
+<p>
+Note that we access a new field called<span class='termainl'>
+id
+</span>that represents a unique identifier for the items in the array of artciles (previously we just used a counter).
+We add the new field when we create a new post entry with the following code:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;<span class="global-variable">$articles</span> = [{ <span class="symbol">:title</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome</span><span class="delimiter">&quot;</span></span>, &#x000A;               <span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">My first post</span><span class="delimiter">&quot;</span></span>,&#x000A;               <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">hello@blog.com</span><span class="delimiter">&quot;</span></span>,&#x000A;               <span class="symbol">:timestamp</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">1.1.2012 10:20:30</span><span class="delimiter">&quot;</span></span>,&#x000A;               <span class="symbol">:id</span> =&gt; <span class="integer">0</span>}]&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Symbolize the params keys</span>&#x000A;  article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }&#x000A;  &#x000A;  article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;  article[<span class="symbol">:id</span>] = <span class="global-variable">$articles</span>.length&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;&#x000A;  puts <span class="global-variable">$articles</span>&#x000A;  redirect to (<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;...&#x000A;</pre></div>
+</div>
+</div>
+<p>
+Now we modify the views of the web app. First we add the Handlerbars.js template to the HTML document:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>&#x000A;  = haml <span class="symbol">:templates</span>&#x000A;  = <span class="keyword">yield</span>&#x000A;</pre></div>
+</div>
+</div>
+<p>
+and we remove the code for generating the list of posts on the server side:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>)&#x000A;= haml <span class="symbol">:header</span>&#x000A;&#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">articlesList</span><span class="delimiter">&quot;</span></span>)&#x000A;&#x000A;= haml <span class="symbol">:footer</span></pre></div>
+</div>
+</div>
+<p>
+Note that the jQuery page now only contains header, footer and the empty placeholder (with<span class='terminal'>
+id="articlesList"
+</span>) where we'll insert the list of posts dynamically at runtime.
+</p>
+<p>
+We are done with the changes on the server-side, now we move on the client-side. The first change is to add the code
+for compiling the Handlerbars.js templates and storing them in a array:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> Templates = {};&#x000A;&#x000A;<span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;    &#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">script[type=&quot;text/x-handlebars-template&quot;]</span><span class="delimiter">'</span></span>).each(<span class="keyword">function</span> () {&#x000A;    Templates[<span class="local-variable">this</span>.id] = Handlebars.compile(<span class="predefined">$</span>(<span class="local-variable">this</span>).html());&#x000A;  });&#x000A;  ...</pre></div>
+</div>
+</div>
+<p>
+Now, our template is accessible with<span class='terminal'>
+Templates.articles
+</span>and can we can instantiate it in the following way:
+</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> list = {&#x000A;  <span class="key">articles</span>: [&#x000A;    title: <span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome</span><span class="delimiter">&quot;</span></span>,&#x000A;    <span class="key">content</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">My first post</span><span class="delimiter">&quot;</span></span>,&#x000A;    <span class="key">email</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">hello@blog.com</span><span class="delimiter">&quot;</span></span>,&#x000A;    <span class="key">timestamp</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">1.1.2012 10:20:30</span><span class="delimiter">&quot;</span></span>,&#x000A;    <span class="key">id</span>:<span class="integer">0</span>&#x000A;  ]&#x000A;}  &#x000A;<span class="keyword">var</span> html = Templates.articles(list);&#x000A;</pre></div>
+</div>
+<p>
+The previous code will store in the variable<span class='terimnal'>
+html
+</span>the following HTML code:
+</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;ul</span> <span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui-listview</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span><span class="tag">&lt;p</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui-li-aside</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1.1.2012 10:20:30<span class="tag">&lt;/p&gt;</span>&#x000A;    <span class="tag">&lt;h3</span> <span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Welcome<span class="tag">&lt;/h3&gt;</span>&#x000A;    <span class="tag">&lt;p&gt;</span><span class="tag">&lt;strong&gt;</span>hello@blog.com<span class="tag">&lt;/strong&gt;</span><span class="tag">&lt;/p&gt;</span>&#x000A;    <span class="tag">&lt;p</span> <span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;      My first post&#x000A;    <span class="tag">&lt;/p&gt;</span>&#x000A;  <span class="tag">&lt;/li&gt;</span>&#x000A;<span class="tag">&lt;/ul&gt;</span>&#x000A;</pre></div>
+</div>
+<p>
+The last part is to generate the list dynamically. On the server side we add a new controller for generating the list of
+articles in JSON format:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  {<span class="symbol">:articles</span> =&gt; <span class="global-variable">$articles</span>}.to_json&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the client side we add the code for fetching the JSON data from the server, generating the HTML code from the template
+and injecting it inside the page. This operation is carried out by the function<span class='terminal'>
+loadArticles
+</span></p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="keyword">var</span> Templates = {};&#x000A;&#x000A;  <span class="keyword">function</span> <span class="function">loadArticles</span> () {&#x000A;    <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(json) {&#x000A;      <span class="keyword">var</span> content = Templates.articles(json);&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#articlesList</span><span class="delimiter">&quot;</span></span>).html(content).find(<span class="string"><span class="delimiter">&quot;</span><span class="content">ul</span><span class="delimiter">&quot;</span></span>).listview();&#x000A;    });&#x000A;  }&#x000A;&#x000A;  <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">script[type=&quot;text/x-handlebars-template&quot;]</span><span class="delimiter">'</span></span>).each(<span class="keyword">function</span> () {&#x000A;      Templates[<span class="local-variable">this</span>.id] = Handlebars.compile(<span class="predefined">$</span>(<span class="local-variable">this</span>).html());&#x000A;    });&#x000A;&#x000A;    loadArticles();&#x000A;    ...&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The function<span class='terminal'>
+loadArticles
+</span>is invoked when the document is ready in order to fill the page with the lastest articles. Since we are replacing
+the HTML content of the<span class='terminal'>
+articlesList
+</span>we must invoke the jQuery initalization function for the listview.
+</p>
+<p>
+We also modify the function for creating new articles by adding a call to<span class='terminal'>
+loadArticles
+</span>to refresh the list of articles in the home page before moving there:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>(e) {&#x000A;    e.preventDefault();&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new .invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;    <span class="keyword">var</span> msg = {};&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#title</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">content</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#content</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">email</span><span class="delimiter">'</span></span>] = localStorage.email;&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">name</span><span class="delimiter">'</span></span>] = localStorage.name;&#x000A;    <span class="predefined">$</span>.post(<span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span>, msg, <span class="keyword">function</span>() {&#x000A;      loadArticles();&#x000A;      <span class="predefined">$</span>.mobile.changePage(<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>);&#x000A;    });&#x000A;  });    </pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<div class='content-wrapper'>
+<h1>Blog based on Backbone.js</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/mvcBackboneBlog'>Browse Source Code</a></div>
+<p>
+In this example we experiment with the client-side framework
+<a href='http://documentcloud.github.com/backbone'>Backbone.js</a>
+and we refactor the design of the example
+<a href='templateHandlearsBlog.html'>templateHandlearsBlog</a>
+. On the client-side we clearly separate the models from the view and on the server-side we implement a RESTful API
+to support Backbone.js' model syncrhonization mechanis.
+</p>
+<p>
+The first step is to download the latest code for Backbone.js
+<a href='http://documentcloud.github.com/backbone/backbone.js'>Backbone.js</a>
+,
+<a href='http://documentcloud.github.com/underscore/underscore.js'>Underscore</a>
+and
+<a href='https://github.com/douglascrockford/JSON-js'>Json2</a>
+. We place the javascript files in the<span class='terminal'>
+<!-- public -->
+</span>directory and include them in our HTML file:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">handlebars-1.0.0.beta.6.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">underscore.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">json2.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">backbone.js</span><span class="delimiter">&quot;</span></span>)&#x000A; &#x000A;    <span class="tag">%title</span>&#x000A;      Blog&#x000A;    ...</pre></div>
+</div>
+</div>
+<p>
+We create one model for the article and the collection that will contain the articles that we fetch from the server.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="keyword">var</span> Article = Backbone.Model.extend ({&#x000A;  });&#x000A;&#x000A;  <span class="keyword">var</span> Articles = Backbone.Collection.extend ({&#x000A;    <span class="key">model</span>: Article,&#x000A;    <span class="key">url</span>: <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span>&#x000A;  });&#x000A;</pre></div>
+</div>
+</div>
+<p>On the server side we create a RESTful API for fetching, creating, updating and deleting the articles:</p>
+<div class='code_block'>
+<div class='code_header'>
+server.ruby
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">#REST API for Articles</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  <span class="global-variable">$articles</span>.to_json&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/articles/:id</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">*** get article </span><span class="inline"><span class="inline-delimiter">#{</span>params[<span class="symbol">:id</span>]<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;  <span class="keyword">if</span> params[<span class="symbol">:id</span>].to_i &gt; <span class="global-variable">$articles</span>.length&#x000A;    status <span class="integer">404</span>&#x000A;  <span class="keyword">else</span>&#x000A;    content_type <span class="symbol">:json</span>&#x000A;    <span class="global-variable">$articles</span>[params[<span class="symbol">:id</span>].to_i].to_json&#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">*** Created article: </span><span class="inline"><span class="inline-delimiter">#{</span>request.body.string<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;  data = <span class="constant">JSON</span>.parse(request.body.string)&#x000A;  <span class="keyword">if</span> data.nil?&#x000A;    status <span class="integer">400</span>&#x000A;  <span class="keyword">else</span>&#x000A;    article = {}&#x000A;    [<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:email</span>, <span class="symbol">:name</span>].each <span class="keyword">do</span> |k|&#x000A;      article[k] = data[k.to_s] || <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>&#x000A;    <span class="keyword">end</span>&#x000A;    article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;    article[<span class="symbol">:id</span>] = <span class="global-variable">$articles</span>.length&#x000A;    <span class="global-variable">$articles</span>.unshift(article)&#x000A;    puts <span class="string"><span class="delimiter">&quot;</span><span class="content">    new article: </span><span class="inline"><span class="inline-delimiter">#{</span>article<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;    &#x000A;    article.to_json  &#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;put <span class="string"><span class="delimiter">'</span><span class="content">/articles/:id</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">*** update article </span><span class="inline"><span class="inline-delimiter">#{</span>params[<span class="symbol">:id</span>]<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;  data = <span class="constant">JSON</span>.parse(request.body.string)&#x000A;  <span class="keyword">if</span> data.nil?&#x000A;    status <span class="integer">400</span>&#x000A;  <span class="keyword">else</span>&#x000A;    article = {}&#x000A;    [<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:email</span>, <span class="symbol">:name</span>].each <span class="keyword">do</span> |k|&#x000A;      article[k] = data[k.to_s] || <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>&#x000A;    <span class="keyword">end</span>&#x000A;    article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;    article[<span class="symbol">:id</span>] = params[<span class="symbol">:id</span>].to_i&#x000A;    &#x000A;    <span class="comment">#Replace the entry in the list of articles</span>&#x000A;    <span class="global-variable">$articles</span>[article[<span class="symbol">:id</span>].to_i].merge!(article)&#x000A;&#x000A;    puts <span class="string"><span class="delimiter">&quot;</span><span class="content">    new value: </span><span class="inline"><span class="inline-delimiter">#{</span>article<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;    content_type <span class="symbol">:json</span>&#x000A;    <span class="global-variable">$articles</span>[params[<span class="symbol">:id</span>].to_i].to_json&#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;delete <span class="string"><span class="delimiter">'</span><span class="content">/articles/:id</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">*** delete article </span><span class="inline"><span class="inline-delimiter">#{</span>params[<span class="symbol">:id</span>]<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;  <span class="keyword">if</span> params[<span class="symbol">:id</span>].to_i &gt;= <span class="global-variable">$articles</span>.length&#x000A;    status <span class="integer">404</span>&#x000A;  <span class="keyword">else</span>&#x000A;    <span class="global-variable">$articles</span>.delete_at(params[<span class="symbol">:id</span>].to_i)&#x000A;  <span class="keyword">end</span> &#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+<p>
+The next step is to create the views of the application. We'll need for views:
+<ul>
+<li><strong class='terminal'>
+ItemView
+</strong>: represents one article consisting of title, content, email and timestamp.
+</li>
+<li><strong class='terminal'>
+ListView
+</strong>: represents the list of articles. It renders a jQuery listivew where each item is a ItemView object.
+</li>
+<li><strong class='terminal'>
+NewView
+</strong>: it's used for creating a new article that is added to the collection of articles.
+</li>
+<li><strong class='terminal'>
+OptionsView
+</strong>: it's used for editing name and email that are stored in the localStorage.
+</li>
+</ul>
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//View for rendering one entry of the blog</span>&#x000A;<span class="keyword">var</span> ItemView = Backbone.View.extend ({&#x000A;  <span class="key">tagName</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">li</span><span class="delimiter">&quot;</span></span>,&#x000A;  <span class="key">events</span>: {&#x000A;    <span class="key"><span class="delimiter">&quot;</span><span class="content">blur [contenteditable]</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">saveValues</span><span class="delimiter">&quot;</span></span>&#x000A;  },&#x000A;  <span class="function">initialize</span>: <span class="keyword">function</span>() { &#x000A;    <span class="local-variable">this</span>.model.bind(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="local-variable">this</span>.render, <span class="local-variable">this</span>);&#x000A;    <span class="local-variable">this</span>.template = Templates.article;  &#x000A;  },&#x000A;  <span class="function">render</span>: <span class="keyword">function</span>() { &#x000A;    <span class="predefined">$</span>(<span class="local-variable">this</span>.el).html( <span class="local-variable">this</span>.template(<span class="local-variable">this</span>.model.toJSON()) ); &#x000A;    <span class="keyword">return</span> <span class="local-variable">this</span>; &#x000A;  },&#x000A;  <span class="function">saveValues</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.model.save({&#x000A;      <span class="key">title</span>: <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[data-name='title']</span><span class="delimiter">&quot;</span></span>).html(), &#x000A;      <span class="key">content</span>: <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[data-name='content']</span><span class="delimiter">&quot;</span></span>).html()&#x000A;    },{<span class="key">silent</span>: <span class="predefined-constant">true</span>});&#x000A;  }        &#x000A;});&#x000A;&#x000A;<span class="comment">//View for rendering the list of entries</span>&#x000A;<span class="keyword">var</span> ListView = Backbone.View.extend ({&#x000A;  <span class="key">el</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#articlesList</span><span class="delimiter">&quot;</span></span>),&#x000A;  <span class="key">events</span>: {&#x000A;  },&#x000A;  <span class="function">initialize</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.collection.bind(<span class="string"><span class="delimiter">'</span><span class="content">reset</span><span class="delimiter">'</span></span>, <span class="local-variable">this</span>.render, <span class="local-variable">this</span>);&#x000A;    <span class="local-variable">this</span>.collection.bind(<span class="string"><span class="delimiter">'</span><span class="content">all</span><span class="delimiter">'</span></span>, <span class="local-variable">this</span>.render, <span class="local-variable">this</span>);&#x000A;  },&#x000A;  <span class="function">render</span>: <span class="keyword">function</span>() {&#x000A;    <span class="keyword">var</span> el = <span class="local-variable">this</span>.<span class="predefined">$el</span>;&#x000A;    el.empty();&#x000A;    <span class="local-variable">this</span>.collection.each(<span class="keyword">function</span>(item) {&#x000A;      <span class="keyword">var</span> itemView = <span class="keyword">new</span> ItemView({<span class="key">model</span>: item});&#x000A;      el.append(itemView.render().el);&#x000A;    });&#x000A;    <span class="local-variable">this</span>.<span class="predefined">$el</span>.listview(<span class="string"><span class="delimiter">'</span><span class="content">refresh</span><span class="delimiter">'</span></span>);&#x000A;    <span class="keyword">return</span> <span class="local-variable">this</span>;&#x000A;  },&#x000A;});&#x000A;&#x000A;<span class="comment">//View for creating a new entry</span>&#x000A;<span class="keyword">var</span> NewView = Backbone.View.extend({&#x000A;  <span class="key">el</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new</span><span class="delimiter">&quot;</span></span>),&#x000A;  <span class="key">events</span>: {&#x000A;    <span class="key"><span class="delimiter">&quot;</span><span class="content">click #postEntry</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">createNew</span><span class="delimiter">&quot;</span></span>&#x000A;  },&#x000A;  <span class="function">initialize</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.title = <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#title</span><span class="delimiter">&quot;</span></span>);&#x000A;    <span class="local-variable">this</span>.content = <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#content</span><span class="delimiter">&quot;</span></span>);&#x000A;    &#x000A;  },&#x000A;  <span class="function">createNew</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;    <span class="keyword">if</span> (<span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;    <span class="local-variable">this</span>.collection.create({&#x000A;      <span class="key">title</span>: <span class="local-variable">this</span>.title.val(), &#x000A;      <span class="key">content</span>: <span class="local-variable">this</span>.content.val(),&#x000A;      <span class="key">email</span>: localStorage.email,&#x000A;      <span class="key">name</span>: localStorage.name&#x000A;    }, {<span class="key">at</span>: <span class="integer">0</span>});&#x000A;    <span class="local-variable">this</span>.title.val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;    <span class="local-variable">this</span>.content.val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;  } &#x000A;});&#x000A;&#x000A;<span class="comment">//View for editing the options</span>&#x000A;<span class="keyword">var</span> OptionsView = Backbone.View.extend({&#x000A;  <span class="key">el</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options</span><span class="delimiter">&quot;</span></span>),&#x000A;  <span class="key">events</span>: {&#x000A;    <span class="key"><span class="delimiter">&quot;</span><span class="content">click #saveOpt</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">saveOptions</span><span class="delimiter">&quot;</span></span>&#x000A;  },&#x000A;  <span class="function">initialize</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.name = <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optName</span><span class="delimiter">&quot;</span></span>);&#x000A;    <span class="local-variable">this</span>.email = <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optEmail</span><span class="delimiter">&quot;</span></span>);&#x000A;    &#x000A;    <span class="comment">// Assign the options from the local storage</span>&#x000A;    <span class="local-variable">this</span>.name.val(localStorage.name);&#x000A;    <span class="local-variable">this</span>.email.val(localStorage.email);&#x000A;  },&#x000A;  <span class="function">saveOptions</span>: <span class="keyword">function</span>() {&#x000A;    <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="local-variable">this</span>.<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;    localStorage.name = <span class="local-variable">this</span>.name.val();&#x000A;    localStorage.email = <span class="local-variable">this</span>.email.val();&#x000A;  }&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The views and the templates are initialized in the jQuery ready function as we show below:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> Templates = {};&#x000A;<span class="keyword">var</span> articles;&#x000A;&#x000A;<span class="comment">//Here goes the model definition</span>&#x000A;...      &#x000A;      &#x000A;<span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="comment">//Load the templates and store them in a global variable</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">script[type=&quot;text/x-handlebars-template&quot;]</span><span class="delimiter">'</span></span>).each(<span class="keyword">function</span> () {&#x000A;    Templates[<span class="local-variable">this</span>.id] = Handlebars.compile(<span class="predefined">$</span>(<span class="local-variable">this</span>).html());&#x000A;  });&#x000A;  &#x000A;  <span class="comment">//Here goes the declaration of the views</span>&#x000A;  ...&#x000A;&#x000A;  <span class="comment">//Trigger an update of the articles collection </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#refresh</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">click</span><span class="delimiter">'</span></span>,<span class="keyword">function</span> () {&#x000A;    articles.fetch();&#x000A;  });    &#x000A;  &#x000A;  <span class="comment">//Instantiate the collection of articles</span>&#x000A;  <span class="keyword">var</span> articles = <span class="keyword">new</span> Articles();&#x000A;&#x000A;  <span class="comment">//Instantiate the views</span>&#x000A;  <span class="keyword">var</span> listView = <span class="keyword">new</span> ListView({<span class="key">collection</span>: articles});&#x000A;  <span class="keyword">var</span> newView = <span class="keyword">new</span> NewView({<span class="key">collection</span>: articles});&#x000A;  <span class="keyword">var</span> optionsView = <span class="keyword">new</span> OptionsView();&#x000A;  &#x000A;  <span class="comment">//Fetch the latest articles and trigger an update of the views</span>&#x000A;  articles.fetch();&#x000A;})</pre></div>
+</div>
+</div>
+<p>
+Note that to initialized the views we simply call the<span class='terminal'>
+fetch()
+</span>method on the collection of articles. Once the collection has been fetched from the server, the change event is sent to
+ListView and it will trigger a re-render of the view.
+</p>
+<p>
+On the server side, we make minor changes to the index.haml by adding the<span class='terminal'>
+id="articlesList"
+</span>to the listview:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>)&#x000A;  = haml <span class="symbol">:header</span>&#x000A;  &#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">articlesList</span><span class="delimiter">&quot;</span></span>)&#x000A;    &#x000A;  = haml <span class="symbol">:footer</span>&#x000A;  ...</pre></div>
+</div>
+</div>
+<p>
+In the footer we add an additional item for refreshing the view:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%ul</span>&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#home</span><span class="delimiter">&quot;</span></span>  <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">refresh</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">refresh</span><span class="delimiter">&quot;</span></span>) Refresh&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">flip</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plus</span><span class="delimiter">&quot;</span></span>) New Entry&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>
