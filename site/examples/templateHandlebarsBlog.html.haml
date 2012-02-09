@@ -1,0 +1,282 @@
+=example_header_tag "Client templating with Handlerbars.js", "templateHanderlbarsBlog"
+
+%p
+  In this example we experiment with the client-side templating mechanism of 
+  %a(href="http://www.handlebarsjs.com")Handlerbars.js
+  As a starting point we use the example 
+  =example_url_tag("htmljQueryStorageBlog") 
+  and we modify the way the list of post entries is generated. Instead of generating the list on the server side,
+  we do the following: 
+  %ol
+    %li Create a template of one entry using Haml and Handlebar.js
+    %li Compile and store the template on the client side
+    %li Fill the template with the JSON data from the server
+    %li Render the template using jQuery
+
+%p
+  The first step is to download the latest Handlerbars.js javascript code from 
+  %a(href="https://github.com/wycats/handlebars.js/downloads") here
+  (we download the full script, not just the runtime) and store it in the 
+  %span.terminal>
+    /public
+  directory.
+%p 
+  Then we add the script in the head of the HTML document:
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;")
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %script(type="text/javascript" src="handlebars-1.0.0.beta.6.js")
+        %title
+          Form Blog
+        ...
+%p
+  By reusing the code in the old 
+  %span.terminal>
+    views/posts.haml
+  we create the handlerbar.js template in the following file:
+  
+.code_block
+  .code_header
+    views/templates.haml  
+  :coderay_raw
+    #!haml
+    %script(id="articles" type="text/x-handlebars-template")
+      %ul(data-role = "listview")
+        {{#articles}}  
+        %li
+          %p.ui-li-aside
+            {{timestamp}}
+          %h3(contenteditable="true" data-name="title" data-id='{{id}}') 
+            {{title}}
+          %p
+            %strong
+              {{email}}
+          %p(contenteditable="true" data-name="content" data-id='{{id}}')
+            {{content}}
+        {{/articles}}
+
+%p
+  The Mustache notation 
+  %span.terminal>
+    {{#articles}}  ...  {{/articles}}
+  allows us to iterate the array of articles and for each item we generate the HTML code for rendering the post entry. 
+  The notation 
+  %span.terminal>
+    {{expression}}
+  allows us to access the hash values of the items that we are iterating over(i.e. timestamp, title, email, etc).
+%p 
+  Note that we access a new field called 
+  %span.termainl>
+    id
+  that represents a unique identifier for the items in the array of artciles (previously we just used a counter).
+  We add the new field when we create a new post entry with the following code:
+
+.code_block
+  .code_header
+    server.rb  
+  :coderay_raw
+    #!ruby
+    ...
+    $articles = [{ :title => "Welcome", 
+                   :content => "My first post",
+                   :email => "hello@blog.com",
+                   :timestamp => "1.1.2012 10:20:30",
+                   :id => 0}]
+
+    post '/new' do
+      #Symbolize the params keys
+      article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }
+      
+      article[:timestamp] = timestamp
+      article[:id] = $articles.length
+      $articles << article
+    
+      puts $articles
+      redirect to ("/")
+    end
+    ...
+
+%p
+  Now we modify the views of the web app. First we add the Handlerbars.js template to the HTML document:
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!haml
+    %body
+      = haml :templates
+      = yield
+
+%p
+  and we remove the code for generating the list of posts on the server side:
+
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="page" id="home")
+    = haml :header
+    
+    %div(data-role="content" id="articlesList")
+    
+    = haml :footer
+%p
+  Note that the jQuery page now only contains header, footer and the empty placeholder (with 
+  %span.terminal>
+    id="articlesList"
+  ) where we'll insert the list of posts dynamically at runtime. 
+  
+%p 
+  We are done with the changes on the server-side, now we move on the client-side. The first change is to add the code
+  for compiling the Handlerbars.js templates and storing them in a array:
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+    var Templates = {};
+
+    $(function() {
+        
+      $('script[type="text/x-handlebars-template"]').each(function () {
+        Templates[this.id] = Handlebars.compile($(this).html());
+      });
+      ...
+%p
+  Now, our template is accessible with 
+  %span.terminal>
+    Templates.articles
+  and can we can instantiate it in the following way:
+:coderay_raw
+  #!javascript
+  var list = {
+    articles: [
+      title: "Welcome",
+      content: "My first post",
+      email: "hello@blog.com",
+      timestamp: "1.1.2012 10:20:30",
+      id:0
+    ]
+  }  
+  var html = Templates.articles(list);
+  
+%p
+  The previous code will store in the variable
+  %span.terimnal>
+    html
+  the following HTML code:
+
+:coderay_raw
+  #!html
+  <ul data-role="listview" class="ui-listview">
+    <li><p class="ui-li-aside">1.1.2012 10:20:30</p>
+      <h3 contenteditable="true" data-id="0" data-name="title">Welcome</h3>
+      <p><strong>hello@blog.com</strong></p>
+      <p contenteditable="true" data-id="0" data-name="content">
+        My first post
+      </p>
+    </li>
+  </ul>
+
+%p
+  The last part is to generate the list dynamically. On the server side we add a new controller for generating the list of
+  articles in JSON format: 
+.code_block
+  .code_header
+    server.rb  
+  :coderay_raw
+    #!ruby
+    get '/articles' do
+      content_type :json
+      {:articles => $articles}.to_json
+    end
+
+%p
+  On the client side we add the code for fetching the JSON data from the server, generating the HTML code from the template 
+  and injecting it inside the page. This operation is carried out by the function
+  %span.terminal>
+    loadArticles
+
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+      var Templates = {};
+
+      function loadArticles () {
+        $.getJSON('/articles', function(json) {
+          var content = Templates.articles(json);
+          $("#articlesList").html(content).find("ul").listview();
+        });
+      }
+  
+      $(function() {
+        $('script[type="text/x-handlebars-template"]').each(function () {
+          Templates[this.id] = Handlebars.compile($(this).html());
+        });
+
+        loadArticles();
+        ...
+
+%p 
+  The function 
+  %span.terminal>
+    loadArticles
+  is invoked when the document is ready in order to fill the page with the lastest articles. Since we are replacing
+  the HTML content of the 
+  %span.terminal>
+    articlesList
+  we must invoke the jQuery initalization function for the listview.
+  
+%p 
+  We also modify the function for creating new articles by adding a call to 
+  %span.terminal>
+    loadArticles
+  to refresh the list of articles in the home page before moving there: 
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+      $("#postEntry").bind("click", function(e) {
+        e.preventDefault();
+        $("#new .invalid").removeClass("invalid")
+        if ($("#new :invalid").length) {
+          $("#new :invalid").addClass("invalid");
+          return false;
+        }
+        var msg = {};
+        msg['title'] = $('#title').val();
+        msg['content'] = $('#content').val();
+        msg['email'] = localStorage.email;
+        msg['name'] = localStorage.name;
+        $.post('/new', msg, function() {
+          loadArticles();
+          $.mobile.changePage("/");
+        });
+      });    
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

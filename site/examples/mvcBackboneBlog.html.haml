@@ -1,0 +1,342 @@
+=example_header_tag "Blog based on Backbone.js", "mvcBackboneBlog"
+
+%p
+  In this example we experiment with the client-side framework
+  %a(href="http://documentcloud.github.com/backbone")Backbone.js
+  and we refactor the design of the example 
+  =example_url_tag("templateHandlearsBlog") 
+  \. On the client-side we clearly separate the models from the view and on the server-side we implement a RESTful API
+  to support Backbone.js' model syncrhonization mechanis.
+
+%p
+  The first step is to download the latest code for Backbone.js 
+  %a(href="http://documentcloud.github.com/backbone/backbone.js") Backbone.js
+  ,
+  %a(href="http://documentcloud.github.com/underscore/underscore.js") Underscore
+  and 
+  %a(href="https://github.com/douglascrockford/JSON-js") Json2
+  \. We place the javascript files in the 
+  %span.terminal>
+    /public
+  directory and include them in our HTML file:
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;")
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %script(type="text/javascript" src="handlebars-1.0.0.beta.6.js")
+        %script(type="text/javascript" src="underscore.js")
+        %script(type="text/javascript" src="json2.js")
+        %script(type="text/javascript" src="backbone.js")
+     
+        %title
+          Blog
+        ...
+%p
+  We create one model for the article and the collection that will contain the articles that we fetch from the server. 
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+      var Article = Backbone.Model.extend ({
+      });
+
+      var Articles = Backbone.Collection.extend ({
+        model: Article,
+        url: '/articles'
+      });
+
+%p On the server side we create a RESTful API for fetching, creating, updating and deleting the articles:
+.code_block
+  .code_header
+    server.ruby  
+  :coderay_raw
+    #!ruby
+    #REST API for Articles
+    get '/articles' do
+      content_type :json
+      $articles.to_json
+    end
+    
+    get '/articles/:id' do
+      puts "*** get article #{params[:id]}"
+      if params[:id].to_i > $articles.length
+        status 404
+      else
+        content_type :json
+        $articles[params[:id].to_i].to_json
+      end
+    end
+    
+    post '/articles' do
+      puts "*** Created article: #{request.body.string}"
+      data = JSON.parse(request.body.string)
+      if data.nil?
+        status 400
+      else
+        article = {}
+        [:title, :content, :email, :name].each do |k|
+          article[k] = data[k.to_s] || ""
+        end
+        article[:timestamp] = timestamp
+        article[:id] = $articles.length
+        $articles.unshift(article)
+        puts "    new article: #{article}"
+        
+        article.to_json  
+      end
+    end
+    
+    put '/articles/:id' do
+      puts "*** update article #{params[:id]}"
+      data = JSON.parse(request.body.string)
+      if data.nil?
+        status 400
+      else
+        article = {}
+        [:title, :content, :email, :name].each do |k|
+          article[k] = data[k.to_s] || ""
+        end
+        article[:timestamp] = timestamp
+        article[:id] = params[:id].to_i
+        
+        #Replace the entry in the list of articles
+        $articles[article[:id].to_i].merge!(article)
+    
+        puts "    new value: #{article}"
+        content_type :json
+        $articles[params[:id].to_i].to_json
+      end
+    end
+    
+    delete '/articles/:id' do
+      puts "*** delete article #{params[:id]}"
+      if params[:id].to_i >= $articles.length
+        status 404
+      else
+        $articles.delete_at(params[:id].to_i)
+      end 
+    end
+%p 
+  The next step is to create the views of the application. We'll need for views:
+  %ul
+    %li 
+      %strong.terminal>
+        ItemView
+      \: represents one article consisting of title, content, email and timestamp.
+    %li
+      %strong.terminal>
+        ListView
+      \: represents the list of articles. It renders a jQuery listivew where each item is a ItemView object.
+    %li
+      %strong.terminal>
+        NewView
+      \: it's used for creating a new article that is added to the collection of articles.
+    %li
+      %strong.terminal>
+        OptionsView
+      \: it's used for editing name and email that are stored in the localStorage.
+         
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+    //View for rendering one entry of the blog
+    var ItemView = Backbone.View.extend ({
+      tagName: "li",
+      events: {
+        "blur [contenteditable]": "saveValues"
+      },
+      initialize: function() { 
+        this.model.bind('change', this.render, this);
+        this.template = Templates.article;  
+      },
+      render: function() { 
+        $(this.el).html( this.template(this.model.toJSON()) ); 
+        return this; 
+      },
+      saveValues: function() {
+        this.model.save({
+          title: this.$("[data-name='title']").html(), 
+          content: this.$("[data-name='content']").html()
+        },{silent: true});
+      }        
+    });
+    
+    //View for rendering the list of entries
+    var ListView = Backbone.View.extend ({
+      el: $("#articlesList"),
+      events: {
+      },
+      initialize: function() {
+        this.collection.bind('reset', this.render, this);
+        this.collection.bind('all', this.render, this);
+      },
+      render: function() {
+        var el = this.$el;
+        el.empty();
+        this.collection.each(function(item) {
+          var itemView = new ItemView({model: item});
+          el.append(itemView.render().el);
+        });
+        this.$el.listview('refresh');
+        return this;
+      },
+    });
+    
+    //View for creating a new entry
+    var NewView = Backbone.View.extend({
+      el: $("#new"),
+      events: {
+        "click #postEntry": "createNew"
+      },
+      initialize: function() {
+        this.title = this.$("#title");
+        this.content = this.$("#content");
+        
+      },
+      createNew: function() {
+        this.$(".invalid").removeClass("invalid");
+        if (this.$(":invalid").length) {
+          this.$(":invalid").addClass("invalid");
+          return false;
+        }
+        this.collection.create({
+          title: this.title.val(), 
+          content: this.content.val(),
+          email: localStorage.email,
+          name: localStorage.name
+        }, {at: 0});
+        this.title.val("");
+        this.content.val("");
+      } 
+    });
+
+    //View for editing the options
+    var OptionsView = Backbone.View.extend({
+      el: $("#options"),
+      events: {
+        "click #saveOpt": "saveOptions"
+      },
+      initialize: function() {
+        this.name = this.$("#optName");
+        this.email = this.$("#optEmail");
+        
+        // Assign the options from the local storage
+        this.name.val(localStorage.name);
+        this.email.val(localStorage.email);
+      },
+      saveOptions: function() {
+        this.$(".invalid").removeClass("invalid")
+        if (this.$(":invalid").length) {
+          this.$(":invalid").addClass("invalid");
+          return false;
+        }
+        localStorage.name = this.name.val();
+        localStorage.email = this.email.val();
+      }
+    });
+
+%p
+  The views and the templates are initialized in the jQuery ready function as we show below:
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+    var Templates = {};
+    var articles;
+
+    //Here goes the model definition
+    ...      
+          
+    $(function() {
+      //Load the templates and store them in a global variable
+      $('script[type="text/x-handlebars-template"]').each(function () {
+        Templates[this.id] = Handlebars.compile($(this).html());
+      });
+      
+      //Here goes the declaration of the views
+      ...
+
+      //Trigger an update of the articles collection 
+      $("#refresh").live('click',function () {
+        articles.fetch();
+      });    
+      
+      //Instantiate the collection of articles
+      var articles = new Articles();
+
+      //Instantiate the views
+      var listView = new ListView({collection: articles});
+      var newView = new NewView({collection: articles});
+      var optionsView = new OptionsView();
+      
+      //Fetch the latest articles and trigger an update of the views
+      articles.fetch();
+    })
+%p
+  Note that to initialized the views we simply call the 
+  %span.terminal>
+    fetch()
+  method on the collection of articles. Once the collection has been fetched from the server, the change event is sent to
+  ListView and it will trigger a re-render of the view.
+
+%p 
+  On the server side, we make minor changes to the index.haml by adding the 
+  %span.terminal>
+    id="articlesList"
+  to the listview: 
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="page" id="home")
+      = haml :header
+      
+      %div(data-role="content")
+        %ul(data-role = "listview" id="articlesList")
+        
+      = haml :footer
+      ...
+%p
+  In the footer we add an additional item for refreshing the view:
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %div(data-role="footer" data-position="fixed")
+    %div(data-role="navbar")
+      %ul
+        %li
+          %a(href="/" data-icon="home") Posts
+        %li
+          %a(href="#home"  data-icon="refresh" id="refresh") Refresh
+        %li
+          %a(href="#new" data-transition="flip" data-icon="plus") New Entry
+   
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

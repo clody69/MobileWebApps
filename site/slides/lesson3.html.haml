@@ -1,24 +1,981 @@
-=title_slide_tag("Lecture 3: CSS3")
+=title_slide_tag("Lecture 3: Templating")
 
 %section.slide.section-title
-  %h1 Lesson 3: 
+  %h1 Lecture 3: Templating
+  .agenda
+    %p MVC
+    %p Templates
+    %p Assets Precompilation
+    
 
 %section.slide
-  %header Scrolling
+  %header
+    Traditional Sequence in a Web Request 
   %article
-    Explain: 
-    overflow: scroll
-    \-webkit-overflow-scrolling: touch;
-    position: fixed
+    .row
+      .twoColumn
+        =image_tag('lesson3/mvc-traditional.png')
+      .twoColumn
+        .autobox.smaller
+          Model
+          :coderay
+            #!ruby
+            $articles = [{ :title => "Welcome", :content => "My first post",
+              :email => "hello@blog.com", :timestamp => "1.1.2012 10:20:30"}]
+          
+          Router + Controller
+          :coderay
+            #!ruby
+            get '/' do 
+              haml :index, :layout => :layout
+            end
+
+          Template
+          :coderay
+            #!ruby
+            %div(data-role="content")
+              %ul(data-role = "listview")
+                - $articles.each_with_index do |a, i|
+                  %li
+                    %p.ui-li-aside
+                      =a[:timestamp]
+                    %h3(contenteditable="true" data-name="title" data-id='\#{i}') 
+                      =a[:title]
+                    %p
+                      %strong
+                        =a[:email]
+                    %p(contenteditable="true" data-name="content" data-id='\#{i}')
+                      =a[:content]       
+
+%section.slide
+  %header
+    Traditional Response
+  %article.smaller
+    :coderay
+      #!html
+      <div data-role='content'>
+        <ul data-role='listview'>
+          <li>
+            <p class='ui-li-aside'>1.1.2012 10:20:30</p>
+            <h3 contenteditable='true' data-id='0' data-name='title'>Welcome</h3>
+            <p>
+              <strong>hello@blog.com</strong>
+            </p>
+            <p contenteditable='true' data-id='0' data-name='content'>My first post</p>
+          </li>
+          <li>
+            <p class='ui-li-aside'>04.02.2012 12:28:31</p>
+            <h3 contenteditable='true' data-id='1' data-name='title'>Test</h3>
+            <p>
+              <strong>hello@blog.com</strong>
+            </p>
+            <p contenteditable='true' data-id='1' data-name='content'>This is test content</p>
+          </li>
+        </ul>
+      </div>
+
+%section.slide
+  %header
+    Important Data in Response
+  %article.smaller
+    %pre
+      :escaped
+        <div data-role='content'>
+          <ul data-role='listview'>
+            <li>
+              <p class='ui-li-aside'>
+      %span.red><
+        1.1.2012 10:20:30
+      :escaped        
+        </p>
+              <h3 contenteditable='true' data-id='
+      %span.red><
+        0
+      :escaped
+        ' data-name='title'>
+      %span.red><
+        Welcome
+      :escaped
+        </h3>
+              <p>
+                <strong>
+      %span.red><
+        hello@blog.com
+      :escaped
+        </strong>
+              </p>
+              <p contenteditable='true' data-id='
+      %span.red><
+        0
+      :escaped
+        ' data-name='content'>
+      %span.red><          
+        My first post
+      :escaped
+        </p>
+            </li>
+            <li>
+              <p class='ui-li-aside'>
+      %span.red><
+        04.02.2012 12:28:31
+      :escaped
+        </p>
+              <h3 contenteditable='true' data-id='
+      %span.red><
+        1
+      :escaped
+        ' data-name='title'>
+      %span.red><
+        Test
+      :escaped
+        </h3>
+              <p>
+                <strong>
+      %span.red><
+        hello@blog.com
+      :escaped
+        </strong>
+              </p>
+              <p contenteditable='true' data-id='
+      %span.red><
+        1
+      :escaped
+        ' data-name='content'>
+      %span.red><
+        This is test content
+      :escaped
+        </p>
+            </li>
+          </ul>
+        </div>
+
+%section.slide
+  %header Client-side templating
+  %article
+    :coderay
+      #!haml
+      %ul(data-role = "listview")
+        {{#articles}}  
+        %li
+          %p.ui-li-aside
+            {{timestamp}}
+          %h3(contenteditable="true" data-name="title" data-id='{{id}}') 
+            {{title}}
+          %p
+            %strong
+              {{email}}
+          %p(contenteditable="true" data-name="content" data-id='{{id}}')
+            {{content}}
+        {{/articles}}
+    :coderay
+      #!javascript
+      {
+        articles: [
+          title: "Welcome",
+          content: "My first post",
+          email: "hello@blog.com",
+          timestamp: "1.1.2012 10:20:30",
+          id:0
+        ]
+      }  
+
+%section.slide
+  %header Handlebars.js
+  %article
+    %p 
+      %a(href="http://handlebarsjs.com/") Handlebars.js 
+      provides the tools for building 
+      %strong semantic templates
+      that can be compiled and instantiated on the client-side
+    .autobox.vmargin
+      .row
+        .twoColumn
+          .autobox
+            Template
+            :coderay
+              #!html
+              <script id="entry" type="text/x-handlebars-template">
+                <div>
+                  <h1>{{title}}</h1>
+                  <div class="content">
+                    {{content}}
+                  </div>
+                </div>
+              </script>  
+        .twoColumn
+          .autobox
+            Instance  
+            :coderay
+              #!html
+              <div>
+                <h1>My New Post</h1>
+                <div class="content">
+                  This is my first post!
+                </div>
+              </div>
+    :coderay
+      #!javascript
+      var source   = $("#entry").html();
+      var template = Handlerbars.compile(source);
+      var context  = {title: "My New Post", body: "This is my first post!"}
+      var html     = template(context);
+
+%section.slide
+  %header
+    Blog with Templates
+    %span.smaller
+      =example_url_tag("templateHandlebarsBlog")
+
+  %article
+  .row
+    .twoColumn
+      .autobox
+        views/templates.haml  
+        :coderay
+          #!haml
+          %script(id="articles" type="text/x-handlebars-template")
+            %ul(data-role = "listview")
+              {{#articles}}  
+              %li
+                %p.ui-li-aside
+                  {{timestamp}}
+                %h3(contenteditable="true" data-name="title" data-id='{{id}}') 
+                  {{title}}
+                %p
+                  %strong
+                    {{email}}
+                %p(contenteditable="true" data-name="content" data-id='{{id}}')
+                  {{content}}
+              {{/articles}}
+    .twoColumn
+      .autobox
+        views/layout.haml  
+        :coderay
+          #!haml
+          %body
+            = haml :templates
+            = yield
+            
+        views/index.haml  
+        :coderay
+          #!haml
+          %div(data-role="page" id="home")
+            = haml :header
+            %div(data-role="content" id="articlesList")
+            = haml :footer
+          %div(data-role="page" id="new")
+            = haml :header
+            %div(data-role="content")
+              = haml :new
+            =haml :footer      
+          %div(data-role="page" id="options")
+            =haml :options
+            =haml :footer                  
+
+%section.slide
+  %header
+    Blog with Templates
+    %span.smaller
+      =example_url_tag("templateHandlebarsBlog")
+
+  %article
+    server.rb
+    :coderay
+      #!ruby
+      get '/articles' do
+        content_type :json
+        {:articles => $articles}.to_json
+      end
     
-    Now available on iOS 5
-    http://johanbrook.com/browsers/native-momentum-scrolling-ios-5/
+    views/layout.haml  
+    :coderay
+      #!javascript
+        var Templates = {};
+  
+        function loadArticles () {
+          $.getJSON('/articles', function(json) {
+            var content = Templates.articles(json);
+            $("#articlesList").html(content).find("ul").listview();
+          });
+        }
     
-    One demo: http://frontendstuff.com/css/examples/overflow-scroll.html
+        $(function() {
+          $('script[type="text/x-handlebars-template"]').each(function () {
+            Templates[this.id] = Handlebars.compile($(this).html());
+          });
+  
+          loadArticles();
+          ...
+%section.slide
+  %header
+    Achievements
+  %article
+    .row
+      .twoColumn
+        =image_tag('lesson3/mvc-templates.png')
+      .twoColumn
+        .autobox
+          %ul
+            %li
+              Controller provides a clear 
+              %strong
+                interface
+            %li
+              Server-side view prepares 
+              %strong 
+                formatted output
+              (as a 
+              %strong decorator
+              )
+            %li
+              Client-side receives a decorated
+              %strong JSON
+              and a 
+              %strong template
+              in HTML/JS
+            %li
+              Client 
+              %strong instantiates 
+              the template with the JSON data and 
+              %strong renders
+              it
+            %li
+              Less work on server-side means 
+              %strong more requests per second
+            %li
+              Views become API customers, 
+              %strong
+                unifying the data interface
+%section.slide
+  %header Templating Tools
+  %articles
+    %ul
+      %li
+        %strong 
+          %a(href="") Mustache
+        \: Generic logic-less templates for HTML, config files, code, anything.
+      %li
+        %strong 
+          %a(href="") Mustache.js
+        \: Mustache implementation in Javasscript
+      %li
+        %strong 
+          %a(href="") Haml-js
+        \: Haml implemenation in Javascript (popular with node.js)
+      %li
+        %strong 
+          %a(href="") Eco
+        \: Embed CoffeScript logic in markup (popular with node.js)
+      %li
+        %strong
+          %a(href="") ICanHaz.js
+        \: JS helper for client-side templating.
+
+%section.slide
+  %header
+    Towards a Client-Side MVC Architecture
+  %article
+    .row
+      .twoColumn
+        =image_tag('lesson3/mvc-client.png')
+      .twoColumn
+        .autobox
+          Various MVC frameworks:
+          %ul
+            %li
+              %strong
+                %a(href="http://documentcloud.github.com/backbone") Backbone.js
+            %li
+              %a(href="http://sproutcore.com") Sproutcore
+            %li
+              %a(href="http://cappuccino.org") Cappuccino
+            %li
+              %a(href="http://knockoutjs.com") KnockoutJS 
+            %li
+              %a(href="http://javascriptmvc.com") JavaScriptMVC
+            %li
+              %a(href="http://sammyjs.org") Sammy.js
+         
+%section.slide
+  %header Backbone.js 
+  %article
+    Backbone.js supplies structures to web applications by providing:
+    %ul 
+      %li 
+        %strong 
+          models
+        with key-value binding and custome events
+      %li
+        %strong
+          collections
+        with a rich API for enumerable functions
+      %li
+        %strong
+          views
+        with declarative handling
+      %li
+        %strong
+          routers
+        for connecting client-side pages to actions and events
+      %li
+        %strong
+          RESTful JSON interface 
+        for connecting to existing applications
+
+%section.slide
+  %header Backbone.js
+  %article
+    Adantages:
+    %ul
+      %li No assumptions about the UI
+      %li Flexible about the data persistence possibilities
+      %li Support any HTML templatng engine
+      %li Only hard dependency is with Underscore.js
+      %li Lightweight: no UI widgets
+      %li Backend agnostic by using RESTful JSON endpoints
+            
+%script(type="text/javascript" src="js/underscore.js")
+%script(type="text/javascript" src="js/json2.js")
+%script(type="text/javascript" src="js/backbone.js")
+
+%section.slide
+  %header Backbone.js - Models
+  %article
+    =image_tag('lesson3/backbone-model.png')
+  
+
+%section.slide
+  %header Let's try it in the Javascript console
+  %article
+    :coderay
+      #!javascript
+      var Book = Backbone.Model.extend({});
+      var book = new Book;
+      //try book, book.id
+      book.set('title', 'Hello');
+      book.set({author: "someone"});
+      book.get('title'); //book.attributes
+      book.isNew();
+      book.save(); 
+      book.url(); 
+      book.urlRoot;
+      book.urlRoot = "/books";
+      book.save();
+      book.fetch();
+
+%section.slide
+  %header Backbone.js - Collections
+  %article
+    =image_tag('lesson3/backbone-collection.png')
+
+%section.slide
+  %header Let's try it in the Javascript console
+  %article
+    :coderay
+      #!javascript
+      var Book = Backbone.Model.extend({});
+      var Library = Backbone.Collection.extend({model: Book});
+      var library = new Library;
+      var book = library.create({title: "Hello", author: "myself"});
+      library.url = "/books";
+      var book = library.create({title: "Hello", author: "myself"});
+      var book = library.create({title: "Stories", author: "myself"}, {wait: true});
+      library.models;
+      JSON.stringify(library.toJSON);
+      library.fetch();
+      library.reset();
+      //Add and Remove don't trigger Backbone.sync
+      book = new Book({title: "HTML5", author: "myself"});
+      library.add(book);
+      //Saving the model will trigger the Backbone.sync
+      book.save();
+      //The model is only removed from the collection but not from the server
+      library.remove(book);
+      //To remove from the server user either:
+      library.remove(book).destroy();
+      //or:
+      book.destroy(); //deletes from all collections as well
+
+%section.slide
+  %header
+    Backbone Model for Blog
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    .row.small
+      .twoColumn
+        .autobox
+          Read collection
+          :coderay
+            #!ruby
+            get '/articles' do
+              content_type :json
+              $articles.to_json
+            end
+          Read item
+          :coderay
+            #!ruby
+            get '/articles/:id' do
+              content_type :json
+              $articles[params[:id].to_i].to_json
+            end          
+          Create item
+          :coderay
+            #!ruby
+            post '/articles' do
+              data = JSON.parse(request.body.string)
+              article = {}
+              [:title, :content, :email, :name].each do |k|
+                article[k] = data[k.to_s] || ""
+              end
+              article[:timestamp] = timestamp
+              article[:id] = $articles.length
+              $articles.unshift(article)
+              article.to_json  
+            end
+      .twoColumn
+        .autobox
+          Update item
+          :coderay
+            #!ruby
+            put '/articles/:id' do
+              data = JSON.parse(request.body.string)
+              article = {}
+              [:title, :content, :email, :name].each do |k|
+                article[k] = data[k.to_s] || ""
+              end
+              article[:timestamp] = timestamp
+              article[:id] = params[:id].to_i
+              
+              $articles[article[:id].to_i].merge!(article)
+          
+              content_type :json
+              $articles[params[:id].to_i].to_json
+            end
+          Destroy item
+          :coderay  
+            #!ruby
+            delete '/articles/:id' do
+              $articles.delete_at(params[:id].to_i)
+            end               
+%section.slide
+  %header Let's test the model in the Javascript console
+  %article
+    :coderay
+      #!javascript
+      articles.fetch();
+      articles.length;
+      articles.create([{title: "First Post"}, {title: "Second post"}]);
+      articles.reset();
+      articles.fetch();
+      articles.at(2).set({title: "Something", content: "different"}).save();
+      articles.at(1).remove();
+      
+%section.slide
+  %header Backbone.js - Events
+  %article
+    =image_tag('lesson3/backbone-events.png')
+
+%section.slide
+  %header Let's test the events in the Javascript console
+  %article
+    :coderay
+      #!javascript
+      articles.fetch();
+      m=articles.at(0);
+      //Event for all changes of the model
+      m.on('change', function(model) { alert(JSON.stringify(model.changedAttributes())); } );
+      m.set('title', 'a new value');
+      //Event only for changes of the content
+      m.on('change:content', function(model) { alert(JSON.stringify(model.changedAttributes())); } );
+      //Events can be set on the collection as well.
+      articles.on('change', function(model) {alert(JSON.stringify(model.changedAttributes()))});
+
+%section.slide
+  %header
+    Backbone.js - View
+  %article
+    .autobox
+      A view handles two duties fundamentally:
+      %ul
+        %li Listen to events thrown by the DOM and models/collections.
+        %li Represent the application’s state and data model to the user.
+    :coderay
+      #!javascript
+      var View = Backbone.view.extend ({
+        tagName: "div",          //tag of the generated element
+        className: "item",       //class of the generated element
+        id: "home",              //id of the generated element
+        el: $('#homeContainer'), //reference to the DOM element
+        
+        //function for rendering the view
+        render: function() { this.el.innerHTML = ... ; return this; }
+      });
+      
+      var v = new View(); //Instantiate a view
+      v.el;  // DOM element of the view
+      v.$el; //Cached jQuery object for the view's element
+      v.render(); //Renders the view into the element
+      v.render().el; //DOM element of the rendered view
+          
+%section.slide
+  %header
+    Inserting a view in the DOM
+  %article
+    :coderay
+      #!javascript
+      var itemView = Backbone.View.extend ({
+        tagName: "li",
+        className: "item",
+        render: function() { this.el.innerHTML = 'Hello'; return this; }
+      });
+      
+      i.el;
+      i.render().el;
+      $("#articlesList").html(i.render().el);
+
+%section.slide
+  %header
+    Attaching the View to an Existing DOM Element
+  %article
+    :coderay
+      #!javascript
+      var itemView1 = Backbone.View.extend ({
+        el: $("#articlesList"),
+        render: function() { $(this.el).html('Hello'); return this; }
+      });
+      
+      var i1 = new itemView1();
+      i1.render();
+      
+      var itemView2 = Backbone.View.extend ({
+        el: $("#articlesList"),
+        render: function() { $(this.el).html('Hello World'); return this; }
+      });
+      
+      var i2 = new itemView1();
+      i2.render();
+      i2.$el.html('Cheers');
+
+%section.slide
+  %header
+    Attaching a Model to a View
+  %article
+    :coderay
+      #!javascript
+      var itemView = Backbone.View.extend ({
+        el: $("#articlesList"),
+        render: function() { $(this.el).html(this.model.get('title') + "," + this.model.get('content')); return this; }
+      });
+      
+      var m = new Article({title: "Hello World", content: "not much to say"});
+      var v = new itemView({model: m});
+      
+      v.render();
+
+%section.slide
+  %header
+    Binding the View to the Model
+  %article
+    :coderay
+      #!javascript
+      var itemView = Backbone.View.extend ({
+        el: $("#articlesList"),
+        initialize: function() { this.model.bind('change', this.render, this); }, 
+        render: function() { $(this.el).html(this.model.get('title') + "," + this.model.get('content')); return this; }
+      });
+      
+      var m = new Article({title: "Hello World", content: "not much to say"});
+      var v = new itemView({model: m});
+      
+      v.render();
+      m.set('title','Good morning');
+
+%section.slide
+  %header
+    Binding to the View's Events
+  %article
+    :coderay
+      #!javascript
+      var itemView = Backbone.View.extend ({
+        el: $("#articlesList"),
+        events: {'click': 'handleClick'},
+        initialize: function() { this.model.bind('change', this.render, this); }, 
+        render: function() { $(this.el).html(this.model.get('title') + "," + this.model.get('content')); return this; },
+        handleClick: function() { this.$el.fadeOut().fadeIn(); }
+      });
+      
+      var m = new Article({title: "Hello World", content: "not much to say"});
+      var v = new itemView({model: m});
+      
+      v.render();
+      
+%section.slide
+  %header Backbone.js - View
+  %article
+    =image_tag('lesson3/backbone-view.png', :resize => true)
+
+%section.slide
+  %header Backbone.js - User Triggers an Update to the Server
+  %article
+    =image_tag('lesson3/backbone-user-triggers-update.png', :resize => true)
+
+%section.slide
+  %header Backbone.js - Server's Changes trigger an Update
+  %article
+    =image_tag('lesson3/backbone-server-update.png', :resize => true)
+
+%section.slide
+  %header
+    Backbone Blog - Model
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+      var Article = Backbone.Model.extend ({
+      });
+
+      var Articles = Backbone.Collection.extend ({
+        model: Article,
+        url: '/articles'
+      });
+
+%section.slide
+  %header
+    Backbone Blog - Item View
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+      //View for rendering one entry of the blog
+      var ItemView = Backbone.View.extend ({
+        tagName: "li",
+        events: {
+          "blur [contenteditable]": "saveValues"
+        },
+        initialize: function() { 
+          this.model.bind('change', this.render, this);
+          this.template = Templates.article;  
+        },
+        render: function() { 
+          $(this.el).html( this.template(this.model.toJSON()) ); 
+          return this; 
+        },
+        saveValues: function() {
+          this.model.save({
+            title: this.$("[data-name='title']").html(), 
+            content: this.$("[data-name='content']").html()
+          },{silent: true});
+        }        
+      });
+
+%section.slide
+  %header
+    Backbone Blog - List View
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+      //View for rendering the list of entries
+      var ListView = Backbone.View.extend ({
+        el: $("#articlesList"),
+        events: {
+        },
+        initialize: function() {
+          this.collection.bind('reset', this.render, this);
+          this.collection.bind('all', this.render, this);
+        },
+        render: function() {
+          var el = this.$el;
+          el.empty();
+          this.collection.each(function(item) {
+            var itemView = new ItemView({model: item});
+            el.append(itemView.render().el);
+          });
+          this.$el.listview('refresh');
+          return this;
+        },
+      });
+%section.slide
+  %header
+    Backbone Blog - New View
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+      //View for creating a new entry
+      var NewView = Backbone.View.extend({
+        el: $("#new"),
+        events: { "click #postEntry": "createNew" },
+        initialize: function() {
+          this.title = this.$("#title");
+          this.content = this.$("#content");
+        },
+        createNew: function() {
+          this.$(".invalid").removeClass("invalid");
+          if (this.$(":invalid").length) {
+            this.$(":invalid").addClass("invalid");
+            return false;
+          }
+          this.collection.create({
+            title: this.title.val(), 
+            content: this.content.val(),
+            email: localStorage.email,
+            name: localStorage.name
+          }, {at: 0});
+          this.title.val("");
+          this.content.val("");
+        } 
+      });
+
+%section.slide
+  %header
+    Backbone Blog - Options View
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+        //View for editing the options
+        var OptionsView = Backbone.View.extend({
+          el: $("#options"),
+          events: {
+            "click #saveOpt": "saveOptions"
+          },
+          initialize: function() {
+            this.name = this.$("#optName");
+            this.email = this.$("#optEmail");
+            
+            // Assign the options from the local storage
+            this.name.val(localStorage.name);
+            this.email.val(localStorage.email);
+          },
+          saveOptions: function() {
+            this.$(".invalid").removeClass("invalid")
+            if (this.$(":invalid").length) {
+              this.$(":invalid").addClass("invalid");
+              return false;
+            }
+            localStorage.name = this.name.val();
+            localStorage.email = this.email.val();
+          }
+        });
+
+%section.slide
+  %header
+    Backbone Blog - Initialization
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    :coderay
+      #!javascript
+      var Templates = {};
+      var articles;
+  
+      $(function() {
+        //Load the templates and store them in a global variable
+        $('script[type="text/x-handlebars-template"]').each(function () {
+          Templates[this.id] = Handlebars.compile($(this).html());
+        });
+  
+        //Trigger an update of the articles collection 
+        $("#refresh").live('click',function () {
+          articles.fetch();
+        });    
+        
+        //Instantiate the collection of articles
+        var articles = new Articles();
+  
+        //Instantiate the views
+        var listView = new ListView({collection: articles});
+        var newView = new NewView({collection: articles});
+        var optionsView = new OptionsView();
+        
+        //Fetch the latest articles and trigger an update of the views
+        articles.fetch();
+      }     
+%section.slide
+  %header
+    Backbone Blog - Diagram
+    %span.smaller
+      =example_url_tag("mvcBackboneBlog")
+  %article
+    =image_tag('lesson3/backbone-blog.png', :resize => true)
+
+%section.slide
+  %header Backbone.js - Summary
+  %article.singlespaced
+    %ul
+      %li
+        MVC Pattern
+        %ul.small
+          %li User or server triggers data change, never update view direcrtly
+          %li Data update triggers change event
+          %li Views can subscribe to change events and re-render
+      %li
+        Models are clearly separated from view logic. One HTTP Sync request can cause many UI updates
+      %li Support for templates (default from Underscore)
+      %li 
+        Persistence comes from Backbone.sync
+        %ul.small
+          %li The default is RESTful JSON
+          %li You can override sync() to use XML or LocalStorage
+      %li Optimized for simplicity and speed
+
+%section.slide
+  %header Backbone.js - Local Storage
+  %article
+    %ul
+      %li
+        The extension 
+        %span.terminal>
+          backbone.localstorage.js
+        provides the persistence with local storage
+      %li
+        The bad news is that the extension disables the communication with the server (rewrites 
+        %span.terminal>
+          Backbone.sync
+        )
+        
     
-    For other platforms no support but plenty of plugins, like sencha and jqtouch
+
+%section.slide
+  %header Challenge of the week
+  %article
+    %p Consider an offline application where the models are stored in the localStorage and in the cloud.
+    %p The models in the cloud are updated independently from the models in the localStorage
+    %p The models in the localStorage and in the cloud are likely to be out of sync with changes on both sides
+    %p 
+    %p Find some strategies how to keep the models in sync. Look at alternatives, constraints, creative solutions, workarounds.
+    %p
+    %p Working code is better than words
+                  
+%section.slide
+  %header Assets precompilation
+  %article
+    http://rubydoc.info/gems/handlebars_assets/0.2.0/frames
     
 %section.slide
-  %header 
-    Handling Orientation Changes
+  %header Streaming responses
   %article
+    Downloading assets in parallel using the sinatra steaming feature
+    http://www.sinatrarb.com/2011/09/30/sinatra-1.3.0
+    
+%section.slide
+  %header Resources
+  %article
+    %p 
+      for model synchroization there is Racer but not ready yet:
+      http://blog.nateps.com/announcing-racer-experimental-realtime-model
+    
+    %p 
+      Interesting example: http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/
+    %p 
+      Backbone and local storage
+      http://occdevcamp.wordpress.com/2011/10/15/backbone-local-storage-and-server-synchronization/
+      
+      
