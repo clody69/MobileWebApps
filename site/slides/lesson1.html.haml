@@ -135,11 +135,22 @@
     .vmargin
       %p.slide
         Web apps are built with open standards that are refered as "Web Technologies"
-    
+
 %section.slide
-  %header Mobile Web Apps
+  %header The Classic Web Architecture
   %article
-        
+    =image_tag "lesson1/web-arch-classic.png", :resize => true
+  
+%section.slide
+  %header Towards a New Web Architecture  
+  %article
+    =image_tag "lesson1/web-arch-new.png", :resize => true
+
+%section.slide
+  %header What the heck is a "Mobile Web App" ?
+  %article
+    Demo of FT
+    Demo of Linkedin
 
 %section.slide
   %header Developing Native Apps for Multiple Platforms
@@ -280,14 +291,6 @@
       =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
 
 %section.slide
-  %header The Classic Web Architecture
-  
-  Show MVC is moving to client
-  
-%section.slide
-  %header Towards a New Web Architecture  
-
-%section.slide
   %header jQuery Example
   %article
     .code_block
@@ -374,6 +377,49 @@
         =image_tag "senchaSimple-iphone.png", :resize => true
       .twoColumn
         =image_tag "senchaSimple-ipad.png", :resize => true
+
+%section.slide
+  %header Is it thing really working ? 
+  %article
+    %ul
+      %li 
+        .slide HTML5 performance is not goot enough ? 
+        .slide Sometimes, it is not enough
+      %li
+        .slide HTML5 is more efficient to develop ? 
+        .slide Yes, sometimes. Look at FT case.
+      %li
+        .slide HTML5 lacks good tools
+        .slide Changing fast (check Sencha)
+      %li
+        .slide HTML5 doesn't have an appstore
+        .slide Hybrid apps (PhoneGap)
+        
+        
+%section.slide
+  %header 
+    FT web app
+    %span.smaller
+      %a(href="http://blog.cohen-rose.org/2011/10/over-air-2011-ft-web-app-weve-got.html") (more info)
+
+  %article
+    %ul
+      %li Developed in 8 months by 3 people
+      %li Same web app works across multiple brands and devices
+      %li 
+        Great and responsive UI design
+        %ul
+          %li content balacingin based on device type
+          %li Audio playing while moving to other pages
+          %li Continous carousel
+          %li Preloading of content
+          %li Swipes using touch gestures
+      %li Offline access
+      %li More engagement than native app 
+
+%section.slide
+  %header LinkedIn App
+  %article      
 
 %section.slide
   %header Organization of the course

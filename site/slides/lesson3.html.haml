@@ -1,11 +1,13 @@
-=title_slide_tag("Lecture 3: Templating")
+=title_slide_tag("Lecture 3: Templating and MVC")
 
 %section.slide.section-title
-  %h1 Lecture 3: Templating
+  %h1 Lecture 3: Templating and MVC
   .agenda
-    %p MVC
-    %p Templates
-    %p Assets Precompilation
+    %p Client-side Templating
+    %p Handlerbar.js
+    %p Model-View-Controller
+    %p Backbone.js
+    %p Examples
     
 
 %section.slide
@@ -940,7 +942,13 @@
         %span.terminal>
           Backbone.sync
         )
-        
+    :coderay
+      #!haml
+      %script(type="text/javascript" src="backbone.js")
+      :javascript
+        //Original sync method is saved
+        Backbone.serverSync = Backbone.sync;
+      %script(type="text/javascript" src="backbone.localsotrage.js")
     
 
 %section.slide

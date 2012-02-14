@@ -1,130 +1,467 @@
-=title_slide_tag("Lecture 3: Web Sockets")
+=title_slide_tag("Lecture 4: File API & Device Access")
 
 %section.slide.section-title
-  %h1 Lesson 3: 
+  %h1 Lecture 4: Templating and MVC
+  .agenda
+    %p Bytes and Blobs
+    %p File API
+    %p Motion Sensor API
+    %p HTML Media Capture API
+    %p Binary Arrays
+    %p GeoLocation
+    
 
 %section.slide
   %header 
-    Push Technology
+    Bytes and Blobs
+    %span.smaller
+      (
+      %a(href="https://developer.mozilla.org/en/DOM/Blob") more info
+      )  
   %article
-    %p HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication
-    %p Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring
-    .singlespace
-      %p Workarounds
-    %ul 
-      %li Frequent requests (=> excessive load on the server)
-      %li Long polling (=> keep many connections open in waiting state)
-      %li Flash XMLSocket relays
-    %p Library hiding complexity: socket.io
-    
-%section.slide
-  %header
-    =html5_websockets_tag
-  %article
-    %blockquote
-      %p.smallest
-        Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
-    .code_block.larger
-      :coderay_raw
-        #!javascript
-        //Socket object
-        var socket = new WebSocket("ws://echo.websocket.org");
-        
-        // Callbacks
-        socket.onopen = function(event) { socket.send('Hello, WebSocket'); };
-        socket.onmessage = function(event) { alert(event.data); }
-        socket.onclose = function(event) { alert('closed'); }
+    %ul    
+      %li 
+        %span.terminal Blob
+        \= Binary Large Object
+      %li A binary data interchange mechanism (File API)
+      %li Useful for moving data around
+      %li 
+        Basic API for:
+        %ul 
+          %li
+            %strong size
+            \: size in bytes of the blob
+          %li
+            %strong type
+            \: MIME type of the data contained in the blob
+          %li
+            %strong slice(start, end, contentType)
+            \: a new blob containing the data in the specified range of the source blob
+      %li Read only 
+      %li May live on disk, so requires asynchronous access (e.g. FileReader)
+      %li 
+        Created with the 
+        %span.terminal>
+          BlobBuilder
+        interface or by slicing an exisitng blob
 
 %section.slide
   %header
-    =html5_websockets_tag
+    Why we need Blobs ? 
   %article
-    Websockets interface:
+    %ul
+      %li File uploading from the client file system to the server
+      %li Downloading a file from web or filesystem and storing in localStorage
+      %li Injecting a file from the file system into the DOM
+      %li Decoding binary data (e.g. from websockets)
+      %li Audio Synthesis
+      %li Image processing
+
+%section.slide
+  %header BlobBuilder
+  %article
+    %p It provides the interface to construct a blob, append data and retrieve it:
     %ul
       %li
-        %strong.red
-          onopen
-        \: callback when the socket is ready (important!)
-      %li  
-        %strong.red
-          onmessage
-        \: callback when a message is received on the socket
+        %strong append( ArrayBuffer | Blob | String)
+        \: append chucks of data to the blob
       %li
-        %strong.red
-          onclose
-        \: callback when the socket is closed
-      %li
-        %strong.red
-          onclose
-        \: callback when there is a communication error
-    %p
-      Messages are in UTF-8:
-      .centered.terminal.larger
-        "
-        .gray> \\x00
-        Hello World
-        .gray> \\xFF
-        "
-
-    :coderay_raw
+        %strong getBlob( contentType )
+        \: retrieves the blob with the desired MIME type.
+    :coderay 
       #!javascript
-      socket.send('Hello World');
+      var BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+      b = new BlobBuilder();
+      b.append("Hello World");
+      b.getBlob('text/plain');
+                    
+%section.slide
+  %header
+    File and Blobs
+  %article
+    %p 
+      %span.terminal File
+      objects represent file data from the file system. 
+    %p 
+      A 
+      %span.terminal File
+      is a
+      %span.terminal Blob 
+      (but a Blob is not a File) and in addition: 
+      %ul
+        %li 
+          %strong name
+        %li
+          %strong lastModifiedDate
+    %p 
+      %span.terminal 
+        FileReader
+      object provides the asynchronous read methods to access the files
+
+%section.slide
+  %header
+    How to get a File
+  %article
+    %ul
+      %li
+        With an input element of type file
+        :coderay
+          #!html
+          <input type='file' multiple='true' accept='image/*'>
+      %li
+        With the drag-and-drop feature
+      %li
+        User grants permission to read the files by selectig them
+      %li
+        Read from a private filesystem sandbox
+
+%section.slide
+  %header.terminal
+    FileList
+  %article
+    %p
+      %span.terminal FileList
+      objects are an array-like sequence of
+      %span.terminal File
+      objects
+    .vmargin
+      :coderay
+        #!html
+        <input type='file' id="fileSelect" multiple='true'>
+    .vmargin
+      :coderay
+        #!javascript
+        $("#fileSelect").live('change', function(e) {
+          $.each(this.files, function (i,file){
+            console.log(file.name, file.size, file.type, file.lastModifiedDate);
+          }
+        }
+    %p 
+      Test here: 
+      %input(type='file' id="fileSelect" multiple='true')
+
+:javascript 
+  $(function () {
+    $("#fileSelect").live('change', function(e) {
+      $.each(this.files, function (i,file){
+        console.log(file.name, file.size, file.type, file.lastModifiedDate);
+      });
+    });
+  });
+%section.slide
+  %header
+    XMLHttpRequest Level 2
+  %article
+    %p Old XMLHttpRequest was limited to send DomString or Document (XML) objects
+    %p 
+      New XMLHttpRequest level 2 allows to send the following types:
+      %ul
+        %li DomString
+        %li Document (XML)
+        %li FormData
+        %li Blob
+        %li File
+        %li ArrayBuffer
+
+%section.slide
+  %header
+    Sending a File
+    %span.smaller
+      =example_url_tag("fileAPITests")
+  %article    
+    :coderay
+      #!javascript
+      $.each(this.files, function (i,file){
+        if (!file.type.match(/image.*/)) {
+          return;
+        }  
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/uploadFile', true);
+        xhr.onload = function(e) {console.log (this.responseText); };
+        xhr.setRequestHeader("X-File-Name", file. name);
+        xhr.setRequestHeader("Content-Type", "application/octet-stream");
+        xhr.send(file); //XHR2
+      });
+
+%section.slide
+  %header
+    FormData
+  %article
+    %p
+      %span.terminal>
+        FormData
+      objects provide a way to easily build a set of key/value pairs (like Forms).
+    %p
+      The objects can be sent to the server with the XHR2 
+      %span.terminal send 
+      method as a 
+      %span.terminal multipart/form-data 
+
+    %p    
+      The interface allows to 
+      %span.terminal>
+        append
+      a key/value pair where: 
+      %ul 
+        %li
+          %strong name
+          is the a string representing the key
+        %li  
+          %strong value
+          is the value of the field: Blob, File or string
+        
+%section.slide
+  %header
+    Sending files with FormData
+    %span.smaller
+      =example_url_tag("fileAPITests")
+  %article    
+    :coderay
+      #!javascript
+      var fd = new FormData(); // XHR2        
+      $.each(this.files, function (i,file){
+        fd.append(file.name, file);
+      });
+      
+      var xhr = new XMLHttpRequest(); 
+      xhr.open('POST', '/uploadFormData', true);
+      xhr.onload = function(e) {console.log (this.responseText); };
+
+      xhr.send(fd); // as multipart/form-data
+
+%section.slide
+  %header
+    Downloading a Blob
+  %article
+    %p
+      XHR2 allows to specify the type of the response: 
+      %ul
+        %li
+          %strong xhr.responseType
+          \: 
+          %span.terminal
+            text | arraybuffer | blob | document
+        %li  
+          %strong xhr.response
+          \: the requested data
+
+%section.slide
+  %header
+    What can we do with a Blob ?
+  %article
+    %p 
+      Create an object and insert it in the DOM
+      %ul
+        %li 
+          .terminal URL.createObjectURL()          
+        %li
+          .terminal URL.revokeObjectutL()
+    %p 
+      Read the content with a FileReader:
+      %ul.terminal
+        %li FileReader.readAsText( File|Blob )
+        %li FileReader.readAsBinaryString( File|Blob )
+        %li FileReader.readAsArrayBuffer( File|Blob )
+        %li FileReader.readAsDataURL( File|Blob )
+    %p
+      Messages to/form WebWorkers
+    %p Store in localStorage or IndexedDB
+    
+%section.slide
+  %header 
+    Downloading a Blob
+    %span.smaller
+      =example_url_tag("fileAPITests")
+  %article
+    :coderay
+      #!javascript
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'logo.png', true);
+      xhr.responseType = 'blob';
+      
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var blob = this.response;
+          
+          var img = document.createElement('img');
+          img.onload = function(e) {
+            window.URL.revokeObjectURL(img.src); // Clean up after yourself.
+          };
+          img.src = window.URL.createObjectURL(blob);
+          $('#blobOutput').append(img);
+        }
+      };
+      xhr.send();  
+      
+%section.slide 
+  %header ArrayBuffer    
+  %article
+    %p
+      %span.terminal ArrayBuffer
+      is a generic container for binary data.     
+    %p 
+      With typed arrays we can create different views from a single 
+      %span.terminal ArrayBuffer
+      \:
+      .row
+        .twoColumn
+          %ul
+            %li DataView
+            %li Float32Array
+            %li Float64Array
+            %li Int16Array
+            %li Int32Array
+            %li Int8Array
+        .twoColumn
+          %ul
+            %li Uint16Array
+            %li Uint32Array
+            %li Uint8Array        
+
 
 %section.slide
   %header 
-    benefits
+    Downloading to an Array
+    %span.smaller
+      =example_url_tag("fileAPITests")
   %article
-    .row
-      .twoColumn
-        %ul
-          %li connection handshake uses HTTP infrastructure
-          %li no extra ports (works across firewalls)
-          %li no overhead
-          %li very low latency
-          %li clean browser interface
-      .twoColumn
-        %pre.smaller
-          Request URL:ws://localhost:8080/
-          Request Method:GET
-          Status Code:101 Switching Protocols
-          
-          <strong>Request Headers</strong>
-          Connection:Upgrade
-          Cookie:
-          Host:localhost:8080
-          Origin:null
-          Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
-          Sec-WebSocket-Version:13
-          Upgrade:websocket
-          (Key3):00:00:00:00:00:00:00:00
-          
-          <strong>Response Headers</strong>
-          Connection:Upgrade
-          Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
-          Upgrade:websocket
-          (Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+    :coderay
+      #!javascript
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'logo.png', true);
+      xhr.responseType = 'arraybuffer';
       
-   
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var a = new Uint8Array(this.response);
+          html = 'First 3 bytes: ' + a[0] + ',' + a[1] + ',' + a[2];  
+          $('#arrayOutput').html(html);
+        }
+      };
+      xhr.send();  
+      
+%section.slide
+  %header What can I do with an ArrayBuffer? 
+  %article
+    %ul
+      %li Interface with Audio API
+      %li WebGL
+      %li WebSockets
+      
+%section.slide
+  %header.terminal FileReader
+  %article
+    %span.terminal FileReader
+    is an object that enables asynchronous reading of
+    %span.terminal File
+    and 
+    %span.terminal Blob 
+    objects.
+    The following read methods are available: 
+    %ul
+      %li 
+        %strong readAsText
+        \: the result is a text string with default UTF-8
+      %li 
+        %strong readAsArrayBuffer
+        \: the result is stored in a ArrayBuffer object
+      %li 
+        %strong readAsBinaryString
+        \: the result is a binary string where each byte is an integer in the range [0-255]
+      %li 
+        %strong readAsDataURL
+        \: the result is stored in a DataURL object using the 
+        %a(href="http://en.wikipedia.org/wiki/Data_URI_scheme") data URI scheme 
+        (e.g.
+        %span.terminal data:image/png;base64,iVBO...
+        )
+    %p For tracking the progress, the following callbacks are available: onloadstart, onprogress, onload, onabort, onerror, and onloadend.
 %section.slide
   %header
-    =html5_websockets_tag "Sending Data Structures"
+    %span.terminal FileReader.readAsText()    
+    %span.smaller
+      =example_url_tag("fileAPITests")    
   %article
-    Websockets interface:
-     
+    :coderay
+      #!javascript     
+      var reader = new FileReader();
+      reader.onload = function() {
+        var text = reader.result;
+        $("#fileTextOutput").html(text);
+      }
+      reader.readAsText(this.files[0]);         
+
 %section.slide
   %header
-    Pusher.com
+    %span.terminal FileReader.readAsDataURL()
+    %span.smaller
+      =example_url_tag("fileAPITests")      
   %article
-    .row
-      .twoColumn
-        .autobox
-          %p
-            %strong Pusher 
-            is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.     
-          %p Founded in 2009. Team is 5 members.
-          %p 40 billion messages delivered.
-          %p WebSocket as a service
-          %p Using EM-WebSocket
-      .twoColumn
-        =image_tag "pusher_diagram.png"
-          
+    :coderay
+      #!javascript     
+      var reader = var reader = new FileReader();
+          reader.onload = function() {
+            var text = '<img src="'+reader.result+'"/>';
+            $("#fileDataURLOutput").html(text);
+          }
+          reader.readAsDataURL(this.files[0]);         
+ 
+%section.slide
+  %header What works on mobile ?
+  %article
+    =image_tag('lesson4/file-api-browsers.png', :resize=>true)
+    .autobox.smaller
+      %ul
+        %li
+          HTML5 Specs: 
+          %a(href="http://dev.w3.org/2006/webapi/FileAPI") File API
+          ,
+          %a(href="http://www.w3.org/TR/XMLHttpRequest/") XHR2
+          ,
+          %a(href="Typed Arrays") Native binary Array
+        %li 
+          Opera:
+          %a(href="http://www.opera.com/docs/specs/presto2.10/file/") Opera Mobile File API
+        %li
+          Firefox:
+          %a(href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/Using_XMLHttpRequest") FireFox XHR2
+          ,
+          %a(href="https://developer.mozilla.org/en/JavaScript_typed_arrays") FireFox Typed Arrays
+          ,
+          %a(href="https://developer.mozilla.org/en/DOM/FileReader") FileReader  
+        %li
+          Html5Rocks Tricks:
+          %a(href="http://www.html5rocks.com/en/tutorials/file/xhr2/") XHR2
+          ,
+          %a(href="http://www.html5rocks.com/en/tutorials/file/dndfiles/") Local files
+
+%section.slide
+  %header 
+    Good old
+    %span.terminal
+      multipart/form-data
+  %article
+    %p Content type for submitting forms that contain binary data
+    %p Works with all browsers
+    .vmargin
+      :coderay
+        #!haml    
+        %form(id="uploadFormPost" action="/uploadFormData" method="post" data-ajax='false' enctype="multipart/form-data")
+          %input(type="file" id="fileChoose0" name="file"  multiple="true" accept="image/*" style="height:0;width:0;") 
+          %button(id="uploadFormPostButton") Upload via Form POST 
+    .vmargin
+      :coderay
+        #!javascript
+        $("#uploadFormPostButton").click(function(e) { 
+          e.preventDefault();
+          $("#fileChoose0").click();
+        });
+        $("#fileChoose0").live('change', function() {
+          $("#uploadFormPost").submit();
+        });
+
+%section.slide
+  %header
+    Resources
+  %article
+    http://davidflanagan.com/Talks/jsconf11/BytesAndBlobs.html
