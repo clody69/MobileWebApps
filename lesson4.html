@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 3: Web Sockets
+Lecture 4: File API & Device Access
 </h1>
 <br />
 <div class='smaller centered'>
@@ -62,153 +62,513 @@ Aalto University March 2011
 </section>
 
 <section class='slide section-title'>
-<h1>Lesson 3:</h1>
+<h1>Lecture 4: Templating and MVC</h1>
+<div class='agenda'>
+<p>Bytes and Blobs</p>
+<p>File API</p>
+<p>Motion Sensor API</p>
+<p>HTML Media Capture API</p>
+<p>Binary Arrays</p>
+<p>GeoLocation</p>
+</div>
 </section>
 <section class='slide'>
 <header>
-Push Technology
+Bytes and Blobs
+<span class='smaller'>
+(
+<a href='https://developer.mozilla.org/en/DOM/Blob'>more info</a>
+)
+</span>
 </header>
 <article>
-<p>HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication</p>
-<p>Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring</p>
-<div class='singlespace'>
-<p>Workarounds</p>
-</div>
 <ul>
-<li>Frequent requests (=> excessive load on the server)</li>
-<li>Long polling (=> keep many connections open in waiting state)</li>
-<li>Flash XMLSocket relays</li>
+<li>
+<span class='terminal'>Blob</span>
+= Binary Large Object
+</li>
+<li>A binary data interchange mechanism (File API)</li>
+<li>Useful for moving data around</li>
+<li>
+Basic API for:
+<ul>
+<li>
+<strong>size</strong>
+: size in bytes of the blob
+</li>
+<li>
+<strong>type</strong>
+: MIME type of the data contained in the blob
+</li>
+<li>
+<strong>slice(start, end, contentType)</strong>
+: a new blob containing the data in the specified range of the source blob
+</li>
 </ul>
-<p>Library hiding complexity: socket.io</p>
+</li>
+<li>Read only</li>
+<li>May live on disk, so requires asynchronous access (e.g. FileReader)</li>
+<li>
+Created with the<span class='terminal'>
+BlobBuilder
+</span>interface or by slicing an exisitng blob
+</li>
+</ul>
 </article>
 </section>
 <section class='slide'>
 <header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+Why we need Blobs ?
 </header>
 <article>
-<blockquote>
-<p class='smallest'>
-Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
-</p>
-</blockquote>
-<div class='code_block larger'>
+<ul>
+<li>File uploading from the client file system to the server</li>
+<li>Downloading a file from web or filesystem and storing in localStorage</li>
+<li>Injecting a file from the file system into the DOM</li>
+<li>Decoding binary data (e.g. from websockets)</li>
+<li>Audio Synthesis</li>
+<li>Image processing</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>BlobBuilder</header>
+<article>
+<p>It provides the interface to construct a blob, append data and retrieve it:</p>
+<ul>
+<li>
+<strong>append( ArrayBuffer | Blob | String)</strong>
+: append chucks of data to the blob
+</li>
+<li>
+<strong>getBlob( contentType )</strong>
+: retrieves the blob with the desired MIME type.
+</li>
+</ul>
 <div class="CodeRay">
-  <div class="code"><pre><span class="comment">//Socket object</span>&#x000A;<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://echo.websocket.org</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">// Callbacks</span>&#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { alert(event.data); }&#x000A;socket.<span class="function">onclose</span> = <span class="keyword">function</span>(event) { alert(<span class="string"><span class="delimiter">'</span><span class="content">closed</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
-</div>
+  <div class="code"><pre><span class="keyword">var</span> BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;&#x000A;b = <span class="keyword">new</span> BlobBuilder();&#x000A;b.append(<span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>);&#x000A;b.getBlob(<span class="string"><span class="delimiter">'</span><span class="content">text/plain</span><span class="delimiter">'</span></span>);&#x000A;              </pre></div>
 </div>
 </article>
 </section>
 <section class='slide'>
 <header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+File and Blobs
 </header>
 <article>
-Websockets interface:
-<ul>
-<li>
-<strong class='red'>
-onopen
-</strong>
-: callback when the socket is ready (important!)
-</li>
-<li>
-<strong class='red'>
-onmessage
-</strong>
-: callback when a message is received on the socket
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when the socket is closed
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when there is a communication error
-</li>
-</ul>
 <p>
-Messages are in UTF-8:
-<div class='centered terminal larger'>
-"<div class='gray'>\\x00</div>Hello World<div class='gray'>\\xFF</div>"
-</div>
+<span class='terminal'>File</span>
+objects represent file data from the file system.
 </p>
+<p>
+A
+<span class='terminal'>File</span>
+is a
+<span class='terminal'>Blob</span>
+(but a Blob is not a File) and in addition:
+<ul>
+<li>
+<strong>name</strong>
+</li>
+<li>
+<strong>lastModifiedDate</strong>
+</li>
+</ul>
+</p>
+<p>
+<span class='terminal'>
+FileReader
+</span>
+object provides the asynchronous read methods to access the files
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+How to get a File
+</header>
+<article>
+<ul>
+<li>
+With an input element of type file
 <div class="CodeRay">
-  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+  <div class="code"><pre><span class="tag">&lt;input</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">file</span><span class="delimiter">'</span></span> <span class="attribute-name">multiple</span>=<span class="string"><span class="delimiter">'</span><span class="content">true</span><span class="delimiter">'</span></span> <span class="attribute-name">accept</span>=<span class="string"><span class="delimiter">'</span><span class="content">image/*</span><span class="delimiter">'</span></span><span class="tag">&gt;</span></pre></div>
+</div>
+</li>
+<li>
+With the drag-and-drop feature
+</li>
+<li>
+User grants permission to read the files by selectig them
+</li>
+<li>
+Read from a private filesystem sandbox
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header class='terminal'>
+FileList
+</header>
+<article>
+<p>
+<span class='terminal'>FileList</span>
+objects are an array-like sequence of
+<span class='terminal'>File</span>
+objects
+</p>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;input</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">file</span><span class="delimiter">'</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fileSelect</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">multiple</span>=<span class="string"><span class="delimiter">'</span><span class="content">true</span><span class="delimiter">'</span></span><span class="tag">&gt;</span></pre></div>
+</div>
+</div>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileSelect</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;    console.log(file.name, file.size, file.type, file.lastModifiedDate);&#x000A;  }&#x000A;}</pre></div>
+</div>
+</div>
+<p>
+Test here:
+<input id='fileSelect' multiple='true' type='file' />
+</p>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("#fileSelect").live('change', function(e) {
+        $.each(this.files, function (i,file){
+          console.log(file.name, file.size, file.type, file.lastModifiedDate);
+        });
+      });
+    });
+  //]]>
+</script>
+<section class='slide'>
+<header>
+XMLHttpRequest Level 2
+</header>
+<article>
+<p>Old XMLHttpRequest was limited to send DomString or Document (XML) objects</p>
+<p>
+New XMLHttpRequest level 2 allows to send the following types:
+<ul>
+<li>DomString</li>
+<li>Document (XML)</li>
+<li>FormData</li>
+<li>Blob</li>
+<li>File</li>
+<li>ArrayBuffer</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Sending a File
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;  <span class="keyword">if</span> (!file.type.match(<span class="regexp"><span class="delimiter">/</span><span class="content">image.*</span><span class="delimiter">/</span></span>)) {&#x000A;    <span class="keyword">return</span>;&#x000A;  }  &#x000A;  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;  xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadFile</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;  xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;  xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">X-File-Name</span><span class="delimiter">&quot;</span></span>, file. name);&#x000A;  xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">application/octet-stream</span><span class="delimiter">&quot;</span></span>);&#x000A;  xhr.send(file); <span class="comment">//XHR2</span>&#x000A;});&#x000A;</pre></div>
 </div>
 </article>
 </section>
 <section class='slide'>
 <header>
-benefits
+FormData
 </header>
 <article>
+<p><span class='terminal'>
+FormData
+</span>objects provide a way to easily build a set of key/value pairs (like Forms).
+</p>
+<p>
+The objects can be sent to the server with the XHR2
+<span class='terminal'>send</span>
+method as a
+<span class='terminal'>multipart/form-data</span>
+</p>
+<p>
+The interface allows to<span class='terminal'>
+append
+</span>a key/value pair where:
+<ul>
+<li>
+<strong>name</strong>
+is the a string representing the key
+</li>
+<li>
+<strong>value</strong>
+is the value of the field: Blob, File or string
+</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Sending files with FormData
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> fd = <span class="keyword">new</span> FormData(); <span class="comment">// XHR2        </span>&#x000A;<span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;  fd.append(file.name, file);&#x000A;});&#x000A;&#x000A;<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); &#x000A;xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadFormData</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;&#x000A;xhr.send(fd); <span class="comment">// as multipart/form-data</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Downloading a Blob
+</header>
+<article>
+<p>
+XHR2 allows to specify the type of the response:
+<ul>
+<li>
+<strong>xhr.responseType</strong>
+:
+<span class='terminal'>
+text | arraybuffer | blob | document
+</span>
+</li>
+<li>
+<strong>xhr.response</strong>
+: the requested data
+</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+What can we do with a Blob ?
+</header>
+<article>
+<p>
+Create an object and insert it in the DOM
+<ul>
+<li>
+<div class='terminal'>URL.createObjectURL()</div>
+</li>
+<li>
+<div class='terminal'>URL.revokeObjectutL()</div>
+</li>
+</ul>
+</p>
+<p>
+Read the content with a FileReader:
+<ul class='terminal'>
+<li>FileReader.readAsText( File|Blob )</li>
+<li>FileReader.readAsBinaryString( File|Blob )</li>
+<li>FileReader.readAsArrayBuffer( File|Blob )</li>
+<li>FileReader.readAsDataURL( File|Blob )</li>
+</ul>
+</p>
+<p>
+Messages to/form WebWorkers
+</p>
+<p>Store in localStorage or IndexedDB</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Downloading a Blob
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">GET</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">logo.png</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;xhr.responseType = <span class="string"><span class="delimiter">'</span><span class="content">blob</span><span class="delimiter">'</span></span>;&#x000A;&#x000A;xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">if</span> (<span class="local-variable">this</span>.status == <span class="integer">200</span>) {&#x000A;    <span class="keyword">var</span> blob = <span class="local-variable">this</span>.response;&#x000A;    &#x000A;    <span class="keyword">var</span> img = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">img</span><span class="delimiter">'</span></span>);&#x000A;    img.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;      window.URL.revokeObjectURL(img.src); <span class="comment">// Clean up after yourself.</span>&#x000A;    };&#x000A;    img.src = window.URL.createObjectURL(blob);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#blobOutput</span><span class="delimiter">'</span></span>).append(img);&#x000A;  }&#x000A;};&#x000A;xhr.send();  &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>ArrayBuffer</header>
+<article>
+<p>
+<span class='terminal'>ArrayBuffer</span>
+is a generic container for binary data.
+</p>
+<p>
+With typed arrays we can create different views from a single
+<span class='terminal'>ArrayBuffer</span>
+:
 <div class='row'>
 <div class='twoColumn'>
 <ul>
-<li>connection handshake uses HTTP infrastructure</li>
-<li>no extra ports (works across firewalls)</li>
-<li>no overhead</li>
-<li>very low latency</li>
-<li>clean browser interface</li>
+<li>DataView</li>
+<li>Float32Array</li>
+<li>Float64Array</li>
+<li>Int16Array</li>
+<li>Int32Array</li>
+<li>Int8Array</li>
 </ul>
 </div>
 <div class='twoColumn'>
-<pre class='smaller'>Request URL:ws://localhost:8080/
-Request Method:GET
-Status Code:101 Switching Protocols
-<strong>Request Headers</strong>
-Connection:Upgrade
-Cookie:
-Host:localhost:8080
-Origin:null
-Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
-Sec-WebSocket-Version:13
-Upgrade:websocket
-(Key3):00:00:00:00:00:00:00:00
-<strong>Response Headers</strong>
-Connection:Upgrade
-Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
-Upgrade:websocket
-(Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</pre>
+<ul>
+<li>Uint16Array</li>
+<li>Uint32Array</li>
+<li>Uint8Array</li>
+</ul>
 </div>
 </div>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">Sending Data Structures</img>
-</header>
-<article>
-Websockets interface:
-</article>
-</section>
-<section class='slide'>
-<header>
-Pusher.com
-</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<div class='autobox'>
-<p>
-<strong>Pusher</strong>
-is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.
 </p>
-<p>Founded in 2009. Team is 5 members.</p>
-<p>40 billion messages delivered.</p>
-<p>WebSocket as a service</p>
-<p>Using EM-WebSocket</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Downloading to an Array
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">GET</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">logo.png</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;xhr.responseType = <span class="string"><span class="delimiter">'</span><span class="content">arraybuffer</span><span class="delimiter">'</span></span>;&#x000A;&#x000A;xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">if</span> (<span class="local-variable">this</span>.status == <span class="integer">200</span>) {&#x000A;    <span class="keyword">var</span> a = <span class="keyword">new</span> Uint8Array(<span class="local-variable">this</span>.response);&#x000A;    html = <span class="string"><span class="delimiter">'</span><span class="content">First 3 bytes: </span><span class="delimiter">'</span></span> + a[<span class="integer">0</span>] + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> + a[<span class="integer">1</span>] + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> + a[<span class="integer">2</span>];  &#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#arrayOutput</span><span class="delimiter">'</span></span>).html(html);&#x000A;  }&#x000A;};&#x000A;xhr.send();  &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>What can I do with an ArrayBuffer?</header>
+<article>
+<ul>
+<li>Interface with Audio API</li>
+<li>WebGL</li>
+<li>WebSockets</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header class='terminal'>FileReader</header>
+<article>
+<span class='terminal'>FileReader</span>
+is an object that enables asynchronous reading of
+<span class='terminal'>File</span>
+and
+<span class='terminal'>Blob</span>
+objects.
+The following read methods are available:
+<ul>
+<li>
+<strong>readAsText</strong>
+: the result is a text string with default UTF-8
+</li>
+<li>
+<strong>readAsArrayBuffer</strong>
+: the result is stored in a ArrayBuffer object
+</li>
+<li>
+<strong>readAsBinaryString</strong>
+: the result is a binary string where each byte is an integer in the range [0-255]
+</li>
+<li>
+<strong>readAsDataURL</strong>
+: the result is stored in a DataURL object using the
+<a href='http://en.wikipedia.org/wiki/Data_URI_scheme'>data URI scheme</a>
+(e.g.
+<span class='terminal'>data:image/png;base64,iVBO...</span>
+)
+</li>
+</ul>
+<p>For tracking the progress, the following callbacks are available: onloadstart, onprogress, onload, onabort, onerror, and onloadend.</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<span class='terminal'>FileReader.readAsText()</span>
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> text = reader.result;&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileTextOutput</span><span class="delimiter">&quot;</span></span>).html(text);&#x000A;}&#x000A;reader.readAsText(<span class="local-variable">this</span>.files[<span class="integer">0</span>]);         &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<span class='terminal'>FileReader.readAsDataURL()</span>
+<span class='smaller'>
+<a href='fileAPITests.html'>fileAPITests</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> reader = <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;    reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;      <span class="keyword">var</span> text = <span class="string"><span class="delimiter">'</span><span class="content">&lt;img src=&quot;</span><span class="delimiter">'</span></span>+reader.result+<span class="string"><span class="delimiter">'</span><span class="content">&quot;/&gt;</span><span class="delimiter">'</span></span>;&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileDataURLOutput</span><span class="delimiter">&quot;</span></span>).html(text);&#x000A;    }&#x000A;    reader.readAsDataURL(<span class="local-variable">this</span>.files[<span class="integer">0</span>]);         &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>What works on mobile ?</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson4/file-api-browsers.png' class='resize' /></div>
+<div class='autobox smaller'>
+<ul>
+<li>
+HTML5 Specs:
+<a href='http://dev.w3.org/2006/webapi/FileAPI'>File API</a>
+,
+<a href='http://www.w3.org/TR/XMLHttpRequest/'>XHR2</a>
+,
+<a href='Typed Arrays'>Native binary Array</a>
+</li>
+<li>
+Opera:
+<a href='http://www.opera.com/docs/specs/presto2.10/file/'>Opera Mobile File API</a>
+</li>
+<li>
+Firefox:
+<a href='https://developer.mozilla.org/en/DOM/XMLHttpRequest/Using_XMLHttpRequest'>FireFox XHR2</a>
+,
+<a href='https://developer.mozilla.org/en/JavaScript_typed_arrays'>FireFox Typed Arrays</a>
+,
+<a href='https://developer.mozilla.org/en/DOM/FileReader'>FileReader</a>
+</li>
+<li>
+Html5Rocks Tricks:
+<a href='http://www.html5rocks.com/en/tutorials/file/xhr2/'>XHR2</a>
+,
+<a href='http://www.html5rocks.com/en/tutorials/file/dndfiles/'>Local files</a>
+</li>
+</ul>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Good old
+<span class='terminal'>
+multipart/form-data
+</span>
+</header>
+<article>
+<p>Content type for submitting forms that contain binary data</p>
+<p>Works with all browsers</p>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPost</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/uploadFormData</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">'</span><span class="content">false</span><span class="delimiter">'</span></span> <span class="attribute-name">enctype</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">multipart/form-data</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fileChoose0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span>  <span class="attribute-name">multiple</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">accept</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">image/*</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">height:0;width:0;</span><span class="delimiter">&quot;</span></span>) &#x000A;  <span class="tag">%button</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPostButton</span><span class="delimiter">&quot;</span></span>) Upload via Form POST </pre></div>
 </div>
 </div>
-<div class='twoColumn'>
-<div class='image-wrap'><img src='imgs/pusher_diagram.png' /></div>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPostButton</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) { &#x000A;  e.preventDefault();&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPost</span><span class="delimiter">&quot;</span></span>).submit();&#x000A;});&#x000A;</pre></div>
 </div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Resources
+</header>
+<article>
+http://davidflanagan.com/Talks/jsconf11/BytesAndBlobs.html
 </article>
 </section>
 

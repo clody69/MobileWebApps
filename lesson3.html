@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 3: Templating
+Lecture 3: Templating and MVC
 </h1>
 <br />
 <div class='smaller centered'>
@@ -62,11 +62,13 @@ Aalto University March 2011
 </section>
 
 <section class='slide section-title'>
-<h1>Lecture 3: Templating</h1>
+<h1>Lecture 3: Templating and MVC</h1>
 <div class='agenda'>
-<p>MVC</p>
-<p>Templates</p>
-<p>Assets Precompilation</p>
+<p>Client-side Templating</p>
+<p>Handlerbar.js</p>
+<p>Model-View-Controller</p>
+<p>Backbone.js</p>
+<p>Examples</p>
 </div>
 </section>
 <section class='slide'>
@@ -723,6 +725,9 @@ Backbone.sync
 </span>)
 </li>
 </ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">backbone.js</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="comment">:javascript</span>&#x000A;  <span class="comment">//Original sync method is saved</span>&#x000A;  Backbone.serverSync = Backbone.sync;&#x000A;<span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">backbone.localsotrage.js</span><span class="delimiter">&quot;</span></span>)&#x000A;&#x000A;</pre></div>
+</div>
 </article>
 </section>
 <section class='slide'>
