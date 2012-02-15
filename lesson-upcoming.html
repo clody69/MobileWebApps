@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 6: Web Sockets
+Lecture : Upcoming HTML5 standards
 </h1>
 <br />
 <div class='smaller centered'>
@@ -62,160 +62,18 @@ Aalto University March 2011
 </section>
 
 <section class='slide section-title'>
-<h1>Lesson 3:</h1>
+<h1>Upcoming HTML5 standards</h1>
 <div class='agenda'>
-<p>Push Technology</p>
-<p>Web Sockets</p>
-<p>Server-sent events</p>
-<p>Web Notifications (only on firefox)</p>
+<p>Audio API</p>
 </div>
+http://www.html5rocks.com/en/tutorials/webaudio/intro/
 </section>
-<section class='slide'>
-<header>
-Push Technology
-</header>
-<article>
-<p>HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication</p>
-<p>Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring</p>
-<div class='singlespace'>
-<p>Workarounds</p>
-</div>
-<ul>
-<li>Frequent requests (=> excessive load on the server)</li>
-<li>Long polling (=> keep many connections open in waiting state)</li>
-<li>Flash XMLSocket relays</li>
-</ul>
-<p>Library hiding complexity: socket.io</p>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
-</header>
-<article>
-<blockquote>
-<p class='smallest'>
-Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
-</p>
-</blockquote>
-<div class='code_block larger'>
-<div class="CodeRay">
-  <div class="code"><pre><span class="comment">//Socket object</span>&#x000A;<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://echo.websocket.org</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">// Callbacks</span>&#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { alert(event.data); }&#x000A;socket.<span class="function">onclose</span> = <span class="keyword">function</span>(event) { alert(<span class="string"><span class="delimiter">'</span><span class="content">closed</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
-</header>
-<article>
-Websockets interface:
-<ul>
-<li>
-<strong class='red'>
-onopen
-</strong>
-: callback when the socket is ready (important!)
-</li>
-<li>
-<strong class='red'>
-onmessage
-</strong>
-: callback when a message is received on the socket
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when the socket is closed
-</li>
-<li>
-<strong class='red'>
-onclose
-</strong>
-: callback when there is a communication error
-</li>
-</ul>
-<p>
-Messages are in UTF-8:
-<div class='centered terminal larger'>
-"<div class='gray'>\\x00</div>Hello World<div class='gray'>\\xFF</div>"
-</div>
-</p>
-<div class="CodeRay">
-  <div class="code"><pre>socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-benefits
-</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<ul>
-<li>connection handshake uses HTTP infrastructure</li>
-<li>no extra ports (works across firewalls)</li>
-<li>no overhead</li>
-<li>very low latency</li>
-<li>clean browser interface</li>
-</ul>
-</div>
-<div class='twoColumn'>
-<pre class='smaller'>Request URL:ws://localhost:8080/
-Request Method:GET
-Status Code:101 Switching Protocols
-<strong>Request Headers</strong>
-Connection:Upgrade
-Cookie:
-Host:localhost:8080
-Origin:null
-Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
-Sec-WebSocket-Version:13
-Upgrade:websocket
-(Key3):00:00:00:00:00:00:00:00
-<strong>Response Headers</strong>
-Connection:Upgrade
-Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
-Upgrade:websocket
-(Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</pre>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = "imgs/html5/HTML5_Connectivity_64.png">Sending Data Structures</img>
-</header>
-<article>
-Websockets interface:
-</article>
-</section>
-<section class='slide'>
-<header>
-Pusher.com
-</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<div class='autobox'>
-<p>
-<strong>Pusher</strong>
-is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.
-</p>
-<p>Founded in 2009. Team is 5 members.</p>
-<p>40 billion messages delivered.</p>
-<p>WebSocket as a service</p>
-<p>Using EM-WebSocket</p>
-</div>
-</div>
-<div class='twoColumn'>
-<div class='image-wrap'><img src='imgs/pusher_diagram.png' /></div>
-</div>
-</div>
-</article>
+<section>
+List of what is supported per device
+iOS:
+http://www.mobilexweb.com/blog/ios-5-iphone-and-ipad-html5
+Android 4.0
+http://www.mobilexweb.com/blog/android-4-0-browser-html5
 </section>
 
 <!-- Elements -->

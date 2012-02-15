@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 4: File API & Device Access
+Lecture 4: File & Device Access
 </h1>
 <br />
 <div class='smaller centered'>
@@ -66,9 +66,8 @@ Aalto University March 2011
 <div class='agenda'>
 <p>Bytes and Blobs</p>
 <p>File API</p>
-<p>Motion Sensor API</p>
 <p>HTML Media Capture API</p>
-<p>Binary Arrays</p>
+<p>Motion Sensor API</p>
 <p>GeoLocation</p>
 </div>
 </section>
@@ -561,6 +560,89 @@ multipart/form-data
   <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPostButton</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) { &#x000A;  e.preventDefault();&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPost</span><span class="delimiter">&quot;</span></span>).submit();&#x000A;});&#x000A;</pre></div>
 </div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>HTML Media Capture API</img>
+</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Device Orientation API</img>
+</header>
+<article>
+<p>API to access the information of accelererometers, gyroscopes and compasses of mobile devices</p>
+<div class='autobox'>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong>DeviceOrientation Event</strong>
+<ul>
+<li>alpha: around the Z-axis</li>
+<li>beta: around the X-axis</li>
+<li>gamma: around the Y-axis</li>
+</ul>
+<strong>MotionOrientation Event</strong>
+<ul>
+<li>acceleration</li>
+<li>accelerationIncludingGravity</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs//lesson4/orientation.png' class='resize' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Device Orientation API</img>
+</header>
+<article>
+<div class='row'>
+<div class='threeColumn'>
+<div class='autobox centered'>
+Heading (Yaw)
+<div class='image-wrap'><img src='imgs//lesson4/orientation-alpha.png' class='resize' /></div>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox centered'>
+Elevation (Pitch)
+<div class='image-wrap'><img src='imgs//lesson4/orientation-beta.png' class='resize' /></div>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox centered'>
+Bank (Roll)
+<div class='image-wrap'><img src='imgs//lesson4/orientation-gamma.png' class='resize' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Orientation Events
+<span class='smaller'>
+<a href='sensorOrientation.html'>sensorOrientation</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>    <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;    <span class="keyword">if</span> (window.DeviceOrientationEvent) {  &#x000A;      window.addEventListener(<span class="string"><span class="delimiter">&quot;</span><span class="content">deviceorientation</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>( event ) {  &#x000A;        }&#x000A;        <span class="comment">//alpha: rotation around z-axis  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.alpha</span><span class="delimiter">&quot;</span></span>).html(event.alpha);&#x000A;&#x000A;        <span class="comment">//gamma: left to right  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.beta</span><span class="delimiter">&quot;</span></span>).html(event.beta);&#x000A;&#x000A;        <span class="comment">//beta: front back motion  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.gamma</span><span class="delimiter">&quot;</span></span>).html(event.gamma);&#x000A;        &#x000A;        <span class="keyword">var</span> rotation = <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateX(</span><span class="delimiter">&quot;</span></span>+(event.beta*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>&#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content"> rotateY(</span><span class="delimiter">&quot;</span></span>+(event.gamma)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span> &#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateZ(</span><span class="delimiter">&quot;</span></span>+(event.alpha*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>;&#x000A;&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.transform</span><span class="delimiter">&quot;</span></span>).html(rotation);&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">-moz-transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;      }, <span class="predefined-constant">false</span>);  &#x000A;    }  &#x000A;  }&#x000A;  </pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Camera API</header>
+<article>
+http://www.w3.org/TR/2010/WD-html-media-capture-20100720/
+http://my.opera.com/core/blog/2011/03/23/webcam-orientation-preview
 </article>
 </section>
 <section class='slide'>
