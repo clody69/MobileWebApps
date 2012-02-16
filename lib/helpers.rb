@@ -4,6 +4,18 @@ module PresentationHelper
   def lecture_title_tag(title, lecture)
     "<h2>#{title} (<a href='#{lecture}.html'>Slides</a>)</h2>"
   end
+  def lecture_tag(title, timeslot,  slides="", subtitle = "")
+    h = "<div class='title'>#{title}</div>"
+    if subtitle != ""
+      h += "<div class='subtitle'>#{subtitle}</div>"
+    end
+    h += "<div class='info'>#{timeslot}"
+    if slides != ""
+      h += " - <a href='#{slides}'>Slides</a>"
+    end
+    h += "</div>"
+  end
+
   def title_slide_tag(subtitle)
     Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
   end

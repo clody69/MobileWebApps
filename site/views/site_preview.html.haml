@@ -1,98 +1,130 @@
 %a(name="Lectures") 
 %h1 Lectures
 
-.lecture
-  =lecture_title_tag("Lecture 1: Introduction", "lesson1")
-  %p 
-    This lecture gives an introduction of mobile web application development and the frameworks that we'll cover during this course. 
-    We also introduce some basic elements of web development that will be necessary throughout the course (i.e. Sinatra, Javascript, Ruby, etc)
-    introduces the basics of web development that will be necessary through the course. The following topics will be covered: 
-  %p The lecture also gives an overview of the structure of the course, the prerequisites, the expectations and the evaluation method.
 
-.lecture
-  =lecture_title_tag("Lab 1: Assignment Kick-off", "lab1")
-  %p 
+.lecture_block
+  .header
+    Monday 12th March 2012
+  .lecture
+    =lecture_tag("Lecture 1: Introduction", "14:15-15:45", "lesson1.html")
+    .description
+      %p 
+        This lecture gives an introduction of mobile web application development and the frameworks that we'll cover during this course. 
+        We also introduce some basic elements of web development that will be necessary throughout the course (i.e. Sinatra, Javascript, Ruby, etc)
+        introduces the basics of web development that will be necessary through the course. The following topics will be covered: 
+      %p The lecture also gives an overview of the structure of the course, the prerequisites, the expectations and the evaluation method.
   
-.lecture
-  =lecture_title_tag("Lecture 2: Building a Mobile Web App", "lesson2")    
-  %p 
-    This lecture introduces the basics for creating a mobile web application with HTML5 and with jQuery. 
-    We create a simple bloc application that demonstrates the following elements: 
-    %ul
-      %li viewport meta tag
-      %li Forms, new HTML5 form semantics and validation 
-      %li Styling
-      %li Contenteditable attribute
-      %li Single page and multipage with jQuery Mobile
-      %li Sinatra server with templates
-      %li Local storage
-      %li Offline usage
-      %li Detecting connectivity changes
+  .lecture
+    =lecture_tag("Lab 1: Assignment Kick-off", "16:00-17:45", "lab1.html")
+    .description
+      %p Introduction to the assignment: goals, expectations and way of working. We will conduct an exercise for creating the groups.
 
-.lecture
-  =lecture_title_tag("Lab 2: jQuery Mobile", "lab2")
-  %p 
+.lecture_block
+  .header
+    Monday 19th March 2012
+  .lecture
+    =lecture_tag("Lecture 2: Building a Mobile Web App", "14:15-15:45", "lesson2.html")
+    .description
+      %p 
+        This lecture introduces the basics for creating a mobile web application with HTML5 and with jQuery. 
+        We create a simple bloc application that demonstrates the following elements: 
+        %ul
+          %li viewport meta tag
+          %li Forms, new HTML5 form semantics and validation 
+          %li Styling
+          %li Contenteditable attribute
+          %li Single page and multipage with jQuery Mobile
+          %li Sinatra server with templates
+          %li Local storage
+          %li Offline usage
+          %li Detecting connectivity changes
+  .lecture
+    =lecture_tag("Lab 2: jQuery Mobile", "16:00-17:45", "", "Guest Lecture: Mikael Blomberg, SC5")
+    .description
+      %p In this session we dive into jQuery and jQuery Mobile. 
 
-      
-.lecture
-  =lecture_title_tag("Lecture 3: Templating and MVC", "lesson3")
-  %p 
-    In this lecture we explore the advantages of using a templating methdod for creating the views of the application. 
-    We also explore the usage of Backbone.js for simplifying the design of the web client. We cover the following topics:
-    %ul
-      %li Introduction to client-side templating
-      %li Example with Handlerbar.js
-      %li MVC architecture for webapps
-      %li Introduction to Backbone.js
-      %li Example of MVC web app
+.lecture_block
+  .header
+    Monday 26th March 2012
+  .lecture
+    =lecture_tag("Lecture 3: Templating and MVC", "14:15-15:45", "lesson3.html")
+    .description
+      %p
+        In this lecture we explore the advantages of using a templating methdod for creating the views of the application. 
+        We also explore the usage of Backbone.js for simplifying the design of the web client. We cover the following topics:
+        %ul
+          %li Introduction to client-side templating
+          %li Example with Handlerbar.js
+          %li MVC architecture for webapps
+          %li Introduction to Backbone.js
+          %li Example of MVC web app
+  .lecture
+    =lecture_tag("Lab 3: Backbone.js", "16:00-17:45", "", "Guest Lecture: Mikael Blomberg, SC5")
+    .description
+      %p Deep dive on Backbone.js
 
-.lecture
-  =lecture_title_tag("Lab 3: Backbone.js", "lab3")
-  %p 
-
-
-.lecture
-  =lecture_title_tag("Lecture 4: File & Device Access", "lesson4")
-  %p 
-    In this lecture we explore the APIs for accessing the file systema and the hardware resources of mobile devices.
-    We cover the following topics: 
-    %ul
-      %li Bytes and Blobs
-      %li File API
-      %li HTML Media Capture API
-      %li Motion Sensor API
-      %li GeoLocation
-      %li Audio & Video
+.lecture_block
+  .header
+    Monday 2nd April 2012
+  .lecture
+    =lecture_tag("Lecture 4: File & Device Access", "14:15-15:45", "lesson4.html")
+    .description
+      %p 
+        In this lecture we explore the APIs for accessing the file system and the hardware resources of mobile devices.
+        We cover the following topics: 
+        %ul
+          %li Bytes and Blobs
+          %li File API
+          %li HTML Media Capture API
+          %li Motion Sensor API
+          %li GeoLocation
+          %li Audio & Video
+  .lecture
+    =lecture_tag("Lab 4: Ruby on Rails 3", "16:00-17:45", "", "Guest Lecture: Lauri Jutila and Matias Korhonen, Kisko Labs")
+    .description
+      %p Introduction to Ruby on Rails 3
         
-.lecture
-  =lecture_title_tag("Lab 4: Ruby on Rails 3", "lab4")
-  %p 
-      
-.lecture
-  =lecture_title_tag("Lecture 5: HTML5 - CSS3", "lesson5")
+.lecture_block
+  .header
+    Monday 16th April 2012
+  .lecture
+    =lecture_tag("Lecture 5: HTML5 - CSS3 & Canvas", "14:15-15:45", "lesson5.html")
+    .description
+      CSS3 and Canvas
+  .lecture
+    =lecture_tag("Lab 5: Designing REST interfaces", "16:00-17:45", "", "Guest Lecture: Lauri Jutila and Matias Korhonen, Kisko Labs")
+    .description
+      %p Principles of REST design and RESTful interfaces with Ruby on Rails
 
-.lecture
-  =lecture_title_tag("Lab 5: Cloud", "lab5")
-  %p 
-    Storing and Connecting to the Cloud
+.lecture_block
+  .header
+    Monday 23rd April 2012
+  .lecture
+    =lecture_tag("Lecture 6: Websockets & Webworkers", "14:15-15:45", "lesson6.html")
+    .description
+  .lecture
+    =lecture_tag("Lab 6: TBD", "16:00-17:45")
+    .description
 
-.leture
-  =lecture_title_tag("Lecture 6: WebSockets & WebWorkers", "lesson6")
-
-.lecture
-  =lecture_title_tag("Lecture 7: Developing native web apps with HTML5", "lesson7")
-  %p 
-    In this lecture we introduce the tools for creating native applications with an embeeded webview. 
-    We cover the following topics: 
-    %ul
-      %li PhoneGap
-        
-.lecture
-  =lecture_title_tag("Lab 7: Performance Optimization", "lab7")
-  %p
-    %ul Sprockets
-    %ul Zoneear ? 
-    
+.lecture_block
+  .header
+    Monday 7th May 2012
+  .lecture
+    =lecture_tag("Lecture 7: Developing native web apps with HTML5", "14:15-15:45", "lesson7.html")
+    .description
+      %p 
+        In this lecture we introduce the tools for creating native applications with an embeeded webview. 
+        We cover the following topics: 
+        %ul
+          %li PhoneGap
+  .lecture
+    =lecture_tag("ab 7: Performance Optimization", "16:00-17:45", "lab7.html")
+    .description
+      %p
+        %ul Optimization of webapps
+        %ul Latency and compression
+        %ul Sprockets
+        %ul Zoneear ? 
   
 %a(name="Schedule") 
 %h1 Schedule

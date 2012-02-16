@@ -143,6 +143,38 @@ span.terminal, p.terminal, .terminal {
 	font-family: Verdana, Helvetica, Arial;
 }
 
+.lecture_block {
+  clear: both;
+  margin: 20px 20px;
+  border: solid 1px #B6B6B6;
+  font-size: 14px;
+  .header {
+    font-family: Verdana, Helvetica, Arial;  
+    background-color: #E0E0E0;
+    padding: 4px 7px;
+  }
+  .lecture {    
+    padding: 10px 20px 0px 20px;   
+    .info {
+      font-weight: bold;
+      color: #999;      
+    }
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .subtitle {
+      font-style: italic;  
+    }
+    .description {
+      padding: 0px 20px;       
+      ul {
+        padding-left: 10px;
+      }
+    }  
+  }
+}
+
 .actions {
   font-size: 120%;  
   position: relative;
@@ -276,7 +308,7 @@ span.terminal, p.terminal, .terminal {
   font-size:13px;
   color: #636363;
   margin: 45px 0 0 0;
-  height: 130px;
+  height: 250px;
   background-color: rgb(240,240,240);
   z-index: -1;
   border-top: 1px solid rgb(200,200,200);
