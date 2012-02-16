@@ -11,6 +11,10 @@ module PresentationHelper
   def html5_offline_storage_tag(title="Offline Storage")
     "<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>#{title}</img>"
   end
+
+  def html5_device_access_tag(title="Device Access")
+    "<img src = 'imgs/html5/HTML5_Device_Access_64.png'>#{title}</img>"
+  end
   
   def html5_semantics_tag(title="New Semantics")
     h= '<img src = "imgs/html5/HTML5_Semantics_64.png">'
@@ -37,7 +41,7 @@ module PresentationHelper
 
   def example_header_tag(title, name, url="")
     if url == ""
-      if File.directory?('public/examples/#{name}')
+      if File.directory?("../public/examples/#{name}")
         url = "examples/#{name}"
       end
     end
@@ -47,6 +51,7 @@ module PresentationHelper
     if url != ""
       h += "<a href='#{url}'>Try it</a>"
     end
+    
     h += "<a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/#{name}'>Browse Source Code</a>"
     h += "</div>"
   end

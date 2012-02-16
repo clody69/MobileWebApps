@@ -16,7 +16,7 @@ task :render do
 
   print_coderay_css "public/css/coderay.css"
 
-  %w(jQuerySimple senchaSimple websocketsEcho).each { |file| 
+  %w(jQuerySimple senchaSimple websocketsEcho deviceGeolocation deviceOrientation).each { |file| 
     dst = "public/examples/#{file}"
     FileUtils.mkdir_p(dst)
     FileUtils.cp_r Dir.glob("../examples/#{file}/*.html"), dst

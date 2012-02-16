@@ -1,15 +1,47 @@
-=title_slide_tag("Lecture 4: File API & Device Access")
+=title_slide_tag("Lecture 4: File & Device Access")
 
 %section.slide.section-title
-  %h1 Lecture 4: Templating and MVC
+  %h1 Lecture 4: File & Device Access
   .agenda
-    %p Bytes and Blobs
     %p File API
-    %p Motion Sensor API
+    %p Bytes and Blobs
     %p HTML Media Capture API
-    %p Binary Arrays
-    %p GeoLocation
+    %p Motion Sensor API
+    %p GeoLocation API
     
+%section.slide
+  %header
+    =html5_device_access_tag("File API")
+    %span.smaller
+      %a(href="http://www.w3.org/TR/FileAPI/") W3C
+  %article
+    The File API provides the interfaces for accessing file objects in web applications:
+    %ul
+      %li
+        %strong.terminal<>
+          Blob
+        \: an interface for raw binary data
+      %li
+        %strong.terminal<>
+          File
+        \: readonly information about a file
+      %li
+        %strong.terminal<>
+          FileList
+        \: an array of individually selected files from the file system (e.g. through the file input tag)
+      %li
+        %strong.terminal<>
+          FileReader
+        \: asynchronous interface for reading the content of a File or Blob
+      %li
+        %strong.terminal<>
+          URI scheme
+        \: for referencing a blob (e.g. 
+        %span.terminal>
+          blob:4342e43fa43-34ea53-4343dfa-37675
+        )
+    It works in conjunction witht the new XMLHttpRequest level 2
+          
 
 %section.slide
   %header 
@@ -460,6 +492,246 @@
           $("#uploadFormPost").submit();
         });
 
+%section.slide
+  %header
+    =html5_device_access_tag("HTML Media Capture API")
+    %span.smaller
+      %a(href="http://www.w3.org/TR/2010/WD-html-media-capture-20100720/") W3C
+  %article
+    %p Basic API for capturing media from the device (images, video and sound)
+    %p 
+      More powerful API will come with 
+      %span.terminal
+        %a(href="http://dev.w3.org/2011/webrtc/editor/getusermedia.html") getUserMedia
+    %p Only implemented in Android Browser 3.0 onwards
+    %p 
+      Based on the extension of the 
+      %span.terminal accept 
+      attribute with the 
+      %span.terminal capture
+      paramenter:
+    :coderay
+      #!html
+        <input type="file" accept="image/*;capture=camera">
+    %ul
+      %li
+        %strong accept
+        %span.terminal> : "image/*", "sound/*", "video/*"
+      %li
+        %strong capture
+        %span.terminal> : camera, camcoder, microphone, filesystem     
+
+%section.slide
+  %header
+    =html5_device_access_tag("The MediaFile Interface")
+  %article
+    %p 
+      If the media capture succeds the 
+      %span.terminal 
+        files
+      attribute contains 
+      %span.terminal MediaFile
+      objects instead of 
+      %span.terminal File
+      objects
+    %p 
+      %span.terminal MediaFile
+      objects inherit from 
+      %span.terminal File
+      and have the additional attribute
+      %span.terminal FormData
+    %p
+      %span.terminal
+        FormData
+      contains the attributes:
+      %ul
+        %li codecs
+        %li bitrate
+        %li height
+        %li width
+        %li duration 
+        
+%section.slide
+  %header 
+    =html5_device_access_tag("Device Orientation API")
+    %span.smaller
+      %a(href="http://www.w3.org/TR/orientation-event/") W3C
+
+    
+  %article
+    %p API to access the information of accelererometers, gyroscopes and compasses of mobile devices
+    .autobox
+      .row
+        .twoColumn
+          .autobox
+            %strong DeviceOrientation Event
+            %ul
+              %li alpha: around the Z-axis
+              %li beta: around the X-axis
+              %li gamma: around the Y-axis
+            %strong MotionOrientation Event
+            %ul
+              %li acceleration
+              %li accelerationIncludingGravity
+        .twoColumn
+          =image_tag("/lesson4/orientation.png", :resize => true)
+
+%section.slide
+  %header 
+    =html5_device_access_tag("Device Orientation API")
+  %article
+    .row
+      .threeColumn
+        .autobox.centered
+          Heading (Yaw)
+          =image_tag("/lesson4/orientation-alpha.png", :resize => true)
+      .threeColumn
+        .autobox.centered
+          Elevation (Pitch)
+          =image_tag("/lesson4/orientation-beta.png", :resize => true)
+      .threeColumn
+        .autobox.centered
+          Bank (Roll)
+          =image_tag("/lesson4/orientation-gamma.png", :resize => true)
+%section.slide
+  %header
+    Orientation Events 
+    %span.smaller
+      =example_url_tag("deviceOrientation")      
+  %article
+    :coderay
+      #!javascript
+          $(function() {
+          if (window.DeviceOrientationEvent) {  
+            window.addEventListener("deviceorientation", function( event ) {  
+              }
+              //alpha: rotation around z-axis  
+              $(".alpha").html(event.alpha);
+  
+              //gamma: left to right  
+              $(".beta").html(event.beta);
+  
+              //beta: front back motion  
+              $(".gamma").html(event.gamma);
+              
+              var rotation = "rotateX("+(event.beta*-1)+"deg)"
+              rotation += " rotateY("+(event.gamma)+"deg)" 
+              rotation += "rotateZ("+(event.alpha*-1)+"deg)";
+  
+              $(".transform").html(rotation);
+              $("#imgLogo").css('-moz-transform',rotation);
+            }, false);  
+          }  
+        }
+
+%section.slide
+  %header 
+    =html5_device_access_tag("Geolocation API")
+    %span.smaller
+      %a(href="http://dev.w3.org/geo/api/spec-source.html") W3C
+  %article
+    %ul
+      %li 
+        API for locating the user exact position that contains three methods: 
+        %ul
+          %li 
+            %strong.terminal<> getCurrentPosition
+            \: asynchronous request for current location of the user. The handler is invoked with a 
+            %span.terminal< Position
+            object
+          %li 
+            %strong.terminal<> watchPosition
+            \: polling at regular intervals and if the location has changed invoke the handler with a
+            %span.terminal< Position
+            object
+          %li 
+            %strong.terminal<> clearWatch
+            \: cancel the watching request 
+        
+      %li
+        Browser displays a dialogue to request for user's permission
+      
+      %li
+        Positioning happens in two ways:
+        %ul
+          %li IP, cell id, WiFi access point + some black magic from a geocoding provider (less accurate, fast, works indoor)
+          %li GPS for enabled devices (accurate, slower, works outdoor)
+
+%section.slide
+  %header 
+    =html5_device_access_tag("Geolocation API")
+    %span.smaller
+      %a(href="http://dev.w3.org/geo/api/spec-source.html") W3C
+  %article
+    :coderay
+      #!javascript
+      //Get location ASAP, regardless of accuracy
+      navigator.geolocation.getCurrentPosition(function(position) {  
+        do_something(position.coords.latitude, position.coords.longitude);  
+      });
+      
+      //Watch for location changes, request high accuracy
+      var wpid = navigator.geolocation.watchPosition(
+        function(position) { do_something(position.coords.latitude, position.coords.longitude); }, 
+        function(error) { show_error(error.code, error.message); },
+        {enableHighAccuracy:true, maximumAge:30000, timeout:27000}
+      );
+    .autobox.smaller
+      .row
+        .threeColumn
+          .autobox
+            %strong
+              Position 
+            %ul
+              %li 
+                coords
+              %li
+                timestamp
+        .threeColumn
+          .autobox
+            %strong
+              Coordinates
+            %ul
+              %li
+                latitude (decimal degrees)
+              %li
+                longitude (decimal degrees)
+              %li
+                accuracy (radius in m.)
+              %li
+                altitude (in m.)
+              %li
+                altitudeAccuracy (in m.)
+              %li
+                heading (degrees)
+              %li 
+                speed (in m/s)
+        .threeColumn
+          .autobox
+            %strong
+              Error
+            %ul
+              %li 
+                %span.terminal code
+                %ul
+                  %li UNKNOWN_ERROR (0)
+                  %li PERMISSION_DENIED (1)
+                  %li POSITION_UNAVAILABLE (2)
+                  %li TIMEOUT (3)
+              %li
+                %span.terminal message
+
+%section.slide
+  %header Challenge of the week
+  %article
+    Demo something cool that uses location and the sensors
+    
+      
+%section.slide
+  %header Camera API
+  %article
+    http://www.w3.org/TR/2010/WD-html-media-capture-20100720/
+    http://my.opera.com/core/blog/2011/03/23/webcam-orientation-preview
 %section.slide
   %header
     Resources
