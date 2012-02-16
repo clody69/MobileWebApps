@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Geolocation</h1><div class='actions'><a href='examples/deviceGeolocation'>Try it</a><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/deviceGeolocation'>Browse Source Code</a></div>
+<p>
+In this example we experiment with the Geolocation API. We create an app that shows our current coordinate and
+shows the location on Google Maps
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%strong</span> Location&#x000A;<span class="tag">%br</span>&#x000A;latitude:&#x000A;<span class="tag">%span</span><span class="class">.latitude</span>&#x000A;<span class="tag">%br</span>&#x000A;longitude:&#x000A;<span class="tag">%span</span><span class="class">.longitude</span>&#x000A;<span class="tag">%br</span>&#x000A;accuracy:&#x000A;<span class="tag">%span</span><span class="class">.accuracy</span>&#x000A;<span class="tag">%br</span>&#x000A;altitude:&#x000A;<span class="tag">%span</span><span class="class">.altitude</span>&#x000A;<span class="tag">%br</span>&#x000A;heading:&#x000A;<span class="tag">%span</span><span class="class">.heading</span>&#x000A;<span class="tag">%br</span>&#x000A;speed:&#x000A;<span class="tag">%span</span><span class="class">.speed</span>&#x000A;<span class="tag">%br</span>&#x000A;<span class="constant">#map</span>(<span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width:300px; height:200px</span><span class="delimiter">&quot;</span></span>)&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> myLatLng;&#x000A;<span class="keyword">var</span> map;&#x000A;<span class="keyword">var</span> marker;&#x000A;&#x000A;<span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="comment">//Get position fast and initialized google map</span>&#x000A;  navigator.geolocation.getCurrentPosition(<span class="keyword">function</span>(geodata) {&#x000A;    myLatLng = <span class="keyword">new</span> google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);&#x000A;    &#x000A;    <span class="keyword">var</span> myOptions = { <span class="key">center</span>: myLatLng, <span class="key">zoom</span>: <span class="integer">8</span>, <span class="key">mapTypeId</span>: google.maps.MapTypeId.ROADMAP };&#x000A;    map = <span class="keyword">new</span> google.maps.Map(document.getElementById(<span class="string"><span class="delimiter">&quot;</span><span class="content">map</span><span class="delimiter">&quot;</span></span>), myOptions);&#x000A;&#x000A;    marker = <span class="keyword">new</span> google.maps.Marker( { <span class="key">position</span>: myLatLng, <span class="key">map</span>: map, <span class="key">title</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">My position</span><span class="delimiter">&quot;</span></span> });&#x000A;  });&#x000A;  <span class="comment">//Update the position at least every 5 seconds and use GPS if available</span>&#x000A;  navigator.geolocation.watchPosition(<span class="keyword">function</span>(geodata) {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.latitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.latitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.longitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.longitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.accuracy</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.accuracy);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.altitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.altitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.heading</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.heading);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.speed</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.speed);&#x000A;    &#x000A;    myLatLng = <span class="keyword">new</span> google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);&#x000A;    marker.setPosition(myLatLng);&#x000A;  },<span class="keyword">function</span>() {},{<span class="key">enableHighAccuracy</span>:<span class="predefined-constant">true</span>, <span class="key">maximumAge</span>:<span class="integer">30000</span>, <span class="key">timeout</span>:<span class="integer">5000</span>} );  &#x000A;})</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+</div>
+</div>
+</body>
+</html>

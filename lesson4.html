@@ -62,14 +62,40 @@ Aalto University March 2011
 </section>
 
 <section class='slide section-title'>
-<h1>Lecture 4: Templating and MVC</h1>
+<h1>Lecture 4: File & Device Access</h1>
 <div class='agenda'>
-<p>Bytes and Blobs</p>
 <p>File API</p>
+<p>Bytes and Blobs</p>
 <p>HTML Media Capture API</p>
 <p>Motion Sensor API</p>
-<p>GeoLocation</p>
+<p>GeoLocation API</p>
 </div>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>File API</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/FileAPI/'>W3C</a>
+</span>
+</header>
+<article>
+The File API provides the interfaces for accessing file objects in web applications:
+<ul>
+<li><strong class='terminal'>Blob</strong>: an interface for raw binary data
+</li>
+<li><strong class='terminal'>File</strong>: readonly information about a file
+</li>
+<li><strong class='terminal'>FileList</strong>: an array of individually selected files from the file system (e.g. through the file input tag)
+</li>
+<li><strong class='terminal'>FileReader</strong>: asynchronous interface for reading the content of a File or Blob
+</li>
+<li><strong class='terminal'>URI scheme</strong>: for referencing a blob (e.g.<span class='terminal'>
+blob:4342e43fa43-34ea53-4343dfa-37675
+</span>)
+</li>
+</ul>
+It works in conjunction witht the new XMLHttpRequest level 2
+</article>
 </section>
 <section class='slide'>
 <header>
@@ -565,12 +591,81 @@ multipart/form-data
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>HTML Media Capture API</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/2010/WD-html-media-capture-20100720/'>W3C</a>
+</span>
 </header>
-<article></article>
+<article>
+<p>Basic API for capturing media from the device (images, video and sound)</p>
+<p>
+More powerful API will come with
+<span class='terminal'>
+<a href='http://dev.w3.org/2011/webrtc/editor/getusermedia.html'>getUserMedia</a>
+</span>
+</p>
+<p>Only implemented in Android Browser 3.0 onwards</p>
+<p>
+Based on the extension of the
+<span class='terminal'>accept</span>
+attribute with the
+<span class='terminal'>capture</span>
+paramenter:
+</p>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="tag">&lt;input</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">accept</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">image/*;capture=camera</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span></pre></div>
+</div>
+<ul>
+<li>
+<strong>accept</strong><span class='terminal'>: "image/*", "sound/*", "video/*"</span></li>
+<li>
+<strong>capture</strong><span class='terminal'>: camera, camcoder, microphone, filesystem</span></li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>The MediaFile Interface</img>
+</header>
+<article>
+<p>
+If the media capture succeds the
+<span class='terminal'>
+files
+</span>
+attribute contains
+<span class='terminal'>MediaFile</span>
+objects instead of
+<span class='terminal'>File</span>
+objects
+</p>
+<p>
+<span class='terminal'>MediaFile</span>
+objects inherit from
+<span class='terminal'>File</span>
+and have the additional attribute
+<span class='terminal'>FormData</span>
+</p>
+<p>
+<span class='terminal'>
+FormData
+</span>
+contains the attributes:
+<ul>
+<li>codecs</li>
+<li>bitrate</li>
+<li>height</li>
+<li>width</li>
+<li>duration</li>
+</ul>
+</p>
+</article>
 </section>
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>Device Orientation API</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/orientation-event/'>W3C</a>
+</span>
 </header>
 <article>
 <p>API to access the information of accelererometers, gyroscopes and compasses of mobile devices</p>
@@ -629,13 +724,139 @@ Bank (Roll)
 <header>
 Orientation Events
 <span class='smaller'>
-<a href='sensorOrientation.html'>sensorOrientation</a>
+<a href='deviceOrientation.html'>deviceOrientation</a>
 </span>
 </header>
 <article>
 <div class="CodeRay">
-  <div class="code"><pre>    <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;    <span class="keyword">if</span> (window.DeviceOrientationEvent) {  &#x000A;      window.addEventListener(<span class="string"><span class="delimiter">&quot;</span><span class="content">deviceorientation</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>( event ) {  &#x000A;        }&#x000A;        <span class="comment">//alpha: rotation around z-axis  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.alpha</span><span class="delimiter">&quot;</span></span>).html(event.alpha);&#x000A;&#x000A;        <span class="comment">//gamma: left to right  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.beta</span><span class="delimiter">&quot;</span></span>).html(event.beta);&#x000A;&#x000A;        <span class="comment">//beta: front back motion  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.gamma</span><span class="delimiter">&quot;</span></span>).html(event.gamma);&#x000A;        &#x000A;        <span class="keyword">var</span> rotation = <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateX(</span><span class="delimiter">&quot;</span></span>+(event.beta*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>&#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content"> rotateY(</span><span class="delimiter">&quot;</span></span>+(event.gamma)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span> &#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateZ(</span><span class="delimiter">&quot;</span></span>+(event.alpha*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>;&#x000A;&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.transform</span><span class="delimiter">&quot;</span></span>).html(rotation);&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">-moz-transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;      }, <span class="predefined-constant">false</span>);  &#x000A;    }  &#x000A;  }&#x000A;  </pre></div>
+  <div class="code"><pre>    <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;    <span class="keyword">if</span> (window.DeviceOrientationEvent) {  &#x000A;      window.addEventListener(<span class="string"><span class="delimiter">&quot;</span><span class="content">deviceorientation</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>( event ) {  &#x000A;        }&#x000A;        <span class="comment">//alpha: rotation around z-axis  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.alpha</span><span class="delimiter">&quot;</span></span>).html(event.alpha);&#x000A;&#x000A;        <span class="comment">//gamma: left to right  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.beta</span><span class="delimiter">&quot;</span></span>).html(event.beta);&#x000A;&#x000A;        <span class="comment">//beta: front back motion  </span>&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.gamma</span><span class="delimiter">&quot;</span></span>).html(event.gamma);&#x000A;        &#x000A;        <span class="keyword">var</span> rotation = <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateX(</span><span class="delimiter">&quot;</span></span>+(event.beta*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>&#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content"> rotateY(</span><span class="delimiter">&quot;</span></span>+(event.gamma)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span> &#x000A;        rotation += <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateZ(</span><span class="delimiter">&quot;</span></span>+(event.alpha*-<span class="integer">1</span>)+<span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>;&#x000A;&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.transform</span><span class="delimiter">&quot;</span></span>).html(rotation);&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">-moz-transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;      }, <span class="predefined-constant">false</span>);  &#x000A;    }  &#x000A;  }&#x000A;</pre></div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Geolocation API</img>
+<span class='smaller'>
+<a href='http://dev.w3.org/geo/api/spec-source.html'>W3C</a>
+</span>
+</header>
+<article>
+<ul>
+<li>
+API for locating the user exact position that contains three methods:
+<ul>
+<li><strong class='terminal'>getCurrentPosition</strong>: asynchronous request for current location of the user. The handler is invoked with a
+<span class='terminal'>Position</span>
+object
+</li>
+<li><strong class='terminal'>watchPosition</strong>: polling at regular intervals and if the location has changed invoke the handler with a
+<span class='terminal'>Position</span>
+object
+</li>
+<li><strong class='terminal'>clearWatch</strong>: cancel the watching request
+</li>
+</ul>
+</li>
+<li>
+Browser displays a dialogue to request for user's permission
+</li>
+<li>
+Positioning happens in two ways:
+<ul>
+<li>IP, cell id, WiFi access point + some black magic from a geocoding provider (less accurate, fast, works indoor)</li>
+<li>GPS for enabled devices (accurate, slower, works outdoor)</li>
+</ul>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Geolocation API</img>
+<span class='smaller'>
+<a href='http://dev.w3.org/geo/api/spec-source.html'>W3C</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Get location ASAP, regardless of accuracy</span>&#x000A;navigator.geolocation.getCurrentPosition(<span class="keyword">function</span>(position) {  &#x000A;  do_something(position.coords.latitude, position.coords.longitude);  &#x000A;});&#x000A;&#x000A;<span class="comment">//Watch for location changes, request high accuracy</span>&#x000A;<span class="keyword">var</span> wpid = navigator.geolocation.watchPosition(&#x000A;  <span class="keyword">function</span>(position) { do_something(position.coords.latitude, position.coords.longitude); }, &#x000A;  <span class="keyword">function</span>(error) { show_error(error.code, error.message); },&#x000A;  {<span class="key">enableHighAccuracy</span>:<span class="predefined-constant">true</span>, <span class="key">maximumAge</span>:<span class="integer">30000</span>, <span class="key">timeout</span>:<span class="integer">27000</span>}&#x000A;);</pre></div>
+</div>
+<div class='autobox smaller'>
+<div class='row'>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>
+Position
+</strong>
+<ul>
+<li>
+coords
+</li>
+<li>
+timestamp
+</li>
+</ul>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>
+Coordinates
+</strong>
+<ul>
+<li>
+latitude (decimal degrees)
+</li>
+<li>
+longitude (decimal degrees)
+</li>
+<li>
+accuracy (radius in m.)
+</li>
+<li>
+altitude (in m.)
+</li>
+<li>
+altitudeAccuracy (in m.)
+</li>
+<li>
+heading (degrees)
+</li>
+<li>
+speed (in m/s)
+</li>
+</ul>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>
+Error
+</strong>
+<ul>
+<li>
+<span class='terminal'>code</span>
+<ul>
+<li>UNKNOWN_ERROR (0)</li>
+<li>PERMISSION_DENIED (1)</li>
+<li>POSITION_UNAVAILABLE (2)</li>
+<li>TIMEOUT (3)</li>
+</ul>
+</li>
+<li>
+<span class='terminal'>message</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Challenge of the week</header>
+<article>
+Demo something cool that uses location and the sensors
 </article>
 </section>
 <section class='slide'>
