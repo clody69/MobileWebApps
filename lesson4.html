@@ -69,6 +69,7 @@ Aalto University March 2011
 <p>HTML Media Capture API</p>
 <p>Motion Sensor API</p>
 <p>GeoLocation API</p>
+<p>Audio & Video</p>
 </div>
 </section>
 <section class='slide'>
@@ -851,6 +852,90 @@ Error
 </div>
 </div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Maps and Location
+<span class='smaller'>
+<a href='deviceGeolocation.html'>deviceGeolocation</a>
+</span>
+</header>
+<article class='small'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> myLatLng;&#x000A;<span class="keyword">var</span> map;&#x000A;<span class="keyword">var</span> marker;&#x000A;&#x000A;<span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="comment">//Get position fast and initialized google map</span>&#x000A;  navigator.geolocation.getCurrentPosition(<span class="keyword">function</span>(geodata) {&#x000A;    myLatLng = <span class="keyword">new</span> google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);&#x000A;    &#x000A;    <span class="keyword">var</span> myOptions = { <span class="key">center</span>: myLatLng, <span class="key">zoom</span>: <span class="integer">8</span>, <span class="key">mapTypeId</span>: google.maps.MapTypeId.ROADMAP };&#x000A;    map = <span class="keyword">new</span> google.maps.Map(document.getElementById(<span class="string"><span class="delimiter">&quot;</span><span class="content">map</span><span class="delimiter">&quot;</span></span>), myOptions);&#x000A;    marker = <span class="keyword">new</span> google.maps.Marker( { <span class="key">position</span>: myLatLng, <span class="key">map</span>: map, <span class="key">title</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">My position</span><span class="delimiter">&quot;</span></span> });&#x000A;  });&#x000A;  <span class="comment">//Update the position at least every 5 seconds and use GPS if available</span>&#x000A;  navigator.geolocation.watchPosition(<span class="keyword">function</span>(geodata) {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.latitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.latitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.longitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.longitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.accuracy</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.accuracy);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.altitude</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.altitude);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.heading</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.heading);&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.speed</span><span class="delimiter">&quot;</span></span>).html(geodata.coords.speed);&#x000A;    &#x000A;    myLatLng = <span class="keyword">new</span> google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);&#x000A;    marker.setPosition(myLatLng);&#x000A;    map.setCenter(myLatLng);&#x000A;  },<span class="keyword">function</span>() {},{<span class="key">enableHighAccuracy</span>:<span class="predefined-constant">true</span>, <span class="key">maximumAge</span>:<span class="integer">30000</span>, <span class="key">timeout</span>:<span class="integer">5000</span>} );  &#x000A;})&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Audio & Video</img>
+</header>
+<article>
+<ul>
+<li>Open standard for delivery of multimedia without plugins</li>
+<li>HTML native video and audio elements</li>
+<li>No support for DRM</li>
+<li>No access to webcam or microphone</li>
+<li>Mix with HTML, JS and CSS</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Video Formats</img>
+</header>
+<article>
+<ul>
+<li>
+<strong class='red'>.mp4 = H.264 + AAC</strong>
+<ul>
+<li>Not an open codec</li>
+<li>Not royalty free</li>
+<li>Only codec supported on iOS</li>
+<li>Not supported by Firefox and Opera</li>
+</ul>
+</li>
+<li>
+<strong class='red'>.ogg / .ogv = Theora + Vorbis</strong>
+<ul>
+<li>Supported by Firefox, Chrome and Opera</li>
+</ul>
+</li>
+<li>
+<strong class='red'>.webm = VP8 + Vorbis</strong>
+<ul>
+<li>High-quality, royalty free and open video format</li>
+<li>Supported in Firefox, Chrome, Opera and Andorid</li>
+</ul>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Video</img>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%video</span>(<span class="attribute-name">controls</span>)&#x000A;<span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.webm</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/webm; codecs=&quot;vp8, vorbis&quot;</span><span class="delimiter">'</span></span>)&#x000A;<span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.mp4</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;</span><span class="delimiter">'</span></span>)&#x000A;Video tag not supported. Download the video&#x000A;<span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">movie.webm</span><span class="delimiter">&quot;</span></span>) here&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Audio and Video Element Attributes</img>
+</header>
+<article>
+<ul>
+<li>autoplay</li>
+<li>controls</li>
+<li>poster</li>
+<li>muted</li>
+<li>height, width</li>
+<li>loop</li>
+<li>preload</li>
+</ul>
 </article>
 </section>
 <section class='slide'>

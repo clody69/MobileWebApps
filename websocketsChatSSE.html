@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Chat with server-sent events</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/websocketsChatSSE'>Browse Source Code</a></div>
+<p>
+We implement a chat service like in the example
+<a href='websocketsDrawEM.html'>websocketsDrawEM</a>
+but we use the server-sent events instead of the websockets.
+For the server we use Sinatra with the Streaming API.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Gemfile
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>source &quot;http://rubygems.org&quot;&#x000A;&#x000A;gem &quot;haml&quot;&#x000A;gem 'sinatra'&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;set server: <span class="string"><span class="delimiter">'</span><span class="content">thin</span><span class="delimiter">'</span></span>&#x000A;set <span class="symbol">:public_folder</span>, settings.root&#x000A;&#x000A;users = []&#x000A;messages = []&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  send_file <span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>, provides: <span class="string"><span class="delimiter">'</span><span class="content">text/event-stream</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  stream <span class="symbol">:keep_open</span> <span class="keyword">do</span> |out|&#x000A;    users &lt;&lt; out&#x000A;    &#x000A;    <span class="comment">#callback is fired when the stream is closed. </span>&#x000A;    out.callback { &#x000A;      users.delete(out) &#x000A;    } &#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  puts params&#x000A;  <span class="comment">#Add the timestamp to the message</span>&#x000A;  message = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;&#x000A;  <span class="comment">#append the message at the end of the queue</span>&#x000A;  messages &lt;&lt; message&#x000A;  messages.shift <span class="keyword">if</span> messages.length &gt; <span class="integer">10</span>&#x000A;&#x000A;  users.each { |out| out &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">data: </span><span class="inline"><span class="inline-delimiter">#{</span>message<span class="inline-delimiter">}</span></span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>}&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsChatEM/index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)  &#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Server-Sent Events Chat&#x000A;  <span class="tag">%body</span>&#x000A;<span class="comment">    :javascript</span>&#x000A;      <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;        <span class="keyword">var</span> es = <span class="keyword">new</span> EventSource(<span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>);&#x000A;        es.<span class="function">onmessage</span> = <span class="keyword">function</span>(e) { &#x000A;          <span class="keyword">var</span> msg = <span class="predefined">$</span>.parseJSON(event.data);&#x000A;          <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span> + msg.timestamp + <span class="string"><span class="delimiter">'</span><span class="content"> &lt;strong&gt;</span><span class="delimiter">'</span></span> + msg.nickname + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/strong&gt;: </span><span class="delimiter">'</span></span> + msg.message + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>);&#x000A;        }&#x000A;        &#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#send</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>(event) {&#x000A;          event.preventDefault();&#x000A;          <span class="keyword">var</span> msg = {<span class="key">nickname</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#nickname</span><span class="delimiter">'</span></span>).val(), <span class="key">message</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val()};&#x000A;          &#x000A;          <span class="predefined">$</span>.post( <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>,msg,<span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>);&#x000A;          <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;        })  &#x000A;      });&#x000A;&#x000A;    <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%h1</span> Simple Chat&#x000A;      <span class="tag">%input</span><span class="constant">#nickname</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Nickname</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%input</span><span class="constant">#message</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">text</span><span class="delimiter">'</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Start chat here</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%a</span><span class="constant">#send</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">'</span><span class="content">button</span><span class="delimiter">'</span></span>)&#x000A;        Send&#x000A;      &#x000A;      <span class="constant">#console</span></pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>

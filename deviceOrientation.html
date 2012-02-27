@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Orientation Sensors</h1><div class='actions'><a href='examples/deviceOrientation'>Try it</a><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/deviceOrientation'>Browse Source Code</a></div>
+<p>
+In this example we experiment with the device orientation API. We create an app that shows the current orienrtation of the
+device and rotates an image with CSS3 when the device changes orientation.
+</p>
+<p>
+The HTML code contains the text where to show the orientation parameters and the image.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>&#x000A;  <span class="tag">%strong</span> Device Orientation&#x000A;  <span class="tag">%br</span>&#x000A;  <span class="class">.absolute</span>&#x000A;    Absolute Coord&#x000A;  <span class="tag">%br</span>&#x000A;  Rotate (Alpha): &#x000A;  <span class="tag">%span</span><span class="class">.alpha</span>  &#x000A;  <span class="tag">%br</span>&#x000A;  frontToBack (Beta):&#x000A;  <span class="tag">%span</span><span class="class">.beta</span>&#x000A;  <span class="tag">%br</span>&#x000A;  leftToRight (Gamma):&#x000A;  <span class="tag">%span</span><span class="class">.gamma</span>&#x000A;  <span class="tag">%br</span>&#x000A;  <span class="tag">%strong</span> Device Motion&#x000A;  <span class="tag">%br</span>&#x000A;  Acceleration:&#x000A;  <span class="tag">%span</span><span class="class">.acceleration</span>&#x000A;  <span class="tag">%br</span>&#x000A;  Transform:&#x000A;  <span class="tag">%span</span><span class="class">.transform</span>&#x000A;  <span class="tag">%br</span>&#x000A;  <span class="class">.container</span>(<span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">-moz-perspective: 300; perspective: 300;</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%img</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/html/logo/downloads/HTML5_Badge_64.png</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">imgLogo</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>)&#x000A;</pre></div>
+</div>
+</div>
+<p>
+Below there is the Javascript code that listen to the device orientation events. For each event the handler updates the
+data about the orientation on the html page and applies a new 3d transformation to the logo.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>window.addEventListener(<span class="string"><span class="delimiter">&quot;</span><span class="content">deviceorientation</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>( event ) {  &#x000A;  <span class="keyword">if</span>(event.absolute) {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.absolute</span><span class="delimiter">&quot;</span></span>).show();&#x000A;  } <span class="keyword">else</span>&#x000A;  {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.absolute</span><span class="delimiter">&quot;</span></span>).hide();&#x000A;  }&#x000A;  <span class="comment">//alpha: rotation around z-axis  </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.alpha</span><span class="delimiter">&quot;</span></span>).html(event.alpha);&#x000A;&#x000A;  <span class="comment">//gamma: left to right  </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.beta</span><span class="delimiter">&quot;</span></span>).html(event.beta);&#x000A;&#x000A;  <span class="comment">//beta: front back motion  </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.gamma</span><span class="delimiter">&quot;</span></span>).html(event.gamma);&#x000A;  <span class="keyword">var</span> rotation = <span class="string"><span class="delimiter">&quot;</span><span class="content">rotateX(</span><span class="delimiter">&quot;</span></span>+(event.beta * -<span class="integer">1</span>) + <span class="string"><span class="delimiter">&quot;</span><span class="content">deg) rotateY(</span><span class="delimiter">&quot;</span></span> + (event.gamma) + <span class="string"><span class="delimiter">&quot;</span><span class="content">deg) rotateZ(</span><span class="delimiter">&quot;</span></span> + (event.alpha * -<span class="integer">1</span>) + <span class="string"><span class="delimiter">&quot;</span><span class="content">deg)</span><span class="delimiter">&quot;</span></span>;&#x000A;&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.transform</span><span class="delimiter">&quot;</span></span>).html(rotation);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">-moz-transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">-webkit-transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#imgLogo</span><span class="delimiter">&quot;</span></span>).css(<span class="string"><span class="delimiter">'</span><span class="content">transform</span><span class="delimiter">'</span></span>,rotation);&#x000A;&#x000A;}, <span class="predefined-constant">false</span>);</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>

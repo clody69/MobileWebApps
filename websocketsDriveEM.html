@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>WebSockets Drive EM</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/websocketsDriveEM'>Browse Source Code</a></div>
+<p>
+In this example we combine the usage of websockets, canvas and accelerometers. It's an evolution of the
+example
+<a href='websocketsDrawEM.html'>websocketsDrawEM</a>
+Each client draws on the canvas the position of all connected users
+and updates its own position using the accelerometers. The server keeps track of the location of each connected
+users and at regualr intervals it broadcast the latest locations.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+Gemfile
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>source &quot;http://rubygems.org&quot;&#x000A;&#x000A;gem &quot;haml&quot;&#x000A;gem 'em-websocket'&#x000A;gem 'sinatra'&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">em-websocket</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">sinatra/base</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="constant">EventMachine</span>.run {&#x000A;  <span class="instance-variable">@channel</span> = <span class="constant">EM</span>::<span class="constant">Channel</span>.new&#x000A;  <span class="instance-variable">@users</span> = {}&#x000A;  <span class="instance-variable">@location</span> = {}&#x000A;&#x000A;  <span class="constant">EventMachine</span>::<span class="constant">WebSocket</span>.start(<span class="symbol">:host</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">0.0.0.0</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:port</span> =&gt; <span class="integer">8080</span>) <span class="keyword">do</span> |ws|&#x000A;    ws.onopen {&#x000A;      <span class="comment">#Subscribe the new user to the channel with the callback function for the push action</span>&#x000A;      <span class="comment">#The callback sends the location of the other users</span>&#x000A;      new_user = <span class="instance-variable">@channel</span>.subscribe { |locs|&#x000A;        ws.send (locs.select { |k,v| k != ws.object_id }).to_json&#x000A;      }&#x000A;      &#x000A;      <span class="comment">#Add the new user to the user and location list</span>&#x000A;      <span class="instance-variable">@users</span>[ws.object_id] = new_user&#x000A;      <span class="instance-variable">@location</span>[ws.object_id] = {}&#x000A;    }&#x000A;&#x000A;    ws.onmessage { |msg|&#x000A;      message = <span class="constant">JSON</span>.parse(msg)&#x000A;&#x000A;      <span class="comment">#update the location of the user</span>&#x000A;      <span class="instance-variable">@location</span>[ws.object_id].merge!(message)&#x000A;    }&#x000A;&#x000A;    ws.onclose { &#x000A;      <span class="instance-variable">@channel</span>.unsubscribe(<span class="instance-variable">@users</span>[ws.object_id])&#x000A;      <span class="instance-variable">@users</span>.delete(ws.object_id)&#x000A;      <span class="instance-variable">@location</span>.delete(ws.object_id)&#x000A;    }&#x000A;  <span class="keyword">end</span>&#x000A;&#x000A;  <span class="comment">#Periodically broadcast the current locations to all the users</span>&#x000A;  <span class="constant">EventMachine</span>::run {&#x000A;    <span class="constant">EventMachine</span>::add_periodic_timer( <span class="float">0.5</span> ) { &#x000A;      puts <span class="instance-variable">@location</span>&#x000A;&#x000A;      <span class="comment">#Broadcast the message to all users connected to the channel</span>&#x000A;      <span class="instance-variable">@channel</span>.push <span class="instance-variable">@location</span>&#x000A;&#x000A;      <span class="comment">#Store the old location of the users</span>&#x000A;      <span class="instance-variable">@location</span>.each { |k, v| &#x000A;        <span class="keyword">if</span> v&#x000A;          <span class="instance-variable">@location</span>[k].merge! ({<span class="string"><span class="delimiter">'</span><span class="content">oldX</span><span class="delimiter">'</span></span> =&gt; v[<span class="string"><span class="delimiter">'</span><span class="content">x</span><span class="delimiter">'</span></span>], <span class="string"><span class="delimiter">'</span><span class="content">oldY</span><span class="delimiter">'</span></span> =&gt; v[<span class="string"><span class="delimiter">'</span><span class="content">y</span><span class="delimiter">'</span></span>]} )&#x000A;        <span class="keyword">end</span>&#x000A;      }&#x000A;    }&#x000A;  }&#x000A;&#x000A;  <span class="comment">#Run a Sinatra server for serving index.html</span>&#x000A;  <span class="keyword">class</span> <span class="class">App</span> &lt; <span class="constant">Sinatra</span>::<span class="constant">Base</span>&#x000A;    set <span class="symbol">:public_folder</span>, settings.root&#x000A;    &#x000A;    get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;      send_file <span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>&#x000A;    <span class="keyword">end</span>&#x000A;  <span class="keyword">end</span>&#x000A;  <span class="constant">App</span>.run!&#x000A;} &#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+websocketsDrawEM/index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)  &#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      WebSockets Drive&#x000A;  <span class="tag">%body</span>&#x000A;<span class="comment">    :javascript</span>&#x000A;      <span class="keyword">var</span> WebSocket = window.WebSocket || window.MozWebSocket;&#x000A;&#x000A;      <span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;&#x000A;        socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://</span><span class="delimiter">&quot;</span></span> + location.hostname + <span class="string"><span class="delimiter">&quot;</span><span class="content">:8080</span><span class="delimiter">&quot;</span></span>);&#x000A;        &#x000A;        <span class="keyword">var</span> currentX = Math.random()*<span class="integer">350</span>;&#x000A;        <span class="keyword">var</span> currentY = Math.random()*<span class="integer">450</span>;&#x000A;        <span class="keyword">var</span> color = <span class="string"><span class="delimiter">'</span><span class="content">rgb(</span><span class="delimiter">'</span></span> + Math.floor(Math.random()*<span class="integer">255</span>) + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> +   &#x000A;                       Math.floor(Math.random()*<span class="integer">255</span>) + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> + &#x000A;                       Math.floor(Math.random()*<span class="integer">255</span>) + <span class="string"><span class="delimiter">'</span><span class="content">)</span><span class="delimiter">'</span></span>;  &#x000A;        <span class="keyword">var</span> lastX;&#x000A;        <span class="keyword">var</span> lastY;&#x000A;        <span class="keyword">var</span> lastSentX;&#x000A;        <span class="keyword">var</span> lastSentY;&#x000A;        <span class="keyword">var</span> heading = <span class="integer">0</span>;&#x000A;        <span class="keyword">var</span> speed = <span class="integer">0</span>;&#x000A;        &#x000A;        <span class="keyword">var</span> ctx = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>].getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;        <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">vmousemove</span><span class="delimiter">'</span></span>,<span class="keyword">function</span>(ev){&#x000A;          ev = ev || window.event;&#x000A;          currentX = ev.pageX || ev.clientX;&#x000A;          currentY = ev.pageY || ev.clientY;&#x000A;        });&#x000A;        &#x000A;        socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) {&#x000A;          setInterval(<span class="keyword">function</span>(){&#x000A;            <span class="keyword">if</span>(currentX !== lastSentX || currentY !== lastSentY){&#x000A;              socket.send( JSON.stringify({ <span class="key">x</span>:currentX, <span class="key">y</span>: currentY, <span class="key">color</span>: color}) );&#x000A;              lastSentX = currentX;&#x000A;              lastSentY = currentY;&#x000A;            }&#x000A;          }, <span class="integer">30</span>); <span class="comment">// send every 300 milliseconds if position has changed</span>&#x000A;        }&#x000A;        &#x000A;        socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) {&#x000A;          <span class="keyword">var</span> locs = <span class="predefined">$</span>.parseJSON(event.data);&#x000A;          console.log(locs);&#x000A;          <span class="predefined">$</span>.each(locs, <span class="keyword">function</span> (i,loc){&#x000A;            <span class="keyword">if</span> (loc.oldX != <span class="predefined-constant">undefined</span>) {&#x000A;              display(loc.oldX, loc.oldY, loc.x, loc.y, loc.color.toString());            &#x000A;            }&#x000A;          });&#x000A;&#x000A;        }&#x000A;&#x000A;        <span class="function">display</span> = <span class="keyword">function</span>(fromX, fromY, toX, toY, c) {&#x000A;          ctx.beginPath();&#x000A;          ctx.moveTo(fromX,fromY);&#x000A;          ctx.lineWidth = <span class="integer">2</span>;&#x000A;          ctx.strokeStyle = c;&#x000A;          ctx.lineTo(toX,toY);&#x000A;          ctx.closePath();&#x000A;          ctx.stroke();&#x000A;        }&#x000A;&#x000A;        window.addEventListener(<span class="string"><span class="delimiter">&quot;</span><span class="content">deviceorientation</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>( event ) {  &#x000A;          lastX = currentX;&#x000A;          lastY = currentY;&#x000A;          heading += Math.tan(event.gamma/<span class="integer">360</span>*Math.PI*<span class="integer">2</span>)/<span class="integer">10</span>;&#x000A;          speed = Math.tan(event.beta/<span class="integer">360</span>*Math.PI)*<span class="integer">5</span>;&#x000A;          currentY -= speed * Math.cos(heading);&#x000A;          currentX += speed * Math.sin(heading);&#x000A;          <span class="keyword">if</span> (currentY &lt; <span class="integer">0</span>) { currentY = <span class="integer">0</span>;}&#x000A;          <span class="keyword">if</span> (currentY &gt; <span class="integer">450</span>) {currentY = <span class="integer">450</span>;};&#x000A;          <span class="keyword">if</span> (currentX &lt; <span class="integer">0</span>) { currentX = <span class="integer">0</span>;}&#x000A;          <span class="keyword">if</span> (currentX &gt; <span class="integer">350</span>) {currentX = <span class="integer">350</span>;};&#x000A;          display(lastX, lastY, currentX, currentY, color);&#x000A;        });&#x000A;      });&#x000A;&#x000A;    <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span>)&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>

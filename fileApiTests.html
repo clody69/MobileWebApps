@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='index.html#Lectures'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='index.html#Examples'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='index.html#Resources'>Resources</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Tests with File API</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/fileApiTests'>Browse Source Code</a></div>
+<p>
+In this example we look at what the File API offers for reading/writing files in the local file sytem and fetching/uploading
+files from/to the web.
+</p>
+<p>First we take handle the various browser vedors' differences</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">// Take care of vendor prefixes.</span>&#x000A;<span class="keyword">var</span> BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;&#x000A;window.URL = window.URL || window.webkitURL;  &#x000A;</pre></div>
+</div>
+</div>
+<h2>1. Upload a file by posting a form</h2>
+<p>
+The first example uses the classic method for posting a file to the server. This method works on all browsers, desktop and
+mobile, except iOS that doesn't support the file input. We use the file input for requesting the file to the user.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPost</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/uploadFormData</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">'</span><span class="content">false</span><span class="delimiter">'</span></span> <span class="attribute-name">enctype</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">multipart/form-data</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fileChoose0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span>  <span class="attribute-name">multiple</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">accept</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">image/*</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">height:0;width:0;</span><span class="delimiter">&quot;</span></span>) &#x000A;  <span class="tag">%button</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPostButton</span><span class="delimiter">&quot;</span></span>) Upload via Form POST &#x000A;</pre></div>
+</div>
+</div>
+<p>The javascript logic is very simple. Once the user has selected the file, we trigger the submit action on the form</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload a file by posting a form</span>&#x000A;<span class="comment">//Works in most browsers for uploading a file (except iOS)</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPostButton</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) { &#x000A;  e.preventDefault();&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose0</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormPost</span><span class="delimiter">&quot;</span></span>).submit();&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side Sinatra decodes the multipart message for us and we only need to save the file in the location we prefer
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/uploadFormData</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  raw = request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">rack.input</span><span class="delimiter">&quot;</span></span>].read&#x000A;  puts params&#x000A;  params.each <span class="keyword">do</span> |k,v|&#x000A;    <span class="constant">File</span>.open(<span class="string"><span class="delimiter">&quot;</span><span class="content">public/</span><span class="delimiter">&quot;</span></span>+v[<span class="symbol">:filename</span>], <span class="string"><span class="delimiter">&quot;</span><span class="content">w</span><span class="delimiter">&quot;</span></span>) <span class="keyword">do</span> |f| &#x000A;      f.puts v[<span class="symbol">:tempfile</span>].read;    &#x000A;    <span class="keyword">end</span> &#x000A;  <span class="keyword">end</span>&#x000A;  redirect to(<span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<h2>2. Upload a string</h2>
+<p>
+In this example we upload a string of text by creating a Blob and by posting it with the new XHR2 send method
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload a text by creating a Blob and XHR2 send</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadText</span><span class="delimiter">&quot;</span></span>).click( <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;  xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadText</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;  xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;  <span class="keyword">var</span> bb = <span class="keyword">new</span> BlobBuilder();&#x000A;  bb.append(<span class="string"><span class="delimiter">'</span><span class="content">hello world</span><span class="delimiter">'</span></span>);&#x000A;  xhr.send(bb.getBlob(<span class="string"><span class="delimiter">'</span><span class="content">text/plain</span><span class="delimiter">'</span></span>));&#x000A;});  &#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side we just receive the text as part of the HTTP request
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/uploadText</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  raw = request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">rack.input</span><span class="delimiter">&quot;</span></span>].read&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Received data:</span><span class="delimiter">&quot;</span></span> + raw&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<h2>3. Upload files</h2>
+<p>
+In this example we upload one or more files to the server using the XHR2 send method. The simply send the File object
+as a binary object. The filename is added to the request header.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload one or more images by using the XHR2 binary send function</span>&#x000A;<span class="comment">//Should work in FF10 for android and Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFile</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose1</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose1</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;    <span class="keyword">if</span> (!file.type.match(<span class="regexp"><span class="delimiter">/</span><span class="content">image.*</span><span class="delimiter">/</span></span>)) {&#x000A;      <span class="keyword">return</span>;&#x000A;    }  &#x000A;    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;    xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadFile</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;    xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;    xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">X-File-Name</span><span class="delimiter">&quot;</span></span>, file. name);&#x000A;    xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">application/octet-stream</span><span class="delimiter">&quot;</span></span>);&#x000A;    xhr.send(file); <span class="comment">//XHR2</span>&#x000A;  });&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side we just receive the binary object and we save on the file system using the filename from the request
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/uploadFile</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  raw = request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">rack.input</span><span class="delimiter">&quot;</span></span>].read&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Received data size:</span><span class="delimiter">&quot;</span></span> + raw.length.to_s&#x000A;  <span class="constant">File</span>.open(<span class="string"><span class="delimiter">&quot;</span><span class="content">public/</span><span class="delimiter">&quot;</span></span>+request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">HTTP_X_FILE_NAME</span><span class="delimiter">&quot;</span></span>], <span class="string"><span class="delimiter">&quot;</span><span class="content">w</span><span class="delimiter">&quot;</span></span>) <span class="keyword">do</span> |f| &#x000A;    f.puts raw;    &#x000A;  <span class="keyword">end</span> &#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<h2>4. Upload files via DataForm</h2>
+<p>
+In this example we upload one or more files to the server using the new DataForm object and the new XHR2 send method.
+The metod is similar to the first example but here we build the form object manually. The XHR2 send method automatically
+send the form as a
+<span class='terminal'>multipart/form-data</span>
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload one or more files by creating a multipart/form-data message</span>&#x000A;<span class="comment">//using the new FormData object</span>&#x000A;<span class="comment">//Should work on FF 10 and Android 4</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFormData</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose2</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose2</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> fd = <span class="keyword">new</span> FormData(); <span class="comment">// XHR2        </span>&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;    <span class="keyword">if</span> (!file.type.match(<span class="regexp"><span class="delimiter">/</span><span class="content">image.*</span><span class="delimiter">/</span></span>)) {&#x000A;      <span class="keyword">return</span>;&#x000A;    }  &#x000A;    fd.append(file.name, file);&#x000A;  });&#x000A;  &#x000A;  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); &#x000A;  xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadFormData</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;  xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;&#x000A;  xhr.send(fd); <span class="comment">// as multipart/form-data</span>&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side we use the same server handler like in the first example.
+</p>
+<h2>5. Upload binary files by reading into an array buffer</h2>
+<p>
+In this example we read the files using the FileReader interface into a binary array and we upload it to the
+server by sending it as a binary object.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload one or more files by reading the file into an array buffer </span>&#x000A;<span class="comment">//sending it as binary using XHR2 send functionality</span>&#x000A;<span class="comment">//Should work FF10 and Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFileMobile</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose3</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose3</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;    <span class="keyword">if</span> (!file.type.match(<span class="regexp"><span class="delimiter">/</span><span class="content">image.*</span><span class="delimiter">/</span></span>)) {&#x000A;      <span class="keyword">return</span>;&#x000A;    }  &#x000A;    <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;    reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;      xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadFile</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;      xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;      xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">X-File-Name</span><span class="delimiter">&quot;</span></span>, file. name);&#x000A;      xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">application/octet-stream</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">var</span> data = <span class="keyword">new</span> Uint8Array(reader.result);&#x000A;      xhr.send(data); <span class="comment">//XHR2</span>&#x000A;    }&#x000A;    reader.readAsArrayBuffer(file);          &#x000A;  });&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The server side is the same as in example 3.
+</p>
+<h2>6. Upload files with Base64 encoding</h2>
+<p>
+In this example we read the file from the file system as a DataURL. The file is stored in a string as a Base64 encoded
+object that looks like this:
+<div class='terminal'>
+"data:image/gif;base64,R0lGODlhMAAwAPf/ALRGC5BLMmRIFbOTZ+J1EPe6BkozFcrH...
+</div>
+</p>
+<p>
+We post the string to the server as a text object.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Upload one or more files by reading the object as URL and posting</span>&#x000A;<span class="comment">//the Base64 encoded version</span>&#x000A;<span class="comment">//Should work on FF10 and Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#uploadFileBase64</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose4</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileChoose4</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;    <span class="keyword">if</span> (!file.type.match(<span class="regexp"><span class="delimiter">/</span><span class="content">image.*</span><span class="delimiter">/</span></span>)) {&#x000A;      <span class="keyword">return</span>;&#x000A;    }  &#x000A;    <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;    reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;      xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">/uploadBase64</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;      xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {console.log (<span class="local-variable">this</span>.responseText); };&#x000A;      xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">X-File-Name</span><span class="delimiter">&quot;</span></span>, file. name);&#x000A;      xhr.setRequestHeader(<span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">application/octet-stream</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">var</span> data = reader.result;&#x000A;      xhr.send(data); <span class="comment">//XHR2</span>&#x000A;    }&#x000A;    reader.readAsDataURL(file);          &#x000A;  });&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+On the server side we must decode the Base64 string to recreate the original binary file
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/uploadBase64</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  raw = request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">rack.input</span><span class="delimiter">&quot;</span></span>].read.split(<span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span>)[<span class="integer">1</span>]&#x000A;  puts request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">HTTP_X_FILE_NAME</span><span class="delimiter">&quot;</span></span>]&#x000A;  &#x000A;  <span class="constant">File</span>.open(<span class="string"><span class="delimiter">&quot;</span><span class="content">public/</span><span class="delimiter">&quot;</span></span>+request.env[<span class="string"><span class="delimiter">&quot;</span><span class="content">HTTP_X_FILE_NAME</span><span class="delimiter">&quot;</span></span>], <span class="string"><span class="delimiter">&quot;</span><span class="content">w</span><span class="delimiter">&quot;</span></span>) <span class="keyword">do</span> |f| &#x000A;    f.puts <span class="constant">Base64</span>.decode64(raw);   &#x000A;  <span class="keyword">end</span> &#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+<h2>7. Download a binary object</h2>
+<p>
+In this example we download an image from the server as a blob (new XHR2 feature) and we insert it into the DOM
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Download an image as a blob and add it to the DOM</span>&#x000A;<span class="comment">//Works and FF10 and should work on Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#downloadBlob</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;  xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">GET</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">logo.png</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;  xhr.responseType = <span class="string"><span class="delimiter">'</span><span class="content">blob</span><span class="delimiter">'</span></span>;&#x000A;  &#x000A;  xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;    <span class="keyword">if</span> (<span class="local-variable">this</span>.status == <span class="integer">200</span>) {&#x000A;      <span class="keyword">var</span> blob = <span class="local-variable">this</span>.response;&#x000A;      &#x000A;      <span class="keyword">var</span> img = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">img</span><span class="delimiter">'</span></span>);&#x000A;      img.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;        window.URL.revokeObjectURL(img.src); <span class="comment">// Clean up after yourself.</span>&#x000A;      };&#x000A;      img.src = window.URL.createObjectURL(blob);&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#blobOutput</span><span class="delimiter">'</span></span>).append(img);&#x000A;    }&#x000A;  };&#x000A;  xhr.send();  &#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<h2>8. Upload files</h2>
+<p>
+In this example we download a binary file as an ArrayBuffer and we display the first 3 bytes.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Download an image as an arraybuffer and show the first 3 bytes</span>&#x000A;<span class="comment">//Works on FF10, iOS5 and should work on Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#downloadArray</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();&#x000A;  xhr.open(<span class="string"><span class="delimiter">'</span><span class="content">GET</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">logo.png</span><span class="delimiter">'</span></span>, <span class="predefined-constant">true</span>);&#x000A;  xhr.responseType = <span class="string"><span class="delimiter">'</span><span class="content">arraybuffer</span><span class="delimiter">'</span></span>;&#x000A;  &#x000A;  xhr.<span class="function">onload</span> = <span class="keyword">function</span>(e) {&#x000A;    <span class="keyword">if</span> (<span class="local-variable">this</span>.status == <span class="integer">200</span>) {&#x000A;      <span class="keyword">var</span> a = <span class="keyword">new</span> Uint8Array(<span class="local-variable">this</span>.response);&#x000A;      html = <span class="string"><span class="delimiter">'</span><span class="content">First 3 bytes: </span><span class="delimiter">'</span></span> + a[<span class="integer">0</span>] + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> + a[<span class="integer">1</span>] + <span class="string"><span class="delimiter">'</span><span class="content">,</span><span class="delimiter">'</span></span> + a[<span class="integer">2</span>];  &#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#arrayOutput</span><span class="delimiter">'</span></span>).html(html);&#x000A;    }&#x000A;  };&#x000A;  xhr.send();  &#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<h2>9. Read a text file and insert into DOM</h2>
+<p>
+In this example we ask the user to select a text file, we read it with the FileReader interface and
+we insert it into the DOM.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Read a text file and insert it in the DOM</span>&#x000A;<span class="comment">//Should work on FF10</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#readFileText</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileTextChoose</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileTextChoose</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;  reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;    <span class="keyword">var</span> text = reader.result;&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileTextOutput</span><span class="delimiter">&quot;</span></span>).html(text);&#x000A;  }&#x000A;  reader.readAsText(<span class="local-variable">this</span>.files[<span class="integer">0</span>]);         &#x000A;});</pre></div>
+</div>
+</div>
+<h2>10. Read an image from the file system and insert into DOM</h2>
+<p>
+In this example we ask the user to select an image from the Gallery, we read the content with the FileReader as a DataURL and
+we add it to the DOM.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+views/index.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Read an image from the file system and inserts in the DOM</span>&#x000A;<span class="comment">//Should work on FF10 and Android 4.0</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#readFileDataURL</span><span class="delimiter">&quot;</span></span>).click(<span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileDataURLChoose</span><span class="delimiter">&quot;</span></span>).click();&#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileDataURLChoose</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();&#x000A;  reader.<span class="function">onload</span> = <span class="keyword">function</span>() {&#x000A;    <span class="keyword">var</span> text = <span class="string"><span class="delimiter">'</span><span class="content">&lt;img src=&quot;</span><span class="delimiter">'</span></span>+reader.result+<span class="string"><span class="delimiter">'</span><span class="content">&quot;/&gt;</span><span class="delimiter">'</span></span>;&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileDataURLOutput</span><span class="delimiter">&quot;</span></span>).html(text);&#x000A;  }&#x000A;  reader.readAsDataURL(<span class="local-variable">this</span>.files[<span class="integer">0</span>]);         &#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>
