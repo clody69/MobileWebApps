@@ -8,6 +8,7 @@
     %p HTML Media Capture API
     %p Motion Sensor API
     %p GeoLocation API
+    %p Audio & Video
     
 %section.slide
   %header
@@ -720,7 +721,101 @@
                   %li TIMEOUT (3)
               %li
                 %span.terminal message
+                
+%section.slide
+  %header 
+    Maps and Location
+    %span.smaller
+      =example_url_tag("deviceGeolocation")      
+  %article.small
+    :coderay
+      #!javascript
+      var myLatLng;
+      var map;
+      var marker;
+      
+      $(function() {
+        //Get position fast and initialized google map
+        navigator.geolocation.getCurrentPosition(function(geodata) {
+          myLatLng = new google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);
+          
+          var myOptions = { center: myLatLng, zoom: 8, mapTypeId: google.maps.MapTypeId.ROADMAP };
+          map = new google.maps.Map(document.getElementById("map"), myOptions);
+          marker = new google.maps.Marker( { position: myLatLng, map: map, title:"My position" });
+        });
+        //Update the position at least every 5 seconds and use GPS if available
+        navigator.geolocation.watchPosition(function(geodata) {
+          $(".latitude").html(geodata.coords.latitude);
+          $(".longitude").html(geodata.coords.longitude);
+          $(".accuracy").html(geodata.coords.accuracy);
+          $(".altitude").html(geodata.coords.altitude);
+          $(".heading").html(geodata.coords.heading);
+          $(".speed").html(geodata.coords.speed);
+          
+          myLatLng = new google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);
+          marker.setPosition(myLatLng);
+          map.setCenter(myLatLng);
+        },function() {},{enableHighAccuracy:true, maximumAge:30000, timeout:5000} );  
+      })
 
+%section.slide
+  %header 
+    =html5_device_access_tag("Audio & Video")
+  %article
+    %ul
+      %li Open standard for delivery of multimedia without plugins
+      %li HTML native video and audio elements
+      %li No support for DRM
+      %li No access to webcam or microphone
+      %li Mix with HTML, JS and CSS
+      
+%section.slide
+  %header
+    =html5_device_access_tag("Video Formats")
+  %article
+    %ul
+      %li
+        %strong.red .mp4 = H.264 + AAC
+        %ul
+          %li Not an open codec
+          %li Not royalty free
+          %li Only codec supported on iOS
+          %li Not supported by Firefox and Opera
+      %li
+        %strong.red .ogg / .ogv = Theora + Vorbis
+        %ul
+          %li Supported by Firefox, Chrome and Opera
+      %li
+        %strong.red .webm = VP8 + Vorbis
+        %ul
+          %li High-quality, royalty free and open video format  
+          %li Supported in Firefox, Chrome, Opera and Andorid
+
+%section.slide
+  %header
+    =html5_device_access_tag("Video")
+  %article
+    :coderay
+      #!haml
+      %video(controls)
+      %source(src="gaga.webm" type='video/webm; codecs="vp8, vorbis"')
+      %source(src="gaga.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"')
+      Video tag not supported. Download the video
+      %a(href="movie.webm") here
+
+%section.slide
+  %header
+    =html5_device_access_tag("Audio and Video Element Attributes")
+  %article
+    %ul
+      %li autoplay
+      %li controls
+      %li poster
+      %li muted
+      %li height, width
+      %li loop 
+      %li preload 
+        
 %section.slide
   %header Challenge of the week
   %article

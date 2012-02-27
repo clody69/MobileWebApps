@@ -1,12 +1,12 @@
-=title_slide_tag("Lecture 6: Web Sockets")
+=title_slide_tag("Lecture 6: Web Sockets & Web Workers")
 
 %section.slide.section-title
-  %h1 Lesson 3: 
+  %h1 Lesson 3: Web Sockets and Web Workers
   .agenda
     %p Push Technology
     %p Web Sockets
-    %p Server-sent events 
-    %p Web Notifications (only on firefox)
+    %p Server-Sent Events 
+    %p Web Workers
 
 %section.slide
   %header 
@@ -20,11 +20,16 @@
       %li Frequent requests (=> excessive load on the server)
       %li Long polling (=> keep many connections open in waiting state)
       %li Flash XMLSocket relays
-    %p Library hiding complexity: socket.io
+    %p 
+      Library hiding complexity: 
+      %a(href="http://socket.io/") Socket.IO
+    
     
 %section.slide
   %header
     =html5_websockets_tag
+    %span.smaller
+      %a(href="http://www.w3.org/TR/websockets/") W3C    
   %article
     %blockquote
       %p.smallest
@@ -33,7 +38,10 @@
       :coderay_raw
         #!javascript
         //Socket object
-        var socket = new WebSocket("ws://echo.websocket.org");
+        var socket = new WebSocket("ws://echo.websocket.org?encoding=text");
+        
+        // Send
+        socket.send('Hello, WebSocket');
         
         // Callbacks
         socket.onopen = function(event) { socket.send('Hello, WebSocket'); };
@@ -47,37 +55,37 @@
     Websockets interface:
     %ul
       %li
-        %strong.red
+        %strong.terminal.red
+          binaryType 
+        \: 
+        %span.terminal
+          blob | arraybuffer
+      %li
+        %strong.terminal.red
+          send 
+        %span.terminal.red<> (DOMString | ArrayBuffer | Blob)
+        \: send the message over the socket
+      %li
+        %strong.terminal.red
           onopen
         \: callback when the socket is ready (important!)
       %li  
-        %strong.red
+        %strong.terminal.red
           onmessage
         \: callback when a message is received on the socket
       %li
-        %strong.red
+        %strong.terminal.red
           onclose
         \: callback when the socket is closed
       %li
-        %strong.red
-          onclose
+        %strong.terminal.red
+          onerror
         \: callback when there is a communication error
-    %p
-      Messages are in UTF-8:
-      .centered.terminal.larger
-        "
-        .gray> \\x00
-        Hello World
-        .gray> \\xFF
-        "
-
-    :coderay_raw
-      #!javascript
-      socket.send('Hello World');
 
 %section.slide
   %header 
-    benefits
+  %header
+    =html5_websockets_tag('WebSockets - Benefits')
   %article
     .row
       .twoColumn
@@ -118,6 +126,390 @@
      
 %section.slide
   %header
+    Echo Example
+    %span.smaller
+      =example_url_tag("websocketsEcho")      
+  %article
+    HTML
+    :coderay
+      #!haml
+      %div(data-role="page")
+      %input#wsMessage(type='text')
+      %a#wsSend(data-role = 'button')
+        Send
+      #console
+    Javascript
+    :coderay
+      #!javascript
+      $(function() {
+        var WebSocket = window.WebSocket || window.MozWebSocket;
+        
+        var socket = new WebSocket('ws://echo.websocket.org/echo?encoding=text');
+        
+        $('#wsSend').click(function() { socket.send( $('#wsMessage').val() ); })
+          
+        socket.onopen = function(event) { $('#console').append('<p>CONNECTED</p>'); };
+        
+        socket.onmessage = function(event) { $('#console').append('<p>' + event.data + '</p>'); }
+        
+        socket.onerror = function(event) { $('#console').append('<p>ERROR: ' + event.data + '</p>'); }
+      });
+
+%section.slide
+  %header Sending/Receiving a JSON Object
+  %article
+    %ul
+      %li
+        Sending a JSON object
+        :coderay
+          #!javascript
+          var msg = { nickname: "John", message: "Hello World!" };
+          socket.send( JSON.stringify(msg) );
+      %li
+        Receiving a JSON object
+        :coderay
+          #!javascript
+          socket.onmessage = function(event) {
+            var msg = $.parseJSON( event.data );
+            console.log( msg.nickname );
+            console.log( msg.message );
+          }
+
+%section.slide
+  %header Sending blob or arraybuffer
+  %article
+    %ul
+      %li
+        To send a file(blob) from the browser to the server:
+        :coderay
+          #!haml
+          %input(id="fileSelect" type="file" multiple = "true")
+        :coderay
+          #!javascript
+          $("#fileSelect").live('change', function(e) {
+            $.each(this.files, function (i,file){
+            socket.send(file);
+            }
+          }
+      %li
+        To send array buffer from browser to server
+        :coderay
+          #!javascript
+          var s = "Hello";
+          var ba = new Uint8Array(size);
+          for (var i = 0; i < size; i++) {
+            ba[i] = s.charCodeAt(i);
+          }
+          socket.send(ba.buffer);
+
+%section.slide
+  %header Receiving blob or arraybuffer
+  %article
+    %ul
+      %li 
+        To receive a blob from the server:
+        :coderay
+          #!javascript
+          socket.binaryType = 'blob';
+          socket.onmessage = function (e) {
+            // e.data is Blob object.
+          };
+
+      %li
+        To receive an array buffer from the server
+        :coderay
+          #!javascript
+    
+          socket.binaryType = 'arraybuffer';
+          socket.onmessage = function (e) {
+            // e.data is ArrayBuffer object.
+          };
+    
+          //To access arraybuffer as uint8 array,
+          var ba = new Uint8Array(e.data);
+          for (var i = 0; i < ba.length; i++) {
+            ba[i];
+          }
+
+%section.slide
+  %header The Server Side
+  %article
+    %p LAMP stack and HTTP request/response not suitable
+    %p Coping with large number of open socket connections
+    %p Requires high concurrency at low performance cost (non-bocking IO)
+    %p 
+      Common frameworks based on 
+      %a(href="http://en.wikipedia.org/wiki/Event_loop") event loop:
+      %ul
+        %li 
+          %a(href="href://socket.io") Socket.IO
+        %li
+          %a(href="http://www.eclipse.org/jetty/") Jetty (Java)
+        %li
+          %a(href="http://rubyeventmachine.com/") Ruby / Event Machine
+        %li
+          %a(href="https://github.com/rlotun/txWebSocket") Python / Twisted
+          
+%section.slide
+  %header 
+    Echo Server with Ruby Event Machine
+    %span.smaller
+      =example_url_tag("websocketsEchoEM")      
+
+  %article
+    %ul
+      %li Event-driven I/O (Reactor pattern)
+      %li Extremly high scalability, performance and stability
+      %li Hide complexity of high-performance threaded network programming
+      
+      :coderay
+        #!ruby
+        require 'em-websocket'
+        
+        EventMachine.run {
+            EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
+                ws.onopen { 
+                  puts "WebSocket connection open"
+        
+                  # publish message to the client
+                  ws.send "Hello Client"
+                }
+                ws.onclose { puts "Connection closed" }
+                ws.onmessage { |msg|
+                  puts "Recieved message: \#{msg}"
+                  ws.send "Pong: \#{msg}"
+                }
+            end
+        }
+
+%section.slide
+  %header 
+    Channels with Ruby Event Machine
+  %article
+    %p Interface to push items to a number of subscribers
+    :coderay
+      #!ruby
+      #Create a new channel
+      channel = EM::Channel.new
+      
+      #Subscribe to the channel
+      sid = channel.subscribe{ |msg| p [:got, msg] }
+      
+      #Push a message on the channel to all subscribers
+      channel.push('hello world')
+      channel.unsubscribe(sid)
+    %p The subscribe's callback function is used when pushing the message to the subscriber 
+
+%section.slide
+  %header 
+    Chat Client
+    %span.smaller
+      =example_url_tag("websocketsChatEM")      
+  %article
+    HTML
+    :coderay
+      #!haml
+      %input#nickname(type="text" value="" placeholder="Nickname")
+      %input#message(type='text' value="" placeholder="Start chat here")
+      %a#send(data-role = 'button')
+        Send
+      #console
+    JS
+    :coderay
+      #!javascript
+      var socket = new WebSocket("ws://" + location.hostname + ":8080");
+      
+      $('#send').click(function() {
+        var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
+        socket.send( JSON.stringify(msg) );
+        $('#message').val("");
+      })  
+      socket.onopen = function(event) { $('#console').prepend('<p>CONNECTED</p>'); };
+      socket.onmessage = function(event) {
+        var msg = $.parseJSON(event.data);
+        $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
+      }
+      socket.onerror = function(event) { $('#console').prepend('<p>ERROR: ' + event.data + '</p>'); }
+
+%section.slide
+  %header 
+    Chat Server
+    %span.smaller
+      =example_url_tag("websocketsChatEM")      
+  %article
+    :coderay
+      #!ruby
+      EventMachine.run {
+        @channel = EM::Channel.new
+        @users = {}
+        @messages = []
+      
+        EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
+          ws.onopen { ... }
+          ws.onmessage { |msg| ... }
+          ws.onclose { ... }
+        end
+      
+        #Run a Sinatra server for serving index.html
+        class App < Sinatra::Base
+          set :public_folder, settings.root
+          
+          get '/' do
+            send_file 'index.html'
+          end
+        end
+        App.run!
+      } 
+
+%section.slide
+  %header 
+    Chat Server - ws.onopen
+  %article
+    :coderay
+      #!ruby
+      ws.onopen {
+        #Subscribe the new user to the channel with the callback function for the push action
+        new_user = @channel.subscribe { |msg| ws.send msg }
+        
+        #Add the new user to the user list
+        @users[ws.object_id] = new_user
+        
+        #Push the last messages to the user
+        @messages.each do |message|
+          ws.send message
+        end
+        
+        #Broadcast the notification to all users
+        @channel.push  ({
+          "nickname" => '', 
+          "message" => "New user joined. \#{@users.length} users in chat", 
+          "timestamp" => timestamp }.to_json)
+      }
+%section.slide
+  %header 
+    Chat Server - ws.onmessage
+  %article
+    :coderay
+      #!ruby
+      ws.onmessage { |msg|
+        
+        #Add the timestamp to the message
+        message = JSON.parse(msg).merge( {'timestamp' => timestamp}).to_json
+        
+        #append the message at the end of the queue
+        @messages << message
+        @messages.shift if @messages.length > 10
+  
+        #Broadcast the message to all users connected to the channel
+        @channel.push message
+      }
+      
+%section.slide
+  %header 
+    Chat Server - ws.onclose
+  %article
+    :coderay
+      #!ruby
+      ws.onclose { 
+        @channel.unsubscribe(@users[ws.object_id])
+        @users.delete(ws.object_id)
+        
+        #Broadcast the notification to all users
+        @channel.push ({
+          "nickname" => '', 
+          "message" => "One user left. \#{@users.length} users in chat", 
+          "timestamp" => timestamp}.to_json)
+      }
+
+%section.slide
+  %header
+    Generic Server
+    %span.smaller
+      =example_url_tag("websocketsDrawEM")      
+  %article
+    :coderay
+      #!ruby
+       ws.onopen {
+          #Subscribe the new user to the channel with the callback function for the push action
+          new_user = @channel.subscribe { |msg| ws.send msg }
+          
+          #Add the new user to the user list
+          @users[ws.object_id] = new_user
+          
+          #Push the last messages to the user
+          @messages.each do |message|
+            ws.send message
+          end
+       }
+        ws.onmessage { |msg|
+          #append the message at the end of the queue
+          @messages << msg
+          @messages.shift if @messages.length > 10
+    
+          #Broadcast the message to all users connected to the channel
+          @channel.push msg
+        }
+        ws.onclose { 
+          @channel.unsubscribe(@users[ws.object_id])
+          @users.delete(ws.object_id)
+        }       
+%section.slide
+  %header 
+    Websockets + canvas + orientation ? 
+    %span.smaller
+      =example_url_tag("websocketsDriveEM")      
+  %article
+    
+%section.slide
+  %header Protocol Versions and Browser Support
+  %article.smaller
+    .row
+      .twoColumn
+        %ul
+          %li
+            %strong Hixie-75
+            %ul
+              %li Chrome 4.0 + 5.0
+              %li Safari 5.0.0
+          %li
+            %strong HyBi-00/Hixie-76
+            %ul
+              %li Chrome 6.0 - 13.0
+              %li Safari 5.0.2 + 5.1
+              %li iOS 4.2 + iOS 5
+              %li Firefox 4.0 - support for WebSockets disabled.
+              %li Opera 11 - with support disabled. 
+          %li
+            %strong HyBi-07+
+            %ul
+              %li Chrome 14.0
+              %li Firefox 6.0 - prefixed: MozWebSocket
+              %li IE 9 + IE 10 - via downloadable Silverlight extension
+      .twoColumn
+        .autobox
+          %li
+            %strong HyBi-10
+            %ul
+              %li Chrome 14.0 + 15.0
+              %li Firefox 7.0 + 8.0 + 9.0 + 10.0 - prefixed: MozWebSocket
+              %li IE 10 (from Windows 8 developer preview)
+          %li
+            %strong HyBi-17/RFC 6455
+            %ul
+              %li Chrome 16
+              %li Firefox 11
+          %p
+            To enable support in Opera, type his in the address bar:
+            %span.terminal
+              opera:config#Enable%20WebSockets
+          %p
+            To enable support in Firefox old version, type 
+            %span.terminal about:config
+            and enable 
+            %span.terminal network.websockets
+
+%section.slide
+  %header
     Pusher.com
   %article
     .row
@@ -127,9 +519,398 @@
             %strong Pusher 
             is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.     
           %p Founded in 2009. Team is 5 members.
-          %p 40 billion messages delivered.
+          %p +40 billion messages delivered.
           %p WebSocket as a service
-          %p Using EM-WebSocket
+          %p Based on EM-WebSocket
       .twoColumn
-        =image_tag "pusher_diagram.png"
+        =image_tag("/lesson6/pusher_diagram.png")
+
+%section.slide
+  %header
+    Basic interface for pusher
+  %article
+    %ul
+      %li
+        %strong.red
+          Channels
+        \: each application has a number of channels, and every client can choose which channels it connects to.
+        :coderay
+          #!javascript
+          //Subscribe
+          var channel = pusher.subscribe(channelName);
+          //Unsubscribe
+          pusher.unsubscribe(channelName);  
+      %li
+        %strong.red
+          Events
+        \: are 'named messages' that are sent to all clients that are registered to a channel
+        :coderay
+          #!javascript
+          //Bind to an event on a channel
+          channel.bind(eventName, callback);
+          //Bind to an event on any channel
+          pusher.bind(eventName, callback);
+      %li
+        %strong.red
+          Publisher (server)
+        \: Publish an event to a channel on the server side
+        :coderay
+          #!ruby
+          Pusher['test-channel'].trigger('test_event', '{"hello":"world"}')
+%section.slide
+  %header 
+    Chat using Pusher - Client
+    %span.smaller
+      =example_url_tag("websocketsChatPusher")      
+  %article
+    :coderay
+      #!javascript
+      var pusher = new Pusher('8dc1dcd216474ec35b02'); 
+      var chatChannel = pusher.subscribe('chat');
+
+      chatChannel.bind('say', function(msg) {
+        $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
+      });
+      
+      $('#send').click(function(event) {
+        event.preventDefault();
+        var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
+        
+        $.post( 'http://' + location.host + '/say',msg,'json');
+        $('#message').val("");
+      })  
+ 
+
+%section.slide
+  %header 
+    Chat using Pusher - Server
+    %span.smaller
+      =example_url_tag("websocketsChatPusher")      
+  %article
+    :coderay
+      #!ruby
+      require 'sinatra'
+      require 'json'
+      require 'pusher'
+      
+      Pusher.app_id = '13324'
+      Pusher.key = '8dc1dcd216474ec35b02'
+      Pusher.secret = '6ae6292fa86e2a559643'
+      
+      def timestamp
+        Time.now.strftime("%H:%M:%S")
+      end
+      
+      get '/' do 
+        #Serve the chat client
+        File.read('index.html')
+      end
+      
+      post '/say' do
+        message = params.merge( {'timestamp' => timestamp}).to_json
+      
+        #Use the REST Pusher API so pass the message that needs to be broadcasted
+        #to all clients that are connected to the chat channel
+        Pusher['chat'].trigger('say', message)
+      end
+
+%section.slide 
+  %header
+    =html5_websockets_tag("Server-sent Events")
+  %article
+    %ul
+      %li Possiblity to subscribe to a stream of updates that are generated by a server
+      %li Only support one-way notificaions from the server
+      %li Simpler to use than WebSockets
+      %li Based on HTTP protocol (can be emulated in JS if not available)
+      %li Automatic reconnect and resumable with event IDs
+    :coderay
+      #!javascript
+      //Subscribe to the updates
+      var source = new EventSource('/events');
+      
+      source.onopen = function(event) { console.log("CONNECTED"); }
+      source.onmessage = function (event) { console.log(event.data); }
+      source.onerror = function(event) { console.log(event.data); }
+      source.addEventListener('login', function(e) { console.log(e.data); }, false);
+
+%section.slide
+  %header
+    =html5_websockets_tag("Message Format")
+  %article
+    .row
+      .twoColumn
+        .autobox
+          :coderay
+            #!plain
+            data: this is a simple message
+            <blank line>
+          :coderay
+            #!plain
+            data: This is a message
+            data: on multiple lines
+            <blank line>
+          :coderay
+            #!plain
+            id: 25
+            data: This is a message with an id
+            <blank line>
+      .twoColumn
+        .autobox
+          :coderay
+            #!plain
+            id: 25
+            event: news
+            data: This message is of type news
+            <blank line>
+          :coderay
+            #!plain
+            data: {
+            data: "msg": "A JSON message",
+            data: "id": 12345
+            data: }
+            <blank line>
+
+%section.slide
+  %header
+    Sinatra Streaming API
+  %article
+    %p It allows us to stream repsonses until the client closes the connection:           
+    .row
+      .twoColumn
+        :coderay
+          #!ruby
+          get '/' do
+            stream do |out|
+              out << "It's gonna be legen -\n"
+              sleep 0.5
+              out << " (wait for it) \n"
+              sleep 1
+              out << "- dary!\n"
+            end
+          end            
+      .twoColumn
+        :coderay
+          #!ruby
+          set :server, :thin
+          connections = []
           
+          get '/' do
+            # keep stream open
+            stream :keep_open { |out| connections << out }
+          end
+          
+          post '/' do
+            # write to all open streams
+            connections.each { |out| 
+              out << params[:message] << "\n" 
+            }
+            "message sent"
+          end
+%section.slide
+  %header
+    Chat using SSE - Server 
+    %span.smaller
+      =example_url_tag("websocketsChatSSE")      
+  %article.small
+    :coderay
+      #!ruby
+      users = []
+      messages = []
+      
+      get '/' do
+        send_file 'index.html'
+      end
+      
+      get '/chat', provides: 'text/event-stream' do
+        stream :keep_open do |out|
+          users << out
+          
+          #callback is fired when the stream is closed. 
+          out.callback { users.delete(out) } 
+        end
+      end
+      
+      post '/chat' do
+        #Add the timestamp to the message
+        message = params.merge( {'timestamp' => timestamp}).to_json
+      
+        #append the message at the end of the queue
+        messages << message
+        messages.shift if messages.length > 10
+      
+        users.each { |out| out << "data: \#{message}\n\n"}
+      end 
+      
+%section.slide
+  %header
+    Chat using SSE - Client 
+    %span.smaller
+      =example_url_tag("websocketsChatSSE")      
+  %article
+    :coderay
+      #!javascript
+      var es = new EventSource('/chat');
+      es.onmessage = function(e) { 
+        var msg = $.parseJSON(event.data);
+        $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
+      }
+      
+      $('#send').click(function(event) {
+        event.preventDefault();
+        var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
+        
+        $.post( '/chat',msg,'json');
+        $('#message').val("");
+      })  
+ 
+%section.slide
+  %header
+    =html5_websockets_tag('WebWorkers')
+    %span.smaller
+      %a(href="http://www.w3.org/TR/workers/") W3C    
+  %article
+    %ul 
+      %li Javascript is single-threaded environment (one thread for UI events, data processing and DOM manipulation)
+      %li Web Workers introduce an API for spawning background scripts for long-running scripts without blocking the UI
+      %li Two types: Dedicated workers and shared workers
+      %li Communication across threads happens via messages
+    .row
+      .twoColumn
+        .autobox
+          main.js
+          :coderay
+            #!javascript
+            var worker = new Worker('worker.js');
+            worker.postMessage('Hello Worker');
+            worker.onmessage = function (e) {
+              console.log(e.data); 
+            }
+      .twoColumn
+        .autobox
+          worker.js
+          :coderay
+            #!javascript
+              this.onmesage = function(e) {
+                postMessage('You said' + e.data);
+              } 
+%section.slide
+  %header
+    Javascript Event Loop
+  %article
+    =image_tag("/lesson6/event-loop-js.png", :resize => true)
+
+%section.slide
+  %header
+    Webworkers and Main Thread
+  %article
+    =image_tag("/lesson6/event-loop-worker.png", :resize => true)
+
+
+%section.slide
+  %header
+    What a worker can do and not do
+  %article.small
+    .row
+      .twoColumn
+        .autobox
+          What a worker can do:
+          %ul
+            %li Post and listen for messages
+            %li Close the worker
+            %li Access navigator and location objects
+            %li XMLHttpRequest
+            %li Use timers
+            %li Application cache
+            %li importScripts()
+            %li Websockets and server-sent events 
+            %li IndexedDB
+            %li Spawn other workers
+            
+      .twoColumn
+        .autobox
+          What a worker cannot do:
+          %ul 
+            %li Access the DOM
+            %li Access the window object
+            %li Access the document object
+            %li Access the parent object
+%section.slide
+  %header
+    Mandelbrot Renderer
+  %article
+    =image_tag("/lesson6/mandelbrot.png", :resize => true, :url => "http://www.framexpeditions.com/~alex2/teaching/mandelbrot/")
+
+%section.slide
+  %header
+    The worker
+  %article
+    :coderay
+      #!javascript
+      self.onmessage = function (event) {
+        var data = event.data;
+        var max_iter = data.max_iter;
+        var escape = data.escape * data.escape;
+        data.values = [];
+        for (var j = data.j_start; j < data.j_end; j++) {
+          var c_j = data.r_min + (data.r_max - data.r_min) * (j-data.j_start) / data.height;
+          for (var i = data.i_start; i < data.i_end; i++) {
+            var c_i = data.c_min + (data.c_max - data.c_min) * (i-data.i_start) / data.width;
+            var z_j = 0, z_i = 0;
+            for (iter = 0; z_j*z_j + z_i*z_i < escape && iter < max_iter; iter++) {
+        // z -> z^2 + c
+        var tmp = z_j*z_j - z_i*z_i + c_i;
+        z_i = 2 * z_j * z_i + c_j;
+        z_j = tmp;
+            }
+            if (iter == max_iter) {
+        iter = -1;
+            }
+            data.values.push(iter);
+          }
+        }
+        self.postMessage(data);
+      }
+
+%section.slide
+  %header
+    Main Thread  
+  %article
+    :coderay
+      #!javascript
+      init : function(options){
+        var me=this;
+        this.workers = [];
+  
+        this.nb_workers=options.nbworkers;
+  
+        for (var i = 0; i < this.nb_workers; i++) {
+          var worker = new Worker("worker.js");
+          worker.label=""+i;
+          worker.onmessage = function(event) {
+            me.received_block(event.target, event.data)
+          }
+          worker.idle = true;
+          this.workers.push(worker);
+        }
+        ...
+      }      
+      process_block: function(worker) {
+        ...
+        worker.postMessage(data);
+        ...
+      }  
+
+%section.slide
+  %header
+    Message passing
+  %article
+    %p Messages passed between threads are copied not shared
+    %p Object is serialized and de-serialized each time
+    %p 
+      Supported objects by postMessage:
+      %ul RegExp
+      %ul Blob, File and FileList
+      %ul ImageData
+    %p Transfarable objects for high-performance operations (only in Chrome 17)
+    

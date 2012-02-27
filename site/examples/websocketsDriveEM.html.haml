@@ -1,0 +1,199 @@
+=example_header_tag "WebSockets Drive EM", "websocketsDriveEM"
+
+%p
+  In this example we combine the usage of websockets, canvas and accelerometers. It's an evolution of the 
+  example 
+  =example_url_tag("websocketsDrawEM")
+  Each client draws on the canvas the position of all connected users 
+  and updates its own position using the accelerometers. The server keeps track of the location of each connected
+  users and at regualr intervals it broadcast the latest locations.
+
+.code_block
+  .code_header
+    Gemfile
+  :coderay_raw
+    #!text
+    source "http://rubygems.org"
+    
+    gem "haml"
+    gem 'em-websocket'
+    gem 'sinatra'
+
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    require 'em-websocket'
+    require 'json'
+    require 'sinatra/base'
+    
+    EventMachine.run {
+      @channel = EM::Channel.new
+      @users = {}
+      @location = {}
+    
+      EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
+        ws.onopen {
+          #Subscribe the new user to the channel with the callback function for the push action
+          #The callback sends the location of the other users
+          new_user = @channel.subscribe { |locs|
+            ws.send (locs.select { |k,v| k != ws.object_id }).to_json
+          }
+          
+          #Add the new user to the user and location list
+          @users[ws.object_id] = new_user
+          @location[ws.object_id] = {}
+        }
+    
+        ws.onmessage { |msg|
+          message = JSON.parse(msg)
+    
+          #update the location of the user
+          @location[ws.object_id].merge!(message)
+        }
+    
+        ws.onclose { 
+          @channel.unsubscribe(@users[ws.object_id])
+          @users.delete(ws.object_id)
+          @location.delete(ws.object_id)
+        }
+      end
+    
+      #Periodically broadcast the current locations to all the users
+      EventMachine::run {
+        EventMachine::add_periodic_timer( 0.5 ) { 
+          puts @location
+    
+          #Broadcast the message to all users connected to the channel
+          @channel.push @location
+    
+          #Store the old location of the users
+          @location.each { |k, v| 
+            if v
+              @location[k].merge! ({'oldX' => v['x'], 'oldY' => v['y']} )
+            end
+          }
+        }
+      }
+    
+      #Run a Sinatra server for serving index.html
+      class App < Sinatra::Base
+        set :public_folder, settings.root
+        
+        get '/' do
+          send_file 'index.html'
+        end
+      end
+      App.run!
+    } 
+
+.code_block
+  .code_header
+    websocketsDrawEM/index.html.haml
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, initial-scale=1")  
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %title
+          WebSockets Drive
+      %body
+        :javascript
+          var WebSocket = window.WebSocket || window.MozWebSocket;
+    
+          $(function() {
+    
+            socket = new WebSocket("ws://" + location.hostname + ":8080");
+            
+            var currentX = Math.random()*350;
+            var currentY = Math.random()*450;
+            var color = 'rgb(' + Math.floor(Math.random()*255) + ',' +   
+                           Math.floor(Math.random()*255) + ',' + 
+                           Math.floor(Math.random()*255) + ')';  
+            var lastX;
+            var lastY;
+            var lastSentX;
+            var lastSentY;
+            var heading = 0;
+            var speed = 0;
+            
+            var ctx = $('#canvas')[0].getContext('2d');
+    
+            $('#canvas').bind('vmousemove',function(ev){
+              ev = ev || window.event;
+              currentX = ev.pageX || ev.clientX;
+              currentY = ev.pageY || ev.clientY;
+            });
+            
+            socket.onopen = function(event) {
+              setInterval(function(){
+                if(currentX !== lastSentX || currentY !== lastSentY){
+                  socket.send( JSON.stringify({ x:currentX, y: currentY, color: color}) );
+                  lastSentX = currentX;
+                  lastSentY = currentY;
+                }
+              }, 30); // send every 300 milliseconds if position has changed
+            }
+            
+            socket.onmessage = function(event) {
+              var locs = $.parseJSON(event.data);
+              console.log(locs);
+              $.each(locs, function (i,loc){
+                if (loc.oldX != undefined) {
+                  display(loc.oldX, loc.oldY, loc.x, loc.y, loc.color.toString());            
+                }
+              });
+    
+            }
+    
+            display = function(fromX, fromY, toX, toY, c) {
+              ctx.beginPath();
+              ctx.moveTo(fromX,fromY);
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = c;
+              ctx.lineTo(toX,toY);
+              ctx.closePath();
+              ctx.stroke();
+            }
+    
+            window.addEventListener("deviceorientation", function( event ) {  
+              lastX = currentX;
+              lastY = currentY;
+              heading += Math.tan(event.gamma/360*Math.PI*2)/10;
+              speed = Math.tan(event.beta/360*Math.PI)*5;
+              currentY -= speed * Math.cos(heading);
+              currentX += speed * Math.sin(heading);
+              if (currentY < 0) { currentY = 0;}
+              if (currentY > 450) {currentY = 450;};
+              if (currentX < 0) { currentX = 0;}
+              if (currentX > 350) {currentX = 350;};
+              display(lastX, lastY, currentX, currentY, color);
+            });
+          });
+    
+        %div(data-role="page")
+          %canvas#canvas(width='350' height='350')
+    
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+    
+                
+
+            
+                

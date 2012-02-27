@@ -1,0 +1,125 @@
+=example_header_tag "Chat with server-sent events", "websocketsChatSSE"
+
+%p
+  We implement a chat service like in the example
+  =example_url_tag("websocketsDrawEM")
+  but we use the server-sent events instead of the websockets.
+  For the server we use Sinatra with the Streaming API.
+  
+.code_block
+  .code_header
+    Gemfile
+  :coderay_raw
+    #!text
+    source "http://rubygems.org"
+    
+    gem "haml"
+    gem 'sinatra'
+
+
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    require 'json'
+    require 'sinatra'
+    
+    def timestamp
+      Time.now.strftime("%H:%M:%S")
+    end
+    
+    set server: 'thin'
+    set :public_folder, settings.root
+    
+    users = []
+    messages = []
+    
+    get '/' do
+      send_file 'index.html'
+    end
+    
+    get '/chat', provides: 'text/event-stream' do
+      stream :keep_open do |out|
+        users << out
+        
+        #callback is fired when the stream is closed. 
+        out.callback { 
+          users.delete(out) 
+        } 
+      end
+    end
+    
+    post '/chat' do
+      puts params
+      #Add the timestamp to the message
+      message = params.merge( {'timestamp' => timestamp}).to_json
+    
+      #append the message at the end of the queue
+      messages << message
+      messages.shift if messages.length > 10
+    
+      users.each { |out| out << "data: #{message}\n\n"}
+    end
+
+
+.code_block
+  .code_header
+    websocketsChatEM/index.html.haml
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, initial-scale=1")  
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %title
+          Server-Sent Events Chat
+      %body
+        :javascript
+          $(function() {
+            var es = new EventSource('/chat');
+            es.onmessage = function(e) { 
+              var msg = $.parseJSON(event.data);
+              $('#console').prepend('<p>' + msg.timestamp + ' <strong>' + msg.nickname + '</strong>: ' + msg.message + '</p>');
+            }
+            
+            $('#send').click(function(event) {
+              event.preventDefault();
+              var msg = {nickname: $('#nickname').val(), message: $('#message').val()};
+              
+              $.post( '/chat',msg,'json');
+              $('#message').val("");
+            })  
+          });
+    
+        %div(data-role="page")
+          %div(data-role = "header")
+            %h1 Simple Chat
+          %input#nickname(type="text" value="" placeholder="Nickname")
+          %input#message(type='text' value="" placeholder="Start chat here")
+          %a#send(data-role = 'button')
+            Send
+          
+          #console
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+    
+                
+        
+    
+            
+                

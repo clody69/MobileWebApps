@@ -1,0 +1,71 @@
+=example_header_tag "Orientation Sensors", "deviceOrientation"
+
+%p
+  In this example we experiment with the device orientation API. We create an app that shows the current orienrtation of the 
+  device and rotates an image with CSS3 when the device changes orientation. 
+
+%p
+  The HTML code contains the text where to show the orientation parameters and the image.
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!haml
+    %body
+      %strong Device Orientation
+      %br
+      .absolute
+        Absolute Coord
+      %br
+      Rotate (Alpha): 
+      %span.alpha  
+      %br
+      frontToBack (Beta):
+      %span.beta
+      %br
+      leftToRight (Gamma):
+      %span.gamma
+      %br
+      %strong Device Motion
+      %br
+      Acceleration:
+      %span.acceleration
+      %br
+      Transform:
+      %span.transform
+      %br
+      .container(style="-moz-perspective: 300; perspective: 300;")
+        %img(src="http://www.w3.org/html/logo/downloads/HTML5_Badge_64.png" id="imgLogo" class="logo")
+
+%p 
+  Below there is the Javascript code that listen to the device orientation events. For each event the handler updates the 
+  data about the orientation on the html page and applies a new 3d transformation to the logo.
+.code_block
+  .code_header
+    index.html.haml
+  :coderay_raw
+    #!javascript
+    window.addEventListener("deviceorientation", function( event ) {  
+      if(event.absolute) {
+        $(".absolute").show();
+      } else
+      {
+        $(".absolute").hide();
+      }
+      //alpha: rotation around z-axis  
+      $(".alpha").html(event.alpha);
+
+      //gamma: left to right  
+      $(".beta").html(event.beta);
+
+      //beta: front back motion  
+      $(".gamma").html(event.gamma);
+      var rotation = "rotateX("+(event.beta * -1) + "deg) rotateY(" + (event.gamma) + "deg) rotateZ(" + (event.alpha * -1) + "deg)";
+
+      $(".transform").html(rotation);
+      $("#imgLogo").css('-moz-transform',rotation);
+      $("#imgLogo").css('-webkit-transform',rotation);
+      $("#imgLogo").css('transform',rotation);
+
+    }, false);  

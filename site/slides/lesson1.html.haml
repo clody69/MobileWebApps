@@ -76,7 +76,41 @@
         =image_tag "mobile-app-chart.jpg"
       .twoColumn
         =image_tag "mobile-app-chart-2.jpg"
-   
+
+%section.slide
+  %header 
+    The Apple Mobile App Economy
+    %span.smaller
+      %a(href="http://www.asymco.com/2012/02/19/app-developers-get-12-for-each-ios-device-sold/") Asymco
+
+  %article
+    %ul
+      %li.slide
+        How many total apps have been downloaded on iOS ? 
+      %p.slide 25 billion
+      %li.slide
+        What's the gross sales from apps in Q4-11 ? 
+      %p.slide $1 billion
+      %li.slide
+        How much was paid to developers in Q4-11 ? 
+      %p.slide $700 million
+      %li.slide
+        On average how many apps were downloaded per unit sold ?
+      %p.slide 75 apps
+      %li.slide
+        What's the minimum payout to developers per unit sold ? 
+      %p.slide $12
+    
+%section.slide
+  %header App Downloads on iTunes
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson1/itunes-apps-download-total.png"
+      .twoColumn
+        =image_tag "lesson1/itunes-apps-download-rate.png"
+
+           
 %section.slide
   %header Is the Web Dead ? 
   %article
@@ -88,7 +122,7 @@
           %li.slide 
             Wired article was read and discussed mostly on the web
           %li.slide
-            HTML5 brings a a lot of new cool stuff for web developers
+            HTML5 brings a lot of new cool stuff for web developers
           %li.slide
             Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
           %li.slide
@@ -147,10 +181,35 @@
     =image_tag "lesson1/web-arch-new.png", :resize => true
 
 %section.slide
-  %header What the heck is a "Mobile Web App" ?
+  %header Shom me a "Mobile Web App"
   %article
-    Demo of FT
-    Demo of Linkedin
+    =image_tag "lesson1/ft.png", :resize => true
+
+%section.slide
+  %header 
+    FT Web App
+    %span.smaller
+      %a(href="http://blog.cohen-rose.org/2011/10/over-air-2011-ft-web-app-weve-got.html") (more info)
+
+  %article
+    %ul
+      %li Developed in 8 months by 3 people
+      %li Same web app works across multiple brands and devices
+      %li 
+        Great and responsive UI design
+        %ul
+          %li Content balacncing based on device type
+          %li Audio playing while moving to other pages
+          %li Continous carousel
+          %li Preloading of content
+          %li Swipes using touch gestures
+      %li Offline access
+      %li More engagement than native app 
+
+%section.slide
+  %header LinkedIn App
+  %article      
+    =image_tag "lesson1/linkedin.png", :resize => true
 
 %section.slide
   %header Developing Native Apps for Multiple Platforms
@@ -179,6 +238,12 @@
   %article
     =image_tag "smartphones.jpg", :resize => true
 
+
+%section.slide
+  %header Fragmentation of OS Versions
+  %article
+    =image_tag "lesson1/mobile-platform-updates.png", :resize => true, :url => "http://theunderstatement.com/post/11982112928/android-orphans-visualizing-a-sad-history-of-support"
+    
 %section.slide
   %header 
     Smartphone Platforms Shares 
@@ -205,9 +270,43 @@
 %section.slide
   %header What is HTML5 ? 
   %article
-    See introduction to html5 book
-    WHATWG vs W3c
+    %p 
+      %strong 1998
+      \- W3C decided they will stop evolving HTML beyond version 4.01 
+    %p  
+      %strong 2000
+      \- W3C released XHTML 1.0 and. 
+    %p   
+      %strong 2002
+      \- W3C released first draft of XHTML 2.0, no backwards compatibility
+    %p  
+      %strong 2004
+      \- WHATWG started working on HTML v5 (Opera, Mozilla and Apple)
+    %p  
+      %strong 2006
+      \- W3C agrees to use WHATWG proposal for HTML5
+    %p 
+      %strong 2009
+      \- W3C stops works on XHTML 2.0 and resources are diverted to HTML5
 
+%section.slide
+  %header Philposphy of HTML5
+  %article
+    %p 
+      Philosophy of HTML5
+      %ul
+        %li Specify undocumented features (e.g. XMLHttpRequest)
+        %li Browser behaviour with invalid markup
+        %li Support web applications
+        %li Define an open standard (opposed to Flash)
+        %li Don't break the Web
+    %p 
+      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/") HTML5 Spec at WHATWG
+    %p
+      %a(href="http://www.w3.org/standards/webdesign/") Some additional sepcs at W3C
+       
+     
+      
 %section.slide
   %header HTML5     
   %article
@@ -255,12 +354,12 @@
 %section.slide
   %header Test your Browser for HTML5 support
   %article
-    =image_tag "html5test.png", :caption => "The HTML5 Test", :url => "http://html5test.com/"
+    =image_tag "html5test.png", :caption => "The HTML5 Test", :url => "http://html5test.com/", :resize => true
     
 %section.slide
   %header Mobile HTML5 Compatibility Table
   %article
-    =image_tag "mobile-html5-comp-table.png", :caption => "Mobile HTML5", :url => "http://mobilehtml5.org"
+    =image_tag "mobile-html5-comp-table.png", :caption => "Mobile HTML5", :url => "http://mobilehtml5.org", :resize => true
 
 %section.slide
   %header HTML5 Frameworks & Tools
@@ -299,7 +398,7 @@
 
 %section.slide
   %header jQuery Example
-  %article
+  %article.small
     .code_block
       :coderay_raw
         #!html
@@ -386,12 +485,15 @@
         =image_tag "senchaSimple-ipad.png", :resize => true
 
 %section.slide
-  %header Is it thing really working ? 
+  %header Hey dude, native is better! 
   %article
     %ul
+      %li
+        .slide Is HTML5 a silver bullet ? 
+        .slide No, but silver bullets don't exist.
       %li 
         .slide HTML5 performance is not goot enough ? 
-        .slide Sometimes, it is not enough
+        .slide Sometimes, it is not enough.
       %li
         .slide HTML5 is more efficient to develop ? 
         .slide Yes, sometimes. Look at FT case.
@@ -400,33 +502,12 @@
         .slide Changing fast (check Sencha)
       %li
         .slide HTML5 doesn't have an appstore
-        .slide Hybrid apps (PhoneGap)
+        .slide Hybrid apps
+      %li
+        .slide Can HTML5 help in development cost saving ? 
+        .slide Possibly
         
         
-%section.slide
-  %header 
-    FT web app
-    %span.smaller
-      %a(href="http://blog.cohen-rose.org/2011/10/over-air-2011-ft-web-app-weve-got.html") (more info)
-
-  %article
-    %ul
-      %li Developed in 8 months by 3 people
-      %li Same web app works across multiple brands and devices
-      %li 
-        Great and responsive UI design
-        %ul
-          %li content balacingin based on device type
-          %li Audio playing while moving to other pages
-          %li Continous carousel
-          %li Preloading of content
-          %li Swipes using touch gestures
-      %li Offline access
-      %li More engagement than native app 
-
-%section.slide
-  %header LinkedIn App
-  %article      
 
 %section.slide
   %header Organization of the course
@@ -434,7 +515,7 @@
     %p
       %strong.red
         Lectures
-      \: Deep dives on the key concepts, technologies and frameworks
+      \: Introduction of key concepts, technologies and frameworks
     %p
       %strong.red
         Labs
@@ -442,7 +523,7 @@
     %p
       %strong.red
         Assignment
-      \: Team work on development of a web app
+      \: Team work development of a mobile web app
     
 %section.slide
   %header Lectures & Labs
@@ -467,35 +548,33 @@
     
 %section.slide
   %header
-    Course Material
+    Course Material and Communication
   %article
-
-%section.slide
-  %header Assignment
-  %article
-    Expectations
-    Grading
-    Board
-    
-%section.slide
-  %header Disclaimer
-  %article
-    %ul
-      %li.slide This course is a pilot
-      %li.slide First time teaching this course
-      %li.slide First time teaching at the Aalto Venture Garage
-      %li.slide Timing of the lessons may be inaccurate
-      %li.slide Exercises may be too simple or too complex
-      %li.slide The level of the course is not calibrated
-
+    %p 
+      Slides are available at 
+      %a(href="http://aaltowebapps.com") aaltowebapps.com
+    %p The slides are only visible with Google Chrome 
+    %p 
+      Exercises are available at
+      %a(href="https://github.com/clody69/MobileWebAppsExamples") GitHub
+    %p 
+      Communication channels:
+      %ul
+        %li
+          Twitter: 
+          %a(href="https://twitter.com/#!/aaltowebapps") @aaltowebapps 
+        %li
+          Noppa
+        
 %section.slide.section-title
   %h1 The Fundamentals
   .agenda
     %p Git 
     %p Javascript Refresh
-    %p MVC
-    %p HAML, SASS and CoffeScript
-    %p Ruby, Sinatra and Rails
+    %p JSON
+    %p jQuery
+    %p HAML
+    %p Ruby & Sinatra
     %p Heroku
 
 %section.slide
@@ -759,16 +838,17 @@
             ...
 
 %section.slide
-  %header HAML
+  %header JSON
   %article
 
 %section.slide
-  %header SASS (SCSS)
+  %header jQuery
   %article
-    
+
 %section.slide
-  %header CoffeScript
+  %header HAML
   %article
+
 
 %section.slide
   %header Ruby
@@ -778,9 +858,6 @@
   %header Sinatra
   %article
 
-%section.slide
-  %header Ruby on Rails
-  %article
 
 
 %section.slide

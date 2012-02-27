@@ -1,0 +1,388 @@
+=example_header_tag "Tests with File API", "fileApiTests"
+
+%p
+  In this example we look at what the File API offers for reading/writing files in the local file sytem and fetching/uploading 
+  files from/to the web.
+  
+%p First we take handle the various browser vedors' differences
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    // Take care of vendor prefixes.
+    var BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+    window.URL = window.URL || window.webkitURL;  
+
+%h2 1. Upload a file by posting a form
+%p 
+  The first example uses the classic method for posting a file to the server. This method works on all browsers, desktop and
+  mobile, except iOS that doesn't support the file input. We use the file input for requesting the file to the user.
+ 
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!haml
+    %form(id="uploadFormPost" action="/uploadFormData" method="post" data-ajax='false' enctype="multipart/form-data")
+      %input(type="file" id="fileChoose0" name="file"  multiple="true" accept="image/*" style="height:0;width:0;") 
+      %button(id="uploadFormPostButton") Upload via Form POST 
+
+%p The javascript logic is very simple. Once the user has selected the file, we trigger the submit action on the form
+
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload a file by posting a form
+    //Works in most browsers for uploading a file (except iOS)
+    $("#uploadFormPostButton").click(function(e) { 
+      e.preventDefault();
+      $("#fileChoose0").click();
+    });
+    $("#fileChoose0").live('change', function() {
+      $("#uploadFormPost").submit();
+    });
+
+%p
+  On the server side Sinatra decodes the multipart message for us and we only need to save the file in the location we prefer 
+.code_block
+  .code_header
+    server.rb 
+  :coderay_raw
+    #!ruby
+    post '/uploadFormData' do
+      raw = request.env["rack.input"].read
+      puts params
+      params.each do |k,v|
+        File.open("public/"+v[:filename], "w") do |f| 
+          f.puts v[:tempfile].read;    
+        end 
+      end
+      redirect to('/')
+    end
+
+%h2 2. Upload a string
+%p 
+  In this example we upload a string of text by creating a Blob and by posting it with the new XHR2 send method
+
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload a text by creating a Blob and XHR2 send
+    $("#uploadText").click( function(e) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/uploadText', true);
+      xhr.onload = function(e) {console.log (this.responseText); };
+      var bb = new BlobBuilder();
+      bb.append('hello world');
+      xhr.send(bb.getBlob('text/plain'));
+    });  
+
+%p
+  On the server side we just receive the text as part of the HTTP request 
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    post '/uploadText' do
+      raw = request.env["rack.input"].read
+      puts "Received data:" + raw
+    end
+
+%h2 3. Upload files
+%p 
+  In this example we upload one or more files to the server using the XHR2 send method. The simply send the File object
+  as a binary object. The filename is added to the request header.
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload one or more images by using the XHR2 binary send function
+    //Should work in FF10 for android and Android 4.0
+    $("#uploadFile").click(function(e) {
+      $("#fileChoose1").click();
+    });
+    $("#fileChoose1").live('change', function(e) {
+      $.each(this.files, function (i,file){
+        if (!file.type.match(/image.*/)) {
+          return;
+        }  
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/uploadFile', true);
+        xhr.onload = function(e) {console.log (this.responseText); };
+        xhr.setRequestHeader("X-File-Name", file. name);
+        xhr.setRequestHeader("Content-Type", "application/octet-stream");
+        xhr.send(file); //XHR2
+      });
+    });
+
+%p
+  On the server side we just receive the binary object and we save on the file system using the filename from the request
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    post '/uploadFile' do
+      raw = request.env["rack.input"].read
+      puts "Received data size:" + raw.length.to_s
+      File.open("public/"+request.env["HTTP_X_FILE_NAME"], "w") do |f| 
+        f.puts raw;    
+      end 
+    end
+
+%h2 4. Upload files via DataForm
+%p 
+  In this example we upload one or more files to the server using the new DataForm object and the new XHR2 send method. 
+  The metod is similar to the first example but here we build the form object manually. The XHR2 send method automatically
+  send the form as a 
+  %span.terminal multipart/form-data
+  
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload one or more files by creating a multipart/form-data message
+    //using the new FormData object
+    //Should work on FF 10 and Android 4
+    $("#uploadFormData").click(function(e) {
+      $("#fileChoose2").click();
+    });
+    $("#fileChoose2").live('change', function(e) {
+      var fd = new FormData(); // XHR2        
+      $.each(this.files, function (i,file){
+        if (!file.type.match(/image.*/)) {
+          return;
+        }  
+        fd.append(file.name, file);
+      });
+      
+      var xhr = new XMLHttpRequest(); 
+      xhr.open('POST', '/uploadFormData', true);
+      xhr.onload = function(e) {console.log (this.responseText); };
+
+      xhr.send(fd); // as multipart/form-data
+    });
+
+%p
+  On the server side we use the same server handler like in the first example. 
+  
+%h2 5. Upload binary files by reading into an array buffer
+%p 
+  In this example we read the files using the FileReader interface into a binary array and we upload it to the
+  server by sending it as a binary object. 
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload one or more files by reading the file into an array buffer 
+    //sending it as binary using XHR2 send functionality
+    //Should work FF10 and Android 4.0
+    $("#uploadFileMobile").click(function(e) {
+      $("#fileChoose3").click();
+    });
+    $("#fileChoose3").live('change', function(e) {
+      $.each(this.files, function (i,file){
+        if (!file.type.match(/image.*/)) {
+          return;
+        }  
+        var reader = new FileReader();
+        reader.onload = function() {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/uploadFile', true);
+          xhr.onload = function(e) {console.log (this.responseText); };
+          xhr.setRequestHeader("X-File-Name", file. name);
+          xhr.setRequestHeader("Content-Type", "application/octet-stream");
+          var data = new Uint8Array(reader.result);
+          xhr.send(data); //XHR2
+        }
+        reader.readAsArrayBuffer(file);          
+      });
+    });
+
+%p
+  The server side is the same as in example 3. 
+
+%h2 6. Upload files with Base64 encoding
+%p 
+  In this example we read the file from the file system as a DataURL. The file is stored in a string as a Base64 encoded
+  object that looks like this: 
+  .terminal
+    "data:image/gif;base64,R0lGODlhMAAwAPf/ALRGC5BLMmRIFbOTZ+J1EPe6BkozFcrH...
+
+%p
+  We post the string to the server as a text object.
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Upload one or more files by reading the object as URL and posting
+    //the Base64 encoded version
+    //Should work on FF10 and Android 4.0
+    $("#uploadFileBase64").click(function(e) {
+      $("#fileChoose4").click();
+    });
+    $("#fileChoose4").live('change', function(e) {
+      $.each(this.files, function (i,file){
+        if (!file.type.match(/image.*/)) {
+          return;
+        }  
+        var reader = new FileReader();
+        reader.onload = function() {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/uploadBase64', true);
+          xhr.onload = function(e) {console.log (this.responseText); };
+          xhr.setRequestHeader("X-File-Name", file. name);
+          xhr.setRequestHeader("Content-Type", "application/octet-stream");
+          var data = reader.result;
+          xhr.send(data); //XHR2
+        }
+        reader.readAsDataURL(file);          
+      });
+    });
+
+%p
+  On the server side we must decode the Base64 string to recreate the original binary file
+.code_block
+  .code_header
+    server.rb
+  :coderay_raw
+    #!ruby
+    post '/uploadBase64' do
+      raw = request.env["rack.input"].read.split(',')[1]
+      puts request.env["HTTP_X_FILE_NAME"]
+      
+      File.open("public/"+request.env["HTTP_X_FILE_NAME"], "w") do |f| 
+        f.puts Base64.decode64(raw);   
+      end 
+    end
+
+%h2 7. Download a binary object
+%p 
+  In this example we download an image from the server as a blob (new XHR2 feature) and we insert it into the DOM
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Download an image as a blob and add it to the DOM
+    //Works and FF10 and should work on Android 4.0
+    $("#downloadBlob").click(function(e) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'logo.png', true);
+      xhr.responseType = 'blob';
+      
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var blob = this.response;
+          
+          var img = document.createElement('img');
+          img.onload = function(e) {
+            window.URL.revokeObjectURL(img.src); // Clean up after yourself.
+          };
+          img.src = window.URL.createObjectURL(blob);
+          $('#blobOutput').append(img);
+        }
+      };
+      xhr.send();  
+    });
+
+%h2 8. Upload files
+%p 
+  In this example we download a binary file as an ArrayBuffer and we display the first 3 bytes.
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Download an image as an arraybuffer and show the first 3 bytes
+    //Works on FF10, iOS5 and should work on Android 4.0
+    $("#downloadArray").click(function(e) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'logo.png', true);
+      xhr.responseType = 'arraybuffer';
+      
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var a = new Uint8Array(this.response);
+          html = 'First 3 bytes: ' + a[0] + ',' + a[1] + ',' + a[2];  
+          $('#arrayOutput').html(html);
+        }
+      };
+      xhr.send();  
+    });
+
+%h2 9. Read a text file and insert into DOM
+%p 
+  In this example we ask the user to select a text file, we read it with the FileReader interface and 
+  we insert it into the DOM.
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Read a text file and insert it in the DOM
+    //Should work on FF10
+    $("#readFileText").click(function(e) {
+      $("#fileTextChoose").click();
+    });
+    $("#fileTextChoose").live('change', function(e) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var text = reader.result;
+        $("#fileTextOutput").html(text);
+      }
+      reader.readAsText(this.files[0]);         
+    });
+%h2 10. Read an image from the file system and insert into DOM
+%p 
+  In this example we ask the user to select an image from the Gallery, we read the content with the FileReader as a DataURL and 
+  we add it to the DOM.
+  
+.code_block
+  .code_header
+    views/index.haml  
+  :coderay_raw
+    #!javascript
+    //Read an image from the file system and inserts in the DOM
+    //Should work on FF10 and Android 4.0
+    $("#readFileDataURL").click(function(e) {
+      $("#fileDataURLChoose").click();
+    });
+    $("#fileDataURLChoose").live('change', function(e) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var text = '<img src="'+reader.result+'"/>';
+        $("#fileDataURLOutput").html(text);
+      }
+      reader.readAsDataURL(this.files[0]);         
+    });
+  
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+

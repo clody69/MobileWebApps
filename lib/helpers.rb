@@ -24,8 +24,15 @@ module PresentationHelper
     "<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>#{title}</img>"
   end
 
+  def html5_offline_storage_tag(title="Multimedia")
+    "<img src = 'imgs/html5/HTML5_Multimedia_64.png'>#{title}</img>"
+  end
+
   def html5_device_access_tag(title="Device Access")
     "<img src = 'imgs/html5/HTML5_Device_Access_64.png'>#{title}</img>"
+  end
+  def html5_styling_tag(title="Device Access")
+    "<img src = 'imgs/html5/HTML5_Styling_64.png'>#{title}</img>"
   end
   
   def html5_semantics_tag(title="New Semantics")

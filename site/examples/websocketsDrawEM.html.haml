@@ -17,6 +17,7 @@
     
     gem "haml"
     gem 'em-websocket'
+    gem 'sinatra'
 
 .code_block
   .code_header
@@ -69,6 +70,16 @@
           @users.delete(ws.object_id)
         }
       end
+
+      #Run a Sinatra server for serving index.html
+      class App < Sinatra::Base
+        set :public_folder, settings.root
+        
+        get '/' do
+          send_file 'index.html'
+        end
+      end
+      App.run!
     } 
 
 .code_block
@@ -89,9 +100,11 @@
           WebSockets Drawing
       %body
         :javascript
+          var WebSocket = window.WebSocket || window.MozWebSocket;
+  
           $(function() {
     
-            var socket = new WebSocket('ws://localhost:8080');
+            var socket = new WebSocket("ws://" + location.hostname + ":8080");
             
             var currentX = 0;
             var currentY = 0;
@@ -108,14 +121,15 @@
               currentY = ev.pageY || ev.clientY;
             });
             
-            setInterval(function(){
-              if(currentX !== lastX || currentY !== lastY){
-                lastX = currentX;
-                lastY = currentY;
-                socket.send( JSON.stringify({x:currentX, y: currentY}) );
-              }
-            }, 30); // send every 300 milliseconds if position has changed
-    
+            socket.onopen = function(event) {
+              setInterval(function(){
+                if(currentX !== lastX || currentY !== lastY){
+                  lastX = currentX;
+                  lastY = currentY;
+                  socket.send( JSON.stringify({x:currentX, y: currentY}) );
+                }
+              }, 30); // send every 300 milliseconds if position has changed
+            }    
             socket.onmessage = function(event) {
               var msg = $.parseJSON(event.data);
               
