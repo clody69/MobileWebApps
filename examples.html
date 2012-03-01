@@ -77,47 +77,9 @@ Mobile Web Applications Development with HTML5
 <div id='wrapper'>
 <a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
 <div class='content-wrapper'>
-<h1>Automatic manifest file with Manifesto.</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmljQueryOfflineManifestoBlog'>Browse Source Code</a></div>
-<p>
-We simplify the example
-<a href='htmljQueryOfflineBlog.html'>htmljQueryOfflineBlog</a>
-by automatically generating the manifest file using
-<a href='https://github.com/johntopley/manifesto'>Manifesto</a>
-</p>
-<p>
-We inlcude the Manifesto gem into our Gemfile and install using the command<span class='terminal'>
-bundle install
-</span></p>
-<div class='code_block'>
-<div class='code_header'>
-Gemfile
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>...&#x000A;gem 'manifesto'&#x000A;</pre></div>
-</div>
-</div>
-<p>The only change is in the Sinatra server where we invoke Manifesto for generating the manifest file:</p>
-<div class='code_block'>
-<div class='code_header'>
-server.rb
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  <span class="constant">Manifesto</span>.cache&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
-</div>
-</div>
-<p>
-You can try this example by starting the server and visiting the page
-<a href='http://localhost:4567'>http://localhost:4567</a>
-in your browser
-</p>
-<div class='code_block'>
-<div class='code_header'>
-terminal
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>ruby server.rb</pre></div>
-</div>
-</div>
+<a name='Examples'></a>
+<h1>Examples</h1>
+The examples used in the course will be added here
 
 </div>
 </div>

@@ -11,7 +11,7 @@
 <title>
 Mobile Web Appplications Development with HTML5
 |
-Aalto University March 2011
+Aalto University March 2012
 </title>
 <meta content='A course on developing mobile web applications with HTML5' name='description' />
 <meta content='Claudio Riva' name='author' />
@@ -56,7 +56,7 @@ Lecture 3: CSS3
 Claudio Riva
 </h3>
 <h3>
-Aalto University March 2011
+Aalto University March 2012
 </h3>
 </div>
 </section>
@@ -76,6 +76,8 @@ Aalto University March 2011
 <p>Transitions and Aninamtions</p>
 <p>3D Transformations</p>
 <p>Flexible Box Layout</p>
+<p>Touch events</p>
+http://www.html5rocks.com/en/mobile/touch/
 </div>
 </section>
 <section class='slide'>
@@ -141,8 +143,8 @@ Handling Orientation Changes
     $(document).bind('deck.change', function(event, from, to) {
      
       //alert('Moving from slide ' + from + ' to ' + to);
-      var f = $.deck('getSlide', from).closest('section').attr("data-background");
-      var t = $.deck('getSlide', to).closest('section').attr("data-background");
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
       if (t==undefined) { t = "bg-default"; }
       if (f==undefined) { f = "bg-default"; }
              

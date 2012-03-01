@@ -77,47 +77,67 @@ Mobile Web Applications Development with HTML5
 <div id='wrapper'>
 <a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
 <div class='content-wrapper'>
-<h1>Automatic manifest file with Manifesto.</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/htmljQueryOfflineManifestoBlog'>Browse Source Code</a></div>
+<a name='Resources'></a>
+<h1>Resources</h1>
+<h2>Books</h2>
 <p>
-We simplify the example
-<a href='htmljQueryOfflineBlog.html'>htmljQueryOfflineBlog</a>
-by automatically generating the manifest file using
-<a href='https://github.com/johntopley/manifesto'>Manifesto</a>
+Zachary Kessin,
+<a href='http://www.amazon.com/Programming-HTML5-Applications-Cross-Platform-Environments/dp/1449399088'>Programming HTML5 Applications: Building Powerful Cross-Platform Environments in Javascript</a>
+, O'Reilly Media, 2011
 </p>
 <p>
-We inlcude the Manifesto gem into our Gemfile and install using the command<span class='terminal'>
-bundle install
-</span></p>
-<div class='code_block'>
-<div class='code_header'>
-Gemfile
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>...&#x000A;gem 'manifesto'&#x000A;</pre></div>
-</div>
-</div>
-<p>The only change is in the Sinatra server where we invoke Manifesto for generating the manifest file:</p>
-<div class='code_block'>
-<div class='code_header'>
-server.rb
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  <span class="constant">Manifesto</span>.cache&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
-</div>
-</div>
-<p>
-You can try this example by starting the server and visiting the page
-<a href='http://localhost:4567'>http://localhost:4567</a>
-in your browser
+Bruce Lawson and Remy Sharp,
+<a href='http://www.amazon.com/Introducing-HTML5-2nd-Bruce-Lawson/dp/0321784421/'>Introducing HTML5 (2nd Edition)</a>
+, New Riders Press, 2011
 </p>
-<div class='code_block'>
-<div class='code_header'>
-terminal
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>ruby server.rb</pre></div>
-</div>
-</div>
+<p>
+Peter Gasston,
+<a href='http://www.amazon.com/Book-CSS3-Developers-Future-Design/dp/1593272863/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1326745612&amp;sr=1-1'>The Book of CSS3: A Developer's Guide to the Future of Web Design</a>
+, No Starch Press, 2011 (Amazon link)
+</p>
+<p>
+Obie Fernandez,
+<a href='http://www.amazon.com/Rails-Way-Addison-Wesley-Professional-Ruby/dp/0321601661/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1326745634&amp;sr=1-1'>The Rails 3 Way (2nd Edition)</a>
+, Addison-Wesley Professional Ruby Series, 2010
+</p>
+<p>
+Damon Oehlman,
+<a href='http://www.amazon.com/Pro-Android-Web-Apps-Professionals/dp/1430232765'>Pro Android Web Apps: Develop for Android using HTML5, CSS3 & JavaScript</a>
+, Apress, 2011
+</p>
+<h2>Version Control</h2>
+<p>
+<a href='http://gitref.org/'>Git Reference</a>
+</p>
+<p>
+<a href='http://github.com/'>GitHub</a>
+</p>
+<h2>HTML5</h2>
+<p>
+<a href='http://www.html5rocks.com'>www.html5rocks.com</a>
+</p>
+<p>
+<a href='http://www.htmlfivewow.com'>www.htmlfivewow.com</a>
+</p>
+<p>
+<a href='http://chromestatus.com'>chromestatus.com</a>
+</p>
+<p>
+<a href='http://caniuse.com'>caniuse.com</a>
+</p>
+<h2>Frameworks</h2>
+<p>
+<a href='http://jquerymobile.com'>jQueryMobile</a>
+</p>
+<p>
+<a href='http://sencha.com'>Sencha</a>
+</p>
+<p>
+<a href='http://phonegap.com'>PhoneGap</a>
+</p>
+<h2>Ruby and Ruby on Rails</h2>
+<a href='http://ruby.on-page.net/'>Ruby on one page</a>
+<a href='http://rubyonrails.org'>Ruby on Rails</a>
 
 </div>
 </div>

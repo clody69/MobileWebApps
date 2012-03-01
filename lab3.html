@@ -11,7 +11,7 @@
 <title>
 Mobile Web Appplications Development with HTML5
 |
-Aalto University March 2011
+Aalto University March 2012
 </title>
 <meta content='A course on developing mobile web applications with HTML5' name='description' />
 <meta content='Claudio Riva' name='author' />
@@ -56,7 +56,7 @@ Lab 3: Templating
 Claudio Riva
 </h3>
 <h3>
-Aalto University March 2011
+Aalto University March 2012
 </h3>
 </div>
 </section>
@@ -93,8 +93,8 @@ http://blog.carbonfive.com/2011/12/19/exploring-client-side-mvc-with-backbonejs/
     $(document).bind('deck.change', function(event, from, to) {
      
       //alert('Moving from slide ' + from + ' to ' + to);
-      var f = $.deck('getSlide', from).closest('section').attr("data-background");
-      var t = $.deck('getSlide', to).closest('section').attr("data-background");
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
       if (t==undefined) { t = "bg-default"; }
       if (f==undefined) { f = "bg-default"; }
              

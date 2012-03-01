@@ -48,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 6: Web Sockets & Web Workers
+Websockets and webworkers with HTML5
 </h1>
 <br />
 <div class='smaller centered'>
@@ -62,13 +62,450 @@ Aalto University March 2012
 </section>
 
 <section class='slide section-title'>
-<h1>Lesson 6: Web Sockets and Web Workers</h1>
+<h1>Web Sockets and Web Workers</h1>
 <div class='agenda'>
+<p>HTML5</p>
 <p>Push Technology</p>
 <p>Web Sockets</p>
 <p>Server-Sent Events</p>
 <p>Web Workers</p>
 </div>
+</section>
+<section class='slide'>
+<header>The Web is Dead!</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/the-web-is-dead.jpg' class='resize' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
+</div>
+<div class='twoColumn slide'>
+<div class='image-wrap'><img src='imgs/mobile-applications.jpg' class='resize' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>An App for Every Task</header>
+<article>
+<div class='item'>
+<img src='imgs/iphone-facebook-2-application.jpg' />
+<img src='imgs/twitter-web-app.jpg' />
+<img src='imgs/weather-app.jpg' />
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>More Time is Spent on Mobile Apps</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/mobile-app-chart.jpg' /></div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/mobile-app-chart-2.jpg' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>App Downloads on iTunes</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson1/itunes-apps-download-total.png' /></div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson1/itunes-apps-download-rate.png' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Is the Web Dead ?</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<ul>
+<li class='slide'>
+If you are reading this, it's not.
+</li>
+<li class='slide'>
+Wired article was read and discussed mostly on the web
+</li>
+<li class='slide'>
+HTML5 brings a lot of new cool stuff for web developers
+</li>
+<li class='slide'>
+Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
+</li>
+<li class='slide'>
+Many apps are built in HTML5 and wrapped with a native shell
+</li>
+</ul>
+</div>
+<div class='twoColumn'>
+<div id='thewebisdead_wrapper'>
+<div class='autoimage' id='thewebisdead'>
+<div class='image-wrap'><img src='imgs/the-web-is-dead.jpg' class='resize' /><div class='caption'><a href='http://www.wired.com/magazine/2010/08/ff_webrip/all/1'>Wired August 2010</a></div></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Evolution of the Web (Browsers)</header>
+<article>
+<div class='image-wrap'><img src='imgs/evolution-web.png' /><div class='caption'><a href='http://evolutionofweb.appspot.com/'>Web Evolution</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>Shifting from the "Document Web" to the "App Web"</header>
+<article>
+<div class='row'>
+<div class='twoColumn slide'>
+<div class='autobox'>
+<p>
+Hyperlinked documents
+</p>
+<p>
+Page reloading
+</p>
+<p>
+Static pages
+</p>
+<p>
+Web servers
+</p>
+<p>
+Static content
+</p>
+</div>
+</div>
+<div class='twoColumn slide'>
+<div class='autobox'>
+<p>
+Interactive web apps
+</p>
+<p>
+Asynchronous API calls
+</p>
+<p>
+HTML + CSS + JS
+</p>
+<p>
+Data hubs (web apis)
+</p>
+<p>
+Real-time communication
+</p>
+</div>
+</div>
+</div>
+<div class='vmargin'>
+<p class='slide'>
+Web apps are built with open standards that are refered as "Web Technologies"
+</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>The Classic Web Architecture</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/web-arch-classic.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>Towards a New Web Architecture</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/web-arch-new.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>Shom me a "Mobile Web App"</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/ft.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+FT Web App
+<span class='smaller'>
+<a href='http://blog.cohen-rose.org/2011/10/over-air-2011-ft-web-app-weve-got.html'>(more info)</a>
+</span>
+</header>
+<article>
+<ul>
+<li>Developed in 8 months by 3 people</li>
+<li>Same web app works across multiple brands and devices</li>
+<li>
+Great and responsive UI design
+<ul>
+<li>Content balacncing based on device type</li>
+<li>Audio playing while moving to other pages</li>
+<li>Continous carousel</li>
+<li>Preloading of content</li>
+<li>Swipes using touch gestures</li>
+</ul>
+</li>
+<li>Offline access</li>
+<li>More engagement than native app</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>LinkedIn App</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/linkedin.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>Developing Native Apps for Multiple Platforms</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='slide'>
+<div class='image-wrap'><img src='imgs/asymco-live-death-mobile-platforms.png' /><div class='caption'><a href='http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/'>Asymco Feb 2011</a></div></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class='slide'>
+<p>We must have:</p>
+</div>
+<ul>
+<li class='slide'>
+2008 - iPhone Apps
+</li>
+<li class='slide'>
+2009 - Android App
+</li>
+<li class='slide'>
+2010 - iPad App
+</li>
+<li class='slide'>
+2011 - maintain them ???
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Develop, Test and Maintain</header>
+<article>
+<div class='image-wrap'><img src='imgs/smartphones.jpg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Smartphone Platforms Shares
+<div class='smaller inline'>
+(units shipped Q4 2011)
+</div>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/smartphone-platforms-share.png' class='resize' /></div>
+</div>
+<div class='twoColumn slide'>
+<div class='image-wrap'><img src='imgs/smartphone-languages-share.png' class='resize' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Smartphone Browsers Shares
+<div class='smaller inline'>
+(units shipped Q4 2011)
+</div>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/smartphone-browser-share.png' class='resize' /></div>
+</div>
+<div class='twoColumn slide'>
+<div class='image-wrap'><img src='imgs/smartphone-html5-share.png' class='resize' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>What is HTML5 ?</header>
+<article>
+<p>
+<strong>1998</strong>
+- W3C decided they will stop evolving HTML beyond version 4.01
+</p>
+<p>
+<strong>2000</strong>
+- W3C released XHTML 1.0 and.
+</p>
+<p>
+<strong>2002</strong>
+- W3C released first draft of XHTML 2.0, no backwards compatibility
+</p>
+<p>
+<strong>2004</strong>
+- WHATWG started working on HTML v5 (Opera, Mozilla and Apple)
+</p>
+<p>
+<strong>2006</strong>
+- W3C agrees to use WHATWG proposal for HTML5
+</p>
+<p>
+<strong>2009</strong>
+- W3C stops works on XHTML 2.0 and resources are diverted to HTML5
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>Philposphy of HTML5</header>
+<article>
+<p>
+Philosophy of HTML5
+<ul>
+<li>Specify undocumented features (e.g. XMLHttpRequest)</li>
+<li>Browser behaviour with invalid markup</li>
+<li>Support web applications</li>
+<li>Define an open standard (opposed to Flash)</li>
+<li>Don't break the Web</li>
+</ul>
+</p>
+<p>
+<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/'>HTML5 Spec at WHATWG</a>
+</p>
+<p>
+<a href='http://www.w3.org/standards/webdesign/'>Some additional sepcs at W3C</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>HTML5</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='item'>
+<img src='imgs/html5/HTML5_Semantics_64.png' />
+<span>
+<strong>New semantics</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Styling_64.png' />
+<span>
+<strong>CSS3</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_3D_Effects_64.png' />
+<span>
+<strong>3D, Graphics and Effects</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Offline_Storage_64.png' />
+<span>
+<strong>Offline & Storage</strong>
+</span>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='item'>
+<img src='imgs/html5/HTML5_Connectivity_64.png' />
+<span>
+<strong>Connectivity</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Device_Access_64.png' />
+<span>
+<strong>Device Access</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Multimedia_64.png' />
+<span>
+<strong>Multimedia</strong>
+</span>
+</div>
+<div class='item'>
+<img src='imgs/html5/HTML5_Performance_64.png' />
+<span>
+<strong>Performance & Integration</strong>
+</span>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Browser Support for HTML5</header>
+<article>
+<div class='image-wrap'><img src='imgs/caniuse.png' /><div class='caption'><a href='http://caniuse.com/'>When Can I Use ...</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>Test your Browser for HTML5 support</header>
+<article>
+<div class='image-wrap'><img src='imgs/html5test.png' class='resize' /><div class='caption'><a href='http://html5test.com/'>The HTML5 Test</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>Mobile HTML5 Compatibility Table</header>
+<article>
+<div class='image-wrap'><img src='imgs/mobile-html5-comp-table.png' class='resize' /><div class='caption'><a href='http://mobilehtml5.org'>Mobile HTML5</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>HTML5 Frameworks & Tools</header>
+<article class='larger centered'>
+<div class='item emphasizebox'>
+<span>
+UI
+</span>
+<a href='http://jquerymobile.com/'><img src='imgs/jquery.png' /></a>
+<a href='http://www.sencha.com/'><img src='imgs/sencha.png' /></a>
+<a href='http://jqtouch.com/'><img src='imgs/jqtouch.png' /></a>
+<a href='http://sproutcore.com/'><img src='imgs/sproutcore.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Helpers
+</span>
+<a href='http://documentcloud.github.com/backbone/'><img src='imgs/backbonejs.png' /></a>
+<a href='http://www.modernizr.com/'><img src='imgs/modernizr.png' /></a>
+<a href='http://www.handlebarsjs.com/'><img src='imgs/handlebarsjs.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Dev Tools
+</span>
+<a href='http://coffeescript.org/'><img src='imgs/coffescript.png' /></a>
+<a href='http://sass-lang.com/'><img src='imgs/sass.png' /></a>
+<a href='http://haml-lang.com/'><img src='imgs/haml.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Backend
+</span>
+<a href='http://rubyonrails.org'><img src='imgs/rails.png' /></a>
+<a href='http://www.sinatrarb.com'><img src='imgs/sinatra.png' /></a>
+<a href='http://nodejs.org'><img src='imgs/nodejs.png' /></a>
+<a href='https://www.djangoproject.com/'><img src='imgs/django.png' /></a>
+</div>
+<div class='item emphasizebox'>
+<span>
+Database
+</span>
+<a href='http://www.mongodb.org/'><img src='imgs/mongodb.png' /></a>
+<a href='http://couchdb.apache.org/'><img src='imgs/couchdb.png' /></a>
+</div>
+</article>
 </section>
 <section class='slide'>
 <header>

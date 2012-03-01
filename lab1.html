@@ -11,11 +11,13 @@
 <title>
 Mobile Web Appplications Development with HTML5
 |
-Aalto University March 2011
+Aalto University March 2012
 </title>
 <meta content='A course on developing mobile web applications with HTML5' name='description' />
 <meta content='Claudio Riva' name='author' />
 <meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Coloring for code. To be included before the custom css like course and screen -->
+<link href='css/coderay.css' rel='stylesheet' />
 <!-- Core and extension CSS files -->
 <link href='deckjs/core/deck.core.css' rel='stylesheet' />
 <link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
@@ -25,7 +27,6 @@ Aalto University March 2011
 <link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
 <!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
 <!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
-<link href='css/coderay_dark.css' rel='stylesheet' />
 <!-- Theme CSS files (menu swaps these out) -->
 <link href='css/course.css' id='style-theme-link' rel='stylesheet' />
 <link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
@@ -47,7 +48,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lab 1: Building a Mobile Web App
+Lab 1: Assignment Kick-Off
 </h1>
 <br />
 <div class='smaller centered'>
@@ -55,19 +56,114 @@ Lab 1: Building a Mobile Web App
 Claudio Riva
 </h3>
 <h3>
-Aalto University March 2011
+Aalto University March 2012
 </h3>
 </div>
 </section>
 
+<div class='background' data-background='bg-lab1'></div>
 <section class='slide section-title'>
-<h1>Building a Mobile Web App</h1>
+<h1>Assignment Kick-Off</h1>
 <div class='agenda'>
-<p>Ruby on Rails</p>
-<p>jQuery</p>
+<p>Overview of the assignment (Claudio)</p>
+<p>GitHub (Kimmo)</p>
+<p>Windows Phones (Drazen Dodik)</p>
+<p>Teams (Håkan)</p>
+<p>Dev Environment (Antti)</p>
+<p>Course Examples (Claudio)</p>
 </div>
 </section>
-http://blog.bernatfarrero.com/jquery-and-rails-3-mini-tutorial/
+<section class='slide'>
+<header>Assignment: Goals</header>
+<article>
+<ul>
+<li>
+Build a mobile web application with the following criteria:
+<ul>
+<li>Using at least one of the HTML5 key API (e.g. canvas, local data storage, sockets)</li>
+<li>Using at least one mobile device feature (e.g. GPS, camera, sensors, media)</li>
+<li>Using some client/server communication (e.g. REST)</li>
+</ul>
+</li>
+<li>Complete freedom to choose the topic of the web app</li>
+<li>Mimic a real-life assignment</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Assignment: Team</header>
+<article>
+<ul>
+<li>Work as a team</li>
+<li>Nominate a team leader (to be the contact person)</li>
+<li>Weekly status report in GitHub (deadline is Sunday night)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Assignment: Proposal</header>
+<article>
+<ul>
+<li>Name of the team</li>
+<li>Team leader</li>
+<li>List of GitHub accounts</li>
+<li>Description of the web app</li>
+<li>Key use cases</li>
+<li>List of client/server technologies</li>
+<li>Target devices</li>
+<li>How it fulfills the 3 assignment criteria</li>
+<li>Max 1 page</li>
+</ul>
+<p>Send the proposal to Håkan by 19 March 2012</p>
+</article>
+</section>
+<section class='slide'>
+<header>Assignment: Schedule</header>
+<article>
+<ul>
+<li>
+<strong>12 March</strong>
+: Kick-off
+</li>
+<li>
+<strong>19 March</strong>
+: Proposal ready
+</li>
+<li>
+<strong>23 April</strong>
+: Mid-term review
+</li>
+<li>
+<strong>15 & 22 May</strong>
+: Final review (demo day)
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Evaluation Criteria</header>
+<article>
+<ul>
+<li>Number of implemented use cases</li>
+<li>Usability of the application (e.g. touch interactions)</li>
+<li>Application design and code style</li>
+<li>Extra credits for a PhoneGap version that runs on other devices than the primary target devices</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Recap of next steps</header>
+<article>
+<ol>
+<li>You setup the GitHub accounts</li>
+<li>You send the proposal to Håkan before 19 March</li>
+<li>We send the confirmation the proposal has been accepted</li>
+<li>We send the GitHub repository that you will use</li>
+<li>You publish the weekly status updates on GitHub</li>
+<li>You show the results at the demo day</li>
+</ol>
+</article>
+</section>
 
 <!-- Elements -->
 <a class='deck-next-link' href='#' title='Next'>→</a>
@@ -92,8 +188,8 @@ http://blog.bernatfarrero.com/jquery-and-rails-3-mini-tutorial/
     $(document).bind('deck.change', function(event, from, to) {
      
       //alert('Moving from slide ' + from + ' to ' + to);
-      var f = $.deck('getSlide', from).closest('section').attr("data-background");
-      var t = $.deck('getSlide', to).closest('section').attr("data-background");
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
       if (t==undefined) { t = "bg-default"; }
       if (f==undefined) { f = "bg-default"; }
              
