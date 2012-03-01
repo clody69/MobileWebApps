@@ -1,12 +1,332 @@
-=title_slide_tag("Lecture 6: Web Sockets & Web Workers")
+=title_slide_tag("Websockets and webworkers with HTML5")
 
 %section.slide.section-title
-  %h1 Lesson 6: Web Sockets and Web Workers
+  %h1 Web Sockets and Web Workers
   .agenda
+    %p HTML5
     %p Push Technology
     %p Web Sockets
     %p Server-Sent Events 
     %p Web Workers
+
+%section.slide
+  %header The Web is Dead!
+  %article
+    .row
+      .twoColumn
+        = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
+      .twoColumn.slide
+        = image_tag "mobile-applications.jpg", :resize => true
+
+
+%section.slide
+  %header An App for Every Task
+  %article
+    .item
+      = image_tag "iphone-facebook-2-application.jpg", :nowrap => true
+      = image_tag "twitter-web-app.jpg", :nowrap => true
+      = image_tag "weather-app.jpg", :nowrap => true
+
+%section.slide
+  %header More Time is Spent on Mobile Apps
+  %article
+    .row
+      .twoColumn
+        =image_tag "mobile-app-chart.jpg"
+      .twoColumn
+        =image_tag "mobile-app-chart-2.jpg"
+
+    
+%section.slide
+  %header App Downloads on iTunes
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson1/itunes-apps-download-total.png"
+      .twoColumn
+        =image_tag "lesson1/itunes-apps-download-rate.png"
+
+           
+%section.slide
+  %header Is the Web Dead ? 
+  %article
+    .row 
+      .twoColumn
+        %ul
+          %li.slide
+            If you are reading this, it's not.
+          %li.slide 
+            Wired article was read and discussed mostly on the web
+          %li.slide
+            HTML5 brings a lot of new cool stuff for web developers
+          %li.slide
+            Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
+          %li.slide
+            Many apps are built in HTML5 and wrapped with a native shell
+      .twoColumn
+        #thewebisdead_wrapper
+          .autoimage#thewebisdead
+            = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
+
+%section.slide
+  %header Evolution of the Web (Browsers)
+  %article
+    =image_tag "evolution-web.png", :caption => "Web Evolution", :url => "http://evolutionofweb.appspot.com/"
+
+
+%section.slide
+  %header Shifting from the "Document Web" to the "App Web"
+  %article
+    .row
+      .twoColumn.slide
+        .autobox
+          %p 
+            Hyperlinked documents
+          %p
+            Page reloading
+          %p 
+            Static pages
+          %p 
+            Web servers
+          %p 
+            Static content
+      .twoColumn.slide
+        .autobox
+          %p 
+            Interactive web apps
+          %p
+            Asynchronous API calls
+          %p 
+            HTML + CSS + JS
+          %p 
+            Data hubs (web apis)
+          %p 
+            Real-time communication
+    .vmargin
+      %p.slide
+        Web apps are built with open standards that are refered as "Web Technologies"
+
+%section.slide
+  %header The Classic Web Architecture
+  %article
+    =image_tag "lesson1/web-arch-classic.png", :resize => true
+  
+%section.slide
+  %header Towards a New Web Architecture  
+  %article
+    =image_tag "lesson1/web-arch-new.png", :resize => true
+
+%section.slide
+  %header Shom me a "Mobile Web App"
+  %article
+    =image_tag "lesson1/ft.png", :resize => true
+
+%section.slide
+  %header 
+    FT Web App
+    %span.smaller
+      %a(href="http://blog.cohen-rose.org/2011/10/over-air-2011-ft-web-app-weve-got.html") (more info)
+
+  %article
+    %ul
+      %li Developed in 8 months by 3 people
+      %li Same web app works across multiple brands and devices
+      %li 
+        Great and responsive UI design
+        %ul
+          %li Content balacncing based on device type
+          %li Audio playing while moving to other pages
+          %li Continous carousel
+          %li Preloading of content
+          %li Swipes using touch gestures
+      %li Offline access
+      %li More engagement than native app 
+
+%section.slide
+  %header LinkedIn App
+  %article      
+    =image_tag "lesson1/linkedin.png", :resize => true
+
+%section.slide
+  %header Developing Native Apps for Multiple Platforms
+  %article 
+    .row
+      .twoColumn
+        .slide
+          =image_tag "asymco-live-death-mobile-platforms.png", :caption => "Asymco Feb 2011", :url => "http://www.asymco.com/2011/02/19/the-lives-and-deaths-of-mobile-platforms/"      
+      .twoColumn
+        .autobox        
+          .slide 
+            %p We must have:
+          %ul
+            %li.slide
+              2008 - iPhone Apps
+            %li.slide
+              2009 - Android App
+            %li.slide  
+              2010 - iPad App
+            %li.slide
+              2011 - maintain them ???
+
+
+%section.slide
+  %header Develop, Test and Maintain
+  %article
+    =image_tag "smartphones.jpg", :resize => true
+
+
+%section.slide
+  %header 
+    Smartphone Platforms Shares 
+    .smaller.inline
+      (units shipped Q4 2011)
+  %article
+    .row
+      .twoColumn
+        =image_tag "smartphone-platforms-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-languages-share.png", :resize => true
+
+%section.slide
+  %header 
+    Smartphone Browsers Shares
+    .smaller.inline
+      (units shipped Q4 2011)
+  %article
+    .row
+      .twoColumn
+        =image_tag "smartphone-browser-share.png", :resize => true
+      .twoColumn.slide
+        =image_tag "smartphone-html5-share.png", :resize => true
+%section.slide
+  %header What is HTML5 ? 
+  %article
+    %p 
+      %strong 1998
+      \- W3C decided they will stop evolving HTML beyond version 4.01 
+    %p  
+      %strong 2000
+      \- W3C released XHTML 1.0 and. 
+    %p   
+      %strong 2002
+      \- W3C released first draft of XHTML 2.0, no backwards compatibility
+    %p  
+      %strong 2004
+      \- WHATWG started working on HTML v5 (Opera, Mozilla and Apple)
+    %p  
+      %strong 2006
+      \- W3C agrees to use WHATWG proposal for HTML5
+    %p 
+      %strong 2009
+      \- W3C stops works on XHTML 2.0 and resources are diverted to HTML5
+
+%section.slide
+  %header Philposphy of HTML5
+  %article
+    %p 
+      Philosophy of HTML5
+      %ul
+        %li Specify undocumented features (e.g. XMLHttpRequest)
+        %li Browser behaviour with invalid markup
+        %li Support web applications
+        %li Define an open standard (opposed to Flash)
+        %li Don't break the Web
+    %p 
+      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/") HTML5 Spec at WHATWG
+    %p
+      %a(href="http://www.w3.org/standards/webdesign/") Some additional sepcs at W3C
+       
+     
+      
+%section.slide
+  %header HTML5     
+  %article
+    .row
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Semantics_64.png")
+          %span 
+            %strong New semantics
+        .item
+          %img(src = "imgs/html5/HTML5_Styling_64.png")
+          %span
+            %strong CSS3
+        .item
+          %img(src = "imgs/html5/HTML5_3D_Effects_64.png")
+          %span
+            %strong 3D, Graphics and Effects
+        .item
+          %img(src = "imgs/html5/HTML5_Offline_Storage_64.png")
+          %span
+            %strong Offline & Storage
+      .twoColumn
+        .item
+          %img(src = "imgs/html5/HTML5_Connectivity_64.png")
+          %span
+            %strong Connectivity
+        .item
+          %img(src = "imgs/html5/HTML5_Device_Access_64.png")
+          %span
+            %strong Device Access
+        .item
+          %img(src = "imgs/html5/HTML5_Multimedia_64.png")
+          %span
+            %strong Multimedia
+        .item
+          %img(src = "imgs/html5/HTML5_Performance_64.png")
+          %span
+            %strong Performance & Integration
+       
+%section.slide
+  %header Browser Support for HTML5
+  %article
+    =image_tag "caniuse.png", :caption => "When Can I Use ...", :url => "http://caniuse.com/"
+ 
+%section.slide
+  %header Test your Browser for HTML5 support
+  %article
+    =image_tag "html5test.png", :caption => "The HTML5 Test", :url => "http://html5test.com/", :resize => true
+    
+%section.slide
+  %header Mobile HTML5 Compatibility Table
+  %article
+    =image_tag "mobile-html5-comp-table.png", :caption => "Mobile HTML5", :url => "http://mobilehtml5.org", :resize => true
+
+%section.slide
+  %header HTML5 Frameworks & Tools
+  %article.larger.centered
+    .item.emphasizebox 
+      %span
+        UI
+      =image_tag "jquery.png", :nowrap => true, :url => "http://jquerymobile.com/"
+      =image_tag "sencha.png", :nowrap => true, :url => "http://www.sencha.com/"
+      =image_tag "jqtouch.png", :nowrap => true, :url => "http://jqtouch.com/"
+      =image_tag "sproutcore.png", :nowrap => true, :url => "http://sproutcore.com/"
+    .item.emphasizebox 
+      %span
+        Helpers
+      =image_tag "backbonejs.png", :nowrap => true, :url => "http://documentcloud.github.com/backbone/"
+      =image_tag "modernizr.png", :nowrap => true, :url => "http://www.modernizr.com/"
+      =image_tag "handlebarsjs.png", :nowrap => true, :url => "http://www.handlebarsjs.com/"
+    .item.emphasizebox 
+      %span
+        Dev Tools 
+      =image_tag "coffescript.png", :nowrap => true, :url => "http://coffeescript.org/"  
+      =image_tag "sass.png", :nowrap => true, :url => "http://sass-lang.com/"
+      =image_tag "haml.png", :nowrap => true, :url => "http://haml-lang.com/"
+    .item.emphasizebox 
+      %span
+        Backend
+      =image_tag "rails.png", :nowrap => true, :url => "http://rubyonrails.org"
+      =image_tag "sinatra.png", :nowrap => true, :url => "http://www.sinatrarb.com"
+      =image_tag "nodejs.png", :nowrap => true, :url => "http://nodejs.org"
+      =image_tag "django.png", :nowrap => true, :url => "https://www.djangoproject.com/"
+    .item.emphasizebox 
+      %span
+        Database
+      =image_tag "mongodb.png", :nowrap => true, :url => "http://www.mongodb.org/"
+      =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
+
 
 %section.slide
   %header 

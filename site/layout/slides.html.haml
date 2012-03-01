@@ -19,6 +19,7 @@
     / Coloring for code. To be included before the custom css like course and screen
     %link(href="css/coderay.css" rel="stylesheet")
 
+
     / Core and extension CSS files
     %link(href="deckjs/core/deck.core.css" rel="stylesheet")
     %link(href="deckjs/extensions/goto/deck.goto.css" rel="stylesheet")
@@ -69,8 +70,8 @@
         $(document).bind('deck.change', function(event, from, to) {
          
           //alert('Moving from slide ' + from + ' to ' + to);
-          var f = $.deck('getSlide', from).closest('section').attr("data-background");
-          var t = $.deck('getSlide', to).closest('section').attr("data-background");
+          var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+          var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
           if (t==undefined) { t = "bg-default"; }
           if (f==undefined) { f = "bg-default"; }
                  

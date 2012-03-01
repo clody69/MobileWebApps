@@ -164,6 +164,7 @@ body, html {
 #bg-lesson2 { background-image: url('../imgs/bg-lesson2.jpg'); }
 #bg-lesson3 { background-image: url('../imgs/bg-lesson3.jpg'); }
 #bg-template { background-image: url('../imgs/bg-template.jpg'); }
+#bg-lab1 { background-image: url('../imgs/bg-lab1.jpg'); }
 
 
 
@@ -351,7 +352,7 @@ h1, h2 {
 
     font-family: "Arial Black";
     color: white;
-    background-color: rgba(255,255,255, 0.2);
+    background-color: rgba(80,80,80, 0.3);
     @include border-radius(30px);
     text-align: right;
     font-variant: small-caps; 

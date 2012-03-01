@@ -18,11 +18,11 @@ module DeckJSBuilder
     
     content = Haml::Engine.new(IO.read(file), :ugly => true).render(b)
     
-    name = File.basename(file,'.haml.html')
-    
-    if File.exist?('public/imgs/bg-' + name + '.jpg')
-      content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
-    end
+    #name = File.basename(file,'.html.haml')
+    #if File.exist?( File.join(Dir.pwd, '../public/imgs/bg-' + name + '.jpg'))
+    #  content.gsub!(/<section class='slide/,"<section data-background='bg-#{name}' class='slide")
+    #  content.gsub!(/bg-default/,"bg-#{name}")
+    #end
     
     if layout != ''
       layout = File.join MAIN_DIR, layout
@@ -35,7 +35,8 @@ module DeckJSBuilder
   end
   
   def build(file, layout, output="")
-    
+
+    puts "[#{Time.now.strftime("%H:%M:%S")}] Compiling #{file}"
     text = render file, layout, binding
     if output == ""
       write_to = File.join MAIN_DIR, file.sub('.haml','')     
@@ -44,7 +45,7 @@ module DeckJSBuilder
     end
     
     File.open(write_to,"w+") {|f| f.write text}
-    puts "[#{Time.now.strftime("%H:%M:%S")}] written #{write_to} #{binding.to_s}"
+    puts "[#{Time.now.strftime("%H:%M:%S")}] written #{write_to}"
   end
 
   def css

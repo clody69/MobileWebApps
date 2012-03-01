@@ -9,6 +9,9 @@ task :render do
   build "site/views/site.html.haml", "site/layout/site.html.haml", "public/index.html"
   build "site/views/site_preview.html.haml", "site/layout/site.html.haml", "public/site.html"
   build "site/views/notes.html.haml", "site/layout/site.html.haml", "public/notes.html"
+  build "site/views/lectures.html.haml", "site/layout/site.html.haml", "public/lectures.html"
+  build "site/views/examples.html.haml", "site/layout/site.html.haml", "public/examples.html"
+  build "site/views/resources.html.haml", "site/layout/site.html.haml", "public/resources.html"
 
   Dir["site/examples/*.html.haml"].each { |file| build file, "site/layout/site.html.haml", "public/" + File.basename(file).gsub('.haml','')}
 
