@@ -77,45 +77,20 @@ Mobile Web Applications Development with HTML5
 <div id='wrapper'>
 <a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
 <div class='content-wrapper'>
-<h1>Automatic manifest file with Manifesto.</h1><div class='actions'><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/htmljQueryOfflineManifestoBlog'>Browse Source Code</a></div>
+<h1>Media Query on Viewport</h1><div class='actions'><a href='examples/cssMediaQueriesViewport'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/cssMediaQueriesViewport'>Browse Source Code</a></div>
 <p>
-We simplify the example
-<a href='htmljQueryOfflineBlog.html'>htmljQueryOfflineBlog</a>
-by automatically generating the manifest file using
-<a href='https://github.com/johntopley/manifesto'>Manifesto</a>
+In this example we demonstrate how to use the CSS3 media query on the viewport of the browser.
+The background image of the title disappears when the viewport of the browser is too small
 </p>
 <p>
-We inlcude the Manifesto gem into our Gemfile and install using the command<span class='terminal'>
-bundle install
-</span></p>
-<div class='code_block'>
-<div class='code_header'>
-Gemfile
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>...&#x000A;gem 'manifesto'&#x000A;</pre></div>
-</div>
-</div>
-<p>The only change is in the Sinatra server where we invoke Manifesto for generating the manifest file:</p>
-<div class='code_block'>
-<div class='code_header'>
-server.rb
-</div>
-<div class="CodeRay">
-  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  <span class="constant">Manifesto</span>.cache&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
-</div>
-</div>
-<p>
-You can try this example by starting the server and visiting the page
-<a href='http://localhost:4567'>http://localhost:4567</a>
-in your browser
+The CSS code to achieve this is below:
 </p>
 <div class='code_block'>
 <div class='code_header'>
-terminal
+index.html.haml
 </div>
 <div class="CodeRay">
-  <div class="code"><pre>ruby server.rb</pre></div>
+  <div class="code"><pre><span class="class">.container</span> {&#x000A;  <span class="key">width</span>: <span class="float">500px</span>;&#x000A;  }&#x000A;<span class="class">.container</span> <span class="type">div</span> {&#x000A;  <span class="key">float</span>: <span class="value">left</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">15px</span> <span class="float">0</span> <span class="float">0</span>;&#x000A;  <span class="key">width</span>: <span class="float">235px</span>;&#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span>: <span class="float">320px</span>) {&#x000A;  <span class="class">.container</span> {&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;  <span class="class">.container</span> <span class="type">div</span> {&#x000A;    <span class="key">float</span>: <span class="value">none</span>;&#x000A;    <span class="key">margin</span>: <span class="float">0</span>;&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;}</pre></div>
 </div>
 </div>
 

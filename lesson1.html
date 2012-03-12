@@ -310,7 +310,7 @@ FT Web App
 <article>
 <ul>
 <li>Developed in 8 months by 3 people</li>
-<li>Same web app works across multiple brands and devices</li>
+<li>Hugely optimized for iOS</li>
 <li>
 Great and responsive UI design
 <ul>
@@ -422,7 +422,7 @@ Smartphone Browsers Shares
 </p>
 <p>
 <strong>2000</strong>
-- W3C released XHTML 1.0 and.
+- W3C released XHTML 1.0 and force the world to use XML
 </p>
 <p>
 <strong>2002</strong>
@@ -523,6 +523,124 @@ Philosophy of HTML5
 </article>
 </section>
 <section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Semantics_64.png">New Semantics</img>
+</header>
+<article>
+<div class='autobox'>
+<strong>New Semantics</strong>
+<p>section, header, footer, nav, ...</p>
+<strong>New Form Controls & Types</strong>
+<p>date, range, email, url, tel, ...</p>
+<strong>New Form Validation</strong>
+<p>by type, required, :valid, :invalid, :required</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage</img>
+</header>
+<article>
+<div class='autobox'>
+<strong>Offline Usage</strong>
+<ul>
+<li>Install a package on the device</li>
+<li>Buggy on some platforms</li>
+<li>online/offline events</li>
+<li>iOS full screen metatag</li>
+</ul>
+<strong>Storage</strong>
+<ul>
+<li>Persistent and Session Storage</li>
+<li>key/value (strings)</li>
+<li>limited to 5Mb</li>
+<li>IndexDB and SQL storage</li>
+</ul>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Multimedia</img>
+</header>
+<article>
+<div class='autobox'>
+<p>Audio and Video Tags</p>
+<p>Javascript API & events</p>
+<p>Some codecs supported</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_3D_Effects_64.png'>3D, Graphics and Effects</img>
+</header>
+<article>
+<div class='autobox'>
+<p>2D Canvas API</p>
+<P>SVG support</P>
+<p>WebGL</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Device_Access_64.png'>Device Access</img>
+</header>
+<article>
+<div class='autobox'>
+<p>Accelerometer / gyroscope / magnetometer</p>
+<p>Orientation change</p>
+<p>Touch events (touchstart, touchmove, touchend)</p>
+<p>File API and File Reader</p>
+<p>(Media Camera API)</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 and Styling</img>
+</header>
+<article>
+<div class='autobox'>
+<strong>New styling</strong>
+<p>Rounded borders, shadows, opacity</p>
+<strong>2D & 3D transforms</strong>
+<p>rotate, scale, skew, translate</p>
+<strong>Transitions</strong>
+<p>basic animations between 2 states</p>
+<p>
+<strong>keyframe animations</strong>
+</p>
+<p>prefixes (-webkit, -o, -moz, -ms)</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+</header>
+<article>
+<div class='autobox'>
+<p>Web Sockets</p>
+<p>Server-sent Events</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Performance_64.png'>Performance & Integration</img>
+</header>
+<article>
+<div class='autobox'>
+<p>Notifications API</p>
+<p>XMLHttpRequest 2</p>
+<p>Web Workers</p>
+</div>
+</article>
+</section>
+<section class='slide'>
 <header>Browser Support for HTML5</header>
 <article>
 <div class='image-wrap'><img src='imgs/caniuse.png' /><div class='caption'><a href='http://caniuse.com/'>When Can I Use ...</a></div></div>
@@ -535,9 +653,36 @@ Philosophy of HTML5
 </article>
 </section>
 <section class='slide'>
+<header>Mobile Browsers</header>
+<article>
+<div class='autobox'>
+<p class='slide'>Too many</p>
+<p class='slide'>Some are limited</p>
+<p class='slide'>Some are too innovative</p>
+<p class='slide'>Some are proxy based</p>
+<p class='slide'>Most have little documentation</p>
+<p class='slide'>Most have little debugging support</p>
+<p class='slide'>Focus, cursor, touch or multi-touch based</p>
+</div>
+</article>
+</section>
+<section class='slide'>
 <header>Mobile HTML5 Compatibility Table</header>
 <article>
 <div class='image-wrap'><img src='imgs/mobile-html5-comp-table.png' class='resize' /><div class='caption'><a href='http://mobilehtml5.org'>Mobile HTML5</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>Mobile Web Challenges</header>
+<article>
+<div class='autobox'></div>
+<p class='slide'>Server-side detection</p>
+<p class='slide'>Responsive design</p>
+<p class='slide'>Mobile usability</p>
+<p class='slide'>Best experience based on context</p>
+<p class='slide'>Performance optimization</p>
+<p class='slide'>The viewport and pixel density</p>
+<p class='slide'>Data URI - inlining content</p>
 </article>
 </section>
 <section class='slide'>
@@ -587,7 +732,7 @@ Database
 </article>
 </section>
 <section class='slide'>
-<header>jQuery Example</header>
+<header>jQuery Mobile Example</header>
 <article class='small'>
 <div class='code_block'>
 <div class="CodeRay">
@@ -693,20 +838,23 @@ Assignment
 <div class='twoColumn'>
 <div class='autobox'>
 <p>Lecture 1: Introduction</p>
-<p>Lecture 2: New semantics</p>
-<p>Lecture 3: CSS3</p>
-<p>Lecture 4: HTML5 Storage and Device Access</p>
-<p>Lecture 5: Sencha</p>
-<p>Lecture 6: Storing into the cloud</p>
+<p>Lecture 2: Building a Mobile Web App</p>
+<p>Lecture 3: Templating and MVC</p>
+<p>Lecture 4: File and Device Access</p>
+<p>Lecture 5: CSS3 & Canvas</p>
+<p>Lecture 6: Websockets & Webworkers</p>
 <p>Lecture 7: Developing native apps</p>
 </div>
 </div>
 <div class='twoColumn'>
 <div class='autobox'>
 <p>Lab 1: Assignment Kick-off</p>
-<p>Lab 2: Building a mobile web app</p>
-<p>Lab 3: Client side templating</p>
-<p>Lab 4:</p>
+<p>Lab 2: jQuery Mobile</p>
+<p>Lab 3: Backbone.js</p>
+<p>Lab 4: Device Access</p>
+<p>Lab 5: Ruby on Rails 3</p>
+<p>Lab 6: Designing REST interfaces</p>
+<p>Lab 7: PhoneGap</p>
 </div>
 </div>
 </div>
@@ -721,10 +869,10 @@ Course Material and Communication
 Slides are available at
 <a href='http://aaltowebapps.com'>aaltowebapps.com</a>
 </p>
-<p>The slides are only visible with Google Chrome</p>
+<p>The slides are best viewed with Google Chrome</p>
 <p>
 Exercises are available at
-<a href='https://github.com/clody69/MobileWebAppsExamples'>GitHub</a>
+<a href='https://github.com/aaltowebapps/MobileWebAppsExamples'>GitHub</a>
 </p>
 <p>
 Communication channels:
@@ -740,16 +888,61 @@ Noppa
 </p>
 </article>
 </section>
+<section class='slide'>
+<header>The Staff</header>
+<article>
+<p>
+<strong>
+Claudio Riva
+</strong>
+, Nokia, Main Instructor
+</p>
+<p>
+<strong>
+Antti Vuorela
+</strong>
+, Futurice, Course Assistant
+</p>
+<p>
+<strong>
+Kimmo Karhu
+</strong>
+, Aalto University, Assignment Coordinator
+</p>
+<p>
+<strong>
+Häkan Mitts
+</strong>
+, Aalto University, Program Coordinator
+</p>
+<p>
+<strong>Mikael Blomberg</strong>
+, SC5, jQuery and Backbone Instructor
+</p>
+<p>
+<strong>
+Matias Korhonen
+</strong>
+, Kisko Labs, Ruby On Rails Instructor
+</p>
+<p>
+<strong>
+Lauri Jutila
+</strong>
+, Kisko Labs, Ruby on Rails Instructor
+</p>
+</article>
+</section>
+<div class='background' data-background='bg-stones'></div>
 <section class='slide section-title'>
 <h1>The Fundamentals</h1>
 <div class='agenda'>
 <p>Git</p>
-<p>Javascript Refresh</p>
-<p>JSON</p>
+<p>Javascript & Json</p>
 <p>jQuery</p>
-<p>HAML</p>
 <p>Ruby & Sinatra</p>
-<p>Heroku</p>
+<p>HAML</p>
+<p>Tools</p>
 </div>
 </section>
 <section class='slide'>
@@ -808,6 +1001,14 @@ Must Read:
 </strong>
 <a href='http://gitref.org'>Git Reference</a>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Javascript Event Loop
+</header>
+<article>
+<div class='image-wrap'><img src='imgs//lesson6/event-loop-js.png' class='resize' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -988,32 +1189,395 @@ object or an object passed by reference as an argument to the outer function cal
 </article>
 </section>
 <section class='slide'>
-<header>JSON</header>
-<article></article>
+<header>Javascript Object Notation (JSON)</header>
+<article>
+<p>Lightweight data-interchange format</p>
+<p>Human readable and easy to comprehend</p>
+<p>Easy for machines to parse</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong class='red'>
+Array
+</strong>
+<div class="CodeRay">
+  <div class="code"><pre>  [<span class="string"><span class="delimiter">&quot;</span><span class="content">first</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">second</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>, <span class="integer">4</span>]</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong class='red'>
+Hash table
+</strong>
+<div class="CodeRay">
+  <div class="code"><pre>{<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">John</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">address</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">London</span><span class="delimiter">&quot;</span></span>, <span class="key"><span class="delimiter">&quot;</span><span class="content">age</span><span class="delimiter">&quot;</span></span>:<span class="integer">38</span>}    </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='row vmargin'>
+<div class='autobox'>
+Serialize/Deserialize
+<div class="CodeRay">
+  <div class="code"><pre>JSON.stringify( [<span class="string"><span class="delimiter">'</span><span class="content">first</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">second</span><span class="delimiter">'</span></span>, <span class="integer">3</span>, <span class="integer">4</span>] );&#x000A;=&gt; [<span class="string"><span class="delimiter">&quot;</span><span class="content">first</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">second</span><span class="delimiter">&quot;</span></span>,<span class="integer">3</span>,<span class="integer">4</span>]&#x000A;&#x000A;JSON.parse( <span class="string"><span class="delimiter">'</span><span class="content"> [&quot;first&quot;, &quot;second&quot;, 3, 4] </span><span class="delimiter">'</span></span> );&#x000A;=&gt; Object&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</article>
 </section>
 <section class='slide'>
-<header>jQuery</header>
-<article></article>
+<header>
+jQuery
+<span class='smaller'>
+<a href='http://jquery.com'>more info</a>
+</span>
+</header>
+<article>
+<p>
+Fast Javascript library for
+<strong>document traversing</strong>
+,
+<strong>event handling</strong>
+,
+<strong>animations</strong>
+and
+<strong>Ajax interactions</strong>
+</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+HTML
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;&lt;body&gt;&#x000A;  <span class="tag">&lt;div</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">button</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Click me<span class="tag">&lt;/div&gt;</span>&#x000A;&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">body&#x000A;</span></span></pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+JS
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="predefined">$</span>(document).ready(<span class="keyword">function</span>(){&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#button</span><span class="delimiter">&quot;</span></span>).click( <span class="keyword">function</span>(event) {&#x000A;      alert(<span class="string"><span class="delimiter">&quot;</span><span class="content">Button pressed</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#button</span><span class="delimiter">&quot;</span></span>).toggleClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">red</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#button</span><span class="delimiter">&quot;</span></span>).fadeOut().fadeIn();&#x000A;    });&#x000A;  });  &#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='autobox'>
+Test here:
+<span id='button'>Click me</span>
+</div>
+</article>
 </section>
-<section class='slide'>
-<header>HAML</header>
-<article></article>
-</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(document).ready(function(){
+      $("#button").click( function(event) {
+        alert("Button pressed");
+        $("#button").toggleClass("red");
+        $("#button").fadeOut().fadeIn();
+      });
+    });
+  //]]>
+</script>
 <section class='slide'>
 <header>Ruby</header>
-<article></article>
-</section>
-<section class='slide'>
-<header>Sinatra</header>
-<article></article>
-</section>
-<section class='slide'>
-<header>Important resources</header>
 <article>
-http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
-http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
-http://www.modernizr.com/
-http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
+<p>Ruby is a dynamic programming language that combines functional and imperative programming ( a mix of Perl, Smalltalk, Eifel, Ada and Lisp)</p>
+<p>
+Online resources to start with:
+<ul>
+<li>
+<a href='http://www.ruby-lang.org/en/documentation/quickstart/'>Ruby in Twenty Minutes</a>
+</li>
+<li>
+<a href='http://ruby.on-page.net/'>Ruby on One Page</a>
+</li>
+<li>
+<a href='http://ruby-doc.org/core-1.9.3/Enumerable.html'>Enumerables</a>
+</li>
+<li>
+<a href='http://ruby-doc.org/docs/ProgrammingRuby/'>Programming Ruby</a>
+</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>Ruby Blocks</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="integer">3</span>.times { puts <span class="string"><span class="delimiter">'</span><span class="content">Hello</span><span class="delimiter">'</span></span> }&#x000A;<span class="constant">Hello</span>&#x000A;<span class="constant">Hello</span>&#x000A;<span class="constant">Hello</span>&#x000A;=&gt; <span class="integer">3</span></pre></div>
+</div>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre>array = [<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>]&#x000A;array.collect <span class="keyword">do</span> |n|&#x000A;  n ** <span class="integer">2</span>&#x000A;<span class="keyword">end</span>         &#x000A;=&gt; [<span class="integer">1</span>, <span class="integer">4</span>, <span class="integer">9</span>, <span class="integer">16</span>]</pre></div>
+</div>
+</div>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="instance-variable">@names</span> = <span class="string"><span class="delimiter">%w(</span><span class="content">John Anne Lukas</span><span class="delimiter">)</span></span>&#x000A;<span class="instance-variable">@names</span>.each <span class="keyword">do</span> |name|&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello </span><span class="inline"><span class="inline-delimiter">#{</span>name<span class="inline-delimiter">}</span></span><span class="content">!</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>&#x000A;<span class="constant">Hello</span> John!&#x000A;<span class="constant">Hello</span> Anne!&#x000A;<span class="constant">Hello</span> Lukas!&#x000A;=&gt; [<span class="string"><span class="delimiter">&quot;</span><span class="content">John</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Anne</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Lukas</span><span class="delimiter">&quot;</span></span>]    </pre></div>
+</div>
+
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">#iterator for Fibonacci numbers</span>&#x000A;<span class="keyword">def</span> <span class="function">fibUpTo</span>(max)&#x000A;    n1, n2 = <span class="integer">1</span>, <span class="integer">1</span>&#x000A;    <span class="keyword">while</span> n1 &lt;= max&#x000A;        <span class="keyword">yield</span> n1  <span class="comment"># invoke block with value</span>&#x000A;        n1, n2 = n2, n1+n2  <span class="comment"># and calculate next</span>&#x000A;    <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;fibUpTo(<span class="integer">1000</span>) { |term| print term, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span> }&#x000A;=&gt;&#x000A;<span class="integer">1</span> <span class="integer">1</span> <span class="integer">2</span> <span class="integer">3</span> <span class="integer">5</span> <span class="integer">8</span> <span class="integer">13</span> <span class="integer">21</span> <span class="integer">34</span> <span class="integer">55</span> <span class="integer">89</span> <span class="integer">144</span> <span class="integer">233</span> <span class="integer">377</span> <span class="integer">610</span> <span class="integer">987</span>            &#x000A;&#x000A;a = []  &#x000A;fibUpTo(<span class="integer">1000</span>) { |term| a &lt;&lt; term }&#x000A;a&#x000A;=&gt; [<span class="integer">1</span>, <span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">8</span>, <span class="integer">13</span>, <span class="integer">21</span>, <span class="integer">34</span>, <span class="integer">55</span>, <span class="integer">89</span>, <span class="integer">144</span>, <span class="integer">233</span>, <span class="integer">377</span>, <span class="integer">610</span>, <span class="integer">987</span>]         &#x000A;   </pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Sinatra
+<span class='smaller'>
+<a href='http://www.sinatrarb.com/intro.html'>more info</a>
+</span>
+</header>
+<article>
+<div class='autobox'>
+<p>Sinatra is a DSL for quickly creating web applications in Ruby</p>
+<p>Single file web app</p>
+<p>Runs on Rack (fast Ruby web server)</p>
+<p>Supports many template engines</p>
+</div>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/hi</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World!</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Sinatra - HTTP Methods (REST)</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  .. show something ..&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  .. create something ..&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;put <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  .. replace something ..&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;delete <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  .. annihilate something ..&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Sinatra - Routes</header>
+<article>
+<div class='autobox'>
+Simple Routes
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/hello</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="string"><span class="delimiter">'</span><span class="content">Hello World</span><span class="delimiter">'</span></span>&#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+<div class='autobox vmargin'>
+Named parameters
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/hello/:name</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment"># matches &quot;GET /hello/foo&quot; and &quot;GET /hello/bar&quot;</span>&#x000A;  <span class="comment"># params[:name] is 'foo' or 'bar'</span>&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello </span><span class="inline"><span class="inline-delimiter">#{</span>params[<span class="symbol">:name</span>]<span class="inline-delimiter">}</span></span><span class="content">!</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>            &#x000A;</pre></div>
+</div>
+
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Sinatra - Views</header>
+<article>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment"># erb =&gt; renders /views/index.erb (using /views/layout.erb if it exists)</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  erb <span class="symbol">:index</span>&#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+<div class='autobox vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">#haml =&gt; renders /views/index.haml embedded in the views/post.haml</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  haml <span class="symbol">:index</span>, <span class="symbol">:layout</span> =&gt; <span class="symbol">:post</span>&#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+<div class='autobox vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">#Inline templates</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  haml <span class="string"><span class="delimiter">'</span><span class="content">%div.title Hello World</span><span class="delimiter">'</span></span>&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+HAML
+<span class='smaller' href='http://haml-lang.com/'>more info</span>
+</header>
+<article>
+<p>
+Template Language
+<ul>
+<Li>Mix Ruby code with HAML</Li>
+<li>Haml generates HTML code</li>
+</ul>
+</p>
+<p>
+Clarity
+<ul>
+<li>Indentation = structure</li>
+<li>
+Tags begin with
+<strong>%</strong>
+</li>
+<li>Tags close themselves</li>
+<li>Use of hashes for attributes</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+HAML - Syntax
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%tag</span> content</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;tag&gt;</span>content<span class="tag">&lt;/tag&gt;</span></pre></div>
+</div>
+</div>
+</div>
+<div class='row vmargin'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%h1</span> Hello HAML&#x000A;<span class="tag">%p</span> HAML is &#x000A;<span class="tag">%ul</span>&#x000A;  <span class="tag">%li</span> Beautiful&#x000A;  <span class="tag">%li</span> Easy&#x000A;  <span class="tag">%li</span> Well-indented</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;h1&gt;</span>Hello HAML<span class="tag">&lt;/h1&gt;</span>&#x000A;<span class="tag">&lt;p&gt;</span>HAML is<span class="tag">&lt;/p&gt;</span>&#x000A;<span class="tag">&lt;ul&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span>Beautiful<span class="tag">&lt;/li&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span>Easy<span class="tag">&lt;/li&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span>Well-indented<span class="tag">&lt;/li&gt;</span>&#x000A;<span class="tag">&lt;/ul&gt;</span></pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+HAML - Attributes
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%a</span>{href =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">http://bbc.com</span><span class="delimiter">&quot;</span></span>, id =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>} &#x000A;  BBC</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://bbc.com</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>BBC<span class="tag">&lt;/a&gt;</span></pre></div>
+</div>
+</div>
+</div>
+<div class='row vmargin'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://haml-lang.com</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>) &#x000A;  BBC</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://bbc.com</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>BBC<span class="tag">&lt;/a&gt;</span>&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+HAML - Shortcuts
+</header>
+<article></article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%p</span>{<span class="keyword">class</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">bio</span><span class="delimiter">&quot;</span></span>} Hello&#x000A;<span class="tag">%p</span><span class="class">.bio</span> Hello</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;p</span> <span class="attribute-name">class</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">bio</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Hello<span class="tag">&lt;/p&gt;</span></pre></div>
+</div>
+</div>
+</div>
+<div class='row vmargin'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%p</span>{id=&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>} Hello&#x000A;<span class="tag">%p</span><span class="constant">#title</span> Hello</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;p</span> <span class="attribute-name">id</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Hello<span class="tag">&lt;/p&gt;</span></pre></div>
+</div>
+</div>
+</div>
+<div class='row vmargin'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="constant">#title</span>&#x000A;  <span class="class">.red</span>&#x000A;    <span class="tag">%p</span> Hello </pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;div</span> <span class="attribute-name">id</span> = <span class="attribute-value">title</span><span class="tag">&gt;</span>&#x000A;  <span class="tag">&lt;div</span> <span class="attribute-name">class</span> = <span class="attribute-value">red</span><span class="tag">&gt;</span>&#x000A;    <span class="tag">&lt;p&gt;</span>Hello<span class="tag">&lt;/p&gt;</span>&#x000A;  <span class="tag">&lt;/div&gt;</span>&#x000A;<span class="tag">&lt;/div&gt;</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class='slide'>
+<header>HAML - Ruby Evaluation</header>
+<article class='large'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%h1</span> My Blog&#x000A;- <span class="keyword">for</span> article <span class="keyword">in</span> <span class="instance-variable">@articles</span>&#x000A;  <span class="class">.post</span>&#x000A;    <span class="class">.title</span>&#x000A;      <span class="tag">%h1</span>= article.title&#x000A;    <span class="class">.date</span>&#x000A;      =article.date.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d %m %Y</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="class">.article</span>&#x000A;      <span class="tag">%p</span>= article.body&#x000A;  </pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Tools</header>
+<article class='small singlespace'>
+<p>
+Browsers on PC with debugging capability:
+<ul>
+<li>Google Chrome</li>
+<li>Firefox + Firebug</li>
+<li>
+Safari (
+<a href='http://www.iwebinspector.com/'>iWebInspector</a>
+)
+</li>
+</ul>
+</p>
+<p>
+Mobile Browser Emulators (
+<a href='http://www.mobilexweb.com/emulators'>guide</a>
+):
+<ul>
+<li>iOS Browser: XCode contains iPhone/iPad emulators</li>
+<li>Android SDK</li>
+<li>
+<a href='http://www.opera.com/developer/tools/'>Opera Mobile Emulator + Dragonfly</a>
+</li>
+</ul>
+</p>
+<p>
+Devices:
+<ul>
+<li>iPhone/iPad: iOS browser</li>
+<li>Android: native browser, Firefox 11, Chrome for Andorid, Opera Mobile</li>
+<li>Nokia N9: native browser, Firefox 10, Opera Mobile</li>
+</ul>
+</p>
+<p>
+<a href='http://adobe.com/go/shadow'>Adobe Shadow</a>
+</p>
 </article>
 </section>
 

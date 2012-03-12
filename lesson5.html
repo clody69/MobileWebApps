@@ -73,7 +73,7 @@ Aalto University March 2012
 <p>Color and Opacity</p>
 <p>Gradients</p>
 <p>2D Transitions</p>
-<p>Transitions and Aninamtions</p>
+<p>Transitions and Animations</p>
 <p>3D Transformations</p>
 <p>Flexible Box Layout</p>
 <p>Touch events</p>
@@ -81,22 +81,293 @@ http://www.html5rocks.com/en/mobile/touch/
 </div>
 </section>
 <section class='slide'>
+<header>Device Screen Width</header>
+<article>
+<div class='row'>
+<div class='twoThirds'>
+<div class='image-wrap'><a href='http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/20/hac'><img src='imgs/lesson5/atlas_screen_width.png' /></a></div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>240px (28%)</p>
+<p>128px (23%)</p>
+<p>176px (13%)</p>
+<p>480px (7%)</p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Device Screen Height</header>
+<article></article>
+<div class='row'>
+<div class='twoThirds'>
+<div class='image-wrap'><a href='http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/21/hac'><img src='imgs/lesson5/atlas_screen_height.png' /></a></div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>320px (23%)</p>
+<p>160px (15.5%)</p>
+<p>220px (12.4%)</p>
+<p>128px (7.6%)</p>
+</div>
+</div>
+</div>
+</section>
+<section class='slide'>
+<header>Device Screen Height over Time</header>
+<article></article>
+<div class='row'>
+<div class='twoThirds'>
+<div class='image-wrap'><a href='http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/compare/16/1136968/19/20'><img src='imgs/lesson5/atlas_screen_width_year.png' /></a></div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<p>
+<strong class='red'>2012</strong>
+:  176,
+<strong>240</strong>
+, 320, 360,
+<strong>480</strong>
+,
+<strong>540</strong>
+, 600, 640,
+<strong>720</strong>
+, 768, 780, 800, 1024, 1280, 1920
+</p>
+<p>
+<strong class='red'>2011</strong>
+:  120, 128, 160, 176, 220,
+<strong>240</strong>
+,
+<strong>320</strong>
+, 360, 400,
+<strong>480</strong>
+, 540, 600, 640, 720, 768, 800, 840, 960, 1024, 1240, 1280
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class='slide'>
+<header>Screen Resolution Market Share</header>
+<article>
+<div class='image-wrap'><a href='http://netmarketshare.com/report.aspx?qprid=17'><img src='imgs/lesson5/screen-resolution.png' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+What is the Viewport ?
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+What is the Viewport ?
+<ul>
+<li>The available area for rendering a web page</li>
+<li>Not necessarily equal to the visible area on the device</li>
+<li>User can zoom and pan within the viewport</li>
+<li>
+Default viewport width:
+<ul>
+<li>980px on iPhone</li>
+<li>850px on Opera</li>
+<li>800px on Android</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/mobile_layoutviewport.jpg' class='resize' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Viewport Meta Tag
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autoimage bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/firstapp-no-viewport.png' /></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autoimage bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/firstapp-viewport.png' /></div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width; user-scalable=0;</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>        &#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Styling_64.png'>Media Queries</img>
 </header>
 <article>
-<p>Query syntax for serving the most appropiate styles based on the device characteristics</p>
-<p>
+<p>Query syntax for serving the most appropriate styles based on the device characteristics</p>
 Enables us:
 <ul>
-<li>to create device-indipendent websites</li>
+<li>to create device-independent websites</li>
 <li>to optimize the visitor's experience</li>
+<li>to avoid multiple sites per device</li>
+<li>to server the mobile optimized versions (i.e. smaller images)</li>
 </ul>
+<a href='http://www.alistapart.com/articles/responsive-web-design/'>Responsive Web Design</a>
+<ul>
+<li>
+<a href='http://2010.dconstruct.org'>An example</a>
+</li>
+<li>
+<a href='http://www.mediaqueri.es'>Other examples</a>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Media Queries Syntax</header>
+<article>
+<ul>
+<li>
+Link external stylesheet
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file.css</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">&lt;logic</span></span><span class="error">&gt;</span> <span class="tag">&lt;media&gt;</span> and ( <span class="tag">&lt;expression&gt;</span>)&quot;<span class="error">&gt;</span></pre></div>
+</div>
+</li>
+<li>
+Import external stylesheet
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">url</span>(<span class="string"><span class="delimiter">'</span><span class="content">file.css</span><span class="delimiter">'</span></span>) <span class="error">l</span><span class="error">o</span><span class="error">g</span><span class="error">i</span><span class="error">c</span> <span class="error">&lt;</span><span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> ( <span class="error">&lt;</span><span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>&gt; );</pre></div>
+</div>
+</li>
+<li>
+Embedded in a stylesheet
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="error">&lt;</span><span class="type">logic</span>&gt; <span class="error">&lt;</span><span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span>&gt; ( <span class="error">&lt;</span><span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>&gt; ) { <span class="error">&lt;</span><span class="type">rules</span>&gt; }</pre></div>
+</div>
+</li>
+</ul>
+<p>
+<strong>Logic</strong>
+: only | not
 </p>
 <p>
-<a href='http://www.alistapart.com/articles/responsive-web-design/'>Responsive Web Design</a>
+<strong>Media</strong>
+: all | screen | projection | print ...
 </p>
 </article>
+</section>
+<section class='slide'>
+<header>Viewport Width and Height</header>
+<article>
+<ul>
+<li>
+<strong>Width</strong>
+: width of the browser viewport including the scroll bars
+</li>
+<li>
+<strong>Height</strong>
+: height of the browser viewport including the scroll bars
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;<span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">min-width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;<span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Viewport Media Query Example
+<span class='smaller'>
+<a href='cssMediaQueriesViewport.html'>cssMediaQueriesViewport</a>
+</span>
+</header>
+<article></article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.container</span> {&#x000A;  <span class="key">width</span>: <span class="float">500px</span>;&#x000A;  }&#x000A;<span class="class">.container</span> <span class="type">div</span> {&#x000A;  <span class="key">float</span>: <span class="value">left</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">15px</span> <span class="float">0</span> <span class="float">0</span>;&#x000A;  <span class="key">width</span>: <span class="float">235px</span>;&#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span>: <span class="float">500px</span>) {&#x000A;  <span class="type">h1</span> {&#x000A;    <span class="key">background</span>: <span class="value">white</span> <span class="string"><span class="delimiter">url(</span><span class="content">'background.jpg'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span>;&#x000A;    <span class="key">color</span>: <span class="value">black</span>;&#x000A;    <span class="key">height</span>: <span class="float">250px</span>;&#x000A;    <span class="key">padding</span>: <span class="float">20px</span>;&#x000A;    <span class="key">font-size</span>: <span class="float">36px</span>;&#x000A;    <span class="key">margin</span>: <span class="float">0px</span>;&#x000A;  }&#x000A;}&#x000A;</pre></div>
+</div>
+</section>
+<section class='slide'>
+<header>Device Width and Height</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li>
+<strong>Width</strong>
+: width of the device screen (shorter side on iOS)
+</li>
+<li>
+<strong>Height</strong>
+: height of the device screen (longer side on iOS)
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">device-width</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">min-device-width</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-device-width</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/mobile_mediaqueries.jpg' class='resize' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Device Media Query Example
+<span class='smaller'>
+<a href='cssMediaQueriesDevice.html'>cssMediaQueriesDevice</a>
+</span>
+</header>
+<article></article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.container</span> {&#x000A;  <span class="key">width</span>: <span class="float">500px</span>;&#x000A;  }&#x000A;<span class="class">.container</span> <span class="type">div</span> {&#x000A;  <span class="key">float</span>: <span class="value">left</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">15px</span> <span class="float">0</span> <span class="float">0</span>;&#x000A;  <span class="key">width</span>: <span class="float">235px</span>;&#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span>: <span class="float">320px</span>) {&#x000A;  <span class="class">.container</span> {&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;  <span class="class">.container</span> <span class="type">div</span> {&#x000A;    <span class="key">float</span>: <span class="value">none</span>;&#x000A;    <span class="key">margin</span>: <span class="float">0</span>;&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;}&#x000A;</pre></div>
+</div>
+</section>
+<section class='slide'>
+<header>Device Orientation</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Device Pixel Ratio</header>
+<article>
+<p>Devices with high pixel density (> 300dpi)</p>
+<p>Provide high-def web images</p>
+<div class='vmargin'>
+<strong>device-pixel-ratio</strong>
+: device pixels per CSS pixel.
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">device-pixel-ratio</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">min-device-pixel-ratio</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-device-pixel-ratio</span>: <span class="type">value</span>} &#x000A;  { <span class="key">rules</span> }&#x000A;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;link</span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">screen and min-device-pixel-ratio: 2</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">highres.css</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>CSS for each device layout</header>
+<article class='small'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">/* Smartphones (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">480px</span>) { ...  }&#x000A;&#x000A;<span class="comment">/* Smartphones (landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">321px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Smartphones (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (landscape)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">l</span><span class="error">a</span><span class="error">n</span><span class="error">d</span><span class="error">s</span><span class="error">c</span><span class="error">a</span><span class="error">p</span><span class="error">e</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">t</span><span class="error">r</span><span class="error">a</span><span class="error">i</span><span class="error">t</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Desktops and laptops */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1224px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Large screens  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1824px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPhone 4 */</span> &#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>), <span class="error">s</span><span class="error">c</span><span class="error">r</span><span class="error">e</span><span class="error">e</span><span class="error">n</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>) { ... }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Overflow: scroll</header>
+<article></article>
 </section>
 <section class='slide'>
 <header>Scrolling</header>
