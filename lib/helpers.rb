@@ -24,15 +24,22 @@ module PresentationHelper
     "<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>#{title}</img>"
   end
 
-  def html5_offline_storage_tag(title="Multimedia")
+  def html5_multimedia_tag(title="Multimedia")
     "<img src = 'imgs/html5/HTML5_Multimedia_64.png'>#{title}</img>"
+  end
+  
+  def html5_3d_effects_tag(title="3D, Graphics and Effects")
+    "<img src = 'imgs/html5/HTML5_3D_Effects_64.png'>#{title}</img>"
   end
 
   def html5_device_access_tag(title="Device Access")
     "<img src = 'imgs/html5/HTML5_Device_Access_64.png'>#{title}</img>"
   end
-  def html5_styling_tag(title="Device Access")
+  def html5_styling_tag(title="CSS3 and Styling")
     "<img src = 'imgs/html5/HTML5_Styling_64.png'>#{title}</img>"
+  end
+  def html5_performance_tag(title="Performance & Integration")
+    "<img src = 'imgs/html5/HTML5_Performance_64.png'>#{title}</img>"
   end
   
   def html5_semantics_tag(title="New Semantics")
@@ -70,8 +77,8 @@ module PresentationHelper
     if url != ""
       h += "<a href='#{url}'>Try it</a>"
     end
-    
-    h += "<a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/#{name}'>Browse Source Code</a>"
+  
+    h += "<a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/#{name}'>Browse Source Code</a>"
     h += "</div>"
   end
 

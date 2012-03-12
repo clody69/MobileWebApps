@@ -13,25 +13,310 @@
     %p Color and Opacity
     %p Gradients
     %p 2D Transitions
-    %p Transitions and Aninamtions
+    %p Transitions and Animations
     %p 3D Transformations
     %p Flexible Box Layout
     %p Touch events
     http://www.html5rocks.com/en/mobile/touch/
+%section.slide
+  %header Device Screen Width
+  %article
+    .row
+      .twoThirds
+        =image_tag "lesson5/atlas_screen_width.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/20/hac"
+      .threeColumn
+        .autobox
+          %p 240px (28%)
+          %p 128px (23%)
+          %p 176px (13%)
+          %p 480px (7%)
+        
+%section.slide
+  %header Device Screen Height
+  %article
+  .row
+    .twoThirds
+      =image_tag "lesson5/atlas_screen_height.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/21/hac"
+    .threeColumn
+      .autobox
+        %p 320px (23%)
+        %p 160px (15.5%)
+        %p 220px (12.4%)
+        %p 128px (7.6%)
 
+%section.slide
+  %header Device Screen Height over Time
+  %article
+  .row
+    .twoThirds
+      =image_tag "lesson5/atlas_screen_width_year.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/compare/16/1136968/19/20"
+    .threeColumn
+      .autobox
+        %p 
+          %strong.red 2012
+          \:  176, 
+          %strong 240
+          , 320, 360, 
+          %strong 480
+          ,
+          %strong 540
+          , 600, 640, 
+          %strong 720
+          , 768, 780, 800, 1024, 1280, 1920
+        %p 
+          %strong.red 2011
+          \:  120, 128, 160, 176, 220, 
+          %strong 240
+          ,
+          %strong 320
+          , 360, 400, 
+          %strong 480
+          , 540, 600, 640, 720, 768, 800, 840, 960, 1024, 1240, 1280  
+
+%section.slide
+  %header Screen Resolution Market Share
+  %article
+    =image_tag "lesson5/screen-resolution.png", :url => "http://netmarketshare.com/report.aspx?qprid=17"
+
+      
+%section.slide
+  %header
+    What is the Viewport ? 
+  %article
+    .row
+      .twoColumn
+        .autobox
+          What is the Viewport ?
+          %ul
+            %li The available area for rendering a web page
+            %li Not necessarily equal to the visible area on the device
+            %li User can zoom and pan within the viewport
+            %li 
+              Default viewport width: 
+              %ul
+                %li 980px on iPhone
+                %li 850px on Opera
+                %li 800px on Android 
+      .twoColumn
+        =image_tag 'lesson5/mobile_layoutviewport.jpg', :resize => true
+
+%section.slide
+  %header
+    Viewport Meta Tag
+  %article
+    .row
+      .twoColumn
+        .autoimage.bordered
+          =image_tag('lesson2/firstapp-no-viewport.png')
+      .twoColumn
+        .autoimage.bordered
+          =image_tag('lesson2/firstapp-viewport.png')
+    .row
+      :coderay
+        #!html
+        <meta name="viewport" content="width=device-width; user-scalable=0;" />        
+        
 %section.slide
   %header
     =html5_styling_tag("Media Queries")      
   %article
-    %p Query syntax for serving the most appropiate styles based on the device characteristics
+    %p Query syntax for serving the most appropriate styles based on the device characteristics
+     
+    Enables us:
+    %ul 
+      %li to create device-independent websites
+      %li to optimize the visitor's experience
+      %li to avoid multiple sites per device
+      %li to server the mobile optimized versions (i.e. smaller images)
+    %a(href="http://www.alistapart.com/articles/responsive-web-design/") Responsive Web Design
+    %ul
+      %li
+        %a(href="http://2010.dconstruct.org") An example
+      %li
+        %a(href="http://www.mediaqueri.es") Other examples
+      
+%section.slide
+  %header Media Queries Syntax
+  %article
+    %ul
+      %li 
+        Link external stylesheet
+        :coderay
+          #!html
+          <link href="file.css" rel="stylesheet" media="<logic> <media> and ( <expression>)">
+      %li 
+        Import external stylesheet
+        :coderay
+          #!css
+          @media url('file.css') logic <media> and ( <expression> );
+      %li 
+        Embedded in a stylesheet
+        :coderay
+          #!css
+          @media <logic> <media> ( <expression> ) { <rules> }
     %p 
-      Enables us:
-      %ul 
-        %li to create device-indipendent websites
-        %li to optimize the visitor's experience
-    %p 
-      %a(href="http://www.alistapart.com/articles/responsive-web-design/") Responsive Web Design
-        
+      %strong Logic
+      \: only | not
+    %p
+      %strong Media
+      \: all | screen | projection | print ...
+
+%section.slide
+  %header Viewport Width and Height
+  %article
+    %ul
+      %li
+        %strong Width
+        \: width of the browser viewport including the scroll bars
+      %li
+        %strong Height
+        \: height of the browser viewport including the scroll bars
+    :coderay
+      #!css
+      @media <media> and {width: <value>} { <rules> }
+      @media <media> and {min-width: <value>} { <rules> }
+      @media <media> and {max-width: <value>} { <rules> }
+
+%section.slide
+  %header 
+    Viewport Media Query Example 
+    %span.smaller
+      =example_url_tag("cssMediaQueriesViewport")
+  %article
+  :coderay
+    #!css
+    .container {
+      width: 500px;
+      }
+    .container div {
+      float: left; 
+      margin: 0 15px 0 0;
+      width: 235px;
+    }
+    @media all and (min-width: 500px) {
+      h1 {
+        background: white url('background.jpg') no-repeat;
+        color: black;
+        height: 250px;
+        padding: 20px;
+        font-size: 36px;
+        margin: 0px;
+      }
+    }
+
+%section.slide
+  %header Device Width and Height
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %ul
+            %li
+              %strong Width
+              \: width of the device screen (shorter side on iOS)
+            %li
+              %strong Height
+              \: height of the device screen (longer side on iOS)
+          :coderay
+            #!css
+            @media media and {device-width: value} 
+              { rules }
+            @media media and {min-device-width: value} 
+              { rules }
+            @media media and {max-device-width: value} 
+              { rules }
+      .twoColumn
+        =image_tag "lesson5/mobile_mediaqueries.jpg", :resize => true
+      
+%section.slide
+  %header 
+    Device Media Query Example 
+    %span.smaller
+      =example_url_tag("cssMediaQueriesDevice")
+  %article
+  :coderay
+    #!css
+    .container {
+      width: 500px;
+      }
+    .container div {
+      float: left; 
+      margin: 0 15px 0 0;
+      width: 235px;
+    }
+    @media all and (max-device-width: 320px) {
+      .container {
+        width: auto;
+      }
+      .container div {
+        float: none;
+        margin: 0;
+        width: auto;
+      }
+    }
+    
+%section.slide
+  %header Device Orientation
+  %article
+  
+%section.slide
+  %header Device Pixel Ratio
+  %article 
+    %p Devices with high pixel density (> 300dpi)
+    %p Provide high-def web images
+    .vmargin
+      %strong device-pixel-ratio
+      \: device pixels per CSS pixel.
+    :coderay
+      #!css
+      @media media and {device-pixel-ratio: value} 
+        { rules }
+      @media media and {min-device-pixel-ratio: value} 
+        { rules }
+      @media media and {max-device-pixel-ratio: value} 
+        { rules }
+    
+    :coderay
+      #!html
+      <link rel="stylesheet" media="screen and min-device-pixel-ratio: 2" href="highres.css">
+
+%section.slide
+  %header CSS for each device layout
+  %article.small
+    :coderay
+      #!css
+      /* Smartphones (portrait and landscape) */
+      @media screen and (min-device-width : 320px) and (max-device-width : 480px) { ...  }
+      
+      /* Smartphones (landscape) */
+      @media screen and (min-width : 321px) { ... }
+      
+      /* Smartphones (portrait)  */
+      @media screen and (max-width : 320px) { ... }
+      
+      /* iPads (portrait and landscape) */
+      @media screen and (min-device-width : 768px) and (max-device-width : 1024px) { ... }
+      
+      /* iPads (landscape)  */
+      @media screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { ... }
+      
+      /* iPads (portrait)  */
+      @media screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { ... }
+      
+      /* Desktops and laptops */
+      @media screen and (min-width : 1224px) { ... }
+      
+      /* Large screens  */
+      @media screen and (min-width : 1824px) { ... }
+      
+      /* iPhone 4 */ 
+      @media screen and (-webkit-min-device-pixel-ratio : 1.5), screen and (min-device-pixel-ratio : 1.5) { ... }
+
+%section.slide
+  %header Overflow: scroll
+  %article
+    
+  
 %section.slide
   %header Scrolling
   %article

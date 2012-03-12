@@ -1,0 +1,31 @@
+=example_header_tag "Media Query on Viewport", "cssMediaQueriesViewport"
+
+%p
+  In this example we demonstrate how to use the CSS3 media query on the viewport of the browser. 
+  The background image of the title disappears when the viewport of the browser is too small
+%p
+  The CSS code to achieve this is below: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    .container {
+      width: 500px;
+      }
+    .container div {
+      float: left; 
+      margin: 0 15px 0 0;
+      width: 235px;
+    }
+    @media all and (max-device-width: 320px) {
+      .container {
+        width: auto;
+      }
+      .container div {
+        float: none;
+        margin: 0;
+        width: auto;
+      }
+    }
+    

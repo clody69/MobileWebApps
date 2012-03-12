@@ -191,7 +191,7 @@
   %article
     %ul
       %li Developed in 8 months by 3 people
-      %li Same web app works across multiple brands and devices
+      %li Hugely optimized for iOS
       %li 
         Great and responsive UI design
         %ul
@@ -272,7 +272,7 @@
       \- W3C decided they will stop evolving HTML beyond version 4.01 
     %p  
       %strong 2000
-      \- W3C released XHTML 1.0 and. 
+      \- W3C released XHTML 1.0 and force the world to use XML
     %p   
       %strong 2002
       \- W3C released first draft of XHTML 2.0, no backwards compatibility
@@ -342,7 +342,99 @@
           %img(src = "imgs/html5/HTML5_Performance_64.png")
           %span
             %strong Performance & Integration
-       
+
+%section.slide
+  %header
+    =html5_semantics_tag()
+  %article
+    .autobox
+      %strong New Semantics
+      %p section, header, footer, nav, ...
+      %strong New Form Controls & Types
+      %p date, range, email, url, tel, ...
+      %strong New Form Validation
+      %p by type, required, :valid, :invalid, :required
+
+%section.slide
+  %header
+    =html5_offline_storage_tag()
+  %article
+    .autobox
+      %strong Offline Usage
+      %ul
+        %li Install a package on the device
+        %li Buggy on some platforms
+        %li online/offline events
+        %li iOS full screen metatag
+      %strong Storage
+      %ul
+        %li Persistent and Session Storage
+        %li key/value (strings)
+        %li limited to 5Mb
+        %li IndexDB and SQL storage
+
+%section.slide
+  %header
+    =html5_multimedia_tag()
+  %article
+    .autobox
+      %p Audio and Video Tags
+      %p Javascript API & events
+      %p Some codecs supported
+
+%section.slide
+  %header
+    =html5_3d_effects_tag()
+  %article
+    .autobox
+      %p 2D Canvas API
+      %P SVG support
+      %p WebGL
+
+%section.slide
+  %header
+    =html5_device_access_tag()
+  %article
+    .autobox
+      %p Accelerometer / gyroscope / magnetometer
+      %p Orientation change
+      %p Touch events (touchstart, touchmove, touchend)
+      %p File API and File Reader
+      %p (Media Camera API)
+      
+
+%section.slide
+  %header
+    =html5_styling_tag()
+  %article
+    .autobox
+      %strong New styling
+      %p Rounded borders, shadows, opacity
+      %strong 2D & 3D transforms
+      %p rotate, scale, skew, translate
+      %strong Transitions
+      %p basic animations between 2 states
+      %p 
+        %strong keyframe animations
+      %p prefixes (-webkit, -o, -moz, -ms)
+      
+%section.slide
+  %header
+    =html5_websockets_tag()
+  %article
+    .autobox
+      %p Web Sockets
+      %p Server-sent Events
+
+%section.slide
+  %header
+    =html5_performance_tag()
+  %article
+    .autobox
+      %p Notifications API
+      %p XMLHttpRequest 2
+      %p Web Workers
+      
 %section.slide
   %header Browser Support for HTML5
   %article
@@ -352,12 +444,33 @@
   %header Test your Browser for HTML5 support
   %article
     =image_tag "html5test.png", :caption => "The HTML5 Test", :url => "http://html5test.com/", :resize => true
-    
+
+%section.slide
+  %header Mobile Browsers
+  %article
+    .autobox
+      %p.slide Too many
+      %p.slide Some are limited
+      %p.slide Some are too innovative
+      %p.slide Some are proxy based
+      %p.slide Most have little documentation
+      %p.slide Most have little debugging support
+      %p.slide Focus, cursor, touch or multi-touch based
 %section.slide
   %header Mobile HTML5 Compatibility Table
   %article
     =image_tag "mobile-html5-comp-table.png", :caption => "Mobile HTML5", :url => "http://mobilehtml5.org", :resize => true
-
+%section.slide
+  %header Mobile Web Challenges
+  %article
+    .autobox
+    %p.slide Server-side detection
+    %p.slide Responsive design
+    %p.slide Mobile usability
+    %p.slide Best experience based on context
+    %p.slide Performance optimization
+    %p.slide The viewport and pixel density
+    %p.slide Data URI - inlining content
 %section.slide
   %header HTML5 Frameworks & Tools
   %article.larger.centered
@@ -394,7 +507,7 @@
       =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
 
 %section.slide
-  %header jQuery Example
+  %header jQuery Mobile Example
   %article.small
     .code_block
       :coderay_raw
@@ -529,20 +642,22 @@
       .twoColumn
         .autobox
           %p Lecture 1: Introduction
-          %p Lecture 2: New semantics
-          %p Lecture 3: CSS3
-          %p Lecture 4: HTML5 Storage and Device Access
-          %p Lecture 5: Sencha
-          %p Lecture 6: Storing into the cloud
+          %p Lecture 2: Building a Mobile Web App
+          %p Lecture 3: Templating and MVC
+          %p Lecture 4: File and Device Access
+          %p Lecture 5: CSS3 & Canvas
+          %p Lecture 6: Websockets & Webworkers
           %p Lecture 7: Developing native apps
       .twoColumn
         .autobox
           %p Lab 1: Assignment Kick-off
-          %p Lab 2: Building a mobile web app
-          %p Lab 3: Client side templating
-          %p Lab 4: 
-    
-    
+          %p Lab 2: jQuery Mobile
+          %p Lab 3: Backbone.js
+          %p Lab 4: Device Access
+          %p Lab 5: Ruby on Rails 3
+          %p Lab 6: Designing REST interfaces
+          %p Lab 7: PhoneGap
+
 %section.slide
   %header
     Course Material and Communication
@@ -550,10 +665,10 @@
     %p 
       Slides are available at 
       %a(href="http://aaltowebapps.com") aaltowebapps.com
-    %p The slides are only visible with Google Chrome 
+    %p The slides are best viewed with Google Chrome 
     %p 
       Exercises are available at
-      %a(href="https://github.com/clody69/MobileWebAppsExamples") GitHub
+      %a(href="https://github.com/aaltowebapps/MobileWebAppsExamples") GitHub
     %p 
       Communication channels:
       %ul
@@ -562,18 +677,50 @@
           %a(href="https://twitter.com/#!/aaltowebapps") @aaltowebapps 
         %li
           Noppa
+
+%section.slide
+  %header The Staff
+  %article
+    %p
+      %strong
+        Claudio Riva
+      , Nokia, Main Instructor
+    %p
+      %strong
+        Antti Vuorela
+      , Futurice, Course Assistant
+    %p 
+      %strong
+        Kimmo Karhu
+      , Aalto University, Assignment Coordinator
+    %p
+      %strong 
+        Häkan Mitts
+      , Aalto University, Program Coordinator
+    %p
+      %strong Mikael Blomberg
+      , SC5, jQuery and Backbone Instructor
+    %p
+      %strong 
+        Matias Korhonen
+      , Kisko Labs, Ruby On Rails Instructor
+    %p
+      %strong
+        Lauri Jutila
+      , Kisko Labs, Ruby on Rails Instructor
+  
+.background(data-background = "bg-stones")
         
 %section.slide.section-title
   %h1 The Fundamentals
   .agenda
     %p Git 
-    %p Javascript Refresh
-    %p JSON
+    %p Javascript & Json
     %p jQuery
-    %p HAML
     %p Ruby & Sinatra
-    %p Heroku
-
+    %p HAML
+    %p Tools
+    
 %section.slide
   %header Git
   %article
@@ -636,6 +783,13 @@
       %strong.red
         Must Read: 
       %a(href="http://gitref.org") Git Reference        
+
+%section.slide
+  %header
+    Javascript Event Loop
+  %article
+    =image_tag("/lesson6/event-loop-js.png", :resize => true)
+
 %section.slide
   %header Javascript: Asynchronous calls
   %article
@@ -835,33 +989,403 @@
             ...
 
 %section.slide
-  %header JSON
+  %header Javascript Object Notation (JSON)
   %article
-
+    %p Lightweight data-interchange format
+    %p Human readable and easy to comprehend
+    %p Easy for machines to parse
+    .row
+      .twoColumn
+        .autobox
+          %strong.red
+            Array
+          :coderay
+            #!javascript
+              ["first", "second", 3, 4]
+      .twoColumn
+        .autobox
+          %strong.red
+            Hash table
+          :coderay
+            #!javascript
+            {"name":"John", "address":"London", "age":38}    
+    .row.vmargin
+      .autobox
+        Serialize/Deserialize
+        :coderay
+          #!javascript
+          JSON.stringify( ['first', 'second', 3, 4] );
+          => ["first","second",3,4]
+        
+          JSON.parse( ' ["first", "second", 3, 4] ' );
+          => Object
+        
 %section.slide
-  %header jQuery
+  %header 
+    jQuery
+    %span.smaller
+      %a(href="http://jquery.com") more info  
   %article
+    %p 
+      Fast Javascript library for 
+      %strong document traversing
+      , 
+      %strong event handling
+      , 
+      %strong animations
+      and 
+      %strong Ajax interactions 
 
-%section.slide
-  %header HAML
-  %article
+    .row
+      .twoColumn
+        .autobox
+          HTML
+          :coderay
+            #!javascript
+            ...
+            <body>
+              <div id="button">Click me</div>
+            </body
+      .twoColumn
+        .autobox
+          JS
+          :coderay
+            #!javascript
+              $(document).ready(function(){
+                $("#button").click( function(event) {
+                  alert("Button pressed");
+                  $("#button").toggleClass("red");
+                  $("#button").fadeOut().fadeIn();
+                });
+              });  
 
+    .autobox
+      Test here: 
+      %span(id = "button") Click me
+
+:javascript
+  $(document).ready(function(){
+    $("#button").click( function(event) {
+      alert("Button pressed");
+      $("#button").toggleClass("red");
+      $("#button").fadeOut().fadeIn();
+    });
+  });  
+    
 
 %section.slide
   %header Ruby
   %article 
-    
+    %p Ruby is a dynamic programming language that combines functional and imperative programming ( a mix of Perl, Smalltalk, Eifel, Ada and Lisp)
+    %p 
+      Online resources to start with:
+      %ul
+        %li 
+          %a(href="http://www.ruby-lang.org/en/documentation/quickstart/") Ruby in Twenty Minutes
+        %li 
+          %a(href="http://ruby.on-page.net/") Ruby on One Page
+        %li
+          %a(href="http://ruby-doc.org/core-1.9.3/Enumerable.html") Enumerables
+        %li
+          %a(href="http://ruby-doc.org/docs/ProgrammingRuby/") Programming Ruby
+      
 %section.slide
-  %header Sinatra
+  %header Ruby Blocks
   %article
+    .row
+      .twoColumn
+        .autobox
+          :coderay
+            #!ruby
+            3.times { puts 'Hello' }
+            Hello
+            Hello
+            Hello
+            => 3
+          .vmargin
+            :coderay
+              #!ruby
+              array = [1, 2, 3, 4]
+              array.collect do |n|
+                n ** 2
+              end         
+              => [1, 4, 9, 16]
+          .vmargin
+            :coderay
+              #!ruby
+              @names = %w(John Anne Lukas)
+              @names.each do |name|
+                puts "Hello \#{name}!"
+              end
+              Hello John!
+              Hello Anne!
+              Hello Lukas!
+              => ["John", "Anne", "Lukas"]    
+      .twoColumn
+        .autobox
+          :coderay
+            #!ruby
+            #iterator for Fibonacci numbers
+            def fibUpTo(max)
+                n1, n2 = 1, 1
+                while n1 <= max
+                    yield n1  # invoke block with value
+                    n1, n2 = n2, n1+n2  # and calculate next
+                end
+            end
 
+            fibUpTo(1000) { |term| print term, " " }
+            =>
+            1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987            
 
+            a = []  
+            fibUpTo(1000) { |term| a << term }
+            a
+            => [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]         
+               
+%section.slide
+  %header 
+    Sinatra
+    %span.smaller
+      %a(href="http://www.sinatrarb.com/intro.html") more info
+  %article
+    .autobox
+      %p Sinatra is a DSL for quickly creating web applications in Ruby
+      %p Single file web app
+      %p Runs on Rack (fast Ruby web server)
+      %p Supports many template engines
+    .autobox
+      :coderay
+        #!ruby
+        require 'sinatra'
+
+        get '/hi' do
+          "Hello World!"
+        end
 
 %section.slide
-  %header Important resources
+  %header Sinatra - HTTP Methods (REST)
   %article
-    http://conversionroom.blogspot.com/2011/03/part-1-mobile-website-optimisation-5.html
-    http://gigaom.com/2011/12/21/hold-those-caps-the-average-web-page-is-now-almost-1mb/?utm_source=social&utm_medium=twitter&utm_campaign=gigaom
-    
-    http://www.modernizr.com/ 
-    http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/devices
+    :coderay
+      #!ruby
+      get '/' do
+        .. show something ..
+      end
+
+      post '/' do
+        .. create something ..
+      end
+
+      put '/' do
+        .. replace something ..
+      end
+
+      delete '/' do
+        .. annihilate something ..
+      end
+
+%section.slide
+  %header Sinatra - Routes
+  %article
+    .autobox
+      Simple Routes
+      :coderay
+        #!ruby
+        get '/hello' do
+          'Hello World'
+        end
+    .autobox.vmargin
+      Named parameters
+      :coderay
+        #!ruby
+        get '/hello/:name' do
+          # matches "GET /hello/foo" and "GET /hello/bar"
+          # params[:name] is 'foo' or 'bar'
+          "Hello \#{params[:name]}!"
+        end            
+
+%section.slide
+  %header Sinatra - Views
+  %article
+    .autobox
+      :coderay
+        #!ruby
+        # erb => renders /views/index.erb (using /views/layout.erb if it exists)
+        get '/' do 
+          erb :index
+        end
+    .autobox.vmargin
+      :coderay
+        #!ruby
+        #haml => renders /views/index.haml embedded in the views/post.haml
+        get '/' do 
+          haml :index, :layout => :post
+        end
+    .autobox.vmargin
+      :coderay
+        #!ruby
+        #Inline templates
+        get '/' do
+          haml '%div.title Hello World'
+        end
+        
+%section.slide
+  %header 
+    HAML
+    %span.smaller(href="http://haml-lang.com/") more info
+  %article
+    %p 
+      Template Language
+      %ul
+        %Li Mix Ruby code with HAML
+        %li Haml generates HTML code
+    %p 
+      Clarity
+      %ul
+        %li Indentation = structure
+        %li 
+          Tags begin with 
+          %strong %
+        %li Tags close themselves
+        %li Use of hashes for attributes
+%section.slide
+  %header
+    HAML - Syntax
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!haml
+          %tag content
+      .twoColumn
+        :coderay
+          #!html
+          <tag>content</tag>
+    .row.vmargin
+      .twoColumn
+        :coderay
+          #!haml
+          %h1 Hello HAML
+          %p HAML is 
+          %ul
+            %li Beautiful
+            %li Easy
+            %li Well-indented
+      .twoColumn
+        :coderay
+          #!html
+          <h1>Hello HAML</h1>
+          <p>HAML is</p>
+          <ul>
+            <li>Beautiful</li>
+            <li>Easy</li>
+            <li>Well-indented</li>
+          </ul>
+%section.slide
+  %header
+    HAML - Attributes
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!haml
+          %a{href => "http://bbc.com", id => "title"} 
+            BBC
+      .twoColumn
+        :coderay
+          #!html
+          <a href="http://bbc.com" id="title">BBC</a>
+    .row.vmargin
+      .twoColumn
+        :coderay
+          #!haml
+          %a(href="http://haml-lang.com" id="title") 
+            BBC
+      .twoColumn
+        :coderay
+          #!html
+          <a href="http://bbc.com" id="title">BBC</a>
+
+%section.slide
+  %header
+    HAML - Shortcuts
+  %article
+  .row
+    .twoColumn
+      :coderay
+        #!haml
+        %p{class => "bio"} Hello
+        %p.bio Hello
+    .twoColumn
+      :coderay
+        #!html
+        <p class = "bio">Hello</p>
+  .row.vmargin
+    .twoColumn
+      :coderay
+        #!haml
+        %p{id=> "title"} Hello
+        %p#title Hello
+    .twoColumn
+      :coderay
+        #!html
+        <p id = "title">Hello</p>
+  .row.vmargin
+    .twoColumn
+      :coderay
+        #!haml
+        #title
+          .red
+            %p Hello 
+    .twoColumn
+      :coderay
+        #!html
+        <div id = title>
+          <div class = red>
+            <p>Hello</p>
+          </div>
+        </div>
+%section.slide
+  %header HAML - Ruby Evaluation
+  %article.large
+    :coderay
+      #!haml
+      %h1 My Blog
+      - for article in @articles
+        .post
+          .title
+            %h1= article.title
+          .date
+            =article.date.strftime("%d %m %Y")
+          .article
+            %p= article.body
+        
+%section.slide
+  %header Tools
+  %article.small.singlespace
+    %p
+      Browsers on PC with debugging capability:
+      %ul
+        %li Google Chrome 
+        %li Firefox + Firebug
+        %li 
+          Safari (
+          %a(href="http://www.iwebinspector.com/") iWebInspector
+          )
+    %p
+      Mobile Browser Emulators (
+      %a(href="http://www.mobilexweb.com/emulators") guide
+      ):
+      %ul
+        %li iOS Browser: XCode contains iPhone/iPad emulators
+        %li Android SDK
+        %li 
+          %a(href="http://www.opera.com/developer/tools/") Opera Mobile Emulator + Dragonfly
+    %p 
+      Devices:
+      %ul
+        %li iPhone/iPad: iOS browser
+        %li Android: native browser, Firefox 11, Chrome for Andorid, Opera Mobile
+        %li Nokia N9: native browser, Firefox 10, Opera Mobile
+    %p 
+      %a(href="http://adobe.com/go/shadow") Adobe Shadow
