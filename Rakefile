@@ -18,7 +18,7 @@ task :render do
   Dir["site/slides/*.html.haml"].each { |file| build file, "site/layout/slides.html.haml", "public/" + File.basename(file).gsub('.haml','')}
 
   print_coderay_css "public/css/coderay.css"
-
+  
   %w(jQuerySimple senchaSimple websocketsEcho deviceGeolocation deviceOrientation cssMediaQueriesViewport 
     cssMediaQueriesDevice).each { |file| 
     dst = "public/examples/#{file}"

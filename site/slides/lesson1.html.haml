@@ -195,9 +195,9 @@
       %li 
         Great and responsive UI design
         %ul
-          %li Content balacncing based on device type
+          %li Content balancing based on device type
           %li Audio playing while moving to other pages
-          %li Continous carousel
+          %li Continuos carousel
           %li Preloading of content
           %li Swipes using touch gestures
       %li Offline access
@@ -464,13 +464,13 @@
   %header Mobile Web Challenges
   %article
     .autobox
-    %p.slide Server-side detection
-    %p.slide Responsive design
-    %p.slide Mobile usability
-    %p.slide Best experience based on context
-    %p.slide Performance optimization
-    %p.slide The viewport and pixel density
-    %p.slide Data URI - inlining content
+      %p.slide Server-side detection
+      %p.slide Responsive design
+      %p.slide Mobile usability
+      %p.slide Best experience based on context
+      %p.slide Performance optimization
+      %p.slide The viewport and pixel density
+      %p.slide Data URI - inlining content
 %section.slide
   %header HTML5 Frameworks & Tools
   %article.larger.centered
@@ -505,9 +505,11 @@
         Database
       =image_tag "mongodb.png", :nowrap => true, :url => "http://www.mongodb.org/"
       =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
-
 %section.slide
-  %header jQuery Mobile Example
+  %header 
+    jQuery Mobile Example
+    %span.smaller
+      =example_url_tag("jQuerySimple")
   %article.small
     .code_block
       :coderay_raw
@@ -548,7 +550,10 @@
     
 
 %section.slide
-  %header Sencha Example
+  %header 
+    Sencha Example
+    %span.smaller
+      =example_url_tag("senchaSimple")
   %article.smaller
     .code_block
       :coderay_raw
@@ -788,8 +793,17 @@
   %header
     Javascript Event Loop
   %article
-    =image_tag("/lesson6/event-loop-js.png", :resize => true)
-
+    .row
+      .twoColumn
+        =image_tag("/lesson6/event-loop-js.png", :resize => true)
+      .twoColumn
+        .autobox
+          %ul
+            %li One thread of execution. If a function is blocked, the UI is frozen.
+            %li Asynchronous operations
+            %li Blocking I/O operations must not block the UI thread (callbacks)
+            %li Keep callbacks short and fast
+            %li Use closures for creating callbacks
 %section.slide
   %header Javascript: Asynchronous calls
   %article
