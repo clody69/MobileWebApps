@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='lectures.html'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='examples.html'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='resources.html'>Resources</a>
+</li>
+<li>
+<a href='index.html#Staff'>Staff</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Touch Events</h1><div class='actions'><a href='examples/canvasTouch'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/canvasTouch'>Browse Source Code</a></div>
+<p>
+In this example we demonstrate a multi-touch application that tracks the position of the fingers and
+draws colored lines on the canvas. We use the touch events for detecting the position of the fingers on
+display.
+</p>
+<p>
+The basic logic of the application is that we create a hash table where we store the location of the fingers
+that are touching the display. The key of the hash table is the identifier of the touch event and the value
+contains the current and old x,y position of the fingers and the color of the line. At each touchstart and
+touchend event we add or remove items in the fingers hash table. At each touchmove event we update the position
+of the finger in the hash table.
+</p>
+<p>
+We update the canvas every 15ms to achieve roughly 60fps. At each redraw we draw a line from the old position
+to the new position as it's stored in the fingers hash table.
+</p>
+<p>
+The following code is for initializing the canvas, the list of colors and the fingers hash table.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="comment">//Initialize the canvas</span>&#x000A;  <span class="keyword">var</span> canvas = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>];&#x000A;  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;  canvas.width = <span class="predefined">$</span>(window).width();&#x000A;  canvas.height = <span class="predefined">$</span>(window).height();&#x000A;&#x000A;  <span class="keyword">var</span> colors  = [<span class="string"><span class="delimiter">&quot;</span><span class="content">red</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">green</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">yellow</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">blue</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">magenta</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">orangered</span><span class="delimiter">&quot;</span></span>];&#x000A;&#x000A;  <span class="comment">//Hash table for storing the location of the fingers</span>&#x000A;  <span class="keyword">var</span> fingers = {};&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The following code is used for listening to the touchstart, touchend and touchmove events
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="comment">//At first touch initialize a new entry in the fingers list</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchstart</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;    <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, value) {&#x000A;      fingers[value.identifier] = {<span class="key">oldX</span>: value.pageX, <span class="key">oldY</span>: value.pageY, <span class="key">x</span>: value.pageX, <span class="key">y</span>: value.pageY};&#x000A;      fingers[value.identifier].color = colors[Math.floor(Math.random() * colors.length)];&#x000A;    &#x000A;    });&#x000A;  });&#x000A;  <span class="comment">//Track the location of the fingers</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;    e.preventDefault();&#x000A;    <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, value) {&#x000A;      fingers[value.identifier].x = value.pageX;&#x000A;      fingers[value.identifier].y = value.pageY;&#x000A;    });&#x000A;  });&#x000A;  <span class="comment">//Remove the finger from the list</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchend</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;    <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, value) {&#x000A;      <span class="keyword">delete</span> fingers[value.identifier];&#x000A;    });&#x000A;  });    &#x000A;</pre></div>
+</div>
+</div>
+<p>
+We set the timer for regularly updating the canvas with the following code:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="comment">//Draw on the canvas every 15ms (about 60fps).</span>&#x000A;  <span class="keyword">var</span> timer = setInterval(<span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>.each(fingers, <span class="keyword">function</span>(index, value) {&#x000A;      <span class="keyword">if</span> (value.oldX != value.x || value.oldY != value.y ) {&#x000A;        ctx.beginPath();&#x000A;        ctx.moveTo(value.oldX, value.oldY);&#x000A;        ctx.lineWidth = <span class="integer">1</span>;&#x000A;        ctx.strokeStyle = value.color;&#x000A;        ctx.lineTo(value.x,value.y);&#x000A;        ctx.closePath();&#x000A;        ctx.stroke();&#x000A;        value.oldX = value.x;&#x000A;        value.oldY = value.y;&#x000A;      }&#x000A;    });&#x000A;  }, <span class="integer">15</span>);&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The HTML code only contains the canvas tag:
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>&#x000A;  <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span>)</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>

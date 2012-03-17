@@ -30,7 +30,7 @@ Aalto University March 2012
 <!-- Theme CSS files (menu swaps these out) -->
 <link href='css/course.css' id='style-theme-link' rel='stylesheet' />
 <link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
-<link href='css/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<link href='css/screen.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
 <script src='js/jquery.min.js'></script>
 <!-- Custom CSS just for this page -->
 <script src='js/modernizr.custom.js'></script>
@@ -393,8 +393,6 @@ Now available on iOS 5
 http://johanbrook.com/browsers/native-momentum-scrolling-ios-5/
 One demo: http://frontendstuff.com/css/examples/overflow-scroll.html
 For other platforms no support but plenty of plugins, like sencha and jqtouch
-Fastclick
-http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
 </article>
 </section>
 <section class='slide'>
@@ -402,6 +400,159 @@ http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-tou
 Handling Orientation Changes
 </header>
 <article></article>
+</section>
+<section class='slide'>
+<header>
+Touch Events
+<span class='smaller'>
+<a href='http://dvcs.w3.org/hg/webevents/raw-file/tip/touchevents.html'>W3C</a>
+</span>
+</header>
+<article>
+<p>Mobile browsers wait about 300ms between the first tap and firing the click event. The reason for waiting is to detect a double tap.</p>
+<p>onclick events don't provide the best experience for touch devices</p>
+Touch events:
+<ul>
+<li>
+<strong class='red'>touchstart</strong>
+: a finger is placed on a DOM element
+</li>
+<li>
+<strong class='red'>touchmove</strong>
+: a finger is moved around over a DOM element
+</li>
+<li>
+<strong class='red'>touchend</strong>
+: a finger is removed from a DOM element
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Touches Lists
+</header>
+<article>
+<p>Each touch event contains three lists of touches data:</p>
+<ul>
+<li>
+<strong class='red'>touches</strong>
+: a list of fingers that are currently on the screen
+</li>
+<li>
+<strong class='red'>targetTouches</strong>
+: a list of fingers on the current DOM element
+</li>
+<li>
+<strong class='red'>changedTouches</strong>
+: a list of fingers that are involved in the current event
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(document).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>,<span class="keyword">function</span>(e){&#x000A;    e.preventDefault();&#x000A;    <span class="keyword">var</span> touch = e.originalEvent.changedTouches[<span class="integer">0</span>];&#x000A;    console.log(touch.pageX);&#x000A;}</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Touch Interface
+</header>
+<article>
+<ul>
+<li>
+<strong class='red'>identifier</strong>
+: a unique identifier of the finger in the touch session
+</li>
+<li>
+<strong class='red'>clientX, clientY</strong>
+: coordinates of point relative to the viewport, excluding scroll offset
+</li>
+<li>
+<strong class='red'>pageX, pageY</strong>
+: coordinates of point relative to the viewport, including scroll offset
+</li>
+<li>
+<strong class='red'>screenX, screenY</strong>
+: coordinates of point relative to the screen
+</li>
+<li>
+<strong class='red'>target</strong>
+: the DOM element that was the target of the touch (even if the finger has moved out from the element)
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Example of Multi-touch App
+<span class='smaller'>
+<a href='canvasTouch.html'>canvasTouch</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//At first touch initialize a new entry in the fingers list</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchstart</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, v) {&#x000A;    fingers[v.identifier] = {<span class="key">oldX</span>: v.pageX, <span class="key">oldY</span>: v.pageY, <span class="key">x</span>: v.pageX, <span class="key">y</span>: v.pageY};&#x000A;    fingers[v.identifier].color = colors[Math.floor(Math.random() * colors.length)];&#x000A;  });&#x000A;});&#x000A;<span class="comment">//Track the location of the fingers</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  e.preventDefault();&#x000A;  <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, value) {&#x000A;    fingers[value.identifier].x = value.pageX;&#x000A;    fingers[value.identifier].y = value.pageY;&#x000A;  });&#x000A;});&#x000A;<span class="comment">//Remove the finger from the list</span>&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchend</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(e.originalEvent.changedTouches, <span class="keyword">function</span>(index, value) {&#x000A;    <span class="keyword">delete</span> fingers[value.identifier];&#x000A;  });&#x000A;});  &#x000A;  </pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Example of Multi-touch App
+<span class='smaller'>
+<a href='canvasTouch.html'>canvasTouch</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Draw on the canvas every 15ms (about 60fps).</span>&#x000A;<span class="keyword">var</span> timer = setInterval(<span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>.each(fingers, <span class="keyword">function</span>(index, value) {&#x000A;    <span class="keyword">if</span> (value.oldX != value.x || value.oldY != value.y ) {&#x000A;      ctx.beginPath();&#x000A;      ctx.moveTo(value.oldX, value.oldY);&#x000A;      ctx.lineWidth = <span class="integer">1</span>;&#x000A;      ctx.strokeStyle = value.color;&#x000A;      ctx.lineTo(value.x,value.y);&#x000A;      ctx.closePath();&#x000A;      ctx.stroke();&#x000A;      value.oldX = value.x;&#x000A;      value.oldY = value.y;&#x000A;    }&#x000A;  });&#x000A;}, <span class="integer">15</span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Best practices for touch events</header>
+<article>
+Disable zooming
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span>)</pre></div>
+</div>
+Prevent scrolling
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  e.preventDefault();&#x000A;  ...&#x000A;});</pre></div>
+</div>
+<p>
+Asynchronously handle touch information (timer or
+<a href='http://paulirish.com/2011/requestanimationframe-for-smart-animating/'>animation frame</a>
+)
+</p>
+<p>Must listen both touch and click events</p>
+<p>
+jQuery Mobile provide
+<a href='http://jquerymobile.com/test/docs/api/events.html'>virtual click events</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>Optimization for mobile html5</header>
+<article>
+http://www.html5rocks.com/en/mobile/optimization-and-performance/
+</article>
+</section>
+<section class='slide'>
+<header>
+Fastclick
+</header>
+<article>
+http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
+http://code.google.com/mobile/articles/fast_buttons.html
+</article>
+</section>
+<section class='slide'>
+<header>
+Canvas
+</header>
+<article>
+Tainiting the canvas: https://developer.mozilla.org/en/CORS_Enabled_Image
+</article>
 </section>
 
 <!-- Elements -->

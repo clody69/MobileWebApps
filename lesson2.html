@@ -30,7 +30,7 @@ Aalto University March 2012
 <!-- Theme CSS files (menu swaps these out) -->
 <link href='css/course.css' id='style-theme-link' rel='stylesheet' />
 <link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
-<link href='css/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<link href='css/screen.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
 <script src='js/jquery.min.js'></script>
 <!-- Custom CSS just for this page -->
 <script src='js/modernizr.custom.js'></script>
@@ -74,6 +74,7 @@ Aalto University March 2012
 </div>
 </section>
 
+<div class='background' data-background='bg-lesson2'></div>
 <section class='slide section-title'>
 <h1>Lecture 2: Building a Mobile Web App</h1>
 <div class='agenda'>
@@ -94,7 +95,7 @@ Our goal for today is:
 <li>Add a few entry forms</li>
 <li>Style the forms with CSS</li>
 <li>Implement the server</li>
-<li>Rewrite the app with jQuery</li>
+<li>Rewrite the app with jQuery Mobile</li>
 <li>Add local storage</li>
 <li>Make the app available offline</li>
 </ul>
@@ -208,6 +209,14 @@ Adding Some Style
 </section>
 <section class='slide'>
 <header>
+Basic Design
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram1.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
 A Simple Server with Sinatra
 <span class='smaller'>
 <a href='htmlFormBlog.html'>htmlFormBlog</a>
@@ -239,6 +248,22 @@ A New Design with jQuery mobile
 </div>
 </div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+jQuery Mobile Page
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/jqm-page.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design with Templates
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram2.png' class='resize' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -286,7 +311,60 @@ New Post Form (
 </span>
 )
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;</pre></div>
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Posts</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Don't Repeat Yourself (DRY)
+</header>
+<article>
+<blockquote>
+<div class='smaller'>
+<p>Every piece of knowledge must have a single, unambiguous, authoritative representation within a system</p>
+<p>
+<cite>Andy Hunt and Dave Thomas, The Pragmatic Programmer</cite>
+</p>
+</div>
+</blockquote>
+<p>Don't use the same code (or similar code) in multiple places of the application</p>
+<p>Avoid repetition</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>Form Validation</img>
+</header>
+<article>
+CSS3 introduces two new pseudo-classes for input elements:
+<ul>
+<li>
+<strong class='red'>:valid</strong>
+: element is valid according to the input's type setting (e.g. email)
+</li>
+<li>
+<strong class='red'>:invalid</strong>
+: element failed to validate according to the input's type
+</li>
+</ul>
+<p>
+HTML5 also introduced the
+<strong class='red'>required</strong>
+attribute that indicate the field must have valid data before it can be submmitted.
+</p>
+<p>Styling for invalid elements is done with CSS:</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="pseudo-class">:invalid</span> {  &#x000A;  <span class="key">background-color</span>: <span class="color">#ffdddd</span>;  &#x000A;}  </pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">'</span><span class="content">red</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;</pre></div>
+</div>
 </div>
 </div>
 </article>
@@ -358,12 +436,6 @@ Mobile version from
 </article>
 </section>
 <section class='slide'>
-<hedaer>
-List of new HTML elements
-</hedaer>
-http://www.w3schools.com/html5/html5_form_input_types.asp
-</section>
-<section class='slide'>
 <header>Contenteditable Attribute</header>
 <article>
 <p>The contenteditable attribute specifies whether a user can edit the content of an element.</p>
@@ -401,6 +473,14 @@ List of posts (
 </div>
 
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design supporting updates
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram3.png' class='resize' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -473,6 +553,14 @@ links with external attribute will cause a full page refresh
 </section>
 <section class='slide'>
 <header>
+Design with multiple JQM pages
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram4.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
 A multipage Blog
 <span class='smaller'>
 <a href='htmljQueryMultiBlog.html'>htmljQueryMultiBlog</a>
@@ -540,8 +628,6 @@ strategy with the data stored in the cloud
 </li>
 </ul>
 </article>
-http://ednortonengineeringsociety.blogspot.com/2010/10/detecting-offline-status-in-html-5.html
-http://hacks.mozilla.org/2010/01/offline-web-applications/
 </section>
 <section class='slide'>
 <header>
@@ -593,10 +679,19 @@ HTML5 introduces two key-value storing mechanisms:
 <article>
 <ul>
 <li>Same origin policy</li>
-<li>approx 5MB of storage per host</li>
-<li>Only strings can be stored</li>
+<li>
+approx 2-5MB of storage per host (
+<a href='http://dev-test.nemikor.com/web-storage/support-test/'>test</a>
+)
+</li>
+<li>Only strings can be stored (UTF-16)</li>
 <li>Covert to JSON before storing</li>
 <li>Browser provide tools for looking at the local storage</li>
+<li>
+Performance (
+<a href='http://www.webdirections.org/blog/localstorage-perhaps-not-so-harmful/'>Check this</a>
+) is better than cookies but not the fastest (depends on browser impementation)
+</li>
 </ul>
 </article>
 </section>
@@ -625,6 +720,14 @@ Add Options for storing:
 </div>
 </div>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design with localStorage
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram5.png' class='resize' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -677,6 +780,21 @@ JS
 <li>Every single resource that you want to cache must be explicitly listed (no wildcards).</li>
 <li>The files listed in the manifest will be loaded from the local disk even if the browser is online.</li>
 <li>If the page is loaded from the application cache (either online or offline), the browser will load the assets ONLY from the cache and ignore external resources (unless they are specified in the NETWORK section)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Cache size</img>
+</header>
+<article>
+<ul>
+<li>Safari desktop browser (Mac and Windows) have no limit</li>
+<li>Mobile Safari has a 10MB limit</li>
+<li>Chrome has a 5MB limit</li>
+<li>Android browser has no limit</li>
+<li>Firefox desktop has no limit</li>
+<li>Opera’s cache limit can be managed by the user, but has a default size of 50MB</li>
 </ul>
 </article>
 </section>
@@ -902,19 +1020,15 @@ server.rb
 </section>
 <section class='slide'>
 <header>
-File API
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>IndexedDB</img>
 </header>
 <article>
-http://davidbcalhoun.com/2011/android-3-0-honeycomb-is-first-to-implement-the-device-api
-</article>
-</section>
-<section class='slide'>
-<article>
-Start with the viewport
-Introduce new elementsh
-Create a basic app for entering data
-Create a demo like this with backbone.js
-http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html
+<p>Storage mechanism for unstructured data objects (NoSQL)</p>
+<p>Key-value storage where values can be complex structure objects.</p>
+<p>Good performance (better than localStorage)</p>
+<p>Asynchronous API (not blocking UI thread) and synchronous for web workers</p>
+<p>Based on a transactional model</p>
+<p>Support for data migrations</p>
 </article>
 </section>
 
