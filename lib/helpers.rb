@@ -4,20 +4,29 @@ module PresentationHelper
   def lecture_title_tag(title, lecture)
     "<h2>#{title} (<a href='#{lecture}.html'>Slides</a>)</h2>"
   end
-  def lecture_tag(title, timeslot, subtitle = "", *slides)
-    h = "<div class='title'>#{title}</div>"
+  def lecture_tag(title, timeslot, subtitle = "", link ="", *docs)
+    h = "<div class='title'>"
+    if link != ""
+      h += "<a href='#{link}'>"
+    end
+    h+="#{title}"
+    if link != ""
+      h += "</a>"
+    end
+    h+="</div>"
     if subtitle != ""
       h += "<div class='subtitle'>#{subtitle}</div>"
     end
     h += "<div class='info'>#{timeslot}"
-    slides.each do |slide|
-      if slide != ""
-        h += " - <a href='#{slide}'>Slides</a>"
-      end
-    end
     h += "</div>"
   end
-
+  def docs_tag(*docs)
+    h = "<p>Documents: "
+    docs.collect! { |doc| "<a href='docs/#{doc}'>#{doc}</a>" }
+    h += docs.join(', ')
+    h += "</p>"
+  end
+  
   def title_slide_tag(subtitle)
     Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
   end

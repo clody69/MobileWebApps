@@ -1,5 +1,8 @@
 =title_slide_tag("Lecture 2: Building a Mobile Web App")
 
+
+.background(data-background = "bg-lesson2")
+
 %section.slide.section-title
   %h1 Lecture 2: Building a Mobile Web App
   .agenda
@@ -18,7 +21,7 @@
       %li Add a few entry forms
       %li Style the forms with CSS
       %li Implement the server
-      %li Rewrite the app with jQuery
+      %li Rewrite the app with jQuery Mobile
       %li Add local storage
       %li Make the app available offline
 
@@ -144,7 +147,13 @@
         } 
     .hmargin.bordered
       =image_tag('lesson2/blog-2.png')
-      
+
+%section.slide
+  %header
+    Basic Design
+  %article
+    =image_tag('lesson2/blog-diagram1.png', :resize => true)
+
 %section.slide
   %header 
     A Simple Server with Sinatra
@@ -174,6 +183,72 @@
       end
 
 %section.slide
+  %header jQuery Family
+  %article
+    %a(href="http://jquery.com") jQuery Library 
+    %ul
+      %li Library for manipulating, traversing the DOM and animations.
+      %li 
+        Check also 
+        %a(href="http://zeptojs.com/") Zepto.js
+        )
+      
+    %a(href="http://jqueryui.com") jQuery UI
+    %ul
+      %li Customizable UI library for websites
+  
+    %a(href="http://jquerymobile.com/") jQuery Mobile
+    %ul
+      %li HTML5-based user interface for mobile devices
+      %li Lightweight, flexible and themeable design.
+      %li 3-level graded platform support system
+      %li 
+        Check out the 
+        %a(href="http://www.jqmgallery.com/") gallery
+      
+%section.slide
+  %header 
+    =html5_semantics_tag("Custom Data Attributes")
+    %span.smaller
+      %a(href="http://www.whatwg.org/specs/web-apps/current-work/#embedding-custom-non-visible-data-with-the-data-*-attributes") more info
+  %article
+    %p Custom data attributes allows us to embed data with the page
+    %p 
+      Any element attribute that start with 
+      %strong.red data- 
+      is treated as a storage area for private data
+    %p Custom data attributes do not affect the rendering
+    :coderay
+      #!html
+      <div class="title" data-name="Hello" data-lang="en" data-city="Helsinki">
+        Hello World
+      </div>
+
+%section.slide
+  %header
+    Key elements of jQuery Mobile
+  %article
+    %p 
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-template.html") Single page template
+      and
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/multipage-template.html") Multi-page template
+    %p
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-transitions.html") Page transitions
+    
+    %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-navmodel.html") Ajax Navigation
+    %ul
+      %li First page is requested via HTTP request
+      %li Subsequent pages are loaded via Ajax and injected into the DOM (only the "page" section)
+    %p 
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/forms/forms-all.html") Enhanced form elements
+    %p
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/lists/lists-thumbnails.html") Several list views
+    %p
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/api/events.html") Events
+      and
+      %a(href="http://jquerymobile.com/demos/1.1.0-rc.1/docs/api/data-attributes.html") Data attributes
+
+%section.slide
   %header 
     A New Design with jQuery mobile
     %span.smaller
@@ -186,6 +261,21 @@
       .twoColumn
         .hmargin.bordered
           =image_tag('lesson2/blog-jquery-new.png')
+
+        
+%section.slide
+  %header
+    jQuery Mobile Page
+  %article
+    =image_tag('lesson2/jqm-page.png', :resize => true)
+
+
+%section.slide
+  %header
+    Design with Templates
+  %article
+    =image_tag('lesson2/blog-diagram2.png', :resize => true)
+
 
 %section.slide
   %header Sinatra Server with Templates
@@ -296,7 +386,50 @@
           %textarea(name="content" rows = "5" placeholder = "Content")
           %input(type = "email" name="email" placeholder = "Email")              
           %button#postEntry(type = "submit") Posts
+%section.slide
+  %header 
+    Don't Repeat Yourself (DRY)
+  %article
+    %blockquote
+      .smaller
+        %p Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
+        %p
+          %cite  Andy Hunt and Dave Thomas, The Pragmatic Programmer
+    
+    %p Don't use the same code (or similar code) in multiple places of the application
+    %p Avoid repetition
 
+%section.slide
+  %header
+    =html5_styling_tag("Form Validation")
+  %article
+    CSS3 introduces two new pseudo-classes for input elements:
+    %ul
+      %li
+        %strong.red :valid
+        \: element is valid according to the input's type setting (e.g. email)
+      %li 
+        %strong.red :invalid
+        \: element failed to validate according to the input's type
+    %p 
+      HTML5 also introduced the 
+      %strong.red required
+      attribute that indicate the field must have valid data before it can be submmitted. 
+    
+    %p Styling for invalid elements is done with CSS:
+    .row
+      .twoColumn
+        :coderay
+          #!css
+          :invalid {  
+            background-color: #ffdddd;  
+          }  
+      .twoColumn
+        :coderay
+          #!javascript
+          $(":invalid").addClass('red');
+
+          
 %section.slide 
   %header 
     Validation
@@ -365,13 +498,6 @@
           %p
             Mobile version from 
             %a(href="http://jquerymobile.com/demos/1.0/docs/forms/forms-all.html") jQuery Mobile
-    
-%section.slide
-  %hedaer
-    List of new HTML elements
-  http://www.w3schools.com/html5/html5_form_input_types.asp
-    
-
 
 %section.slide
   %header Contenteditable Attribute
@@ -414,6 +540,13 @@
                   =a[:email]
               %p(contenteditable="true" data-name="content" data-id='\#{i}')
                 =a[:content]
+
+%section.slide
+  %header
+    Design supporting updates
+  %article
+    =image_tag('lesson2/blog-diagram3.png', :resize => true)
+
 
 %section.slide
   %header 
@@ -493,6 +626,11 @@
               data-ajax = "false"
             are present, the link triggers a full page reload.
             links with external attribute will cause a full page refresh
+%section.slide
+  %header
+    Design with multiple JQM pages
+  %article
+    =image_tag('lesson2/blog-diagram4.png', :resize => true)
 
 %section.slide
   %header 
@@ -592,9 +730,6 @@
         %strong synchronization 
         strategy with the data stored in the cloud
 
-  http://ednortonengineeringsociety.blogspot.com/2010/10/detecting-offline-status-in-html-5.html
-  http://hacks.mozilla.org/2010/01/offline-web-applications/
-
 %section.slide
   %header
     =html5_offline_storage_tag("Offline Storage")   
@@ -648,10 +783,18 @@
   %article
     %ul
       %li Same origin policy
-      %li approx 5MB of storage per host
-      %li Only strings can be stored
+      %li 
+        approx 2-5MB of storage per host (
+        %a(href="http://dev-test.nemikor.com/web-storage/support-test/") test
+        )
+      %li Only strings can be stored (UTF-16)
       %li Covert to JSON before storing
       %li Browser provide tools for looking at the local storage
+      %li 
+        Performance ( 
+        %a(href="http://www.webdirections.org/blog/localstorage-perhaps-not-so-harmful/") Check this
+        ) is better than cookies but not the fastest (depends on browser impementation)
+
 
 %section.slide
   %header
@@ -671,6 +814,13 @@
       .twoColumn
         .hmargin.bordered
           =image_tag('lesson2/blog-jquery-options.png')
+
+%section.slide
+  %header
+    Design with localStorage
+  %article
+    =image_tag('lesson2/blog-diagram5.png', :resize => true)
+
     
 %section.slide
   %header
@@ -759,7 +909,19 @@
       %li Every single resource that you want to cache must be explicitly listed (no wildcards).
       %li The files listed in the manifest will be loaded from the local disk even if the browser is online.
       %li If the page is loaded from the application cache (either online or offline), the browser will load the assets ONLY from the cache and ignore external resources (unless they are specified in the NETWORK section)
-
+    
+%section.slide
+  %header
+    =html5_offline_storage_tag("Cache size")   
+  %article
+    %ul
+      %li Safari desktop browser (Mac and Windows) have no limit
+      %li Mobile Safari has a 10MB limit
+      %li Chrome has a 5MB limit
+      %li Android browser has no limit
+      %li Firefox desktop has no limit
+      %li Opera’s cache limit can be managed by the user, but has a default size of 50MB
+      
 %section.slide
   %header
     =html5_offline_storage_tag("Manifest File")   
@@ -1007,19 +1169,12 @@
 
 %section.slide
   %header
-    File API
+    =html5_offline_storage_tag("IndexedDB")
   %article
-    http://davidbcalhoun.com/2011/android-3-0-honeycomb-is-first-to-implement-the-device-api
+    %p Storage mechanism for unstructured data objects (NoSQL)
+    %p Key-value storage where values can be complex structure objects.
+    %p Good performance (better than localStorage)
+    %p Asynchronous API (not blocking UI thread) and synchronous for web workers
+    %p Based on a transactional model
+    %p Support for data migrations
     
-%section.slide
-  %article            
-    Start with the viewport
-
-    Introduce new elementsh
-    
-    Create a basic app for entering data
-    
-    Create a demo like this with backbone.js
-    
-    http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html
-

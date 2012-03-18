@@ -1,0 +1,33 @@
+=example_header_tag "Media Query on Device", "cssMediaQueriesDevice"
+
+%p
+  In this example we demonstrate how to use the CSS3 media query for querying the device screen size. 
+  On narrow devices, the two columns of text are not floated but sit one on top of the other.
+  
+%p
+  The CSS code to achieve this is below: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    :css
+    .container {
+      width: 500px;
+      }
+    .container div {
+      float: left; 
+      margin: 0 15px 0 0;
+      width: 235px;
+    }
+    @media all and (max-device-width: 320px) {
+      .container {
+        width: auto;
+      }
+      .container div {
+        float: none;
+        margin: 0;
+        width: auto;
+      }
+    }
+   

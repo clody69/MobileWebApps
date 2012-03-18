@@ -1,0 +1,101 @@
+=example_header_tag "Touch Events", "canvasTouch"
+
+%p
+  In this example we demonstrate a multi-touch application that tracks the position of the fingers and
+  draws colored lines on the canvas. We use the touch events for detecting the position of the fingers on 
+  display.
+  
+%p
+  The basic logic of the application is that we create a hash table where we store the location of the fingers 
+  that are touching the display. The key of the hash table is the identifier of the touch event and the value 
+  contains the current and old x,y position of the fingers and the color of the line. At each touchstart and 
+  touchend event we add or remove items in the fingers hash table. At each touchmove event we update the position 
+  of the finger in the hash table.
+%p 
+  We update the canvas every 15ms to achieve roughly 60fps. At each redraw we draw a line from the old position 
+  to the new position as it's stored in the fingers hash table. 
+
+%p
+  The following code is for initializing the canvas, the list of colors and the fingers hash table.
+  
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+      //Initialize the canvas
+      var canvas = $('#canvas')[0];
+      var ctx = canvas.getContext('2d');
+      canvas.width = $(window).width();
+      canvas.height = $(window).height();
+
+      var colors  = ["red", "green", "yellow", "blue", "magenta", "orangered"];
+
+      //Hash table for storing the location of the fingers
+      var fingers = {};
+
+%p
+  The following code is used for listening to the touchstart, touchend and touchmove events 
+  
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+      //At first touch initialize a new entry in the fingers list
+      $("#canvas").bind('touchstart', function(e) {
+        $.each(e.originalEvent.changedTouches, function(index, value) {
+          fingers[value.identifier] = {oldX: value.pageX, oldY: value.pageY, x: value.pageX, y: value.pageY};
+          fingers[value.identifier].color = colors[Math.floor(Math.random() * colors.length)];
+        
+        });
+      });
+      //Track the location of the fingers
+      $("#canvas").bind('touchmove', function(e) {
+        e.preventDefault();
+        $.each(e.originalEvent.changedTouches, function(index, value) {
+          fingers[value.identifier].x = value.pageX;
+          fingers[value.identifier].y = value.pageY;
+        });
+      });
+      //Remove the finger from the list
+      $("#canvas").bind('touchend', function(e) {
+        $.each(e.originalEvent.changedTouches, function(index, value) {
+          delete fingers[value.identifier];
+        });
+      });    
+
+%p
+  We set the timer for regularly updating the canvas with the following code: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+      //Draw on the canvas every 15ms (about 60fps).
+      var timer = setInterval(function() {
+        $.each(fingers, function(index, value) {
+          if (value.oldX != value.x || value.oldY != value.y ) {
+            ctx.beginPath();
+            ctx.moveTo(value.oldX, value.oldY);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = value.color;
+            ctx.lineTo(value.x,value.y);
+            ctx.closePath();
+            ctx.stroke();
+            value.oldX = value.x;
+            value.oldY = value.y;
+          }
+        });
+      }, 15);
+
+%p
+  The HTML code only contains the canvas tag:
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!haml
+    %body
+      %canvas#canvas(width='350' height='350')
+    

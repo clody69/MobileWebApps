@@ -332,9 +332,163 @@
     
     For other platforms no support but plenty of plugins, like sencha and jqtouch
     
-    Fastclick
-    http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
 %section.slide
   %header 
     Handling Orientation Changes
   %article
+%section.slide
+  %header
+    Touch Events
+    %span.smaller
+      %a(href="http://dvcs.w3.org/hg/webevents/raw-file/tip/touchevents.html") W3C
+  %article
+    %p Mobile browsers wait about 300ms between the first tap and firing the click event. The reason for waiting is to detect a double tap.
+    %p onclick events don't provide the best experience for touch devices
+    Touch events:
+    %ul
+      %li
+        %strong.red touchstart
+        \: a finger is placed on a DOM element
+      %li
+        %strong.red touchmove
+        \: a finger is moved around over a DOM element
+      %li
+        %strong.red touchend
+        \: a finger is removed from a DOM element
+%section.slide
+  %header
+    Touches Lists
+  %article
+    %p Each touch event contains three lists of touches data:
+    %ul
+      %li 
+        %strong.red touches
+        \: a list of fingers that are currently on the screen
+      %li
+        %strong.red targetTouches
+        \: a list of fingers on the current DOM element
+      %li
+        %strong.red changedTouches
+        \: a list of fingers that are involved in the current event
+    :coderay
+      #!javascript
+      $(document).bind('touchmove',function(e){
+          e.preventDefault();
+          var touch = e.originalEvent.changedTouches[0];
+          console.log(touch.pageX);
+      }
+%section.slide
+  %header
+    Touch Interface
+  %article
+    %ul
+      %li
+        %strong.red identifier
+        \: a unique identifier of the finger in the touch session
+      %li
+        %strong.red clientX, clientY
+        \: coordinates of point relative to the viewport, excluding scroll offset
+      %li
+        %strong.red pageX, pageY
+        \: coordinates of point relative to the viewport, including scroll offset
+      %li
+        %strong.red screenX, screenY  
+        \: coordinates of point relative to the screen
+      %li
+        %strong.red target
+        \: the DOM element that was the target of the touch (even if the finger has moved out from the element)
+%section.slide
+  %header 
+    Example of Multi-touch App
+    %span.smaller
+      =example_url_tag("canvasTouch")
+  %article
+    :coderay
+      #!javascript
+      //At first touch initialize a new entry in the fingers list
+      $("#canvas").bind('touchstart', function(e) {
+        $.each(e.originalEvent.changedTouches, function(index, v) {
+          fingers[v.identifier] = {oldX: v.pageX, oldY: v.pageY, x: v.pageX, y: v.pageY};
+          fingers[v.identifier].color = colors[Math.floor(Math.random() * colors.length)];
+        });
+      });
+      //Track the location of the fingers
+      $("#canvas").bind('touchmove', function(e) {
+        e.preventDefault();
+        $.each(e.originalEvent.changedTouches, function(index, value) {
+          fingers[value.identifier].x = value.pageX;
+          fingers[value.identifier].y = value.pageY;
+        });
+      });
+      //Remove the finger from the list
+      $("#canvas").bind('touchend', function(e) {
+        $.each(e.originalEvent.changedTouches, function(index, value) {
+          delete fingers[value.identifier];
+        });
+      });  
+        
+%section.slide
+  %header 
+    Example of Multi-touch App
+    %span.smaller
+      =example_url_tag("canvasTouch")
+  %article
+    :coderay
+      #!javascript
+      //Draw on the canvas every 15ms (about 60fps).
+      var timer = setInterval(function() {
+        $.each(fingers, function(index, value) {
+          if (value.oldX != value.x || value.oldY != value.y ) {
+            ctx.beginPath();
+            ctx.moveTo(value.oldX, value.oldY);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = value.color;
+            ctx.lineTo(value.x,value.y);
+            ctx.closePath();
+            ctx.stroke();
+            value.oldX = value.x;
+            value.oldY = value.y;
+          }
+        });
+      }, 15);
+      
+%section.slide
+  %header Best practices for touch events
+  %article
+    Disable zooming
+    :coderay
+      #!haml
+      %meta(name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;")
+    Prevent scrolling
+    :coderay
+      #!javascript
+      $("#canvas").bind('touchmove', function(e) {
+        e.preventDefault();
+        ...
+      });
+    %p 
+      Asynchronously handle touch information (timer or 
+      %a(href="http://paulirish.com/2011/requestanimationframe-for-smart-animating/") animation frame
+      )
+    %p Must listen both touch and click events
+    %p 
+      jQuery Mobile provide 
+      %a(href="http://jquerymobile.com/test/docs/api/events.html") virtual click events 
+
+%section.slide
+  %header Optimization for mobile html5
+  %article
+    http://www.html5rocks.com/en/mobile/optimization-and-performance/
+    
+%section.slide
+  %header
+    Fastclick
+  %article
+    http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
+    http://code.google.com/mobile/articles/fast_buttons.html  
+%section.slide
+  %header
+    Canvas
+  %article
+    Tainiting the canvas: https://developer.mozilla.org/en/CORS_Enabled_Image
+    
