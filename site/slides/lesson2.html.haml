@@ -160,28 +160,33 @@
     %span.smaller
       =example_url_tag("htmlFormBlog")
 
-  %article
+  %article.larger
     :coderay
       #!ruby
       require 'sinatra'
       require 'json'
-      
+
       $articles = []
-      
+
       def timestamp
         Time.now.strftime("%H:%M:%S")
       end
-      
+
       get '/' do 
         File.read('index.html')
       end
 
-      post '/articles' do
-        article = params.merge( {'timestamp' => timestamp}).to_json
-        $articles << article
-        puts article
+      get '/articles' do
+        content_type :json
+        {:articles => $articles}.to_json
       end
 
+      post '/articles' do
+        article = params.merge( {'timestamp' => timestamp}).to_json
+        puts article
+        $articles << article
+      end
+      
 %section.slide
   %header jQuery Family
   %article
@@ -191,7 +196,6 @@
       %li 
         Check also 
         %a(href="http://zeptojs.com/") Zepto.js
-        )
       
     %a(href="http://jqueryui.com") jQuery UI
     %ul
@@ -278,7 +282,9 @@
 
 
 %section.slide
-  %header Sinatra Server with Templates
+  %header 
+    Sinatra Server with Templates
+    %span.smaller=example_url_tag("htmljQueryBlog")
   %article.smaller
     :coderay
       #!ruby
@@ -352,7 +358,9 @@
                     %a(href="/new" data-ajax="false") New Entry      
       
 %section.slide
-  %header The Views
+  %header 
+    The Views
+    %span.smaller=example_url_tag("htmljQueryBlog")
 
   %article
     .autobox
@@ -775,7 +783,7 @@
       
       //delete a key
       localStorage.myData = undefined;
-      localStorage.remoteItem('myData');
+      localStorage.removeItem('myData');
 
 %section.slide
   %header
@@ -1021,7 +1029,9 @@
       .twoColumn
         .autobox
           %ul
-            %li Manifesto automatically generate the manifest file by listing all files in the specified directories and subdirectories
+            %li 
+              %a(href="https://github.com/johntopley/manifesto#readme") Manifesto 
+              automatically generate the manifest file by listing all files in the specified directories and subdirectories
             %li 
               By default it includes 
               %span.terminal
