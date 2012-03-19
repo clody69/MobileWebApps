@@ -1,0 +1,1214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Appplications Development with HTML5
+|
+Aalto University March 2012
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Coloring for code. To be included before the custom css like course and screen -->
+<link href='css/coderay.css' rel='stylesheet' />
+<!-- Core and extension CSS files -->
+<link href='deckjs/core/deck.core.css' rel='stylesheet' />
+<link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
+<link href='deckjs/extensions/menu/deck.menu.css' rel='stylesheet' />
+<link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
+<link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
+<link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
+<!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
+<!-- Theme CSS files (menu swaps these out) -->
+<link href='css/course.css' id='style-theme-link' rel='stylesheet' />
+<link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
+<link href='css/screen.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
+<script src='js/jquery.min.js'></script>
+<!-- Custom CSS just for this page -->
+<script src='js/modernizr.custom.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='background'>
+<div class='background front active' id='bg-default'></div>
+<div class='background back' id='bg-default'></div>
+</div>
+<article class='deck-container'>
+<section class='slide main-title'>
+<h1>
+Mobile Web Appplications Development with HTML5
+</h1>
+<img src='imgs/HTML5_logo.png' />
+<br />
+<h1 class='subtitle'>
+Lecture 2: Building a Mobile Web App
+</h1>
+<br />
+<div class='smaller centered'>
+<h3>
+Claudio Riva
+</h3>
+<h3>
+Aalto University March 2012
+</h3>
+</div>
+</section>
+
+<div class='background' data-background='bg-lesson2'></div>
+<section class='slide section-title'>
+<h1>Lecture 2: Building a Mobile Web App</h1>
+<div class='agenda'>
+<p>Our first mobile web app</p>
+<p>New HTML5 form semantics</p>
+<p>Local storage</p>
+<p>Offline usage</p>
+</div>
+</section>
+<section class='slide'>
+<header>
+Our first mobile web app
+</header>
+<article>
+Our goal for today is:
+<ul>
+<li>Create a mobile ready web page</li>
+<li>Add a few entry forms</li>
+<li>Style the forms with CSS</li>
+<li>Implement the server</li>
+<li>Rewrite the app with jQuery Mobile</li>
+<li>Add local storage</li>
+<li>Make the app available offline</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Viewport Meta Tag
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autoimage bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/firstapp-no-viewport.png' /></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autoimage bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/firstapp-viewport.png' /></div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width; user-scalable=0;</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>        &#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Viewport Meta Tag
+</header>
+<article>
+<ul>
+<li>Introduced by Apple with the iPhone for mobile browsing</li>
+<li>Specify exactly the dimension of the page to render</li>
+<li>Not part of HTML5 but will be incorporated in the future</li>
+<li>
+More info at
+<a href='http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html'>Safari Development</a>
+website.
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>        &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Hiding the URL bar
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>On some browser the URL bar is always visible</p>
+<p>UI frameworks (like jQuery and Sencha) automatically hide the bar using the following tricks</p>
+<div class='vmargin'>
+Scroll to the top of the page after the browser has finished to load the page
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;body</span> <span class="attribute-name">onload</span>=<span class="inline"><span class="inline-delimiter">&quot;</span>window.scrollTo(<span class="integer">0</span>, <span class="integer">1</span>);<span class="inline-delimiter">&quot;</span></span><span class="tag">&gt;</span>  &#x000A;</pre></div>
+</div>
+</div>
+<div class='vmargin'>
+On iOS there are specific tags:
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">apple-mobile-web-app-capable</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">yes</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span>&#x000A;<span class="tag">&lt;meta</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">apple-mobile-web-app-status-bar-style</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">black</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autoimage bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/firstapp-jquery.png' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Basic Form for Posting to a Blog
+</header>
+<article class='justified'>
+<div class='hmargin smaller'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;  <span class="tag">%body</span>&#x000A;    <span class="tag">%h1</span> Post a blog entry&#x000A;    <span class="tag">%form</span>&#x000A;      <span class="tag">%ul</span>&#x000A;        <span class="tag">%li</span>&#x000A;          <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%li</span>&#x000A;          <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%li</span>&#x000A;          <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;        <span class="tag">%li</span>&#x000A;          <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Post</span><span class="delimiter">&quot;</span></span>)</pre></div>
+</div>
+</div>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-1.png' /></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Adding Some Style
+</header>
+<article class='justified'>
+<div class='hmargin smaller'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">body</span> {<span class="key">font-family</span>: <span class="value">Arial</span>; <span class="key">margin</span>: <span class="float">0px</span>;}&#x000A;<span class="type">h1</span> {&#x000A; <span class="key">background</span>: <span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">g</span><span class="error">r</span><span class="error">a</span><span class="error">d</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span>(<span class="value">linear</span>, <span class="value">left</span> <span class="value">top</span>, <span class="value">left</span> <span class="value">bottom</span>, <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">0</span><span class="float">.0</span>, <span class="color">#666</span>), &#x000A;    <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">1</span><span class="float">.0</span>, <span class="color">#000</span>));&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="color">#333</span>;&#x000A;  <span class="key">color</span>: <span class="color">#EEE</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="float">0</span>; <span class="key">padding</span>: <span class="float">4px</span>; <span class="key">width</span>: <span class="float">100%</span>;&#x000A;  <span class="key">text-align</span>: <span class="value">center</span>;&#x000A;}&#x000A;<span class="type">form</span> <span class="type">ul</span> { <span class="key">padding</span>: <span class="float">6px</span>; <span class="key">margin</span>: <span class="float">0px</span>; <span class="key">list-style-type</span>: <span class="value">none</span>; }&#x000A;<span class="type">form</span> <span class="type">ul</span> <span class="type">li</span> {&#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="float">0</span>; <span class="key">-webkit-border-radius</span>: <span class="float">4px</span>;&#x000A;  <span class="key">border</span>: <span class="float">1px</span> <span class="value">solid</span> <span class="color">#666</span>; <span class="key">padding</span>: <span class="float">4px</span>;&#x000A;}&#x000A;<span class="type">input</span>, <span class="type">textarea</span> {&#x000A;  <span class="key">-webkit-appearance</span>: <span class="value">none</span>;&#x000A;  <span class="key">border</span>: <span class="float">0</span>; <span class="key">width</span>: <span class="float">95%</span>;&#x000A;}&#x000A;<span class="type">form</span> <span class="type">ul</span> <span class="type">li</span><span class="class">.noborder</span> { <span class="key">border</span>: <span class="float">0</span>; <span class="key">padding</span>: <span class="float">0px</span>;}&#x000A;<span class="type">input</span>[<span class="attribute-name">type=submit</span>] {&#x000A;  <span class="key">border</span>: <span class="float">0</span>;&#x000A;  <span class="key">background</span>: <span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">g</span><span class="error">r</span><span class="error">a</span><span class="error">d</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span>(<span class="value">linear</span>, <span class="value">left</span> <span class="value">top</span>, <span class="value">left</span> <span class="value">bottom</span>, <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">0</span><span class="float">.0</span>, <span class="color">#EEE</span>),&#x000A;    <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">o</span><span class="error">r</span><span class="error">-</span><span class="error">s</span><span class="error">t</span><span class="error">o</span><span class="error">p</span>(<span class="float">1</span><span class="float">.0</span>, <span class="color">#AAA</span>));&#x000A;  <span class="key">-webkit-border-radius</span>: <span class="float">6px</span>;&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">4px</span> <span class="color">#333</span>;&#x000A;  <span class="key">width</span>: <span class="float">100%</span>; <span class="key">padding</span>: <span class="float">6px</span>;&#x000A;} </pre></div>
+</div>
+</div>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-2.png' /></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Basic Design
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram1.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+A Simple Server with Sinatra
+<span class='smaller'>
+<a href='htmlFormBlog.html'>htmlFormBlog</a>
+</span>
+</header>
+<article class='larger'>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = []&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  {<span class="symbol">:articles</span> =&gt; <span class="global-variable">$articles</span>}.to_json&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  article = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;  puts article&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>jQuery Family</header>
+<article>
+<a href='http://jquery.com'>jQuery Library</a>
+<ul>
+<li>Library for manipulating, traversing the DOM and animations.</li>
+<li>
+Check also
+<a href='http://zeptojs.com/'>Zepto.js</a>
+</li>
+</ul>
+<a href='http://jqueryui.com'>jQuery UI</a>
+<ul>
+<li>Customizable UI library for websites</li>
+</ul>
+<a href='http://jquerymobile.com/'>jQuery Mobile</a>
+<ul>
+<li>HTML5-based user interface for mobile devices</li>
+<li>Lightweight, flexible and themeable design.</li>
+<li>3-level graded platform support system</li>
+<li>
+Check out the
+<a href='http://www.jqmgallery.com/'>gallery</a>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Semantics_64.png">Custom Data Attributes</img>
+<span class='smaller'>
+<a href='http://www.whatwg.org/specs/web-apps/current-work/#embedding-custom-non-visible-data-with-the-data-*-attributes'>more info</a>
+</span>
+</header>
+<article>
+<p>Custom data attributes allows us to embed data with the page</p>
+<p>
+Any element attribute that start with
+<strong class='red'>data-</strong>
+is treated as a storage area for private data
+</p>
+<p>Custom data attributes do not affect the rendering</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Hello</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-city</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Helsinki</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;  Hello World&#x000A;<span class="tag">&lt;/div&gt;</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Key elements of jQuery Mobile
+</header>
+<article>
+<p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-template.html'>Single page template</a>
+and
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/multipage-template.html'>Multi-page template</a>
+</p>
+<p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-transitions.html'>Page transitions</a>
+</p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/pages/page-navmodel.html'>Ajax Navigation</a>
+<ul>
+<li>First page is requested via HTTP request</li>
+<li>Subsequent pages are loaded via Ajax and injected into the DOM (only the "page" section)</li>
+</ul>
+<p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/forms/forms-all.html'>Enhanced form elements</a>
+</p>
+<p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/lists/lists-thumbnails.html'>Several list views</a>
+</p>
+<p>
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/api/events.html'>Events</a>
+and
+<a href='http://jquerymobile.com/demos/1.1.0-rc.1/docs/api/data-attributes.html'>Data attributes</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+A New Design with jQuery mobile
+<span class='smaller'>
+<a href='htmljQueryBlog.html'>htmljQueryBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-jquery.png' /></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-jquery-new.png' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+jQuery Mobile Page
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/jqm-page.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design with Templates
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram2.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Sinatra Server with Templates
+<span class='smaller'><a href='htmljQueryBlog.html'>htmljQueryBlog</a></span>
+</header>
+<article class='smaller'>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">haml</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = [{<span class="symbol">:title</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">My first post</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">hello@blog.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:timestamp</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">1.1.2012 10:20:30</span><span class="delimiter">&quot;</span></span>}]&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d.%m.%Y %H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Renders the haml template index.html.haml</span>&#x000A;  <span class="comment">#with the default layout layout.html.haml</span>&#x000A;  haml <span class="symbol">:index</span>, <span class="symbol">:layout</span> =&gt; <span class="symbol">:layout</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  haml <span class="symbol">:new</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Symbolize the params keys</span>&#x000A;  article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }&#x000A;  &#x000A;  article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;&#x000A;  puts article&#x000A;  redirect to (<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+The Layout
+<span class='small'>
+(
+<span class='terminal'>
+'views/layout.haml'
+</span>
+)
+</span>
+</header>
+<article class='small'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, initial-scale=1</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;  <span class="tag">%body</span>&#x000A;    <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>)&#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%h1</span> Our First Blog&#x000A;&#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;        = <span class="keyword">yield</span>&#x000A;        &#x000A;      <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;        <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;          <span class="tag">%ul</span>&#x000A;            <span class="tag">%li</span>&#x000A;              <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;            <span class="tag">%li</span>&#x000A;              <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) New Entry      &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+The Views
+<span class='smaller'><a href='htmljQueryBlog.html'>htmljQueryBlog</a></span>
+</header>
+<article>
+<div class='autobox'>
+List of posts (
+<span class='terminal'>
+'views/index.haml'
+</span>
+)
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  - <span class="global-variable">$articles</span>.each <span class="keyword">do</span> |a|&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        =a[<span class="symbol">:timestamp</span>]&#x000A;      <span class="tag">%h3</span> &#x000A;        =a[<span class="symbol">:title</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          =a[<span class="symbol">:email</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        =a[<span class="symbol">:content</span>]</pre></div>
+</div>
+</div>
+<div class='autobox vmargin'>
+New Post Form (
+<span class='terminal'>
+'views/new.haml'
+</span>
+)
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Posts</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Don't Repeat Yourself (DRY)
+</header>
+<article>
+<blockquote>
+<div class='smaller'>
+<p>Every piece of knowledge must have a single, unambiguous, authoritative representation within a system</p>
+<p>
+<cite>Andy Hunt and Dave Thomas, The Pragmatic Programmer</cite>
+</p>
+</div>
+</blockquote>
+<p>Don't use the same code (or similar code) in multiple places of the application</p>
+<p>Avoid repetition</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>Form Validation</img>
+</header>
+<article>
+CSS3 introduces two new pseudo-classes for input elements:
+<ul>
+<li>
+<strong class='red'>:valid</strong>
+: element is valid according to the input's type setting (e.g. email)
+</li>
+<li>
+<strong class='red'>:invalid</strong>
+: element failed to validate according to the input's type
+</li>
+</ul>
+<p>
+HTML5 also introduced the
+<strong class='red'>required</strong>
+attribute that indicate the field must have valid data before it can be submmitted.
+</p>
+<p>Styling for invalid elements is done with CSS:</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="pseudo-class">:invalid</span> {  &#x000A;  <span class="key">background-color</span>: <span class="color">#ffdddd</span>;  &#x000A;}  </pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">'</span><span class="content">red</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Validation
+<span class='smaller'>
+<a href='htmljQueryValBlog.html'>htmljQueryValBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+CSS
+<div class="CodeRay">
+  <div class="code"><pre>[<span class="attribute-name">required</span>] {&#x000A;  <span class="key">border-color</span>: <span class="color">#88a</span>;&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">3px</span> <span class="color">rgba(0, 0, 255, .5)</span>;&#x000A;}&#x000A;<span class="pseudo-class">:invalid</span> {&#x000A;  <span class="key">border-color</span>: <span class="color">#e88</span>;&#x000A;  <span class="key">-webkit-box-shadow</span>: <span class="float">0</span> <span class="float">0</span> <span class="float">5px</span> <span class="color">rgba(255, 0, 0, .8)</span>;&#x000A;}&#x000A;<span class="type">input</span><span class="class">.invalid</span> {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">error.png</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="float">4px</span> <span class="float">6px</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">30px</span>;&#x000A;}</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+JS
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">.invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">:invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;  })      &#x000A;})</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='vmargin'>
+Form
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">required</span>)&#x000A;<span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;<span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Post&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Semantics_64.png">New Form Input Types</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/textinputs-jquery.png' /></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+Overview at
+<a href='http://slides.html5rocks.com/#new-form-types'>HTML5 Rocks</a>
+</p>
+<p>
+More details at
+<a href='http://www.w3schools.com/html5/html5_form_input_types.asp'>W3Schools</a>
+</p>
+<p>
+Mobile version from
+<a href='http://jquerymobile.com/demos/1.0/docs/forms/forms-all.html'>jQuery Mobile</a>
+</p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Contenteditable Attribute</header>
+<article>
+<p>The contenteditable attribute specifies whether a user can edit the content of an element.</p>
+<p contenteditable='true'>
+This paragraph is editable.
+</p>
+<div class='vmargin'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;p</span> <span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">'</span><span class="content">true</span><span class="delimiter">'</span></span><span class="tag">&gt;</span>This paragraph is editable<span class="tag">&lt;/p&gt;</span></pre></div>
+</div>
+</div>
+<p>
+Supported in iOS 5 and Android Browser 3.0 (
+<a href='http://caniuse.com/#search=contenteditable'>CanIuse</a>
+)
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Editable Blog
+<span class='smaller'>
+<a href='htmljQueryValEditBlog.html'>htmljQueryValEditBlog</a>
+</span>
+</header>
+<article>
+<div class='autobox'>
+List of posts (
+<span class='terminal'>
+'views/index.haml'
+</span>
+)
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  - <span class="global-variable">$articles</span>.each_with_index <span class="keyword">do</span> |a, i|&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        =a[<span class="symbol">:timestamp</span>]&#x000A;      <span class="tag">%h3</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>) &#x000A;        =a[<span class="symbol">:title</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          =a[<span class="symbol">:email</span>]&#x000A;      <span class="tag">%p</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>)&#x000A;        =a[<span class="symbol">:content</span>]&#x000A;</pre></div>
+</div>
+
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design supporting updates
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram3.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Editable Blog
+<span class='smaller'>
+<a href='htmljQueryValEditBlog.html'>htmljQueryValEditBlog</a>
+</span>
+</header>
+<article>
+<div class='row small'>
+<div class='twoColumn'>
+<div class='autobox'>
+javascript code
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[contenteditable]</span><span class="delimiter">&quot;</span></span>).focus(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> <span class="predefined">$this</span> = <span class="predefined">$</span>(<span class="local-variable">this</span>);&#x000A;  <span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>, <span class="predefined">$this</span>.html());&#x000A;  <span class="keyword">return</span> <span class="predefined">$this</span>;          &#x000A;});&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[contenteditable]</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">blur</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="keyword">var</span> <span class="predefined">$this</span> = <span class="predefined">$</span>(<span class="local-variable">this</span>);&#x000A;    <span class="keyword">if</span> (<span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>) !== <span class="predefined">$this</span>.html()) {&#x000A;        <span class="predefined">$this</span>.data(<span class="string"><span class="delimiter">'</span><span class="content">before</span><span class="delimiter">'</span></span>, <span class="predefined">$this</span>.html());&#x000A;        <span class="predefined">$this</span>.trigger(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>);&#x000A;        <span class="comment">//alert($this.attr('data-id'));</span>&#x000A;        <span class="keyword">var</span> msg = {};&#x000A;        msg[<span class="string"><span class="delimiter">'</span><span class="content">id</span><span class="delimiter">'</span></span>] = <span class="predefined">$this</span>.attr(<span class="string"><span class="delimiter">'</span><span class="content">data-id</span><span class="delimiter">'</span></span>);&#x000A;        msg[<span class="predefined">$this</span>.attr(<span class="string"><span class="delimiter">'</span><span class="content">data-name</span><span class="delimiter">'</span></span>)] = <span class="predefined">$this</span>.html();&#x000A;        <span class="predefined">$</span>.post(<span class="string"><span class="delimiter">'</span><span class="content">/update</span><span class="delimiter">'</span></span>, msg);&#x000A;    }&#x000A;    <span class="keyword">return</span> <span class="predefined">$this</span>;&#x000A;});        </pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+server.rb
+<div class="CodeRay">
+  <div class="code"><pre>post <span class="string"><span class="delimiter">'</span><span class="content">/update</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Symbolize the params keys</span>&#x000A;  article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }&#x000A;&#x000A;  <span class="comment">#Update the timestamp</span>&#x000A;  article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;  &#x000A;  <span class="comment">#Replace the entry in the list of articles</span>&#x000A;  <span class="global-variable">$articles</span>[article[<span class="symbol">:id</span>].to_i].merge!(article)&#x000A;&#x000A;  puts <span class="global-variable">$articles</span>&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Create a multipage app with jQuery</header>
+<article class='singlespace'>
+<ul>
+<li>One single HTML document can contain multiple pages</li>
+<li>Each page must have a unique ID</li>
+<li>The framework handles the page switching and updating the url hash</li>
+<li>
+Link behaviour:
+<ul>
+<li>If it's an internal page, there is a transition to that page</li>
+<li>
+If it's an external page, the default behaviour is to trigger an ajax request to load the page.
+Only the content of the
+<span class='terminal'>
+body
+</span>
+(of of the
+<span class='terminal'>
+body-role="page"
+</span>
+if present) is injected into the DOM
+</li>
+<li>
+If the attributes
+<span class='terminal'>
+rel="external"
+</span>
+or
+<span class='terminal'>
+data-ajax = "false"
+</span>
+are present, the link triggers a full page reload.
+links with external attribute will cause a full page refresh
+</li>
+</ul>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design with multiple JQM pages
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram4.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+A multipage Blog
+<span class='smaller'>
+<a href='htmljQueryMultiBlog.html'>htmljQueryMultiBlog</a>
+</span>
+</header>
+<article class='smaller'>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox hmargin'>
+layout.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>&#x000A;  = <span class="keyword">yield</span>&#x000A;</pre></div>
+</div>
+index.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">home</span><span class="delimiter">&quot;</span></span>)&#x000A;  = haml <span class="symbol">:header</span>&#x000A;               &#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;    = haml <span class="symbol">:posts</span>&#x000A;  &#x000A;  = haml <span class="symbol">:footer</span>&#x000A;      &#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">new</span><span class="delimiter">&quot;</span></span>)&#x000A;  = haml <span class="symbol">:header</span>&#x000A;  &#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;    = haml <span class="symbol">:new</span>&#x000A;  &#x000A;  =haml <span class="symbol">:footer</span>      </pre></div>
+</div>
+new.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">required</span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)              &#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Post&#x000A;</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+header.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%h1</span> Our First Blog&#x000A;</pre></div>
+</div>
+footer.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fixed</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">navbar</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%ul</span>&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) Posts&#x000A;      <span class="tag">%li</span>&#x000A;        <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#new</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">flip</span><span class="delimiter">&quot;</span></span>) New Entry&#x000A;</pre></div>
+</div>
+posts.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  - <span class="global-variable">$articles</span>.each_with_index <span class="keyword">do</span> |a, i|&#x000A;    <span class="tag">%li</span>&#x000A;      <span class="tag">%p</span><span class="class">.ui-li-aside</span>&#x000A;        =a[<span class="symbol">:timestamp</span>]&#x000A;      <span class="tag">%h3</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>) &#x000A;        =a[<span class="symbol">:title</span>]&#x000A;      <span class="tag">%p</span>&#x000A;        <span class="tag">%strong</span>&#x000A;          =a[<span class="symbol">:email</span>]&#x000A;      <span class="tag">%p</span>(<span class="attribute-name">contenteditable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-id</span>=<span class="string"><span class="delimiter">'</span><span class="content">#{i}</span><span class="delimiter">'</span></span>)&#x000A;        =a[<span class="symbol">:content</span>]&#x000A;&#x000A;&#x000A;</pre></div>
+</div>
+
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Offline Usage</header>
+<article>
+For a web application to work offline, you need to consider the following:
+<ul>
+<li>
+Store required data locally through
+<strong>localStorage</strong>
+</li>
+<li>
+Define what files to cache locally via a
+<strong>manifest file</strong>
+</li>
+<li>
+Manage connection changes with
+<strong>online and offline events</strong>
+</li>
+<li>
+Define a
+<strong>synchronization</strong>
+strategy with the data stored in the cloud
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage</img>
+</header>
+<article>
+<ul>
+<li>Historically browsers (thin clients) do not support a way to store data.</li>
+<li>
+Cookies allow to attach data to the HTTP requests but:
+<ul>
+<li>Cookies are sent back and forth with every request</li>
+<li>Cookies cannot be share across different subdomains</li>
+<li>Limited storage (20 cookies x 4KB)</li>
+</ul>
+</li>
+<li>
+Local storage in the browser gives the advantage of:
+<ul>
+<li>Reduce number of requests to the server</li>
+<li>Store locally static or semi static data</li>
+<li>Enable offline usage (e.g. for mobile devices)</li>
+</ul>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage</img>
+</header>
+<article>
+HTML5 introduces two key-value storing mechanisms:
+<ul>
+<li><strong>localStorage</strong>: persistent storage across browser restarts
+</li>
+<li><strong>sessionStorage</strong>: storage that resets when a browser session restarts
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//set a key</span>&#x000A;localStorage.myData = <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>;&#x000A;localStorage.setItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">//get a key</span>&#x000A;<span class="keyword">var</span> data;&#x000A;data = localStorage.myData;&#x000A;data = localStorage.getItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="comment">//delete a key</span>&#x000A;localStorage.myData = <span class="predefined-constant">undefined</span>;&#x000A;localStorage.removeItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Offline Storage - Benefits</img>
+</header>
+<article>
+<ul>
+<li>Same origin policy</li>
+<li>
+approx 2-5MB of storage per host (
+<a href='http://dev-test.nemikor.com/web-storage/support-test/'>test</a>
+)
+</li>
+<li>Only strings can be stored (UTF-16)</li>
+<li>Covert to JSON before storing</li>
+<li>Browser provide tools for looking at the local storage</li>
+<li>
+Performance (
+<a href='http://www.webdirections.org/blog/localstorage-perhaps-not-so-harmful/'>Check this</a>
+) is better than cookies but not the fastest (depends on browser impementation)
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+Add Options for storing:
+<ul>
+<li>Name</li>
+<li>E-mail</li>
+</ul>
+</p>
+<p>The personal data is stored in the localStorage</p>
+<p>When posting a new entry the name and email are also included.</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='hmargin bordered'>
+<div class='image-wrap'><img src='imgs/lesson2/blog-jquery-options.png' /></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Design with localStorage
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson2/blog-diagram5.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+<span class='smaller'>
+<a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
+</span>
+</header>
+<article class='smaller'>
+<div class='autobox hmargin'>
+index.haml
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">options</span><span class="delimiter">&quot;</span></span>)&#x000A;&#x000A;  =haml <span class="symbol">:options</span>&#x000A;&#x000A;  =haml <span class="symbol">:footer</span>&#x000A;</pre></div>
+</div>
+options.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-position</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">inline</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">#home</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">delete</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">back</span><span class="delimiter">&quot;</span></span>) Cancel&#x000A;  <span class="tag">%h1</span> Options&#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">#home</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">check</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-theme</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">saveOpt</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">back</span><span class="delimiter">&quot;</span></span>) Save&#x000A;  &#x000A;<span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%form</span>&#x000A;    <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">optName</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">optEmail</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Email</span><span class="delimiter">&quot;</span></span>)   &#x000A;</pre></div>
+</div>
+new.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%form</span>&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Post Title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">required</span>)&#x000A;  <span class="tag">%textarea</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rows</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">Content</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">content</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%button</span><span class="constant">#postEntry</span>(<span class="attribute-name">type</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">submit</span><span class="delimiter">&quot;</span></span>) Post        &#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Add Options to the Blog
+<span class='smaller'>
+<a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
+</span>
+</header>
+<article class='smaller'>
+<div class='autobox hmargin'>
+JS
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="comment">// Assign the options from the local storage</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optName</span><span class="delimiter">&quot;</span></span>).val(localStorage.name);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optEmail</span><span class="delimiter">&quot;</span></span>).val(localStorage.email);&#x000A;    &#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#postEntry</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    e.preventDefault();&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new .invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).length) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#new :invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>); <span class="keyword">return</span> <span class="predefined-constant">false</span>; }&#x000A;    <span class="keyword">var</span> msg = {};&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#title</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">content</span><span class="delimiter">'</span></span>] = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#content</span><span class="delimiter">'</span></span>).val();&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">email</span><span class="delimiter">'</span></span>] = localStorage.email;&#x000A;    msg[<span class="string"><span class="delimiter">'</span><span class="content">name</span><span class="delimiter">'</span></span>] = localStorage.name;&#x000A;    <span class="predefined">$</span>.post(<span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span>, msg, <span class="keyword">function</span>() { <span class="predefined">$</span>.mobile.changePage(<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>, {<span class="key">reloadPage</span>: <span class="predefined-constant">true</span>}); });&#x000A;  });&#x000A;&#x000A;  ...          &#x000A;  <span class="comment">//Save the options in the local storage     </span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#saveOpt</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>() {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options .invalid</span><span class="delimiter">&quot;</span></span>).removeClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="keyword">if</span> (<span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options :invalid</span><span class="delimiter">&quot;</span></span>).length) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#options :invalid</span><span class="delimiter">&quot;</span></span>).addClass(<span class="string"><span class="delimiter">&quot;</span><span class="content">invalid</span><span class="delimiter">&quot;</span></span>);&#x000A;      <span class="keyword">return</span> <span class="predefined-constant">false</span>;&#x000A;    }&#x000A;    localStorage.name = <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optName</span><span class="delimiter">&quot;</span></span>).val();&#x000A;    localStorage.email = <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#optEmail</span><span class="delimiter">&quot;</span></span>).val();        &#x000A;  })          &#x000A;})&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File</img>
+</header>
+<article>
+<ul>
+<li>The manifest file tells the browser what files to cache locally for offline usage (HTML, CSS, Javascript, images, video, etc.)</li>
+<li>Every single resource that you want to cache must be explicitly listed (no wildcards).</li>
+<li>The files listed in the manifest will be loaded from the local disk even if the browser is online.</li>
+<li>If the page is loaded from the application cache (either online or offline), the browser will load the assets ONLY from the cache and ignore external resources (unless they are specified in the NETWORK section)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Cache size</img>
+</header>
+<article>
+<ul>
+<li>Safari desktop browser (Mac and Windows) have no limit</li>
+<li>Mobile Safari has a 10MB limit</li>
+<li>Chrome has a 5MB limit</li>
+<li>Android browser has no limit</li>
+<li>Firefox desktop has no limit</li>
+<li>Opera’s cache limit can be managed by the user, but has a default size of 50MB</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File</img>
+<span class='smaller'>
+<a href='htmljQueryOfflineBlog.html'>htmljQueryOfflineBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="doctype">&lt;!DOCTYPE HTML&gt;</span>&#x000A;<span class="tag">&lt;html</span> <span class="attribute-name">manifest</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/manifest.appcache</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;<span class="tag">&lt;body&gt;</span>&#x000A;...&#x000A;<span class="tag">&lt;/body&gt;</span> <span class="tag">&lt;/html&gt;</span>&#x000A;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# 30 January 2012&#x000A;/index.html&#x000A;/jquery.js&#x000A;/main.css&#x000A;/logo.png &#x000A;&#x000A;NETWORK:&#x000A;/api&#x000A;&#x000A;FALLBACK:&#x000A;/about /offline-about.html</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>mime type: text/cache-manifest</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>
+Recommended file extension is<span class='terminal'>
+.appcache
+</span></li>
+<li>Only HTTP GET requests are cached.</li>
+<li>The NETWORK section contains resources that are always fetched from the network</li>
+<li>The FALLBACK section contains resources that are fetched from the network only if the browser is online. Otherwiser the fallback version is used.</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File - Rules</img>
+</header>
+<article>
+<ul>
+<li>
+When a page is loaded the browser will check the manifest on the server.
+If it has changed, the browser will redownload all the files listed in the manifest, update the cache and fire the event<span class='terminal'>
+applicationCache.onUpdateReady
+</span></li>
+<li>The browser retains the cached assets until either the user clears the cache or you trigger an update.</li>
+<li>Triggering an update requires that the content of the manifest file changes (not just the assets).</li>
+<li>Any document referencing the manifest file is cached</li>
+</ul>
+<p>
+Good explanation is available
+<a href='http://html5doctor.com/go-offline-with-application-cache/'>here</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>Manifest File - Network Whitelisting</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li>Once the manifest file is in place, the browser will route all the requests throught that file (both online or offline).</li>
+<li>If there is no rule in the manifest file that his matching a request, the request will fail.</li>
+<li>In the NETWORK section, the rule '*' whitelist all the requests that are not matching the rules in the CACHE section</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# 30 January 2012&#x000A;/index.html&#x000A;/jquery.js&#x000A;/main.css&#x000A;/logo.png &#x000A;&#x000A;NETWORK:&#x000A;/api&#x000A;*&#x000A;&#x000A;FALLBACK:&#x000A;/about /offline-about.html&#x000A;    </pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Making life easier with Manifesto
+<span class='smaller'>
+<a href='htmljQueryOfflineManifestoBlog.html'>htmljQueryOfflineManifestoBlog</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li>
+<a href='https://github.com/johntopley/manifesto#readme'>Manifesto</a>
+automatically generate the manifest file by listing all files in the specified directories and subdirectories
+</li>
+<li>
+By default it includes
+<span class='terminal'>
+/public
+</span>
+</li>
+<li>It also computes a hash of the files's contents, so that if a file is changed the manifest file is automatically invalidated.</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> &#x000A;  <span class="constant">Manifesto</span>.cache&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>CACHE MANIFEST&#x000A;# Generated by manifesto (http://github.com/johntopley/manifesto)&#x000A;# Hash: 48c5fbdc2a7627233a5f9741fec32a77&#x000A;/jquery.mobile.structure-1.0.1.min.css&#x000A;/jquery.mobile.structure-1.0.1.css&#x000A;/jquery.mobile-1.0.1.min.js&#x000A;/jquery.mobile-1.0.1.min.css&#x000A;/jquery.mobile-1.0.1.js&#x000A;/jquery.mobile-1.0.1.css&#x000A;/jquery-1.7.1.min.js&#x000A;/images/icons-36-white.png&#x000A;/images/icons-36-black.png&#x000A;/images/icons-18-white.png&#x000A;/images/icons-18-black.png&#x000A;/images/ajax-loader.png&#x000A;/error.png            &#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>How to refresh the list of posts</header>
+<article>
+<ul>
+<li>The main HTML page of the web app is also cached (because it is referencing the manifest file)</li>
+<li>The page will be refreshed only when the manifest file expires in the cache of the browser and is changed on the server.</li>
+</ul>
+<br />
+<p>=> Dynamic updates require a new design for our blog</p>
+</article>
+</section>
+<section class='slide'>
+<header>The applicationCache interface</header>
+<article>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>window.applicationCache  <span class="comment">//Main object to access the app cache</span>&#x000A;window.applicationCache.status <span class="comment">//Status</span>&#x000A;window.applicationCache.<span class="function">onupdateready</span> = <span class="keyword">function</span> (e) {...};  <span class="comment">//Callback        </span>&#x000A;window.applicationCache.update();  <span class="comment">//Force cache update</span>&#x000A;window.applicationCache.swapCache();  <span class="comment">//Swap to new cache</span></pre></div>
+</div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+State of the cache:
+<ul class='smaller'>
+<li>0: UNCACHED</li>
+<li>1: IDLE</li>
+<li>2: CHECKING</li>
+<li>3: DOWNLOADING</li>
+<li>4: UPDATEREADY</li>
+<li>5: OBSOLETE</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+Event callbakcs:
+<ul class='smaller'>
+<li>onchecking</li>
+<li>ondownloading</li>
+<li>onupdateready</li>
+<li>onobsolete</li>
+<li>oncached</li>
+<li>onerror</li>
+<li>onnoupdateready</li>
+<li>onprogress</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Browser connectivity
+</header>
+<article>
+Mobile apps must detect if the browser is online or offline to provide the best user experience:
+<ul>
+<li>disabling those parts of the UI that can only work online</li>
+<li>caching offline actions</li>
+<li>synchronizing the offline changes with the server</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Detecting connectivity with the manifest
+<span class='smaller'>
+<a href='htmljQueryOfflineDetectBlog.html'>htmljQueryOfflineDetectBlog</a>
+</span>
+</header>
+<article>
+layout.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">function</span> <span class="function">testOnline</span>() {&#x000A;    <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">'</span><span class="content">ping</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(data) {&#x000A;      <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">.status</span><span class="delimiter">'</span></span>).html(data);  &#x000A;    });&#x000A;  }&#x000A;<span class="comment">//Test at first page load</span>&#x000A;testOnline();&#x000A;<span class="comment">//Test a timer for infinite testing</span>&#x000A;window.setInterval(testOnline, <span class="integer">10000</span>);</pre></div>
+</div>
+header.haml
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%h1</span><span class="class">.status</span> &#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#options</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-icon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gear</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ui-btn-right</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-transition</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">slidedown</span><span class="delimiter">&quot;</span></span>) Options&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Detecting connectivity with the manifest
+<span class='smaller'>
+<a href='htmljQueryOfflineDetectBlog.html'>htmljQueryOfflineDetectBlog</a>
+</span>
+</header>
+<article>
+manifest.appcache
+<div class="CodeRay">
+  <div class="code"><pre>...&#x000A;FALLBACK:&#x000A;/ping /ping-offline.json  &#x000A;</pre></div>
+</div>
+ping-offline.json
+<div class="CodeRay">
+  <div class="code"><pre><span class="string"><span class="delimiter">&quot;</span><span class="content">Offline</span><span class="delimiter">&quot;</span></span>&#x000A;</pre></div>
+</div>
+server.rb
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/manifest.appcache</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  headers <span class="string"><span class="delimiter">'</span><span class="content">Content-Type</span><span class="delimiter">'</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="content">text/cache-manifest</span><span class="delimiter">'</span></span> <span class="comment"># Must be served with this MIME type</span>&#x000A;  cache_control <span class="symbol">:no_cache</span> <span class="comment">#Disable caching of manifest file, only for demo purposes</span>&#x000A;  <span class="constant">Manifesto</span>.cache &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">FALLBACK:</span><span class="char">\n</span><span class="content"> /ping /ping-offline.json</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span>&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/ping</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">Online</span><span class="delimiter">&quot;</span></span>.to_json&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Offline_Storage_64.png'>IndexedDB</img>
+</header>
+<article>
+<p>Storage mechanism for unstructured data objects (NoSQL)</p>
+<p>Key-value storage where values can be complex structure objects.</p>
+<p>Good performance (better than localStorage)</p>
+<p>Asynchronous API (not blocking UI thread) and synchronous for web workers</p>
+<p>Based on a transactional model</p>
+<p>Support for data migrations</p>
+</article>
+</section>
+
+<!-- Elements -->
+<a class='deck-next-link' href='#' title='Next'>→</a>
+<a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+<p class='deck-status'>
+<span class='deck-status-current'></span>
+/
+<span class='deck-status-total'></span>
+</p>
+<a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+<script src='deckjs/core/deck.core.js'></script>
+<script src='deckjs/extensions/menu/deck.menu.js'></script>
+<script src='deckjs/extensions/goto/deck.goto.js'></script>
+<script src='deckjs/extensions/status/deck.status.js'></script>
+<script src='deckjs/extensions/navigation/deck.navigation.js'></script>
+<script src='deckjs/extensions/hash/deck.hash.js'></script>
+<!-- /%script(src="deckjs/extensions/scale/deck.scale.js") -->
+<!-- /%script(src="deckjs/extensions/notes/deck.notes.js") -->
+<script src='js/main.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(document).bind('deck.change', function(event, from, to) {
+     
+      //alert('Moving from slide ' + from + ' to ' + to);
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
+      if (t==undefined) { t = "bg-default"; }
+      if (f==undefined) { f = "bg-default"; }
+             
+      
+      var front = $('#background > .front').first();
+      var back = $('#background > .back').first();
+    
+      if (front.hasClass('active')) {
+        if (front.attr('id') == t) { return; }
+    
+        back.attr('id',t);
+        front.removeClass('active');
+        back.addClass('active');
+        front.css('opacity',0);
+      } else {
+        if (back.attr('id') == t) { return; }
+    
+        front.attr('id',t);
+        back.removeClass('active');
+        front.addClass('active');
+        front.css('opacity',1);
+      }
+      
+      //last.attr('id',active.attr('id'));
+      //last.css('opacity',1);
+      //active.remove();
+      //$("#background").append('<div class="background active" id="'+t+'" style="opacity: 0; "></div>')
+      //$("#"+t).css('opacity',1);
+      //var el = $("#"+t);
+    
+      //active.removeClass('active').addClass('last');
+      //last.removeClass('last').addClass('active');
+      
+      //last.dequeue();
+      //active.dequeue();
+             
+      //active.css('opacity',0);
+      //alert(last.attr('id'));
+      //active.fadeOut('slow');
+      //last.fadeIn('slow', function() {
+      //});
+      
+      //last.fadeIn('slow');
+      //$("#"+t).css('opacity',1);
+      //last.css('opacity',1);
+      //el = $("#"+t);
+      //el.animate({opacity: 1.0}, 1000);
+    
+      //if (t==undefined && f == undefined) {
+      //} else if (t == f) {
+      //}
+      //else if (t != undefined) {
+      //  $('#background').css("background-image", "url(" + t + ")").fadeIn('slow');
+      //} else if (t == undefined) {
+      //  $('#background').fadeOut('slow');
+      //}
+    });
+      //current = $('body').css("background-image");
+      //alert(current);
+  //]]>
+</script>
+<!-- .slide-footer -->
+<!-- =META['title'] -->
+<!-- \- -->
+<!-- =META['author'] -->
+</article>
+</body>
+</html>

@@ -222,9 +222,9 @@ A Simple Server with Sinatra
 <a href='htmlFormBlog.html'>htmlFormBlog</a>
 </span>
 </header>
-<article>
+<article class='larger'>
 <div class="CodeRay">
-  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = []&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  article = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;  puts article&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = []&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  content_type <span class="symbol">:json</span>&#x000A;  {<span class="symbol">:articles</span> =&gt; <span class="global-variable">$articles</span>}.to_json&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/articles</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  article = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;  puts article&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -237,7 +237,6 @@ A Simple Server with Sinatra
 <li>
 Check also
 <a href='http://zeptojs.com/'>Zepto.js</a>
-)
 </li>
 </ul>
 <a href='http://jqueryui.com'>jQuery UI</a>
@@ -346,7 +345,10 @@ Design with Templates
 </article>
 </section>
 <section class='slide'>
-<header>Sinatra Server with Templates</header>
+<header>
+Sinatra Server with Templates
+<span class='smaller'><a href='htmljQueryBlog.html'>htmljQueryBlog</a></span>
+</header>
 <article class='smaller'>
 <div class="CodeRay">
   <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">haml</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="global-variable">$articles</span> = [{<span class="symbol">:title</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">My first post</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">hello@blog.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:timestamp</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">1.1.2012 10:20:30</span><span class="delimiter">&quot;</span></span>}]&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d.%m.%Y %H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Renders the haml template index.html.haml</span>&#x000A;  <span class="comment">#with the default layout layout.html.haml</span>&#x000A;  haml <span class="symbol">:index</span>, <span class="symbol">:layout</span> =&gt; <span class="symbol">:layout</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  haml <span class="symbol">:new</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/new</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Symbolize the params keys</span>&#x000A;  article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }&#x000A;  &#x000A;  article[<span class="symbol">:timestamp</span>] = timestamp&#x000A;  <span class="global-variable">$articles</span> &lt;&lt; article&#x000A;&#x000A;  puts article&#x000A;  redirect to (<span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
@@ -371,7 +373,10 @@ The Layout
 </article>
 </section>
 <section class='slide'>
-<header>The Views</header>
+<header>
+The Views
+<span class='smaller'><a href='htmljQueryBlog.html'>htmljQueryBlog</a></span>
+</header>
 <article>
 <div class='autobox'>
 List of posts (
@@ -747,7 +752,7 @@ HTML5 introduces two key-value storing mechanisms:
 </li>
 </ul>
 <div class="CodeRay">
-  <div class="code"><pre><span class="comment">//set a key</span>&#x000A;localStorage.myData = <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>;&#x000A;localStorage.setItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">//get a key</span>&#x000A;<span class="keyword">var</span> data;&#x000A;data = localStorage.myData;&#x000A;data = localStorage.getItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="comment">//delete a key</span>&#x000A;localStorage.myData = <span class="predefined-constant">undefined</span>;&#x000A;localStorage.remoteItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+  <div class="code"><pre><span class="comment">//set a key</span>&#x000A;localStorage.myData = <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>;&#x000A;localStorage.setItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">//get a key</span>&#x000A;<span class="keyword">var</span> data;&#x000A;data = localStorage.myData;&#x000A;data = localStorage.getItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="comment">//delete a key</span>&#x000A;localStorage.myData = <span class="predefined-constant">undefined</span>;&#x000A;localStorage.removeItem(<span class="string"><span class="delimiter">'</span><span class="content">myData</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -969,7 +974,10 @@ Making life easier with Manifesto
 <div class='twoColumn'>
 <div class='autobox'>
 <ul>
-<li>Manifesto automatically generate the manifest file by listing all files in the specified directories and subdirectories</li>
+<li>
+<a href='https://github.com/johntopley/manifesto#readme'>Manifesto</a>
+automatically generate the manifest file by listing all files in the specified directories and subdirectories
+</li>
 <li>
 By default it includes
 <span class='terminal'>
