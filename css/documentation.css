@@ -207,7 +207,7 @@ span.terminal, p.terminal, .terminal {
 /* line 156, ../../sass/documentation.scss */
 .lecture_block .lecture {
   clear: both;
-  padding: 10px 10px 0px 10px;
+  padding: 20px 10px 0px 10px;
 }
 /* line 159, ../../sass/documentation.scss */
 .lecture_block .lecture .info {
