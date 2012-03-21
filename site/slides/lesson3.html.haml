@@ -3,13 +3,37 @@
 %section.slide.section-title
   %h1 Lecture 3: Templating and MVC
   .agenda
+    %p A quick recap
     %p Client-side Templating
     %p Handlerbar.js
     %p Model-View-Controller
     %p Backbone.js
     %p Examples
     
+%section.slide 
+  %header
+    We started here
+  %article
+    =image_tag "lesson1/web-arch-classic.png", :resize => true
 
+%section.slide
+  %header
+    We added jQuery Mobile
+  %article
+    =image_tag "lesson3/web-arch-classic-jquery.png", :resize => true    
+
+%section.slide
+  %header
+    We added local storage
+  %article
+    =image_tag "lesson3/web-arch-classic-jquery-storage.png", :resize => true    
+    
+%section.slide
+  %header
+    Server-side templates with Haml
+  %article
+    =image_tag "lesson3/web-arch-classic-sinatra-haml.png", :resize => true    
+    
 %section.slide
   %header
     Traditional Sequence in a Web Request 
@@ -227,28 +251,40 @@
     Blog with Templates
     %span.smaller
       =example_url_tag("templateHandlebarsBlog")
+  %article
+    views/templates.haml  
+    .larger
+      :coderay
+        #!haml
+        %script(id="articles" type="text/x-handlebars-template")
+          %ul(data-role = "listview")
+            {{#articles}}  
+            %li
+              %p.ui-li-aside
+                {{timestamp}}
+              %h3(contenteditable="true" data-name="title" data-id='{{id}}') 
+                {{title}}
+              %p
+                %strong
+                  {{email}}
+              %p(contenteditable="true" data-name="content" data-id='{{id}}')
+                {{content}}
+            {{/articles}}
 
+%section.slide
+  %header
+    Design with Templates
+  %article
+    =image_tag('lesson3/blog-diagram6.png', :resize => true)
+
+
+%section.slide
+  %header
+    Blog with Templates
+    %span.smaller
+      =example_url_tag("templateHandlebarsBlog")
   %article
   .row
-    .twoColumn
-      .autobox
-        views/templates.haml  
-        :coderay
-          #!haml
-          %script(id="articles" type="text/x-handlebars-template")
-            %ul(data-role = "listview")
-              {{#articles}}  
-              %li
-                %p.ui-li-aside
-                  {{timestamp}}
-                %h3(contenteditable="true" data-name="title" data-id='{{id}}') 
-                  {{title}}
-                %p
-                  %strong
-                    {{email}}
-                %p(contenteditable="true" data-name="content" data-id='{{id}}')
-                  {{content}}
-              {{/articles}}
     .twoColumn
       .autobox
         views/layout.haml  
@@ -257,19 +293,26 @@
           %body
             = haml :templates
             = yield
-            
+    .twoColumn
+      .autobox
         views/index.haml  
         :coderay
           #!haml
           %div(data-role="page" id="home")
             = haml :header
+          
             %div(data-role="content" id="articlesList")
+          
             = haml :footer
+            
           %div(data-role="page" id="new")
             = haml :header
+          
             %div(data-role="content")
               = haml :new
+          
             =haml :footer      
+          
           %div(data-role="page" id="options")
             =haml :options
             =haml :footer                  
@@ -397,7 +440,9 @@
               %a(href="http://javascriptmvc.com") JavaScriptMVC
             %li
               %a(href="http://sammyjs.org") Sammy.js
-         
+            %li
+              %a(href="http://emberjs.org") Ember.js
+
 %section.slide
   %header Backbone.js 
   %article
@@ -406,7 +451,7 @@
       %li 
         %strong 
           models
-        with key-value binding and custome events
+        with key-value binding and custom events
       %li
         %strong
           collections
@@ -425,13 +470,12 @@
         for connecting to existing applications
 
 %section.slide
-  %header Backbone.js
+  %header Backbone.js - Benefits
   %article
-    Adantages:
     %ul
       %li No assumptions about the UI
       %li Flexible about the data persistence possibilities
-      %li Support any HTML templatng engine
+      %li Support any HTML templating engine
       %li Only hard dependency is with Underscore.js
       %li Lightweight: no UI widgets
       %li Backend agnostic by using RESTful JSON endpoints
@@ -567,7 +611,9 @@
       #!javascript
       articles.fetch();
       articles.length;
-      articles.create([{title: "First Post"}, {title: "Second post"}]);
+      articles.add([{title: "First Post"}, {title: "Second post"}]);
+      articles.reset();
+      articles.create({title: "First Post", content: "The content goes here"});
       articles.reset();
       articles.fetch();
       articles.at(2).set({title: "Something", content: "different"}).save();
@@ -632,6 +678,7 @@
         render: function() { this.el.innerHTML = 'Hello'; return this; }
       });
       
+      var i = new itemView();
       i.el;
       i.render().el;
       $("#articlesList").html(i.render().el);
@@ -655,9 +702,11 @@
         render: function() { $(this.el).html('Hello World'); return this; }
       });
       
-      var i2 = new itemView1();
+      var i2 = new itemView2();
       i2.render();
       i2.$el.html('Cheers');
+      i1.render();
+      i2.render();
 
 %section.slide
   %header
@@ -683,7 +732,7 @@
       #!javascript
       var itemView = Backbone.View.extend ({
         el: $("#articlesList"),
-        initialize: function() { this.model.bind('change', this.render, this); }, 
+        initialize: function() { this.model.on('change', this.render, this); }, 
         render: function() { $(this.el).html(this.model.get('title') + "," + this.model.get('content')); return this; }
       });
       
@@ -702,7 +751,7 @@
       var itemView = Backbone.View.extend ({
         el: $("#articlesList"),
         events: {'click': 'handleClick'},
-        initialize: function() { this.model.bind('change', this.render, this); }, 
+        initialize: function() { this.model.on('change', this.render, this); }, 
         render: function() { $(this.el).html(this.model.get('title') + "," + this.model.get('content')); return this; },
         handleClick: function() { this.$el.fadeOut().fadeIn(); }
       });
@@ -942,48 +991,66 @@
         %span.terminal>
           Backbone.sync
         )
-    :coderay
-      #!haml
-      %script(type="text/javascript" src="backbone.js")
-      :javascript
-        //Original sync method is saved
-        Backbone.serverSync = Backbone.sync;
-      %script(type="text/javascript" src="backbone.localsotrage.js")
-    
+      %li 
+        Original 
+        %span.terminal>
+          Backbone.sync
+        is available at 
+        %span.terminal>
+          Backbone.ajaxSync
 
 %section.slide
-  %header Challenge of the week
+  %header
+    Blog with localStorage
+    %span.smaller
+      =example_url_tag("mvcBackboneLocalBlog")
   %article
-    %p Consider an offline application where the models are stored in the localStorage and in the cloud.
-    %p The models in the cloud are updated independently from the models in the localStorage
-    %p The models in the localStorage and in the cloud are likely to be out of sync with changes on both sides
-    %p 
-    %p Find some strategies how to keep the models in sync. Look at alternatives, constraints, creative solutions, workarounds.
-    %p
-    %p Working code is better than words
-                  
+    layout.haml
+    :coderay
+      #!haml
+      ...
+      %script(type="text/javascript" src="backbone.js")
+      %script(type="text/javascript" src="backbone.localStorage.js")
+      ...
+    JS
+    :coderay
+      #!javascript
+      ...
+      var Articles = Backbone.Collection.extend ({
+        model: Article,
+        localStorage: new Backbone.LocalStorage("Articles")
+      });
+      ...
+
+
 %section.slide
-  %header Assets precompilation
+  %header Pre-compilation of the assets
   %article
-    http://rubydoc.info/gems/handlebars_assets/0.2.0/frames
-    
+    %ul
+      %li
+        If your are developing a standalone application (without a server) you can compile the Haml files to HTML (e.g. using a 
+        %a(href="https://gist.github.com/1635301/") Rakefile
+        )
+      %li 
+        If you are developing a server-based webapp there are tools for precompiling the assets (including the Handlebars.js templates):
+        %ul
+          %li 
+            %a(href="http://rubydoc.info/gems/handlebars_assets/0.2.0/frames") Handlerbar.js compilation
+          %li
+            %a(href="https://github.com/sstephenson/sprockets") Sprockets
+      %li
+        %a(href="https://www.ruby-toolbox.com/categories/static_website_generation") Static Web Site Generation
+        
+
 %section.slide
-  %header Streaming responses
-  %article
-    Downloading assets in parallel using the sinatra steaming feature
-    http://www.sinatrarb.com/2011/09/30/sinatra-1.3.0
-    
-%section.slide
-  %header Resources
+  %header Synchronization of models
   %article
     %p 
-      for model synchroization there is Racer but not ready yet:
-      http://blog.nateps.com/announcing-racer-experimental-realtime-model
-    
+      %a(href="http://blog.nateps.com/announcing-racer-experimental-realtime-model") Racer 
+      but not ready yet
     %p 
-      Interesting example: http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/
+      %a(href="http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/") Backbone.js on the server
     %p 
-      Backbone and local storage
-      http://occdevcamp.wordpress.com/2011/10/15/backbone-local-storage-and-server-synchronization/
+      %a(href="http://occdevcamp.wordpress.com/2011/10/15/backbone-local-storage-and-server-synchronization/") Backbone and local storage
       
       

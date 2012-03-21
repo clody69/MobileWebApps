@@ -1,0 +1,94 @@
+=example_header_tag "Blog based on Backbone.js", "mvcBackboneLocalBlog"
+
+%p
+  We turn the example
+  =example_url_tag("mvcBackboneBlog")
+  into a standalone web application that doesn't require a server. We store the posts locally in the browser using 
+  the localStorage.
+  
+%p 
+  We use the extension 
+  %a(href="https://github.com/jeromegn/Backbone.localStorage") Backbone.localStorage 
+  that provides an adapter for storing models and collections on the localStorage. The extension replaces the 
+  Backbone.sync() method and no other changes are required to the models and collections.
+  
+%p First we must include the backbone.localstorage.js script in the HTML header
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!haml
+    !!! 5
+    %html
+      %head
+        %meta(charset="utf-8")
+        %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+        %meta(name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;")
+        %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
+        %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
+        %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+        %script(type="text/javascript" src="handlebars-1.0.0.beta.6.js")
+        %script(type="text/javascript" src="underscore.js")
+        %script(type="text/javascript" src="json2.js")
+        %script(type="text/javascript" src="backbone.js")
+        %script(type="text/javascript" src="backbone.localStorage.js")
+        
+        %title
+          Blog
+        ...
+%p
+  The second step is to instruct Backbone to store the 
+  %span.terminal Articles
+  collection in the localStorage. This is achieved by removing the url attribute in the collection and adding the localStorage as below:
+
+.code_block
+  .code_header
+    views/layout.haml  
+  :coderay_raw
+    #!javascript
+      var Article = Backbone.Model.extend ({
+      });
+
+      var Articles = Backbone.Collection.extend ({
+        model: Article,
+        localStorage: new Backbone.LocalStorage("Articles")
+      });
+
+
+   
+%p
+  This example doesn't require a server but it requires Sinatra for generating the main page (index.html). 
+  This can be achieved by starting the Sinatra server with the following command: 
+
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!haml
+    ruby server.rb
+
+%p
+  You can save the 
+  %span.terminal
+    index.html
+  page by visiting the URL 
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser or on Unix systems you can just execute the following command: 
+  .code_block
+    .code_header
+      terminal  
+    :coderay_raw
+      #!plain
+      wget localhost:4567
+%p 
+  If you want to deploy the web app as a standalone application you must also copy the content of the 
+  %span.terminal
+    \/public
+  directory at the same location of the 
+  %span.terminal
+    index.html
+  file.
+%p You can try the try the web app also by following the "Try it" link on the top right.
+
+
+

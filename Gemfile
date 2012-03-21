@@ -13,5 +13,4 @@ gem "libnotify"
 gem "pygmentize"
 gem "haml-coderay"
 
-
 # gem "rails"
