@@ -27,8 +27,8 @@ module PresentationHelper
     h += "</p>"
   end
   
-  def title_slide_tag(subtitle)
-    Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle}) 
+  def title_slide_tag(subtitle, author="Claudio Riva")
+    Haml::Engine.new(IO.read('site/views/title_slide.html.haml'), :ugly => true).render(Object.new,{:subtitle => subtitle, :author => author}) 
   end
 
   def html5_offline_storage_tag(title="Offline Storage")

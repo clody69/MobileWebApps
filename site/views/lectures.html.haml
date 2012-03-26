@@ -7,9 +7,9 @@
   .header
     Monday 12th March 2012
   .lecture
-    =lecture_tag("Lecture 1: Introduction", "14:15-15:45", "", "lecture1_2012_1.html")
     .video
       %iframe(src="http://player.vimeo.com/video/38676177?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 1: Introduction", "14:15-15:45", "", "lecture1_2012_1.html")
     .description
       %p 
         This lecture gives an introduction to the mobile application ecosystem and looks at the pros and cons
@@ -40,9 +40,9 @@
   .header
     Monday 19th March 2012
   .lecture
-    =lecture_tag("Lecture 2: Building a Mobile Web App", "14:15-15:45", "", "lecture2_2012_1.html",)
     .video
       %iframe(src="http://player.vimeo.com/video/38901435?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 2: Building a Mobile Web App", "14:15-15:45", "", "lecture2_2012_1.html")
 
     .description
       %p 
@@ -74,6 +74,8 @@
         %li=example_url_tag('htmljQueryOfflineDetectBlog')
 
   .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/39102024?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
     =lecture_tag("Lab 2: jQuery Mobile", "16:00-17:45", "Guest Lecture: Mikael Blomberg, SC5")
     .description
       %p This lab is focused on learning jQuery and jQuery Mobile through examples and hands-on exercises.
@@ -82,13 +84,16 @@
       
       Examples: 
       %a(href="https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/lab2JQueryMobile") jQuery Examples
-      
-      
+      %br
+      %br
+      %br
+      %br
+      %br
 .lecture_block
   .header
     Monday 26th March 2012
   .lecture
-    =lecture_tag("Lecture 3: Templating and MVC", "14:15-15:45")
+    =lecture_tag("Lecture 3: Templating and MVC", "14:15-15:45","", "lecture3_2012_1.html")
     .description
       %p
         In this lecture we'll explore the advantages of using a templating method for creating the views 
@@ -100,8 +105,17 @@
           %li MVC architecture for webapps
           %li Introduction to Backbone.js
           %li Example of MVC web app
+      
+      =docs_tag("lecture3.pdf")
+
+      Examples:
+      %ul
+        %li=example_url_tag('templateHandlebarBlog')
+        %li=example_url_tag('mvcBackboneBlog')
+        %li=example_url_tag('mvcBackboneLocalBlog')
+
   .lecture
-    =lecture_tag("Lab 3: Backbone.js", "16:00-17:45", "Guest Lecture: Mikael Blomberg, SC5")
+    =lecture_tag("Lab 3: Backbone.js", "16:00-17:45", "Guest Lecture: Mikael Blomberg, SC5", "lab3_2012_1.html")
     .description
       %p This lab will be focused on mastering the details of Backbone.js through several examples. 
 
