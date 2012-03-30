@@ -203,46 +203,50 @@
     };
     img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
   })
-  %section.slide
-    %header
-      Drawing a cat
-    %article
+
+%section.slide
+  %header
+    Drawing a cat
+  %article
+
 %section.slide
   %header
     Pixel-level Processing
   %article
-    %p Capture an area of the canvas into an array
     .vmargin
       .terminal.singlespace
         %p var pixels = getImageData(sx, sy, sw, sh)
-        %p putImage(pixels, dx, dy)
-        %p CanvasPixelArray => [ r1, g1, b1, a1, r2, g2, ...]
+        %p putImageData(pixels, dx, dy)
+        %p pixels => [ r1, g1, b1, a1, r2, g2, ...]
     .row
       .twoColumn
         :coderay
           #!javascript
-            var img = new Image();
-
-            //wait until the image has loaded
-            img.onload = function () {
-              ctx.drawImage(this, 0, 0);
-            };
-
-            img.src = "banksy.jpg"
+          var img = new Image();
+          img.onload = function () {
+            ctx.drawImage(this, 0, 0);
+            var a = ctx.getImageData(0, 0, this.width, this.height);
+            var b = $.map(a, function(v,i) {
+              if (i % 4 < 3) return 255-v;
+              else return v;
+            });
+            ctx.putImageData(b, 0, 0);
+          };
+          img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
       .twoColumn
-        %canvas#canvas_3(width="400px" height="300")
+        %canvas#canvas_4(width="400px" height="300")
+      
 :javascript
   $(function() {
-    var ctx = document.getElementById('canvas_3').getContext('2d');
+    var ctx = document.getElementById('canvas_4').getContext('2d');
     var img = new Image();
     img.onload = function () {
       ctx.drawImage(this, 0, 0);
-      var array = ctx.getImageData(0, 0, this.width, this.height);
-      for (var i=0; i < array.data.legth; i+=4) {
-        pixels.data[i] = 255 - pixels.data[i]; // red
-      }
-      ctx.putImageData(pixels, 0, 0);
-      
+      var a = ctx.getImageData(0, 0, this.width, this.height);
+      $.each(a, function(i,v) {
+        if (i % 4 < 3) this = 255-v;
+      });
+      ctx.putImageData(b, 0, 0);
     };
     img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
   })
