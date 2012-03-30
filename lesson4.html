@@ -316,9 +316,8 @@ Pixel-level Processing
       img.onload = function () {
         ctx.drawImage(this, 0, 0);
         var a = ctx.getImageData(0, 0, this.width, this.height);
-        var b = $.map(a, function(v,i) {
-          if (i % 4 < 3) return 255-v;
-          else return v;
+        $.each(a, function(i,v) {
+          if (i % 4 < 3) this = 255-v;
         });
         ctx.putImageData(b, 0, 0);
       };
