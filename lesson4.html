@@ -315,11 +315,12 @@ Pixel-level Processing
       var img = new Image();
       img.onload = function () {
         ctx.drawImage(this, 0, 0);
-        var a = ctx.getImageData(0, 0, this.width, this.height);
-        $.each(a, function(i,v) {
-          if (i % 4 < 3) this = 255-v;
+        var pixels = ctx.getImageData(0, 0, this.width, this.height);
+        $.each(pixels.data, function(i,v) {
+          if (i % 4 < 3) 
+            pixels.data[i] = 255 - pixels.data[i];
         });
-        ctx.putImageData(b, 0, 0);
+        ctx.putImageData(pixels, 0, 0);
       };
       img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
     })
