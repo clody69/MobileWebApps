@@ -77,6 +77,7 @@ Aalto University March 2012
 <section class='slide section-title'>
 <h1>Lecture 4: File & Device Access</h1>
 <div class='agenda'>
+<p>Canvas API</p>
 <p>File API</p>
 <p>Bytes and Blobs</p>
 <p>HTML Media Capture API</p>
@@ -84,6 +85,282 @@ Aalto University March 2012
 <p>GeoLocation API</p>
 <p>Audio & Video</p>
 </div>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
+<span class='smaller'>
+<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html'>WHATWG</a>
+</span>
+</header>
+<article>
+One of the largest part of the HTML5 specification
+It provides an API for 2D drawing
+Some examples:
+<a href='http://www.cuttherope.ie/'>Cut the Rope</a>
+<a href='http://mudcu.be/sketchpad/'>SketchPad</a>
+<a href='http://mrdoob.com/projects/harmony'>Harmony</a>
+</article>
+</section>
+<section class='slide'>
+<header>
+Bitmap vs Vector Graphics
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+A
+<strong>bitmap</strong>
+is just a list of color values for each pixels of the image (e.g. jpg, png, gif)
+</p>
+<p>Fixed resolution</p>
+<p>Large file</p>
+<p>Faster to load and display</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+A
+<strong>vector graphic</strong>
+is a list of instructions how to draw an image (e.g. SVG, VML)
+</p>
+<br />
+<p>Resolution independent</p>
+<p>Smaller file</p>
+<p>Processor intensive</p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
+<span class='smaller'>
+<a href='http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png'>Cheat Sheet</a>
+</span>
+</header>
+<article>
+<p>Javascript API providing low-level primitives for drawing on the Canvas</p>
+Interface of the Canvas element:
+<ul>
+<li><strong class='red'>getContext('2d')</strong>: returns the object for accessing the Javascript Canvas API
+</li>
+<li><strong class='red'>toDataURL( [DOMString type])</strong>: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg')
+</li>
+<li><strong class='red'>toBlob(callback, [DOMString type])</strong>: creates a Blob representation of the image on the canvas and passes to the callback function.
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;canvas</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">canvas</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><span class="tag">&lt;/canvas&gt;</span></pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Get the 2D Canvas context object</span>&#x000A;<span class="keyword">var</span> ctx = document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>).getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Drawing on the canvas
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> ctx = document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">canvas_1</span><span class="delimiter">'</span></span>).getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;ctx.fillStyle = <span class="string"><span class="delimiter">'</span><span class="content">rgb(0, 255, 0)</span><span class="delimiter">'</span></span>;&#x000A;ctx.fillRect(<span class="integer">10</span>, <span class="integer">20</span>, <span class="integer">50</span>, <span class="integer">50</span>); <span class="comment">//Create a solid square</span>&#x000A;ctx.strokeStyle = <span class="string"><span class="delimiter">'</span><span class="content">rgb(0, 182, 0)</span><span class="delimiter">'</span></span>;&#x000A;ctx.lineWidth = <span class="integer">5</span>;&#x000A;ctx.strokeRect(<span class="integer">9</span>, <span class="integer">19</span>, <span class="integer">52</span>, <span class="integer">52</span>); <span class="comment">//Draws an outline</span>&#x000A;gradient = ctx.createLinearGradient(<span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">0</span> , <span class="integer">100</span>);&#x000A;gradient.addColorStop(<span class="integer">0</span>, <span class="string"><span class="delimiter">'</span><span class="content">#fff</span><span class="delimiter">'</span></span>);&#x000A;gradient.addColorStop(<span class="integer">1</span>, <span class="string"><span class="delimiter">'</span><span class="content">#f00</span><span class="delimiter">'</span></span>);&#x000A;ctx.fillStyle = gradient;&#x000A;ctx.fillRect(<span class="integer">100</span>, <span class="integer">10</span>, <span class="integer">100</span>, <span class="integer">100</span>);      </pre></div>
+</div>
+<canvas height='220' id='canvas_1' width='800px'></canvas>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      var ctx = document.getElementById('canvas_1').getContext('2d');
+      ctx.fillStyle = 'rgb(0, 255, 0)';
+      ctx.fillRect(100, 20, 50, 50); //Create a solid square
+      ctx.strokeStyle = 'rgb(0, 182, 0)';
+      ctx.lineWidth = 5;
+      ctx.strokeRect(99, 19, 52, 52); //Draws an outline
+      gradient = ctx.createLinearGradient(0, 0, 0 , 100);
+      gradient.addColorStop(0, '#fff');
+      gradient.addColorStop(1, '#f00');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(300, 10, 100, 100);
+    })
+  //]]>
+</script>
+<section class='slide'>
+<header>
+Drawing paths
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>ctx.beginPath();&#x000A;ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">100</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;ctx.closePath();&#x000A;ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(255, 255, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;ctx.fill();&#x000A;&#x000A;ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0, 0, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;ctx.beginPath();&#x000A;ctx.arc(<span class="integer">120</span>, <span class="integer">130</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;ctx.closePath();&#x000A;ctx.fill();&#x000A;&#x000A;ctx.beginPath();&#x000A;ctx.arc(<span class="integer">180</span>, <span class="integer">130</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;ctx.closePath();&#x000A;ctx.fill();&#x000A;&#x000A;ctx.beginPath();&#x000A;ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">70</span>, Math.PI/<span class="integer">10</span>, Math.PI*(<span class="integer">1</span>-<span class="integer">1</span>/<span class="integer">10</span>), <span class="predefined-constant">false</span>);&#x000A;ctx.lineWidth = <span class="integer">5</span>;&#x000A;ctx.strokeStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0,0,0)</span><span class="delimiter">&quot;</span></span>;&#x000A;ctx.stroke();</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<canvas height='300' id='canvas_2' width='300px'></canvas>
+</div>
+</div>
+</article>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      var ctx = document.getElementById('canvas_2').getContext('2d');
+      ctx.beginPath();
+      ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+    
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.beginPath();
+      ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+    
+      ctx.beginPath();
+      ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    })
+  //]]>
+</script>
+</section>
+<section class='slide'>
+<header>
+Drawing a cat
+</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>
+Drawing an image
+</header>
+<article>
+<div class='vmargin'>
+<div class='terminal singlespace'>
+<p>drawImage(image, dx, dy)</p>
+<p>drawImage(image, dx, dy, dw, dh)</p>
+<p>drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)</p>
+</div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;  &#x000A;  <span class="comment">//wait until the image has loaded</span>&#x000A;  img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;    ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  };&#x000A;  &#x000A;  img.src = <span class="string"><span class="delimiter">&quot;</span><span class="content">banksy.jpg</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<canvas height='400' id='canvas_3' width='400px'></canvas>
+</div>
+</div>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      var ctx = document.getElementById('canvas_3').getContext('2d');
+      var img = new Image();
+      img.onload = function () {
+        ctx.drawImage(this, 0, 0);
+      };
+      img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
+    })
+    %section.slide
+      %header
+        Drawing a cat
+      %article
+  //]]>
+</script>
+<section class='slide'>
+<header>
+Pixel-level Processing
+</header>
+<article>
+<p>Capture an area of the canvas into an array</p>
+<div class='vmargin'>
+<div class='terminal singlespace'>
+<p>var pixels = getImageData(sx, sy, sw, sh)</p>
+<p>putImage(pixels, dx, dy)</p>
+<p>CanvasPixelArray => [ r1, g1, b1, a1, r2, g2, ...]</p>
+</div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;&#x000A;  <span class="comment">//wait until the image has loaded</span>&#x000A;  img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;    ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  };&#x000A;&#x000A;  img.src = <span class="string"><span class="delimiter">&quot;</span><span class="content">banksy.jpg</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<canvas height='300' id='canvas_3' width='400px'></canvas>
+</div>
+</div>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      var ctx = document.getElementById('canvas_3').getContext('2d');
+      var img = new Image();
+      img.onload = function () {
+        ctx.drawImage(this, 0, 0);
+        var array = ctx.getImageData(0, 0, this.width, this.height);
+        for (var i=0; i < array.data.legth; i+=4) {
+          pixels.data[i] = 255 - pixels.data[i]; // red
+        }
+        ctx.putImageData(pixels, 0, 0);
+        
+      };
+      img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
+    })
+  //]]>
+</script>
+<section class='slide'>
+<header>
+Animating the canvas
+</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Scalable Vector Graphics (SVG)</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>SVG vs Canvas</header>
+<article>
+Check html5 book for comparison
+</article>
+</section>
+<section class='slide'>
+<header>SVG to Canvas</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>
+Javascript Libraries
+</header>
+<article>
+<a href='http://processingjs.org/'>ProcessingJS</a>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
+<span class='smaller'>
+<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html'>WHATWG</a>
+</span>
+</header>
+<article></article>
 </section>
 <section class='slide'>
 <header>
@@ -672,21 +949,6 @@ contains the attributes:
 <li>duration</li>
 </ul>
 </p>
-</article>
-</section>
-<section class='slide'>
-<header>
-<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
-<span class='smaller'>
-<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html'>WHATWG</a>
-</span>
-</header>
-<article>
-One of the largest part of the HTML5 specification
-It provides an API for 2D drawing
-Some examples:
-<a href='http://mudcu.be/sketchpad/'>SketchPad</a>
-<a href='http://mrdoob.com/projects/harmony'>Harmony</a>
 </article>
 </section>
 <section class='slide'>
