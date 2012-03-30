@@ -3,12 +3,283 @@
 %section.slide.section-title
   %h1 Lecture 4: File & Device Access
   .agenda
+    %p Canvas API
     %p File API
     %p Bytes and Blobs
     %p HTML Media Capture API
     %p Motion Sensor API
     %p GeoLocation API
     %p Audio & Video
+
+%section.slide
+  %header
+    =html5_multimedia_tag("Canvas API") 
+    %span.smaller
+      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html") WHATWG
+  %article
+    One of the largest part of the HTML5 specification
+    It provides an API for 2D drawing
+    Some examples: 
+    %a(href="http://www.cuttherope.ie/") Cut the Rope
+    %a(href="http://mudcu.be/sketchpad/") SketchPad
+    %a(href="http://mrdoob.com/projects/harmony") Harmony 
+
+%section.slide
+  %header
+    Bitmap vs Vector Graphics
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p 
+            A 
+            %strong bitmap 
+            is just a list of color values for each pixels of the image (e.g. jpg, png, gif)
+          %p Fixed resolution
+          %p Large file
+          %p Faster to load and display
+      .twoColumn
+        .autobox
+          %p
+            A 
+            %strong vector graphic
+            is a list of instructions how to draw an image (e.g. SVG, VML)
+          %br
+          %p Resolution independent
+          %p Smaller file
+          %p Processor intensive
+
+%section.slide
+  %header
+    =html5_multimedia_tag("Canvas API") 
+    %span.smaller
+      %a(href="http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png") Cheat Sheet
+  %article
+    %p Javascript API providing low-level primitives for drawing on the Canvas
+    Interface of the Canvas element:
+    %ul
+      %li 
+        %strong.red<> getContext('2d')
+        \: returns the object for accessing the Javascript Canvas API
+      %li
+        %strong.red<> toDataURL( [DOMString type])
+        \: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg')
+      %li 
+        %strong.red<> toBlob(callback, [DOMString type])
+        \: creates a Blob representation of the image on the canvas and passes to the callback function.
+    :coderay
+      #!html
+      <canvas id="canvas"></canvas>
+    :coderay
+      #!javascript
+      //Get the 2D Canvas context object
+      var ctx = document.getElementById('canvas').getContext('2d');
+
+%section.slide
+  %header
+    Drawing on the canvas
+  %article
+    :coderay
+      #!javascript
+      var ctx = document.getElementById('canvas_1').getContext('2d');
+      ctx.fillStyle = 'rgb(0, 255, 0)';
+      ctx.fillRect(10, 20, 50, 50); //Create a solid square
+      ctx.strokeStyle = 'rgb(0, 182, 0)';
+      ctx.lineWidth = 5;
+      ctx.strokeRect(9, 19, 52, 52); //Draws an outline
+      gradient = ctx.createLinearGradient(0, 0, 0 , 100);
+      gradient.addColorStop(0, '#fff');
+      gradient.addColorStop(1, '#f00');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(100, 10, 100, 100);      
+    %canvas#canvas_1(width="800px" height="220")
+:javascript
+  $(function() {
+    var ctx = document.getElementById('canvas_1').getContext('2d');
+    ctx.fillStyle = 'rgb(0, 255, 0)';
+    ctx.fillRect(100, 20, 50, 50); //Create a solid square
+    ctx.strokeStyle = 'rgb(0, 182, 0)';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(99, 19, 52, 52); //Draws an outline
+    gradient = ctx.createLinearGradient(0, 0, 0 , 100);
+    gradient.addColorStop(0, '#fff');
+    gradient.addColorStop(1, '#f00');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(300, 10, 100, 100);
+  })
+
+%section.slide
+  %header
+    Drawing paths
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+          ctx.beginPath();
+          ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+          ctx.closePath();
+          ctx.fillStyle = "rgb(255, 255, 0)";
+          ctx.fill();
+
+          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.beginPath();
+          ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+          ctx.closePath();
+          ctx.fill();
+    
+          ctx.beginPath();
+          ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = "rgb(0,0,0)";
+          ctx.stroke();
+      .twoColumn
+        %canvas#canvas_2(width="300px" height="300")
+  :javascript
+    $(function() {
+      var ctx = document.getElementById('canvas_2').getContext('2d');
+      ctx.beginPath();
+      ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.beginPath();
+      ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    })
+    
+%section.slide
+  %header
+    Drawing a cat
+  %article
+%section.slide
+  %header
+    Drawing an image
+  %article
+    .vmargin
+      .terminal.singlespace
+        %p drawImage(image, dx, dy)
+        %p drawImage(image, dx, dy, dw, dh)
+        %p drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+            var img = new Image();
+            
+            //wait until the image has loaded
+            img.onload = function () {
+              ctx.drawImage(this, 0, 0);
+            };
+            
+            img.src = "banksy.jpg"
+      .twoColumn
+        %canvas#canvas_3(width="400px" height="400")
+:javascript
+  $(function() {
+    var ctx = document.getElementById('canvas_3').getContext('2d');
+    var img = new Image();
+    img.onload = function () {
+      ctx.drawImage(this, 0, 0);
+    };
+    img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
+  })
+  %section.slide
+    %header
+      Drawing a cat
+    %article
+%section.slide
+  %header
+    Pixel-level Processing
+  %article
+    %p Capture an area of the canvas into an array
+    .vmargin
+      .terminal.singlespace
+        %p var pixels = getImageData(sx, sy, sw, sh)
+        %p putImage(pixels, dx, dy)
+        %p CanvasPixelArray => [ r1, g1, b1, a1, r2, g2, ...]
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+            var img = new Image();
+
+            //wait until the image has loaded
+            img.onload = function () {
+              ctx.drawImage(this, 0, 0);
+            };
+
+            img.src = "banksy.jpg"
+      .twoColumn
+        %canvas#canvas_3(width="400px" height="300")
+:javascript
+  $(function() {
+    var ctx = document.getElementById('canvas_3').getContext('2d');
+    var img = new Image();
+    img.onload = function () {
+      ctx.drawImage(this, 0, 0);
+      var array = ctx.getImageData(0, 0, this.width, this.height);
+      for (var i=0; i < array.data.legth; i+=4) {
+        pixels.data[i] = 255 - pixels.data[i]; // red
+      }
+      ctx.putImageData(pixels, 0, 0);
+      
+    };
+    img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
+  })
+ 
+%section.slide
+  %header
+    Animating the canvas
+  %article
+%section.slide
+  %header Scalable Vector Graphics (SVG)
+  %article
+
+    
+%section.slide
+  %header SVG vs Canvas
+  %article
+    Check html5 book for comparison
+
+%section.slide 
+  %header SVG to Canvas
+  %article
+
+%section.slide
+  %header
+    Javascript Libraries
+  %article
+    %a(href="http://processingjs.org/") ProcessingJS
+    
+%section.slide
+  %header
+    =html5_multimedia_tag("Canvas API") 
+    %span.smaller
+      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html") WHATWG
+  %article
+    
+
+
     
 %section.slide
   %header
@@ -504,7 +775,7 @@
       More powerful API will come with 
       %span.terminal
         %a(href="http://dev.w3.org/2011/webrtc/editor/getusermedia.html") getUserMedia
-    %p Only implemented in Android Browser 3.0 onwards
+    %p Only implemented in Android Browser 3.0 onwards and Firefox for Android 11
     %p 
       Based on the extension of the 
       %span.terminal accept 
@@ -552,6 +823,7 @@
         %li width
         %li duration 
         
+  
 %section.slide
   %header 
     =html5_device_access_tag("Device Orientation API")
