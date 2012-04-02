@@ -117,7 +117,7 @@ Bitmap vs Vector Graphics
 <article>
 <div class='row'>
 <div class='twoColumn'>
-<div class='autobox'>
+<div class='autobox hmargin'>
 <p>
 A
 <strong>bitmap</strong>
@@ -129,13 +129,12 @@ is just a list of color values for each pixels of the image (e.g. jpg, png, gif)
 </div>
 </div>
 <div class='twoColumn'>
-<div class='autobox'>
+<div class='autobox hmargin'>
 <p>
 A
 <strong>vector graphic</strong>
 is a list of instructions how to draw an image (e.g. SVG, VML)
 </p>
-<br />
 <p>Resolution independent</p>
 <p>Smaller file</p>
 <p>Processor intensive</p>
@@ -340,7 +339,7 @@ Pixel-level Processing
 </div>
 </div>
 <div class='row'>
-<div class='twoColumn'>
+<div class='twoColumn small'>
 <div class="CodeRay">
   <div class="code"><pre><span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;  ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  <span class="keyword">var</span> a = ctx.getImageData(<span class="integer">0</span>, <span class="integer">0</span>, <span class="local-variable">this</span>.width, <span class="local-variable">this</span>.height);&#x000A;  <span class="keyword">var</span> b = <span class="predefined">$</span>.map(a, <span class="keyword">function</span>(v,i) {&#x000A;    <span class="keyword">if</span> (i % <span class="integer">4</span> &lt; <span class="integer">3</span>) <span class="keyword">return</span> <span class="integer">255</span>-v;&#x000A;    <span class="keyword">else</span> <span class="keyword">return</span> v;&#x000A;  });&#x000A;  ctx.putImageData(b, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;};&#x000A;img.src = <span class="string"><span class="delimiter">&quot;</span><span class="content">imgs/lesson4/street-maid-graffiti-banksy.jpg</span><span class="delimiter">&quot;</span></span></pre></div>
 </div>
@@ -687,7 +686,7 @@ Rotating Blinking Smile - 1
 </header>
 <article>
 <div class="CodeRay">
-  <div class="code"><pre><span class="keyword">function</span> <span class="function">createCtx</span>() {&#x000A;  <span class="keyword">var</span> canvas = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>);&#x000A;  canvas.width = <span class="integer">200</span>;&#x000A;  canvas.height = <span class="integer">200</span>;&#x000A;  <span class="keyword">return</span> canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;}&#x000A;<span class="comment">//Create ll the contexts</span>&#x000A;<span class="keyword">var</span> smileCtx = createCtx();&#x000A;<span class="keyword">var</span> smileBlinkCtx = createCtx(); &#x000A;<span class="keyword">var</span> mainCtx = createCtx();&#x000A;&#x000A;<span class="comment">//Draw the smiles on their own canvas</span>&#x000A;drawSmile(smileCtx);&#x000A;drawSmileBlink(smileBlinkCtx);&#x000A;&#x000A;<span class="comment">//Translate the center of the main context</span>&#x000A;mainCtx.translate(<span class="integer">100</span>,<span class="integer">100</span>);&#x000A;mainCtx.drawImage(smileCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;&#x000A;</pre></div>
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">createCtx</span>() {&#x000A;  <span class="keyword">var</span> canvas = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>);&#x000A;  canvas.width = <span class="integer">200</span>;&#x000A;  canvas.height = <span class="integer">200</span>;&#x000A;  <span class="keyword">return</span> canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;}&#x000A;<span class="comment">//Create all the contexts</span>&#x000A;<span class="keyword">var</span> smileCtx = createCtx();&#x000A;<span class="keyword">var</span> smileBlinkCtx = createCtx(); &#x000A;<span class="keyword">var</span> mainCtx = createCtx();&#x000A;&#x000A;<span class="comment">//Draw the smiles on their own canvas</span>&#x000A;drawSmile(smileCtx);&#x000A;drawSmileBlink(smileBlinkCtx);&#x000A;&#x000A;<span class="comment">//Translate the center of the main context</span>&#x000A;mainCtx.translate(<span class="integer">100</span>,<span class="integer">100</span>);&#x000A;mainCtx.drawImage(smileCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;&#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -807,7 +806,7 @@ Javascript Libraries
 <article>
 <ul>
 <li>
-<a href='raphaeljs.com'>RaphaelJS</a>
+<a href='http://raphaeljs.com'>RaphaelJS</a>
 </li>
 <li>
 <a href='http://processingjs.org/'>JS Port of Processing language</a>
@@ -1002,10 +1001,9 @@ With an input element of type file
 With the drag-and-drop feature
 </li>
 <li>
-User grants permission to read the files by selectig them
-</li>
-<li>
-Read from a private filesystem sandbox
+Read from a private filesystem sandbox (
+<a href='http://dev.w3.org/2009/dap/file-system/pub/FileSystem/'>FileSystem API</a>
+)
 </li>
 </ul>
 </article>
