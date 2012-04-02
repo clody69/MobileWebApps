@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='lectures.html'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='examples.html'>Examples</a>
+</li>
+<li>
+<a href='index.html#Assignment'>Assignment</a>
+</li>
+<li>
+<a href='resources.html'>Resources</a>
+</li>
+<li>
+<a href='index.html#Staff'>Staff</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Canvas Smile</h1><div class='actions'><a href='examples/canvasSmile'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/canvasSmile'>Browse Source Code</a></div>
+<p>
+In this example we demonstrate how to draw on the canvas by using the low-level vector graphics API and
+how to animate the canvas. We draw a smile that blinks and rotates.
+</p>
+<p>The HTML code only defines the canvas:</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%body</span>                                     &#x000A;  <span class="tag">%div</span>&#x000A;    <span class="tag">%span</span><span class="constant">#FPS</span>                             &#x000A;      fps&#x000A;    <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span>)      &#x000A;</pre></div>
+</div>
+</div>
+<p>The Javascript code:</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> fps = <span class="integer">0</span>, now, lastUpdate = (<span class="keyword">new</span> Date)*<span class="integer">1</span> - <span class="integer">1</span>;&#x000A;  <span class="comment">// The higher this value, the less the FPS will be affected by quick changes</span>&#x000A;  <span class="comment">// Setting this to 1 will show you the FPS of the last sampled frame only</span>&#x000A;  <span class="keyword">var</span> fpsFilter = <span class="integer">50</span>;&#x000A;  <span class="keyword">var</span> fpsEl = <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#FPS</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;  <span class="keyword">function</span> <span class="function">calculateFPS</span>(){&#x000A;    <span class="keyword">var</span> thisFrameFPS = <span class="integer">1000</span> / ((now=<span class="keyword">new</span> Date) - lastUpdate);&#x000A;    fps += (thisFrameFPS - fps) / fpsFilter;&#x000A;    lastUpdate = now * <span class="integer">1</span> - <span class="integer">1</span>;&#x000A;  }&#x000A;  <span class="keyword">function</span> <span class="function">showFPS</span>() {&#x000A;    fpsEl.html(fps.toFixed(<span class="integer">1</span>));&#x000A;  }&#x000A;&#x000A;  <span class="keyword">function</span> <span class="function">drawSmile</span>(ctx) {&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(255, 255, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.fill();&#x000A;&#x000A;    ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0, 0, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">70</span>, <span class="integer">80</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.fill();&#x000A;&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">130</span>, <span class="integer">80</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.fill();&#x000A;&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">70</span>, Math.PI/<span class="integer">10</span>, Math.PI*(<span class="integer">1</span>-<span class="integer">1</span>/<span class="integer">10</span>), <span class="predefined-constant">false</span>);&#x000A;    ctx.lineWidth = <span class="integer">5</span>;&#x000A;    ctx.strokeStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0,0,0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.stroke();&#x000A;  }&#x000A;  <span class="keyword">function</span> <span class="function">drawSmileBlink</span>(ctx) {&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(255, 255, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.fill();&#x000A;&#x000A;    ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0, 0, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.lineWidth = <span class="integer">5</span>;&#x000A;    ctx.beginPath();&#x000A;    ctx.moveTo(<span class="integer">50</span>,<span class="integer">70</span>);&#x000A;    ctx.lineTo(<span class="integer">90</span>,<span class="integer">90</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.stroke();&#x000A;&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">130</span>, <span class="integer">80</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;    ctx.closePath();&#x000A;    ctx.fill();&#x000A;&#x000A;    ctx.beginPath();&#x000A;    ctx.arc(<span class="integer">100</span>, <span class="integer">100</span>, <span class="integer">70</span>, Math.PI/<span class="integer">10</span>, Math.PI*(<span class="integer">1</span>-<span class="integer">1</span>/<span class="integer">10</span>), <span class="predefined-constant">false</span>);&#x000A;    ctx.lineWidth = <span class="integer">5</span>;&#x000A;    ctx.strokeStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0,0,0)</span><span class="delimiter">&quot;</span></span>;&#x000A;    ctx.stroke();&#x000A;  }&#x000A;&#x000A;  <span class="keyword">function</span> <span class="function">clear</span>(ctx) {&#x000A;    ctx.clearRect(<span class="integer">0</span>, <span class="integer">0</span>, ctx.canvas.width, ctx.canvas.height);&#x000A;  }&#x000A;  <span class="keyword">var</span> ctx = document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>).getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;  <span class="keyword">function</span> <span class="function">createCtx</span>() {&#x000A;    <span class="keyword">var</span> canvas = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>);&#x000A;    canvas.width = <span class="integer">200</span>;&#x000A;    canvas.height = <span class="integer">200</span>;&#x000A;    <span class="keyword">return</span> canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;  }&#x000A;  <span class="comment">//Create all the contexts</span>&#x000A;  <span class="keyword">var</span> smileCtx = createCtx();&#x000A;  <span class="keyword">var</span> smileBlinkCtx = createCtx(); &#x000A;  <span class="keyword">var</span> mainCtx = createCtx();&#x000A;&#x000A;  <span class="comment">//Draw the smiles on their own canvas</span>&#x000A;  drawSmile(smileCtx);&#x000A;  drawSmileBlink(smileBlinkCtx);&#x000A;&#x000A;  <span class="comment">//Translate the center of the main context</span>&#x000A;  mainCtx.translate(<span class="integer">100</span>,<span class="integer">100</span>);&#x000A;  mainCtx.drawImage(smileCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;  ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;&#x000A;  <span class="keyword">var</span> current = smileCtx.canvas;&#x000A;  <span class="keyword">var</span> timer1 = setInterval(<span class="keyword">function</span>() {&#x000A;    current = smileBlinkCtx.canvas;&#x000A;    <span class="keyword">var</span> timer2 = setTimeout(<span class="keyword">function</span>() {&#x000A;      current = smileCtx.canvas;&#x000A;    }, <span class="integer">300</span>);&#x000A;  }, <span class="integer">5000</span>);&#x000A;&#x000A;  <span class="comment">//Draw on the canvas every 50ms </span>&#x000A;  <span class="keyword">var</span> timer3 = setInterval(<span class="keyword">function</span>() {&#x000A;    clear(ctx);&#x000A;    mainCtx.rotate(Math.PI/<span class="integer">180</span>*<span class="integer">5</span>);&#x000A;    mainCtx.drawImage(current, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;    ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  }, <span class="integer">50</span>);&#x000A;  <span class="comment">//Calculate the FPS every 15ms.</span>&#x000A;  <span class="keyword">var</span> timer = setInterval(<span class="keyword">function</span>() {&#x000A;    calculateFPS();&#x000A;    showFPS();&#x000A;  }, <span class="integer">15</span>);&#x000A;  &#x000A;})</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
+<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
+<a href='http://www.androidaalto.org'><img src='imgs/androidaalto.png' /></a>
+<a href='http://windowsphoneaalto.org/'><img src='imgs/WindowsPhoneAalto.png' /></a>
+</div>
+<div class='sponsor'>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.kiskolabs.com'><img src='imgs/kisko_labs.png' /></a>
+<a href='http://www.sc5.fi'><img src='imgs/SC5.jpg' /></a>
+<a href='http://www.futurice.fi'><img src='imgs/futurice.png' /></a>
+</div>
+</div>
+</body>
+</html>

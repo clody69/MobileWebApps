@@ -77,20 +77,99 @@ Mobile Web Applications Development with HTML5
 <div id='wrapper'>
 <a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
 <div class='content-wrapper'>
-<h1>Media Query on Device</h1><div class='actions'><a href='examples/cssMediaQueriesDevice'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/cssMediaQueriesDevice'>Browse Source Code</a></div>
+<h1>Instagram</h1><div class='actions'><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/canvasInstagram'>Browse Source Code</a></div>
 <p>
-In this example we demonstrate how to use the CSS3 media query for querying the device screen size.
-On narrow devices, the two columns of text are not floated but sit one on top of the other.
+In this example we demonstrate how to interact with a REST API and how to draw images on the 2D canvas. We fetch the
+most popular images from the
+<a href='http://instagram.com/'>Instagram</a>
+REST API and we draw them on the Canvas. The application also allow the user
+to save up to 2 compositions of images in the local storage.
 </p>
 <p>
-The CSS code to achieve this is below:
+Below there is the JS code for initializing the application. First we resize the canvas to fill the available space
+for the content. We also calculate the maximum number of images that we can visualize in the canvas.
 </p>
 <div class='code_block'>
 <div class='code_header'>
-index.html.haml
+layout.haml
 </div>
 <div class="CodeRay">
-  <div class="code"><pre><span class="pseudo-class">:css</span>&#x000A;<span class="class">.container</span> {&#x000A;  <span class="key">width</span>: <span class="float">500px</span>;&#x000A;  }&#x000A;<span class="class">.container</span> <span class="type">div</span> {&#x000A;  <span class="key">float</span>: <span class="value">left</span>; &#x000A;  <span class="key">margin</span>: <span class="float">0</span> <span class="float">15px</span> <span class="float">0</span> <span class="float">0</span>;&#x000A;  <span class="key">width</span>: <span class="float">235px</span>;&#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span>: <span class="float">320px</span>) {&#x000A;  <span class="class">.container</span> {&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;  <span class="class">.container</span> <span class="type">div</span> {&#x000A;    <span class="key">float</span>: <span class="value">none</span>;&#x000A;    <span class="key">margin</span>: <span class="float">0</span>;&#x000A;    <span class="key">width</span>: <span class="value">auto</span>;&#x000A;  }&#x000A;}</pre></div>
+  <div class="code"><pre><span class="keyword">var</span> canvas = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#canvas</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>];&#x000A;<span class="keyword">var</span> ctx = canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="keyword">var</span> header = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">div[data-role=&quot;header&quot;]:visible</span><span class="delimiter">'</span></span>);&#x000A;<span class="keyword">var</span> footer = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">div[data-role=&quot;footer&quot;]:visible</span><span class="delimiter">'</span></span>);&#x000A;<span class="keyword">var</span> content = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">div[data-role=&quot;content&quot;]:visible</span><span class="delimiter">'</span></span>);&#x000A;<span class="keyword">var</span> viewport_height = <span class="predefined">$</span>(window).height();&#x000A;<span class="keyword">var</span> viewport_width = <span class="predefined">$</span>(window).width();&#x000A;<span class="keyword">var</span> content_height = viewport_height - header.outerHeight() - footer.outerHeight();&#x000A;<span class="comment">/* Trim margin/border/padding height */</span>&#x000A;content_height -= (content.outerHeight() - content.height());&#x000A;&#x000A;canvas.width = viewport_width;&#x000A;canvas.height = content_height;&#x000A;cols = Math.floor(canvas.width/<span class="integer">104</span>);&#x000A;rows = Math.floor(canvas.height/<span class="integer">104</span>);&#x000A;max = Math.min(cols*rows, <span class="integer">50</span>);&#x000A;&#x000A;<span class="keyword">if</span> (!localStorage.index) {&#x000A;  localStorage.index = <span class="integer">0</span>;&#x000A;}&#x000A;</pre></div>
+</div>
+</div>
+<p>
+The next step is to check if there are previously saved compositions and load them from the local storage. We load the images
+in the elements with id
+<span class='terminal'>snap_0</span>
+and
+<span class='terminal'>snap_1</span>
+of the dedicated page with id
+<span class='terminal'>saved</span>
+.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Load the 3 saved images if they are available</span>&#x000A;<span class="predefined">$</span>.each([<span class="string"><span class="delimiter">'</span><span class="content">snap_0</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">snap_1</span><span class="delimiter">'</span></span>], <span class="keyword">function</span>(index, value) {&#x000A;  <span class="keyword">if</span>(localStorage.getItem(value)) {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#</span><span class="delimiter">&quot;</span></span>+value).attr(<span class="string"><span class="delimiter">'</span><span class="content">src</span><span class="delimiter">'</span></span>,localStorage.getItem(value));&#x000A;  }&#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+Below there is the code for fetching the images from Instagram. First we fetch a JSON object that contains the
+metadata of the most popular images on Instagram. Then we download the images and draw them on the canvas. We must
+use a workaround for fetching the images. The 2D canvas API follows the cross-origin policy which means that drawing on the
+canvas images that originate from a different host (than the one we are serving the main page) disables the possibility of
+taking snapshots of the canvas with the toDataURL method (
+<a href='https://developer.mozilla.org/en/CORS_Enabled_Image'></a>
+). To workaround this limitation we use our Sinatra server as a proxy for fetching the images from the Instagram REST API
+through the endpoint:
+<span class='terminal'>/fetch?url=...</span>
+</p>
+<div class='code_block'>
+<div class='code_header'>
+layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#refresh</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>(e) {&#x000A;  e.preventDefault();&#x000A;  <span class="comment">//Fetch the post popular images on istagram</span>&#x000A;  <span class="predefined">$</span>.getJSON(<span class="string"><span class="delimiter">'</span><span class="content">https://api.instagram.com/v1/media/popular?client_id=ffc1e462cbc8442d9247ea1b32fb45e1&amp;callback=?</span><span class="delimiter">'</span></span>, &#x000A;    <span class="keyword">function</span>(data) {&#x000A;      <span class="predefined">$</span>.each(data.data.slice(<span class="integer">0</span>,max), <span class="keyword">function</span>(index, value) {&#x000A;        <span class="comment">//Use custom proxy for downloading and encoding the images in Base64</span>&#x000A;        <span class="comment">//to avoid cross origin issues </span>&#x000A;        <span class="predefined">$</span>.get(<span class="string"><span class="delimiter">'</span><span class="content">/fetch?url=</span><span class="delimiter">'</span></span> + value.images.low_resolution.url, <span class="keyword">function</span> (data) {&#x000A;          <span class="comment">//Create a new image to be placed on the canvas</span>&#x000A;          <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;          img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;            <span class="comment">//Copy the image to the canvas</span>&#x000A;            ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">1</span> + (index % cols)*<span class="integer">101</span>, <span class="integer">1</span>+(Math.floor(index/cols))*<span class="integer">101</span>, <span class="integer">100</span>, <span class="integer">100</span>);&#x000A;          }&#x000A;          img.src = data;&#x000A;        });&#x000A;      });&#x000A;    });&#x000A;  &#x000A;});&#x000A;</pre></div>
+</div>
+</div>
+<p>
+Below there is the code for taking a snapshot of the canvas and saving it in the local storage. To stay within the typical
+memory limits of the local storage we don't store more than 2 images.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+layout.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#save</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, <span class="keyword">function</span>(e) {&#x000A;  e.preventDefault();&#x000A;  <span class="comment">//Take a snapshot of the canvas as base64 encoded data URL</span>&#x000A;  <span class="keyword">var</span> snapshot = ctx.canvas.toDataURL(<span class="string"><span class="delimiter">'</span><span class="content">image/png</span><span class="delimiter">'</span></span>);&#x000A;  <span class="comment">//Store it in the last used slot in the localStorage</span>&#x000A;  localStorage.setItem(<span class="string"><span class="delimiter">'</span><span class="content">snap_</span><span class="delimiter">'</span></span> + localStorage.index, snapshot);&#x000A;  <span class="comment">//Replace the image in the saved page</span>&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#snap_</span><span class="delimiter">&quot;</span></span> + localStorage.index).attr(<span class="string"><span class="delimiter">'</span><span class="content">src</span><span class="delimiter">'</span></span>,snapshot);&#x000A;  <span class="comment">//Increment the index </span>&#x000A;  localStorage.index = (JSON.parse(localStorage.index)+<span class="integer">1</span>) % <span class="integer">2</span>;&#x000A;});</pre></div>
+</div>
+</div>
+<p>
+Below there is the implementation of the Sinatra server whose only function is to server the main HTML file and
+act as a proxy for fetching the images from Instagram. The images are converted to Data URI with Base64 encoding
+before they are sent to the client.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+server.rb
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Renders the haml template index.html.haml</span>&#x000A;  <span class="comment">#with the default layout layout.html.haml</span>&#x000A;  haml <span class="symbol">:index</span>, <span class="symbol">:layout</span> =&gt; <span class="symbol">:layout</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/fetch</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Fetch the image from the URL and encodes it as a data URI</span>&#x000A;  base_image = <span class="constant">Net</span>::<span class="constant">HTTP</span>.get(<span class="constant">URI</span>.parse(params[<span class="string"><span class="delimiter">'</span><span class="content">url</span><span class="delimiter">'</span></span>]))&#x000A;  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Fetched image: </span><span class="delimiter">&quot;</span></span> + params[<span class="string"><span class="delimiter">'</span><span class="content">url</span><span class="delimiter">'</span></span>]&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">data:image/png;base64,</span><span class="inline"><span class="inline-delimiter">#{</span><span class="constant">Base64</span>.encode64(base_image)<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+<p>
+You can try this example by starting the server and visiting the page
+<a href='http://localhost:4567'>http://localhost:4567</a>
+in your browser
+</p>
+<div class='code_block'>
+<div class='code_header'>
+terminal
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>ruby server.rb</pre></div>
 </div>
 </div>
 

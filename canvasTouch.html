@@ -135,7 +135,7 @@ The HTML code only contains the canvas tag:
 index.html.haml
 </div>
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">%body</span>&#x000A;  <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span>)</pre></div>
+  <div class="code"><pre><span class="comment">//Draw on the canvas every 15ms (about 60fps).</span>&#x000A;var timer = setInterval(function() {&#x000A;  redraw();&#x000A;  calculateFPS();&#x000A;  showFPS();&#x000A;}, 15);&#x000A;&#x000A;<span class="tag">%body</span>&#x000A;  <span class="tag">%canvas</span><span class="constant">#canvas</span>(<span class="attribute-name">width</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">'</span><span class="content">350</span><span class="delimiter">'</span></span>)</pre></div>
 </div>
 </div>
 

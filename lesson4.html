@@ -61,7 +61,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 4: File & Device Access
+Lecture 4: Canvas, File & Device Access
 </h1>
 <br />
 <div class='smaller centered'>
@@ -75,17 +75,17 @@ Aalto University March 2012
 </section>
 
 <section class='slide section-title'>
-<h1>Lecture 4: File & Device Access</h1>
+<h1>Lecture 4: Canvas, File & Device Access</h1>
 <div class='agenda'>
 <p>Canvas API</p>
-<p>File API</p>
-<p>Bytes and Blobs</p>
+<p>Bytes, Blobs and File API</p>
 <p>HTML Media Capture API</p>
 <p>Motion Sensor API</p>
 <p>GeoLocation API</p>
 <p>Audio & Video</p>
 </div>
 </section>
+<div class='background' data-background='bg-lesson4-starry-night'></div>
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
@@ -94,12 +94,20 @@ Aalto University March 2012
 </span>
 </header>
 <article>
-One of the largest part of the HTML5 specification
-It provides an API for 2D drawing
+<p>One of the largest part of the HTML5 specification</p>
+<p>It provides an API for 2D drawing</p>
 Some examples:
+<ul>
+<li>
 <a href='http://www.cuttherope.ie/'>Cut the Rope</a>
+</li>
+<li>
 <a href='http://mudcu.be/sketchpad/'>SketchPad</a>
+</li>
+<li>
 <a href='http://mrdoob.com/projects/harmony'>Harmony</a>
+</li>
+</ul>
 </article>
 </section>
 <section class='slide'>
@@ -139,9 +147,6 @@ is a list of instructions how to draw an image (e.g. SVG, VML)
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
-<span class='smaller'>
-<a href='http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png'>Cheat Sheet</a>
-</span>
 </header>
 <article>
 <p>Javascript API providing low-level primitives for drawing on the Canvas</p>
@@ -149,7 +154,7 @@ Interface of the Canvas element:
 <ul>
 <li><strong class='red'>getContext('2d')</strong>: returns the object for accessing the Javascript Canvas API
 </li>
-<li><strong class='red'>toDataURL( [DOMString type])</strong>: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg')
+<li><strong class='red'>toDataURL( [DOMString type])</strong>: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg'
 </li>
 <li><strong class='red'>toBlob(callback, [DOMString type])</strong>: creates a Blob representation of the image on the canvas and passes to the callback function.
 </li>
@@ -159,6 +164,53 @@ Interface of the Canvas element:
 </div>
 <div class="CodeRay">
   <div class="code"><pre><span class="comment">//Get the 2D Canvas context object</span>&#x000A;<span class="keyword">var</span> ctx = document.getElementById(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>).getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
+<span class='smaller'>
+<a href='http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png'>Cheat Sheet</a>
+</span>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong>Drawing tools</strong>
+<ul>
+<li>Rectangles</li>
+<li>Arcs</li>
+<li>Paths and line drawing</li>
+<li>Bezier and quadratic curves</li>
+</ul>
+<strong>Effects</strong>
+<ul>
+<li>Fills and strokes</li>
+<li>Shadows</li>
+<li>Linear and radial gradients</li>
+<li>Alpha transparency</li>
+<li>Compositing</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<strong>Transformations</strong>
+<ul>
+<li>Scaling</li>
+<li>Rotation</li>
+<li>Translation</li>
+<li>Transformation matrix</li>
+</ul>
+<strong>Importing/exporting images</strong>
+<ul>
+<li>Importing images by URL, other canvases or capturing video</li>
+<li>Taking a snapshot of the canvas as a data URI</li>
+</ul>
+</div>
+</div>
 </div>
 </article>
 </section>
@@ -238,12 +290,6 @@ Drawing paths
 </section>
 <section class='slide'>
 <header>
-Drawing a cat
-</header>
-<article></article>
-</section>
-<section class='slide'>
-<header>
 Drawing an image
 </header>
 <article>
@@ -256,8 +302,11 @@ Drawing an image
 </div>
 <div class='row'>
 <div class='twoColumn'>
+<div class='autobox'>
 <div class="CodeRay">
-  <div class="code"><pre>  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;  &#x000A;  <span class="comment">//wait until the image has loaded</span>&#x000A;  img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;    ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  };&#x000A;  &#x000A;  img.src = <span class="string"><span class="delimiter">&quot;</span><span class="content">banksy.jpg</span><span class="delimiter">&quot;</span></span></pre></div>
+  <div class="code"><pre>  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;&#x000A;  <span class="comment">//wait until the image has loaded</span>&#x000A;  img.<span class="function">onload</span> = <span class="keyword">function</span> () {&#x000A;    ctx.drawImage(<span class="local-variable">this</span>, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;  };&#x000A;&#x000A;  img.src = <span class="string"><span class="delimiter">&quot;</span><span class="content">banksy.jpg</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+<p>Source can be an image, a canvas or a video.</p>
 </div>
 </div>
 <div class='twoColumn'>
@@ -278,12 +327,6 @@ Drawing an image
     })
   //]]>
 </script>
-<section class='slide'>
-<header>
-Drawing a cat
-</header>
-<article></article>
-</section>
 <section class='slide'>
 <header>
 Pixel-level Processing
@@ -330,39 +373,483 @@ Pixel-level Processing
 <header>
 Animating the canvas
 </header>
-<article></article>
+<article>
+Animations can be achieved by re-drawing the canvas:
+<ol>
+<li>Initialize the canvas and the objects</li>
+<li>Clear the canvas</li>
+<li>Draw the canvas</li>
+</ol>
+</article>
 </section>
 <section class='slide'>
+<header>
+Draw Smile
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">drawSmile</span>(ctx) {&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">100</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(255, 255, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.fill();&#x000A;&#x000A;  ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0, 0, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">120</span>, <span class="integer">130</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.fill();&#x000A;&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">180</span>, <span class="integer">130</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.fill();&#x000A;&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">70</span>, Math.PI/<span class="integer">10</span>, Math.PI*(<span class="integer">1</span>-<span class="integer">1</span>/<span class="integer">10</span>), <span class="predefined-constant">false</span>);&#x000A;  ctx.lineWidth = <span class="integer">5</span>;&#x000A;  ctx.strokeStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0,0,0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.stroke();&#x000A;}</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<canvas height='300' id='canvas_5' width='300px'></canvas>
+</div>
+</div>
+</article>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      function drawSmile(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      var ctx = document.getElementById('canvas_5').getContext('2d');
+      drawSmile(ctx);
+    })
+  //]]>
+</script>
+</section>
+<section class='slide'>
+<header>
+Draw Smile that blinks
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">drawSmileBlink</span>(ctx) {&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">100</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(255, 255, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.fill();&#x000A;&#x000A;  ctx.fillStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0, 0, 0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.lineWidth = <span class="integer">5</span>;&#x000A;  ctx.beginPath();&#x000A;  ctx.moveTo(<span class="integer">100</span>,<span class="integer">120</span>);&#x000A;  ctx.lineTo(<span class="integer">140</span>,<span class="integer">140</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.stroke();&#x000A;&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">180</span>, <span class="integer">130</span>, <span class="integer">20</span>, <span class="integer">0</span>, <span class="integer">2</span> * Math.PI, <span class="predefined-constant">false</span>);&#x000A;  ctx.closePath();&#x000A;  ctx.fill();&#x000A;&#x000A;  ctx.beginPath();&#x000A;  ctx.arc(<span class="integer">150</span>, <span class="integer">150</span>, <span class="integer">70</span>, Math.PI/<span class="integer">10</span>, Math.PI*(<span class="integer">1</span>-<span class="integer">1</span>/<span class="integer">10</span>), <span class="predefined-constant">false</span>);&#x000A;  ctx.lineWidth = <span class="integer">5</span>;&#x000A;  ctx.strokeStyle = <span class="string"><span class="delimiter">&quot;</span><span class="content">rgb(0,0,0)</span><span class="delimiter">&quot;</span></span>;&#x000A;  ctx.stroke();&#x000A;}</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<canvas height='300' id='canvas_6' width='300px'></canvas>
+</div>
+</div>
+</article>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      function drawSmileBlink(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(100,120);
+        ctx.lineTo(140,140);
+        ctx.closePath();
+        ctx.stroke();
+    
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      var ctx = document.getElementById('canvas_6').getContext('2d');
+      drawSmileBlink(ctx);
+    })
+  //]]>
+</script>
+</section>
+<section class='slide'>
+<header>
+Blinking Smile
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">clear</span>(ctx) { ctx.clearRect(<span class="integer">0</span>, <span class="integer">0</span>, ctx.canvas.width, ctx.canvas.height); }&#x000A;<span class="keyword">var</span> timer1 = setInterval(<span class="keyword">function</span>() {&#x000A;  clear(ctx);&#x000A;  drawSmileBlink(ctx);&#x000A;  &#x000A;  <span class="keyword">var</span> timer2 = setTimeout(<span class="keyword">function</span>() {&#x000A;    clear(ctx);&#x000A;    drawSmile(ctx);&#x000A;  }, <span class="integer">300</span>);&#x000A;&#x000A;}, <span class="integer">5000</span>);</pre></div>
+</div>
+<canvas height='300' id='canvas_7' width='300px'></canvas>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      function drawSmile(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      function drawSmileBlink(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(100,120);
+        ctx.lineTo(140,140);
+        ctx.closePath();
+        ctx.stroke();
+    
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      function clear(ctx) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      }
+      var ctx = document.getElementById('canvas_7').getContext('2d');
+      drawSmile(ctx);
+      //Draw on the canvas every 15ms (about 60fps).
+      var timer1 = setInterval(function() {
+        clear(ctx);
+        drawSmileBlink(ctx);
+          var timer2 = setTimeout(function() {
+          clear(ctx);
+          drawSmile(ctx);
+        }, 300);
+        
+      }, 5000);
+      
+    })
+  //]]>
+</script>
+<section class='slide'>
+<header>
+Rotating Blinking Smile
+<span class='smaller'>
+<a href='canvasSmile.html'>canvasSmile</a>
+</span>
+</header>
+<article>
+<canvas height='400' id='canvas_8' width='400px'></canvas>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      function drawSmile(ctx) {
+        ctx.beginPath();
+        ctx.arc(100, 100, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.arc(70, 80, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(130, 80, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(100, 100, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      function drawSmileBlink(ctx) {
+        ctx.beginPath();
+        ctx.arc(100, 100, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+    
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(50,70);
+        ctx.lineTo(90,90);
+        ctx.closePath();
+        ctx.stroke();
+    
+        ctx.beginPath();
+        ctx.arc(130, 80, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    
+        ctx.beginPath();
+        ctx.arc(100, 100, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+    
+      function clear(ctx) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      }
+      var ctx = document.getElementById('canvas_8').getContext('2d');
+      function createCtx() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 200;
+        return canvas.getContext('2d');
+      }
+      //Create all the contexts
+      var smileCtx = createCtx();
+      var smileBlinkCtx = createCtx(); 
+      var mainCtx = createCtx();
+    
+      //Draw the smiles on their own canvas
+      drawSmile(smileCtx);
+      drawSmileBlink(smileBlinkCtx);
+    
+      //Translate the center of the main context
+      mainCtx.translate(100,100);
+      mainCtx.drawImage(smileCtx.canvas, 0, 0, 200, 200, -100, -100, 200, 200);
+      ctx.drawImage(mainCtx.canvas, 0, 0);
+      
+      var timer1, timer2, timer3;
+      var current = smileCtx.canvas;
+      timer1 = setInterval(function() {
+        current = smileBlinkCtx.canvas;
+        timer2 = setTimeout(function() {
+          current = smileCtx.canvas;
+        }, 300);
+      }, 5000);
+    
+      start = function() {
+        //Draw on the canvas every 50ms 
+        timer3 = setInterval(function() {
+          clear(ctx);
+          mainCtx.rotate(Math.PI/180*5);
+          mainCtx.drawImage(current, 0, 0, 200, 200, -100, -100, 200, 200);
+          ctx.drawImage(mainCtx.canvas, 0, 0);
+        }, 50);
+      }
+      stop = function() {
+        clearInterval(timer3);
+      }
+      $("#canvas_8").mouseenter(start);
+      $("#canvas_8").mouseleave(stop);
+      
+    })
+  //]]>
+</script>
+<section class='slide'>
+<header>
+Rotating Blinking Smile - 1
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">function</span> <span class="function">createCtx</span>() {&#x000A;  <span class="keyword">var</span> canvas = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">canvas</span><span class="delimiter">'</span></span>);&#x000A;  canvas.width = <span class="integer">200</span>;&#x000A;  canvas.height = <span class="integer">200</span>;&#x000A;  <span class="keyword">return</span> canvas.getContext(<span class="string"><span class="delimiter">'</span><span class="content">2d</span><span class="delimiter">'</span></span>);&#x000A;}&#x000A;<span class="comment">//Create ll the contexts</span>&#x000A;<span class="keyword">var</span> smileCtx = createCtx();&#x000A;<span class="keyword">var</span> smileBlinkCtx = createCtx(); &#x000A;<span class="keyword">var</span> mainCtx = createCtx();&#x000A;&#x000A;<span class="comment">//Draw the smiles on their own canvas</span>&#x000A;drawSmile(smileCtx);&#x000A;drawSmileBlink(smileBlinkCtx);&#x000A;&#x000A;<span class="comment">//Translate the center of the main context</span>&#x000A;mainCtx.translate(<span class="integer">100</span>,<span class="integer">100</span>);&#x000A;mainCtx.drawImage(smileCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Rotating Blinking Smile - 2
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> current = smileCtx.canvas;&#x000A;<span class="keyword">var</span> timer1 = setInterval(<span class="keyword">function</span>() {&#x000A;  current = smileBlinkCtx.canvas;&#x000A;  <span class="keyword">var</span> timer2 = setTimeout(<span class="keyword">function</span>() {&#x000A;    current = smileCtx.canvas;&#x000A;  }, <span class="integer">300</span>);&#x000A;}, <span class="integer">5000</span>);&#x000A;&#x000A;<span class="comment">//Draw on the canvas every 50ms </span>&#x000A;<span class="keyword">var</span> timer3 = setInterval(<span class="keyword">function</span>() {&#x000A;  clear(ctx);&#x000A;  mainCtx.rotate(Math.PI/<span class="integer">180</span>*<span class="integer">5</span>);&#x000A;  mainCtx.drawImage(current, <span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">200</span>, <span class="integer">200</span>, -<span class="integer">100</span>, -<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">200</span>);&#x000A;  ctx.drawImage(mainCtx.canvas, <span class="integer">0</span>, <span class="integer">0</span>);&#x000A;}, <span class="integer">50</span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Exporting the canvas as a Data URI
+<span class='smaller'>
+<a href='canvasInstagram.html'>canvasInstagram</a>
+</span>
+</header>
+<article>
+<ul>
+<li>Take a snapshot of the canvas and store it into PNG/JPEG image</li>
+<li>Image is a Base64 encoded data URL</li>
+<li>
+<a href='https://developer.mozilla.org/en/CORS_Enabled_Image'>Cross origin policy</a>
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre>image = ctx.canvas.toDataURL(<span class="string"><span class="delimiter">'</span><span class="content">image/png</span><span class="delimiter">'</span></span>);</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>image =&gt; data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAbRElE...&#x000A;</pre></div>
+</div>
+<div class='row'>
+<div class='twoColumn'>
+<canvas height='300' id='canvas_9' width='300px'></canvas>
+</div>
+<div class='twoColumn'>
+<br />
+<br />
+<a href='#' id='testDataURL'>Export Image as DataURL</a>
+</div>
+</div>
+</article>
+</section>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      var ctx = document.getElementById('canvas_9').getContext('2d');
+      ctx.beginPath();
+      ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+    
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.beginPath();
+      ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+    
+      ctx.beginPath();
+      ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+    
+      ctx.beginPath();
+      ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+      $('#testDataURL').click( function(e){
+        e.preventDefault();
+        var snapshot = ctx.canvas.toDataURL('image/png');
+        window.open(snapshot, "toDataURL() image", "width=600, height=200");
+        
+      });
+      
+    })
+  //]]>
+</script>
+<section class='slide'>
 <header>Scalable Vector Graphics (SVG)</header>
-<article></article>
+<article>
+<p>XML based vector graphics format</p>
+<p>SVG objects are available in the DOM and can be created/traversed/manipulated like HTML elements</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%svg</span>(<span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2000/svg</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">300</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">200</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%text</span>(<span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">font-size:30; stroke: blue</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">x</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">10</span><span class="delimiter">&quot;</span></span>  <span class="attribute-name">y</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">100</span><span class="delimiter">&quot;</span></span>)&#x000A;    Hello World&#x000A;  <span class="tag">%rect</span>(<span class="attribute-name">x</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">5</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">y</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">50</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">150</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">30</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fill:yellow</span><span class="delimiter">&quot;</span></span>)</pre></div>
+</div>
+<circle cx='20' cy='50' r='20' style='fill:red'></circle>
+<svg height='200' width='300' xmlns='http://www.w3.org/2000/svg'>
+<text style='font-size:30; stroke: blue' x='10' y='100'>
+Hello World
+</text>
+<rect height='30' style='fill:yellow' width='150' x='5' y='50'></rect>
+<circle cx='20' cy='50' r='20' style='fill:red'></circle>
+</svg>
+</article>
 </section>
 <section class='slide'>
 <header>SVG vs Canvas</header>
 <article>
-Check html5 book for comparison
+<ul>
+<li>Plenty of graphic tools export SVG</li>
+<li>SVG is retained in the DOM, the canvas not</li>
+<li>We can bind for events to SVG objects</li>
+<li>SVG handles scaling better than canvas that supports only zooming</li>
+<li>Canvas is more suitable for one-time drawing (no interaction and no events)</li>
+</ul>
 </article>
-</section>
-<section class='slide'>
-<header>SVG to Canvas</header>
-<article></article>
 </section>
 <section class='slide'>
 <header>
 Javascript Libraries
 </header>
 <article>
-<a href='http://processingjs.org/'>ProcessingJS</a>
+<ul>
+<li>
+<a href='raphaeljs.com'>RaphaelJS</a>
+</li>
+<li>
+<a href='http://processingjs.org/'>JS Port of Processing language</a>
+</li>
+<li>
+<a href='http://www.pixastic.com/lib/docs/'>Pixastic</a>
+</li>
+<li>
+<a href='http://code.google.com/p/canvg/'>Canvg</a>
+</li>
+<li>
+<a href='http://www.professorcloud.com/svg-to-canvas/'>SVG to Canvas</a>
+</li>
+</ul>
 </article>
 </section>
 <section class='slide'>
 <header>
-<img src = 'imgs/html5/HTML5_Multimedia_64.png'>Canvas API</img>
-<span class='smaller'>
-<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html'>WHATWG</a>
-</span>
+What can you do with a canvas ?
 </header>
-<article></article>
+<article>
+An App that
+<ul>
+<li class='slide'>is #1 in 79 countries</li>
+<li class='slide'>has been downloaded 35+ million times just 6 weeks after launch</li>
+<li class='slide'>generates $1 million+ revenues/day</li>
+<li class='slide'>has 15+ million users</li>
+<li class='slide'>generates 3,000 drawings per second</li>
+<li class='slide'>generated 2 billion drawings since launch (15 Feb 2012)</li>
+<li class='slide'>reached 1 million users in 9 days</li>
+</ul>
+</article>
 </section>
+<section class='slide'>
+<header>
+Draw Something
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson4/drawsomething.png' class='resize' /></div>
+</article>
+</section>
+<div class='background' data-background='bg-lesson4-disk'></div>
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>File API</img>
@@ -666,7 +1153,6 @@ text | arraybuffer | blob | document
 What can we do with a Blob ?
 </header>
 <article>
-<p>
 Create an object and insert it in the DOM
 <ul>
 <li>
@@ -676,8 +1162,6 @@ Create an object and insert it in the DOM
 <div class='terminal'>URL.revokeObjectutL()</div>
 </li>
 </ul>
-</p>
-<p>
 Read the content with a FileReader:
 <ul class='terminal'>
 <li>FileReader.readAsText( File|Blob )</li>
@@ -685,7 +1169,6 @@ Read the content with a FileReader:
 <li>FileReader.readAsArrayBuffer( File|Blob )</li>
 <li>FileReader.readAsDataURL( File|Blob )</li>
 </ul>
-</p>
 <p>
 Messages to/form WebWorkers
 </p>
@@ -867,7 +1350,7 @@ multipart/form-data
 </header>
 <article>
 <p>Content type for submitting forms that contain binary data</p>
-<p>Works with all browsers</p>
+<p>Works with all browsers (except iOS)</p>
 <div class='vmargin'>
 <div class="CodeRay">
   <div class="code"><pre><span class="tag">%form</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPost</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">action</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/uploadFormData</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">method</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">post</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-ajax</span>=<span class="string"><span class="delimiter">'</span><span class="content">false</span><span class="delimiter">'</span></span> <span class="attribute-name">enctype</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">multipart/form-data</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%input</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fileChoose0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span>  <span class="attribute-name">multiple</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">accept</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">image/*</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">height:0;width:0;</span><span class="delimiter">&quot;</span></span>) &#x000A;  <span class="tag">%button</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">uploadFormPostButton</span><span class="delimiter">&quot;</span></span>) Upload via Form POST </pre></div>
@@ -952,6 +1435,7 @@ contains the attributes:
 </p>
 </article>
 </section>
+<div class='background' data-background='bg-lesson4-compass'></div>
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>Device Orientation API</img>
@@ -965,13 +1449,13 @@ contains the attributes:
 <div class='row'>
 <div class='twoColumn'>
 <div class='autobox'>
-<strong>DeviceOrientation Event</strong>
+<strong>DeviceOrientation Event (degrees)</strong>
 <ul>
 <li>alpha: around the Z-axis</li>
 <li>beta: around the X-axis</li>
 <li>gamma: around the Y-axis</li>
 </ul>
-<strong>MotionOrientation Event</strong>
+<strong>MotionOrientation Event (m/s2)</strong>
 <ul>
 <li>acceleration</li>
 <li>accelerationIncludingGravity</li>
@@ -994,18 +1478,21 @@ contains the attributes:
 <div class='threeColumn'>
 <div class='autobox centered'>
 Heading (Yaw)
+<p>[0, 360)</p>
 <div class='image-wrap'><img src='imgs//lesson4/orientation-alpha.png' class='resize' /></div>
 </div>
 </div>
 <div class='threeColumn'>
 <div class='autobox centered'>
 Elevation (Pitch)
+<p>[-180, 180)</p>
 <div class='image-wrap'><img src='imgs//lesson4/orientation-beta.png' class='resize' /></div>
 </div>
 </div>
 <div class='threeColumn'>
 <div class='autobox centered'>
 Bank (Roll)
+<p>[-90, 90)</p>
 <div class='image-wrap'><img src='imgs//lesson4/orientation-gamma.png' class='resize' /></div>
 </div>
 </div>
@@ -1158,6 +1645,7 @@ Maps and Location
 </div>
 </article>
 </section>
+<div class='background' data-background='bg-lesson4-music'></div>
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>Audio & Video</img>
@@ -1206,10 +1694,13 @@ Maps and Location
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Device_Access_64.png'>Video</img>
+<span class='smaller'>
+<a href='videoTest.html'>videoTest</a>
+</span>
 </header>
 <article>
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">%video</span>(<span class="attribute-name">controls</span>)&#x000A;<span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.webm</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/webm; codecs=&quot;vp8, vorbis&quot;</span><span class="delimiter">'</span></span>)&#x000A;<span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.mp4</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;</span><span class="delimiter">'</span></span>)&#x000A;Video tag not supported. Download the video&#x000A;<span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">movie.webm</span><span class="delimiter">&quot;</span></span>) here&#x000A;</pre></div>
+  <div class="code"><pre><span class="tag">%video</span>(<span class="attribute-name">controls</span>)&#x000A;  <span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.webm</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/webm; codecs=&quot;vp8, vorbis&quot;</span><span class="delimiter">'</span></span>)&#x000A;  <span class="tag">%source</span>(<span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.mp4</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;</span><span class="delimiter">'</span></span>)&#x000A;  Video tag not supported. Download the video&#x000A;  <span class="tag">%a</span>(<span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">gaga.webm</span><span class="delimiter">&quot;</span></span>) here&#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -1219,35 +1710,14 @@ Maps and Location
 </header>
 <article>
 <ul>
-<li>autoplay</li>
-<li>controls</li>
-<li>poster</li>
-<li>muted</li>
+<li>autoplay: automatically start playing the audio/video</li>
+<li>controls: show the controls (implementation varies among browsers)</li>
+<li>poster: image to show while the video is downloading</li>
+<li>muted: mute the audio by default</li>
 <li>height, width</li>
-<li>loop</li>
-<li>preload</li>
+<li>loop: repeat playing the audio/video</li>
+<li>preload: start buffering the video</li>
 </ul>
-</article>
-</section>
-<section class='slide'>
-<header>Challenge of the week</header>
-<article>
-Demo something cool that uses location and the sensors
-</article>
-</section>
-<section class='slide'>
-<header>Camera API</header>
-<article>
-http://www.w3.org/TR/2010/WD-html-media-capture-20100720/
-http://my.opera.com/core/blog/2011/03/23/webcam-orientation-preview
-</article>
-</section>
-<section class='slide'>
-<header>
-Resources
-</header>
-<article>
-http://davidflanagan.com/Talks/jsconf11/BytesAndBlobs.html
 </article>
 </section>
 
