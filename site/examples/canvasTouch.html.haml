@@ -96,6 +96,13 @@
     index.html.haml  
   :coderay_raw
     #!haml
+    //Draw on the canvas every 15ms (about 60fps).
+    var timer = setInterval(function() {
+      redraw();
+      calculateFPS();
+      showFPS();
+    }, 15);
+    
     %body
       %canvas#canvas(width='350' height='350')
     

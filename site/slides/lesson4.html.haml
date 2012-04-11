@@ -1,15 +1,16 @@
-=title_slide_tag("Lecture 4: File & Device Access")
+=title_slide_tag("Lecture 4: Canvas, File & Device Access")
 
 %section.slide.section-title
-  %h1 Lecture 4: File & Device Access
+  %h1 Lecture 4: Canvas, File & Device Access
   .agenda
     %p Canvas API
-    %p File API
-    %p Bytes and Blobs
+    %p Bytes, Blobs and File API
     %p HTML Media Capture API
     %p Motion Sensor API
     %p GeoLocation API
     %p Audio & Video
+
+.background(data-background = "bg-lesson4-starry-night")
 
 %section.slide
   %header
@@ -17,12 +18,16 @@
     %span.smaller
       %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html") WHATWG
   %article
-    One of the largest part of the HTML5 specification
-    It provides an API for 2D drawing
+    %p One of the largest part of the HTML5 specification
+    %p It provides an API for 2D drawing 
     Some examples: 
-    %a(href="http://www.cuttherope.ie/") Cut the Rope
-    %a(href="http://mudcu.be/sketchpad/") SketchPad
-    %a(href="http://mrdoob.com/projects/harmony") Harmony 
+    %ul
+      %li
+        %a(href="http://www.cuttherope.ie/") Cut the Rope
+      %li 
+        %a(href="http://mudcu.be/sketchpad/") SketchPad
+      %li
+        %a(href="http://mrdoob.com/projects/harmony") Harmony 
 
 %section.slide
   %header
@@ -30,7 +35,7 @@
   %article
     .row
       .twoColumn
-        .autobox
+        .autobox.hmargin
           %p 
             A 
             %strong bitmap 
@@ -39,12 +44,11 @@
           %p Large file
           %p Faster to load and display
       .twoColumn
-        .autobox
+        .autobox.hmargin
           %p
             A 
             %strong vector graphic
             is a list of instructions how to draw an image (e.g. SVG, VML)
-          %br
           %p Resolution independent
           %p Smaller file
           %p Processor intensive
@@ -52,8 +56,6 @@
 %section.slide
   %header
     =html5_multimedia_tag("Canvas API") 
-    %span.smaller
-      %a(href="http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png") Cheat Sheet
   %article
     %p Javascript API providing low-level primitives for drawing on the Canvas
     Interface of the Canvas element:
@@ -63,7 +65,7 @@
         \: returns the object for accessing the Javascript Canvas API
       %li
         %strong.red<> toDataURL( [DOMString type])
-        \: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg')
+        \: returns a data URL object for the image on the canvas. Type can be 'image/png', 'image/jpeg'
       %li 
         %strong.red<> toBlob(callback, [DOMString type])
         \: creates a Blob representation of the image on the canvas and passes to the callback function.
@@ -75,6 +77,43 @@
       //Get the 2D Canvas context object
       var ctx = document.getElementById('canvas').getContext('2d');
 
+%section.slide
+  %header
+    =html5_multimedia_tag("Canvas API") 
+    %span.smaller
+      %a(href="http://www.nihilogic.dk/labs/canvas_sheet/HTML5_Canvas_Cheat_Sheet.png") Cheat Sheet
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %strong Drawing tools
+          %ul
+            %li Rectangles
+            %li Arcs
+            %li Paths and line drawing
+            %li Bezier and quadratic curves
+          %strong Effects
+          %ul
+            %li Fills and strokes
+            %li Shadows
+            %li Linear and radial gradients
+            %li Alpha transparency
+            %li Compositing
+
+      .twoColumn
+        .autobox
+          %strong Transformations
+          %ul
+            %li Scaling
+            %li Rotation
+            %li Translation
+            %li Transformation matrix
+          %strong Importing/exporting images
+          %ul
+            %li Importing images by URL, other canvases or capturing video
+            %li Taking a snapshot of the canvas as a data URI
+              
+  
 %section.slide
   %header
     Drawing on the canvas
@@ -169,10 +208,6 @@
     
 %section.slide
   %header
-    Drawing a cat
-  %article
-%section.slide
-  %header
     Drawing an image
   %article
     .vmargin
@@ -182,16 +217,18 @@
         %p drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
     .row
       .twoColumn
-        :coderay
-          #!javascript
-            var img = new Image();
+        .autobox
+          :coderay
+            #!javascript
+              var img = new Image();
             
-            //wait until the image has loaded
-            img.onload = function () {
-              ctx.drawImage(this, 0, 0);
-            };
-            
-            img.src = "banksy.jpg"
+              //wait until the image has loaded
+              img.onload = function () {
+                ctx.drawImage(this, 0, 0);
+              };
+          
+              img.src = "banksy.jpg"
+          %p Source can be an image, a canvas or a video.
       .twoColumn
         %canvas#canvas_3(width="400px" height="400")
 :javascript
@@ -206,11 +243,6 @@
 
 %section.slide
   %header
-    Drawing a cat
-  %article
-
-%section.slide
-  %header
     Pixel-level Processing
   %article
     .vmargin
@@ -219,7 +251,7 @@
         %p putImageData(pixels, dx, dy)
         %p pixels => [ r1, g1, b1, a1, r2, g2, ...]
     .row
-      .twoColumn
+      .twoColumn.small
         :coderay
           #!javascript
           var img = new Image();
@@ -235,18 +267,19 @@
           img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
       .twoColumn
         %canvas#canvas_4(width="400px" height="300")
-      
+    
 :javascript
   $(function() {
     var ctx = document.getElementById('canvas_4').getContext('2d');
     var img = new Image();
     img.onload = function () {
       ctx.drawImage(this, 0, 0);
-      var a = ctx.getImageData(0, 0, this.width, this.height);
-      $.each(a, function(i,v) {
-        if (i % 4 < 3) this = 255-v;
+      var pixels = ctx.getImageData(0, 0, this.width, this.height);
+      $.each(pixels.data, function(i,v) {
+        if (i % 4 < 3) 
+          pixels.data[i] = 255 - pixels.data[i];
       });
-      ctx.putImageData(b, 0, 0);
+      ctx.putImageData(pixels, 0, 0);
     };
     img.src = "imgs/lesson4/street-maid-graffiti-banksy.jpg"
   })
@@ -255,34 +288,519 @@
   %header
     Animating the canvas
   %article
+    Animations can be achieved by re-drawing the canvas:
+    %ol
+      %li Initialize the canvas and the objects
+      %li Clear the canvas
+      %li Draw the canvas
+
+%section.slide
+  %header
+    Draw Smile
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+          function drawSmile(ctx) {
+            ctx.beginPath();
+            ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255, 255, 0)";
+            ctx.fill();
+
+            ctx.fillStyle = "rgb(0, 0, 0)";
+            ctx.beginPath();
+            ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "rgb(0,0,0)";
+            ctx.stroke();
+          }
+      .twoColumn
+        %canvas#canvas_5(width="300px" height="300")
+  :javascript
+    $(function() {
+      function drawSmile(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      var ctx = document.getElementById('canvas_5').getContext('2d');
+      drawSmile(ctx);
+    })
+
+%section.slide
+  %header
+    Draw Smile that blinks
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!javascript
+          function drawSmileBlink(ctx) {
+            ctx.beginPath();
+            ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255, 255, 0)";
+            ctx.fill();
+
+            ctx.fillStyle = "rgb(0, 0, 0)";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(100,120);
+            ctx.lineTo(140,140);
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "rgb(0,0,0)";
+            ctx.stroke();
+          }
+      .twoColumn
+        %canvas#canvas_6(width="300px" height="300")
+  :javascript
+    $(function() {
+      function drawSmileBlink(ctx) {
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(255, 255, 0)";
+        ctx.fill();
+
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(100,120);
+        ctx.lineTo(140,140);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+      }
+      var ctx = document.getElementById('canvas_6').getContext('2d');
+      drawSmileBlink(ctx);
+    })
+
+%section.slide
+  %header
+    Blinking Smile
+  %article
+    :coderay
+      #!javascript
+      function clear(ctx) { ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); }
+      var timer1 = setInterval(function() {
+        clear(ctx);
+        drawSmileBlink(ctx);
+        
+        var timer2 = setTimeout(function() {
+          clear(ctx);
+          drawSmile(ctx);
+        }, 300);
+
+      }, 5000);
+    %canvas#canvas_7(width="300px" height="300")
+:javascript
+  $(function() {
+    function drawSmile(ctx) {
+      ctx.beginPath();
+      ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.beginPath();
+      ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    }
+    function drawSmileBlink(ctx) {
+      ctx.beginPath();
+      ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(100,120);
+      ctx.lineTo(140,140);
+      ctx.closePath();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    }
+    function clear(ctx) {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+    var ctx = document.getElementById('canvas_7').getContext('2d');
+    drawSmile(ctx);
+    //Draw on the canvas every 15ms (about 60fps).
+    var timer1 = setInterval(function() {
+      clear(ctx);
+      drawSmileBlink(ctx);
+        var timer2 = setTimeout(function() {
+        clear(ctx);
+        drawSmile(ctx);
+      }, 300);
+      
+    }, 5000);
+    
+  })
+
+%section.slide
+  %header
+    Rotating Blinking Smile
+    %span.smaller
+      =example_url_tag("canvasSmile")
+  %article
+    %canvas#canvas_8(width="400px" height="400")
+:javascript
+  $(function() {
+    function drawSmile(ctx) {
+      ctx.beginPath();
+      ctx.arc(100, 100, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.beginPath();
+      ctx.arc(70, 80, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(130, 80, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(100, 100, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    }
+    function drawSmileBlink(ctx) {
+      ctx.beginPath();
+      ctx.arc(100, 100, 100, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 0)";
+      ctx.fill();
+
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(50,70);
+      ctx.lineTo(90,90);
+      ctx.closePath();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(130, 80, 20, 0, 2 * Math.PI, false);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(100, 100, 70, Math.PI/10, Math.PI*(1-1/10), false);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgb(0,0,0)";
+      ctx.stroke();
+    }
+
+    function clear(ctx) {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+    var ctx = document.getElementById('canvas_8').getContext('2d');
+    function createCtx() {
+      var canvas = document.createElement('canvas');
+      canvas.width = 200;
+      canvas.height = 200;
+      return canvas.getContext('2d');
+    }
+    //Create all the contexts
+    var smileCtx = createCtx();
+    var smileBlinkCtx = createCtx(); 
+    var mainCtx = createCtx();
+
+    //Draw the smiles on their own canvas
+    drawSmile(smileCtx);
+    drawSmileBlink(smileBlinkCtx);
+
+    //Translate the center of the main context
+    mainCtx.translate(100,100);
+    mainCtx.drawImage(smileCtx.canvas, 0, 0, 200, 200, -100, -100, 200, 200);
+    ctx.drawImage(mainCtx.canvas, 0, 0);
+    
+    var timer1, timer2, timer3;
+    var current = smileCtx.canvas;
+    timer1 = setInterval(function() {
+      current = smileBlinkCtx.canvas;
+      timer2 = setTimeout(function() {
+        current = smileCtx.canvas;
+      }, 300);
+    }, 5000);
+
+    start = function() {
+      //Draw on the canvas every 50ms 
+      timer3 = setInterval(function() {
+        clear(ctx);
+        mainCtx.rotate(Math.PI/180*5);
+        mainCtx.drawImage(current, 0, 0, 200, 200, -100, -100, 200, 200);
+        ctx.drawImage(mainCtx.canvas, 0, 0);
+      }, 50);
+    }
+    stop = function() {
+      clearInterval(timer3);
+    }
+    $("#canvas_8").mouseenter(start);
+    $("#canvas_8").mouseleave(stop);
+    
+  })
+
+
+%section.slide
+  %header
+    Rotating Blinking Smile - 1
+  %article
+    :coderay
+      #!javascript
+      function createCtx() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 200;
+        return canvas.getContext('2d');
+      }
+      //Create all the contexts
+      var smileCtx = createCtx();
+      var smileBlinkCtx = createCtx(); 
+      var mainCtx = createCtx();
+
+      //Draw the smiles on their own canvas
+      drawSmile(smileCtx);
+      drawSmileBlink(smileBlinkCtx);
+
+      //Translate the center of the main context
+      mainCtx.translate(100,100);
+      mainCtx.drawImage(smileCtx.canvas, 0, 0, 200, 200, -100, -100, 200, 200);
+      ctx.drawImage(mainCtx.canvas, 0, 0);
+
+
+%section.slide
+  %header
+    Rotating Blinking Smile - 2
+  %article
+    :coderay
+      #!javascript
+      var current = smileCtx.canvas;
+      var timer1 = setInterval(function() {
+        current = smileBlinkCtx.canvas;
+        var timer2 = setTimeout(function() {
+          current = smileCtx.canvas;
+        }, 300);
+      }, 5000);
+
+      //Draw on the canvas every 50ms 
+      var timer3 = setInterval(function() {
+        clear(ctx);
+        mainCtx.rotate(Math.PI/180*5);
+        mainCtx.drawImage(current, 0, 0, 200, 200, -100, -100, 200, 200);
+        ctx.drawImage(mainCtx.canvas, 0, 0);
+      }, 50);
+
+%section.slide
+  %header
+    Exporting the canvas as a Data URI
+    %span.smaller
+      =example_url_tag("canvasInstagram")
+  %article    
+    %ul 
+      %li Take a snapshot of the canvas and store it into PNG/JPEG image
+      %li Image is a Base64 encoded data URL
+      %li
+        %a(href="https://developer.mozilla.org/en/CORS_Enabled_Image") Cross origin policy
+    :coderay
+      #!javascript
+      image = ctx.canvas.toDataURL('image/png');
+    :coderay
+      #!plain
+      image => data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAbRElE...
+
+    .row
+      .twoColumn
+        %canvas#canvas_9(width="300px" height="300")
+      .twoColumn
+        %br
+        %br
+        %a#testDataURL(href="#") Export Image as DataURL
+    
+    
+:javascript
+  $(function() {
+    var ctx = document.getElementById('canvas_9').getContext('2d');
+    ctx.beginPath();
+    ctx.arc(150, 150, 100, 0, 2 * Math.PI, false);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(255, 255, 0)";
+    ctx.fill();
+
+    ctx.fillStyle = "rgb(0, 0, 0)";
+    ctx.beginPath();
+    ctx.arc(120, 130, 20, 0, 2 * Math.PI, false);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(180, 130, 20, 0, 2 * Math.PI, false);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(150, 150, 70, Math.PI/10, Math.PI*(1-1/10), false);
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "rgb(0,0,0)";
+    ctx.stroke();
+    $('#testDataURL').click( function(e){
+      e.preventDefault();
+      var snapshot = ctx.canvas.toDataURL('image/png');
+      window.open(snapshot, "toDataURL() image", "width=600, height=200");
+      
+    });
+    
+  })
+
+
 %section.slide
   %header Scalable Vector Graphics (SVG)
   %article
-
-    
-%section.slide
-  %header SVG vs Canvas
-  %article
-    Check html5 book for comparison
+    %p XML based vector graphics format
+    %p SVG objects are available in the DOM and can be created/traversed/manipulated like HTML elements
+    :coderay
+      #!haml
+      %svg(xmlns="http://www.w3.org/2000/svg" width="300" height="200")
+        %text(style="font-size:30; stroke: blue" x="10"  y="100")
+          Hello World
+        %rect(x="5" y="50" width="150" height="30" style="fill:yellow")
+    %circle(cx="20" cy="50" r="20" style="fill:red")
+    %svg(xmlns="http://www.w3.org/2000/svg" width="300" height="200")
+      %text(style="font-size:30; stroke: blue" x="10"  y="100")
+        Hello World
+      %rect(x="5" y="50" width="150" height="30" style="fill:yellow")
+      %circle(cx="20" cy="50" r="20" style="fill:red")
 
 %section.slide 
-  %header SVG to Canvas
+  %header SVG vs Canvas
   %article
-
+    %ul
+      %li Plenty of graphic tools export SVG
+      %li SVG is retained in the DOM, the canvas not
+      %li We can bind for events to SVG objects
+      %li SVG handles scaling better than canvas that supports only zooming
+      %li Canvas is more suitable for one-time drawing (no interaction and no events)
+      
 %section.slide
   %header
     Javascript Libraries
   %article
-    %a(href="http://processingjs.org/") ProcessingJS
+    %ul
+      %li 
+        %a(href="http://raphaeljs.com") RaphaelJS
+      %li 
+        %a(href="http://processingjs.org/") JS Port of Processing language
+      %li
+        %a(href="http://www.pixastic.com/lib/docs/") Pixastic
+      %li 
+        %a(href="http://code.google.com/p/canvg/") Canvg
+      %li 
+        %a(href="http://www.professorcloud.com/svg-to-canvas/") SVG to Canvas
     
 %section.slide
   %header
-    =html5_multimedia_tag("Canvas API") 
-    %span.smaller
-      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html") WHATWG
+    What can you do with a canvas ? 
   %article
-    
+    An App that 
+    %ul
+      %li.slide is #1 in 79 countries
+      %li.slide has been downloaded 35+ million times just 6 weeks after launch
+      %li.slide generates $1 million+ revenues/day
+      %li.slide has 15+ million users
+      %li.slide generates 3,000 drawings per second
+      %li.slide generated 2 billion drawings since launch (15 Feb 2012)
+      %li.slide reached 1 million users in 9 days
 
+%section.slide
+  %header
+    Draw Something
+  %article
+    =image_tag "lesson4/drawsomething.png", :resize => true
+
+.background(data-background = "bg-lesson4-disk")
 
     
 %section.slide
@@ -419,9 +937,9 @@
       %li
         With the drag-and-drop feature
       %li
-        User grants permission to read the files by selectig them
-      %li
-        Read from a private filesystem sandbox
+        Read from a private filesystem sandbox (
+        %a(href="http://dev.w3.org/2009/dap/file-system/pub/FileSystem/") FileSystem API
+        )
 
 %section.slide
   %header.terminal
@@ -557,20 +1075,18 @@
   %header
     What can we do with a Blob ?
   %article
-    %p 
-      Create an object and insert it in the DOM
-      %ul
-        %li 
-          .terminal URL.createObjectURL()          
-        %li
-          .terminal URL.revokeObjectutL()
-    %p 
-      Read the content with a FileReader:
-      %ul.terminal
-        %li FileReader.readAsText( File|Blob )
-        %li FileReader.readAsBinaryString( File|Blob )
-        %li FileReader.readAsArrayBuffer( File|Blob )
-        %li FileReader.readAsDataURL( File|Blob )
+    Create an object and insert it in the DOM
+    %ul
+      %li 
+        .terminal URL.createObjectURL()          
+      %li
+        .terminal URL.revokeObjectutL()
+    Read the content with a FileReader:
+    %ul.terminal
+      %li FileReader.readAsText( File|Blob )
+      %li FileReader.readAsBinaryString( File|Blob )
+      %li FileReader.readAsArrayBuffer( File|Blob )
+      %li FileReader.readAsDataURL( File|Blob )
     %p
       Messages to/form WebWorkers
     %p Store in localStorage or IndexedDB
@@ -750,7 +1266,7 @@
       multipart/form-data
   %article
     %p Content type for submitting forms that contain binary data
-    %p Works with all browsers
+    %p Works with all browsers (except iOS)
     .vmargin
       :coderay
         #!haml    
@@ -827,6 +1343,7 @@
         %li width
         %li duration 
         
+.background(data-background = "bg-lesson4-compass")
   
 %section.slide
   %header 
@@ -841,12 +1358,12 @@
       .row
         .twoColumn
           .autobox
-            %strong DeviceOrientation Event
+            %strong DeviceOrientation Event (degrees)
             %ul
               %li alpha: around the Z-axis
               %li beta: around the X-axis
               %li gamma: around the Y-axis
-            %strong MotionOrientation Event
+            %strong MotionOrientation Event (m/s2)
             %ul
               %li acceleration
               %li accelerationIncludingGravity
@@ -861,14 +1378,17 @@
       .threeColumn
         .autobox.centered
           Heading (Yaw)
+          %p [0, 360)
           =image_tag("/lesson4/orientation-alpha.png", :resize => true)
       .threeColumn
         .autobox.centered
           Elevation (Pitch)
+          %p [-180, 180)
           =image_tag("/lesson4/orientation-beta.png", :resize => true)
       .threeColumn
         .autobox.centered
           Bank (Roll)
+          %p [-90, 90)
           =image_tag("/lesson4/orientation-gamma.png", :resize => true)
 %section.slide
   %header
@@ -1034,6 +1554,8 @@
         },function() {},{enableHighAccuracy:true, maximumAge:30000, timeout:5000} );  
       })
 
+.background(data-background = "bg-lesson4-music")
+
 %section.slide
   %header 
     =html5_device_access_tag("Audio & Video")
@@ -1070,41 +1592,29 @@
 %section.slide
   %header
     =html5_device_access_tag("Video")
+    %span.smaller
+      =example_url_tag("videoTest")      
   %article
     :coderay
       #!haml
       %video(controls)
-      %source(src="gaga.webm" type='video/webm; codecs="vp8, vorbis"')
-      %source(src="gaga.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"')
-      Video tag not supported. Download the video
-      %a(href="movie.webm") here
+        %source(src="gaga.webm" type='video/webm; codecs="vp8, vorbis"')
+        %source(src="gaga.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"')
+        Video tag not supported. Download the video
+        %a(href="gaga.webm") here
 
 %section.slide
   %header
     =html5_device_access_tag("Audio and Video Element Attributes")
   %article
     %ul
-      %li autoplay
-      %li controls
-      %li poster
-      %li muted
+      %li autoplay: automatically start playing the audio/video
+      %li controls: show the controls (implementation varies among browsers)
+      %li poster: image to show while the video is downloading
+      %li muted: mute the audio by default
       %li height, width
-      %li loop 
-      %li preload 
+      %li loop: repeat playing the audio/video
+      %li preload: start buffering the video
         
-%section.slide
-  %header Challenge of the week
-  %article
-    Demo something cool that uses location and the sensors
+
     
-      
-%section.slide
-  %header Camera API
-  %article
-    http://www.w3.org/TR/2010/WD-html-media-capture-20100720/
-    http://my.opera.com/core/blog/2011/03/23/webcam-orientation-preview
-%section.slide
-  %header
-    Resources
-  %article
-    http://davidflanagan.com/Talks/jsconf11/BytesAndBlobs.html

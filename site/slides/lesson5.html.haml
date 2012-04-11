@@ -324,26 +324,89 @@
       /* iPhone 4 */ 
       @media screen and (-webkit-min-device-pixel-ratio : 1.5), screen and (min-device-pixel-ratio : 1.5) { ... }
 
+
+
 %section.slide
   %header Overflow: scroll
   %article
-    
+
+%section.slide
+  %header 
+    Position: fixed
+    %span.smaller
+      =example_url_tag("cssPositionFixed")
+      
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p Block the position of an element
+          %p Used for creating headers and footers
+          %p Supported on iOS 5 and Android >2.2
+          :coderay
+            #!css
+              #fixed {
+                top: 0;
+                left: 0;
+                width: 100%;
+                position: fixed;
+                background-color: yellow;
+                text-align: center;
+              }
+          :coderay
+            #!html
+              <h1>Lorem Ipsum</h1>
+
+              <div id="fixed">Example of fixed element</div>
+
+              ...
+      .twoColumn
+        =image_tag "lesson5/positionfixed.png", :resize => true
+
+%section.slide
+  %header 
+    Overflow scroll
+    %span.smaller
+      =example_url_tag("cssOverflowScroll")
+
+  %article
+    .row
+      .twoColumn
+        .autobox
+          .small
+            %p 
+              %span.terminal
+                Overflow: scroll
+              defines how a box should be displayed with overflowing content
+            %p 
+              %span.terminal
+                \-webkit-overflow-scrolling: touch 
+              enables native scrolling of an elemnent
+            %p Supported on iOS 5
+          :coderay
+            #!css
+            .scroll {
+              height: 150px;
+              overflow-y: scroll;
+              -webkit-overflow-scrolling: touch;
+              border-top: 1px solid black;
+            }
+          :coderay
+            #!html
+            <div class='scroll'>
+              <h2>Chapter 1</h2>
+              <p>Lorem ipsum dolor...
+            </div>
+            ...  
+      .twoColumn
+        =image_tag "lesson5/overflowscroll.png", :resize => true
   
 %section.slide
-  %header Scrolling
+  %header
+    iScroll
   %article
-    Explain: 
-    overflow: scroll
-    \-webkit-overflow-scrolling: touch;
-    position: fixed
-    
-    Now available on iOS 5
-    http://johanbrook.com/browsers/native-momentum-scrolling-ios-5/
-    
-    One demo: http://frontendstuff.com/css/examples/overflow-scroll.html
-    
-    For other platforms no support but plenty of plugins, like sencha and jqtouch
-    
+  
+   
 %section.slide
   %header 
     Handling Orientation Changes
@@ -487,6 +550,40 @@
       jQuery Mobile provide 
       %a(href="http://jquerymobile.com/test/docs/api/events.html") virtual click events 
 
+%section.slide
+  %header CSS Selectors
+  %article
+    A CSS selector consist of
+    %ul
+      %li 
+        A 
+        %strong.red pattern 
+        that is matched against all elements in the document tree
+      %li
+        A
+        %strong.red rule
+        that is applied to the elements that match
+
+    Two main categories of selectors: 
+    %ul
+      %li 
+        %strong DOM selectors
+        \: class, id, type, attribute selectors  
+      %li  
+        %strong Pseudo-selectors
+        \: first letter of a paragraph
+    Versions
+    %ul
+      %li CSS1 introduced the first 5-6 selectors
+      %li CSS2 introduced 12 more selectors
+      %li CSS3 is adding a dozen more selectors
+
+%section.slide
+  %header
+  
+  %article
+  
+    
 %section.slide
   %header Optimization for mobile html5
   %article

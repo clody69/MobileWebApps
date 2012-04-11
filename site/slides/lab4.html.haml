@@ -1,0 +1,102 @@
+=title_slide_tag("Lab 4: Device APIs", "Claudio Riva and Antti Vuorela")
+
+%section.slide
+  %header The results of last week challenge
+  %article
+    %li 
+      %strong Team-9 
+      (All except offline, 27.3)
+    %li 
+      %strong Gasomob 
+      (All except server, 26.3)
+    %li
+      %strong Team-7 
+      (All except server, 26.3)
+    %li
+      Open Ministry (design, models, UI, some report, no server, 29.3)
+    %li
+      MyMundus (all except report & server, 27,3)
+    %li
+      Zouba (design, models, UI, no functionality, 26.3)
+    %li
+      Hungrybunch (design, models, no UI functionality, 26.3)
+    %li
+      Tap-the-beer (design, model, some UI, 26.3)
+    %li 
+      Team-5 (design?, UI mock-up, 26.3)
+    %li
+      Team-2 (design, 26.3)
+    %li 
+      Team-16 (design?, 26.3)
+
+.background(data-background = "bg-learnhardway")
+%section.slide.section-title
+  %h1 Learn Device APIs the Hard Way
+  .agenda
+    %p Overview of the challenge (10min)
+    %p Group exercise (1:30)
+    %p Feedback at 17:45 (15min)
+
+%section.slide
+  %header The Challenge
+  %article
+    %ul Build a webapp that uses location, canvas and accelerometers
+    %ul Try to complete the 7 tasks
+    %ul Commit the code to your team's GitHub repo 
+    %ul Win the challenge
+
+%section.slide
+  %header Drawing App
+  %article
+    %ul 
+      %li
+        5 use cases
+        %ol
+          %li App detects the user location and prints the coordinates on the canvas
+          %li User draws on the canvas by moving the phone
+          %li User takes a snapshot of the canvas and save locally
+          %li User posts a snapshot of the canvas to own server or online service (e.g. Flickr)
+          %li App adds a background photo taken from Instagram based on user's location
+      %li Delivered through a web server or just as a set of files
+
+%section.slide
+  %header Tasks
+  %article
+    %ol
+      %li Design of the app (paper)
+      %li Detect location of the user
+      %li Print the lat/lng on the canvas
+      %li Draw on the canvas using the accelerometers
+      %li Save locally and/or post a snapshot of the canvas to the server
+      %li Fetch a recent photo from Instagram based on the user's location
+      %li Set the photo as a background in the canvas (will taint the canvas)
+
+%section.slide
+  %header Draw Text on canvas
+  %article
+  :coderay
+    #!javascript
+    ctx.fillText(text, x, y [, maxWidth ] )
+  
+%section.slide
+  %header Instagram Cheat Sheet
+  %article
+    %p
+      %a(href="http://instagram.com/developer/endpoints/locations/") Instagram Location API
+    
+    %a(href="") Locations available at lat=60.169845 and lng=24.938551
+    :coderay
+      #!plain
+      https://api.instagram.com/v1/locations/search?lat=60.169845&lng=24.938551&client_id=ffc1e462cbc8442d9247ea1b32fb45e1
+    
+    %a(href="https://api.instagram.com/v1/locations/237017/media/recent/?client_id=ffc1e462cbc8442d9247ea1b32fb45e1") Photos available at location ID: 237017 (Helsinki)
+    :coderay
+      #!plain
+      https://api.instagram.com/v1/locations/237017/media/recent/?client_id=ffc1e462cbc8442d9247ea1b32fb45e1
+
+%section.slide
+  %header Publish to GitHub
+  %article
+    %p Publish the design and code to your team GitHub repo
+    %p Create a new dir called "Lab4"
+    %p Last commit is tomorrow at midnight.

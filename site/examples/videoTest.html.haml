@@ -1,0 +1,16 @@
+=example_header_tag "Video Test", "videoTest"
+
+%p
+  In this example we experiment with the video capabilities of HTML5. 
+
+.code_block
+  .code_header
+    index.html.haml
+  :coderay_raw
+    #!haml    
+    %body
+      %video(controls)
+        %source(src="gaga.webm" type='video/webm; codecs="vp8, vorbis"')
+        %source(src="gaga.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"')
+        Video tag not supported. Download the video
+        %a(href="gaga.webm") here

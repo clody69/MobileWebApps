@@ -127,23 +127,39 @@
   .header
     Monday 2nd April 2012
   .lecture
-    =lecture_tag("Lecture 4: File & Device Access", "14:15-15:45")
+    .video
+      %iframe(src="http://player.vimeo.com/video/40121896?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 4: File & Device Access", "14:15-15:45", "", "lecture4_2012_1.html")
     .description
       %p 
-        In this lecture we explore the APIs for accessing the file system and the hardware resources of mobile devices.
+        In this lecture we explore the APIs for drawing on the canvas, for reading from the file system, for using the new 
+        XMLHttpRequest Level 2, for accessing the camera, accelerometers and geolocation and, for playing audio/video files.
+
         We cover the following topics: 
         %ul
-          %li Bytes and Blobs
-          %li File API
+          %li Canvas API
+          %li Bytes, Blobs and File API
           %li HTML Media Capture API
           %li Motion Sensor API
-          %li GeoLocation
+          %li GeoLocation API
           %li Audio & Video
+  
+      =docs_tag("lecture4.pdf")
+
+      Examples:
+      %ul
+        %li=example_url_tag('canvasSmile')
+        %li=example_url_tag('canvasInstagram')
+        %li=example_url_tag('fileApiTests')
+        %li=example_url_tag('deviceOrientation')
+        %li=example_url_tag('deviceGeolocation')
+        %li=example_url_tag('videoTest')
+
   .lecture
-    =lecture_tag("Lab 4: Device Access", "16:00-17:45", "")
+    =lecture_tag("Lab 4: Device Access", "16:00-17:45","", "lab4.html")
     .description
       %p Hands-on exercises on device access API
-      
+    
 .lecture_block
   .header
     Monday 16th April 2012

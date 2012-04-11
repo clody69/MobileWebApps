@@ -1,33 +1,151 @@
-=example_header_tag "Media Query on Device", "cssMediaQueriesDevice"
+=example_header_tag "Instagram", "canvasInstagram"
 
 %p
-  In this example we demonstrate how to use the CSS3 media query for querying the device screen size. 
-  On narrow devices, the two columns of text are not floated but sit one on top of the other.
+  In this example we demonstrate how to interact with a REST API and how to draw images on the 2D canvas. We fetch the
+  most popular images from the 
+  %a(href="http://instagram.com/") Instagram
+  REST API and we draw them on the Canvas. The application also allow the user 
+  to save up to 2 compositions of images in the local storage. 
   
 %p
-  The CSS code to achieve this is below: 
+  Below there is the JS code for initializing the application. First we resize the canvas to fill the available space
+  for the content. We also calculate the maximum number of images that we can visualize in the canvas.
 .code_block
   .code_header
-    index.html.haml  
+    layout.haml  
   :coderay_raw
-    #!css
-    :css
-    .container {
-      width: 500px;
-      }
-    .container div {
-      float: left; 
-      margin: 0 15px 0 0;
-      width: 235px;
+    #!javascript    
+    var canvas = $('#canvas')[0];
+    var ctx = canvas.getContext('2d');
+
+    var header = $('div[data-role="header"]:visible');
+    var footer = $('div[data-role="footer"]:visible');
+    var content = $('div[data-role="content"]:visible');
+    var viewport_height = $(window).height();
+    var viewport_width = $(window).width();
+    var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
+    /* Trim margin/border/padding height */
+    content_height -= (content.outerHeight() - content.height());
+    
+    canvas.width = viewport_width;
+    canvas.height = content_height;
+    cols = Math.floor(canvas.width/104);
+    rows = Math.floor(canvas.height/104);
+    max = Math.min(cols*rows, 50);
+    
+    if (!localStorage.index) {
+      localStorage.index = 0;
     }
-    @media all and (max-device-width: 320px) {
-      .container {
-        width: auto;
+
+%p
+  The next step is to check if there are previously saved compositions and load them from the local storage. We load the images
+  in the elements with id 
+  %span.terminal< snap_0
+  and
+  %span.terminal< snap_1
+  of the dedicated page with id 
+  %span.terminal< saved
+  \.
+  
+.code_block
+  .code_header
+    layout.haml  
+  :coderay_raw
+    #!javascript    
+    //Load the 3 saved images if they are available
+    $.each(['snap_0','snap_1'], function(index, value) {
+      if(localStorage.getItem(value)) {
+        $("#"+value).attr('src',localStorage.getItem(value));
       }
-      .container div {
-        float: none;
-        margin: 0;
-        width: auto;
-      }
-    }
-   
+    });
+
+%p
+  Below there is the code for fetching the images from Instagram. First we fetch a JSON object that contains the 
+  metadata of the most popular images on Instagram. Then we download the images and draw them on the canvas. We must 
+  use a workaround for fetching the images. The 2D canvas API follows the cross-origin policy which means that drawing on the 
+  canvas images that originate from a different host (than the one we are serving the main page) disables the possibility of 
+  taking snapshots of the canvas with the toDataURL method (
+  %a(href = "https://developer.mozilla.org/en/CORS_Enabled_Image")
+  ). To workaround this limitation we use our Sinatra server as a proxy for fetching the images from the Instagram REST API 
+  through the endpoint:
+  %span.terminal< /fetch?url=...
+  
+.code_block
+  .code_header
+    layout.haml  
+  :coderay_raw
+    #!javascript
+    $("#refresh").bind("click", function(e) {
+      e.preventDefault();
+      //Fetch the post popular images on istagram
+      $.getJSON('https://api.instagram.com/v1/media/popular?client_id=ffc1e462cbc8442d9247ea1b32fb45e1&callback=?', 
+        function(data) {
+          $.each(data.data.slice(0,max), function(index, value) {
+            //Use custom proxy for downloading and encoding the images in Base64
+            //to avoid cross origin issues 
+            $.get('/fetch?url=' + value.images.low_resolution.url, function (data) {
+              //Create a new image to be placed on the canvas
+              var img = new Image();
+              img.onload = function () {
+                //Copy the image to the canvas
+                ctx.drawImage(this, 1 + (index % cols)*101, 1+(Math.floor(index/cols))*101, 100, 100);
+              }
+              img.src = data;
+            });
+          });
+        });
+      
+    });
+
+%p
+  Below there is the code for taking a snapshot of the canvas and saving it in the local storage. To stay within the typical 
+  memory limits of the local storage we don't store more than 2 images.
+
+.code_block
+  .code_header
+    layout.haml  
+  :coderay_raw
+    #!javascript
+    $("#save").bind("click", function(e) {
+      e.preventDefault();
+      //Take a snapshot of the canvas as base64 encoded data URL
+      var snapshot = ctx.canvas.toDataURL('image/png');
+      //Store it in the last used slot in the localStorage
+      localStorage.setItem('snap_' + localStorage.index, snapshot);
+      //Replace the image in the saved page
+      $("#snap_" + localStorage.index).attr('src',snapshot);
+      //Increment the index 
+      localStorage.index = (JSON.parse(localStorage.index)+1) % 2;
+    });
+%p
+  Below there is the implementation of the Sinatra server whose only function is to server the main HTML file and 
+  act as a proxy for fetching the images from Instagram. The images are converted to Data URI with Base64 encoding
+  before they are sent to the client.
+
+.code_block
+  .code_header
+    server.rb  
+  :coderay_raw
+    #!ruby
+    get '/' do 
+      #Renders the haml template index.html.haml
+      #with the default layout layout.html.haml
+      haml :index, :layout => :layout
+    end
+
+    get '/fetch' do
+      #Fetch the image from the URL and encodes it as a data URI
+      base_image = Net::HTTP.get(URI.parse(params['url']))
+      puts "Fetched image: " + params['url']
+      "data:image/png;base64,#{Base64.encode64(base_image)}"
+    end
+%p
+  You can try this example by starting the server and visiting the page
+  %a(href="http://localhost:4567") http://localhost:4567
+  in your browser
+.code_block
+  .code_header
+    terminal  
+  :coderay_raw
+    #!plain
+    ruby server.rb
