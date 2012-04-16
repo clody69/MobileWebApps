@@ -1,0 +1,17 @@
+=example_header_tag "Touch Events Test", "touchEvents"
+
+%p
+  This example is used for testing the touch events. The events are printed on the main page as soon as they are generated
+  by the browser. 
+    
+%p
+  Here is the JS code for binding to the touch events: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+    $(document).bind('mousedown mouseup mousemove mouseover mouseout keydown keypress keyup touchstart touchmove touchend click', function(e) {
+      $(".console").append(e.type + '<br>');
+    });
+   

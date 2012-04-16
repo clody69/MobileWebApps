@@ -1,0 +1,25 @@
+=example_header_tag "Overflow Scroll", "cssOverflowScroll"
+
+%p
+  In this example we demonstrate how to enable scrolling within an element. This requires a combination of two properties: 
+  %span.terminal 
+    overflow: scroll
+  and
+  %span.terminal
+    \-webkit-overflow-scrolling: touch
+  
+%p
+  The CSS code to achieve this is below: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    .scroll {
+      height: 150px;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      border-top: 1px solid black;
+    }
+
+   

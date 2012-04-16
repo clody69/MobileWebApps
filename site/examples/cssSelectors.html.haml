@@ -1,0 +1,53 @@
+=example_header_tag "CSS Selectors", "cssSelectors"
+
+%p
+  In this example we demonstrate how to use the CSS3 selectors for modifying the style of the text in a un-intrusive way.
+  The CSS code is reported below: 
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    :css
+    a[href^='mailto'] {
+      background: url('data:image/png;base64,iVBORw0KGgoA...FTkSuQmCC') no-repeat left center;
+      padding-left: 20px;
+    }
+
+    a[href^='http'] {
+      background: url('data:image/png;base64,iVBORw0KGgoA...RK5CYII=') no-repeat left center;
+      padding-left: 20px;
+    }
+
+    a[href$='.pdf'] {
+      background: url('data:image/png;base64,iVBORw0KGgoA...FTkSuQmCC') no-repeat left center;
+      padding-left: 20px;
+    }
+
+    a[href$='.doc'] {
+      background: url('data:image/png;base64,iVBORw0KGgoA...U5ErkJggg==') no-repeat left center;
+      padding-left: 20px;
+    }
+
+    a[href*='.rss'] {
+      background: url('data:image/gif;base64,R0lGODlhDwAP...BAIAA7') no-repeat left center;
+      padding-left: 20px;
+    }
+    
+    /* Enlarge first line of paragraph text*/
+    p:first-line {font-size: 1.5em;}
+    
+    /* Enlarge first letter of the paragraph */
+    p:first-letter {
+      font-size:250%;
+      font-weight:bold;
+    }
+
+    /* Enlarge first letter of the paragraph */
+    p:nth-child(2n+1) {
+      font-style: italic;
+    }
+
+    /* Indent the first line of paragraph except the first one*/
+    p + p { text-indent: 1.5em; }  

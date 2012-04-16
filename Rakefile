@@ -18,9 +18,12 @@ task :render do
   Dir["site/slides/*.html.haml"].each { |file| build file, "site/layout/slides.html.haml", "public/" + File.basename(file).gsub('.haml','')}
 
   print_coderay_css "public/css/coderay.css"
+
+
   
   %w(jQuerySimple senchaSimple websocketsEcho deviceGeolocation deviceOrientation cssMediaQueriesViewport 
-    cssMediaQueriesDevice canvasTouch mvcBackboneLocalBlog canvasSmile).each { |file| 
+    cssMediaQueriesDevice canvasTouch mvcBackboneLocalBlog canvasSmile cssMediaQueriesOrientation cssPositionFixed 
+    cssOverflowScroll touchEvents touchDrag cssSelectors).each { |file| 
     dst = "public/examples/#{file}"
     FileUtils.mkdir_p(dst)
     FileUtils.cp_r Dir.glob("../examples/#{file}/*.html"), dst

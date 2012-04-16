@@ -1,0 +1,38 @@
+=example_header_tag "Media Query Orientation", "cssMediaQueriesOrientation"
+
+%p
+  In this example we demonstrate how to use the CSS3 media query for querying the orientation of the device. 
+  The menu is show vertically or horizontally according to the orientation of the device. 
+    
+%p
+  The CSS and HTML code to achieve this is below: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    li { 
+      float: left;
+      border: thin solid black;
+      list-style-type: none;
+      padding: 10px 20px;
+      text-align: center;
+      max-width: 100px;
+    }
+    @media all and (orientation: portrait) {
+      li { float: none; }
+    }
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!haml
+    %body
+      %ul
+        %li Home
+        %li Products
+        %li Services
+        %li Team
+        %li About us
+        %li Contact  

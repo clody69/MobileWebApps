@@ -167,6 +167,10 @@ body, html {
 #bg-lesson4-disk { background-image: url('../imgs/bg-lesson4-disk.jpg'); }
 #bg-lesson4-compass { background-image: url('../imgs/bg-lesson4-compass.jpg'); }
 #bg-lesson4-music { background-image: url('../imgs/bg-lesson4-music.jpg'); }
+#bg-lesson5-dali-time { background-image: url('../imgs/bg-lesson5-dali-time.jpg'); }
+#bg-lesson5-escher { background-image: url('../imgs/bg-lesson5-escher.jpg'); }
+#bg-lesson5-dali-touch { background-image: url('../imgs/bg-lesson5-dali-touch.jpg'); }
+
 #bg-template { background-image: url('../imgs/bg-template.jpg'); }
 #bg-lab1 { background-image: url('../imgs/bg-lab1.jpg'); }
 #bg-stones { background-image: url('../imgs/bg-stones.jpg'); }
@@ -587,3 +591,22 @@ h1, h2 {
 }
 
 
+.deck-container table {
+	margin: 0 0 1.5em;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-bottom: 1px solid #CCC;
+}
+
+.deck-container 
+{	
+	th, td {
+	padding: .25em 1em .25em 0;
+	border-top: 1px solid #CCC;
+	vertical-align: top;
+	text-align: left;
+	}
+	th {
+		font-weight: bold;
+	}
+}

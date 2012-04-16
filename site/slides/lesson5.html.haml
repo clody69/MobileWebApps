@@ -1,23 +1,120 @@
-=title_slide_tag("Lecture 3: CSS3")
+=title_slide_tag("Lecture 5: CSS3 & Touch")
 
+.background(data-background = "bg-lesson5-dali-time")
 
 %section.slide.section-title
-  %h1 Lecture 4: CSS3
+  %h1 Lecture 5: CSS3 & Touch 
   .agenda
     %p Media Queries
-    %p Overflow: scroll
-    %p Position: fixed
-    %p Orientation changes
-    %p Selectors
-    %p Borders and Box Effects
-    %p Color and Opacity
-    %p Gradients
-    %p 2D Transitions
-    %p Transitions and Animations
-    %p 3D Transformations
-    %p Flexible Box Layout
-    %p Touch events
-    http://www.html5rocks.com/en/mobile/touch/
+    %p Position: fixed & Overflow: scroll
+    %p Touch Interaction
+    %p CSS3 Selectors
+    %p CSS3 Transformations
+    %p CSS3 Transitions & Animations
+
+
+%section.slide
+  %header
+    The problem
+  %article
+    .slide
+      :coderay
+        #!plain
+
+        GET / HTTP/1.1
+        Host: example.com
+        Connection: keep-alive
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.79 Safari/535.11
+    %br
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Mozilla/5.0 (iPhone Simulator; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3        
+
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13
+
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Opera/9.80 (Linux armv7l; U; en) Presto/2.9.201 Version/11.50
+
+    .slide
+      :coderay
+        #!plain
+        Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+
+%section.slide
+  %header
+    3 categories and 3 UX factors
+  %article
+    %strong 3 main categories of devices
+    %ul
+      %li Desktop/laptops
+      %li Tablets 
+      %li Mobile devices (from smartphones to dumbphones)
+    %strong 3 main factors affect UX
+    %ul
+      %li Screen resolution (size, orientation, dpi)
+      %li User interaction (mouse, keyboard, touch, voice)
+      %li Performance (CPU power, memory capacity, GPU, bandwidth)
+
+%section.slide
+  %header
+    Desktop/Laptop
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/laptop.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li Large screen
+          %li High performance
+          %li High bandwidth
+          %li Multiple browsers with different capabilities
+          %li Mouse and keyboard interaction (but not always)
+
+%section.slide
+  %header
+    Tablet
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/touch.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li Large screen
+          %li Close to smartphones for user interaction
+          %li Two orientations
+          %li Smooth animations and graphics (often equipped with powerful GPU)
+          %li High to medium performance 
+          %li High to medium bandwidth
+          %li Primarily used with the default browser (but not always)
+          %li Touch interaction (but not always)
+
+%section.slide
+  %header
+    Smartphones & Featurephones
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/operamini.png", :resize => true
+      .twoColumn
+        %ul
+          %li Small screen
+          %li One or two orientations
+          %li Limited animations and graphics
+          %li Medium-low performance 
+          %li 2G/3G bandwidth
+          %li Native and proxy browsing
+          %li Touch interaction (but not always)
+          %li Multi-tasking users on the move that require fast and responsive UI
+          %li Task oriented UI 
+          %li Online/offline experience
+
+          
 %section.slide
   %header Device Screen Width
   %article
@@ -78,7 +175,47 @@
   %article
     =image_tag "lesson5/screen-resolution.png", :url => "http://netmarketshare.com/report.aspx?qprid=17"
 
-      
+%section.slide
+  %header Screen Resolution Alert on April 11
+  %article
+    =image_tag "lesson5/statcounter-news.png", :url => "http://gs.statcounter.com/press/screen-resolution-alert-for-web-developers"
+
+%section.slide
+  %header Screen Resolution Trends
+  %article
+    =image_tag "lesson5/StatCounter-resolution.jpg", :url => "http://gs.statcounter.com/#resolution-ww-monthly-201103-201203"
+
+%section.slide
+  %header Mobile OS Market Share (based on browser)
+  %article
+    =image_tag "lesson5/os_marketshare.png", :url => "http://marketshare.hitslink.com/operating-system-market-share.aspx?qprid=8&qpcustomd=1"
+  
+%section.slide
+  %header Popular screen resolutions for mobile
+  %article
+    %ul 
+      %li 
+        %strong 480 x 320 
+        \: old iPhones, mid-range Android and Nokia devices
+      %li
+        %strong 320 x 240
+        \: low-end Android and older Nokia Symbian phones
+      %li
+        %strong 800 x 480
+        \: new Nokia and Android devices
+      %li 
+        %strong 960 x 640
+        \: iPhone 4 
+      %li 
+        %strong 1024 x 768
+        \: iPad and Android tablets
+
+%section.slide
+  %header Top Mobile Browsers Trends
+  %article
+    =image_tag "lesson5/StatCounter-mobile_browser.jpg", :url => "http://gs.statcounter.com/#mobile_browser-ww-monthly-201103-201203"
+
+    
 %section.slide
   %header
     What is the Viewport ? 
@@ -100,6 +237,7 @@
       .twoColumn
         =image_tag 'lesson5/mobile_layoutviewport.jpg', :resize => true
 
+
 %section.slide
   %header
     Viewport Meta Tag
@@ -118,7 +256,10 @@
         
 %section.slide
   %header
-    =html5_styling_tag("Media Queries")      
+    =html5_styling_tag("Media Queries")
+    %span.smaller
+      %a(href="http://www.w3.org/TR/css3-mediaqueries") W3C
+      
   %article
     %p Query syntax for serving the most appropriate styles based on the device characteristics
      
@@ -133,19 +274,10 @@
       %li
         %a(href="http://2010.dconstruct.org") An example
       %li
+        %a(href="http://lanyrd.com/") Another example
+      %li
         %a(href="http://www.mediaqueri.es") Other examples
 
-%section.slide
-  %header
-    Use responsive design carefully
-  %article
-    Layout of the page is important but building a mobile web site (app) includes also:
-    %ul 
-      %li Optimizing performance
-      %li Avoiding heavy JS libraries
-      %li Reducing latency
-      %li Reducing loading time
-      %li Task-oriented UI
 
 %section.slide
   %header Media Queries Syntax
@@ -155,17 +287,17 @@
         Link external stylesheet
         :coderay
           #!html
-          <link href="file.css" rel="stylesheet" media="<logic> <media> and ( <expression>)">
+          <link href="file.css" rel="stylesheet" media="logic media and ( expression)">
       %li 
         Import external stylesheet
         :coderay
           #!css
-          @media url('file.css') logic <media> and ( <expression> );
+          @media url('file.css') logic media and ( expression );
       %li 
         Embedded in a stylesheet
         :coderay
           #!css
-          @media <logic> <media> ( <expression> ) { <rules> }
+          @media logic media ( expression) { rules }
     %p 
       %strong Logic
       \: only | not
@@ -185,9 +317,9 @@
         \: height of the browser viewport including the scroll bars
     :coderay
       #!css
-      @media <media> and {width: <value>} { <rules> }
-      @media <media> and {min-width: <value>} { <rules> }
-      @media <media> and {max-width: <value>} { <rules> }
+      @media media and {width: value} { rules }
+      @media media and {min-width: value} { rules }
+      @media media and {max-width: value} { rules }
 
 %section.slide
   %header 
@@ -270,6 +402,42 @@
 %section.slide
   %header Device Orientation
   %article
+    %ul
+      %li
+        %strong Orientation
+        %ul
+          %li 
+            %span.terminal landscape
+            (viewport width > viewport height )
+          %li
+            %span.terminal portrait
+            (viewport height >= viewport width )
+          
+    :coderay
+      #!css
+      @media media and {orientation: value} { rules }
+
+%section.slide
+  %header 
+    Orientation Media Query Example 
+    %span.smaller
+      =example_url_tag("cssMediaQueriesOrientation")
+  %article
+  :coderay
+    #!css
+    li { 
+      float: left;
+      border: thin solid black;
+      list-style-type: none;
+      padding: 10px 20px;
+      text-align: center;
+      max-width: 100px;
+    }
+    @media all and (orientation: portrait) {
+      li { float: none; }
+    }
+
+
   
 %section.slide
   %header Device Pixel Ratio
@@ -292,6 +460,40 @@
       #!html
       <link rel="stylesheet" media="screen and min-device-pixel-ratio: 2" href="highres.css">
 
+%section.slide
+  %header Avoid hiding elements if possible
+  %article
+    :coderay
+      #!css
+      .container {
+        background: white url('background.jpg') no-repeat;        
+      }
+      @media all and {max-device-width: 400px} {
+        .container {
+          display: none;
+        }
+    %p Assets are downloaded even if hidden. This is consuming bandwidth and cache.
+
+%section.slide
+  %header Best practices
+  %article
+    %p Define first the basic stylesheet for mobile users and include the one for desktop/tablets through media queries
+    %p Legacy browsers will get the basic stylesheet
+    :coderay
+      #!html
+      <link href="basic.css" rel="stylesheet" media="screen">
+      <link href="desktop.css" rel="stylesheet" media="screen and (min-device-width: 480px)">
+    %br
+    %p Same is valid for high definition graphics
+    :coderay
+      #!css
+      E { background-image: url('background-lowres.png'); }
+      @media all and (min-device-pixel-ratio: 1.5) {
+        background-image: url('background-highres.png');
+        /* Ensure the images are not displayed bigger than their element */
+        background-size: 100% 100%;
+      }
+      
 %section.slide
   %header CSS for each device layout
   %article.small
@@ -324,11 +526,17 @@
       /* iPhone 4 */ 
       @media screen and (-webkit-min-device-pixel-ratio : 1.5), screen and (min-device-pixel-ratio : 1.5) { ... }
 
-
-
 %section.slide
-  %header Overflow: scroll
+  %header
+    Use responsive design carefully
   %article
+    Layout of the page is important but building a mobile web site (app) includes also:
+    %ul 
+      %li Optimizing performance
+      %li Avoiding heavy JS libraries
+      %li Reducing latency
+      %li Reducing loading time
+      %li Task-oriented UI
 
 %section.slide
   %header 
@@ -382,7 +590,10 @@
               %span.terminal
                 \-webkit-overflow-scrolling: touch 
               enables native scrolling of an elemnent
-            %p Supported on iOS 5
+            %p 
+              Supported on iOS 5 (Check also 
+              %a(href="http://cubiq.org/iscroll-4") iScroll
+              )
           :coderay
             #!css
             .scroll {
@@ -400,25 +611,94 @@
             ...  
       .twoColumn
         =image_tag "lesson5/overflowscroll.png", :resize => true
-  
+
+.background(data-background = "bg-lesson5-dali-touch")
+
 %section.slide
   %header
-    iScroll
+    Interaction Design
   %article
-  
-   
+    =image_tag "lesson5/coffeepot_for_masochists.jpg", :resize => true
+
 %section.slide
-  %header 
-    Handling Orientation Changes
+  %header
+    Interaction Design
   %article
+    .small
+      %blockquote Interaction design is about shaping digital things for people’s use
+    %br
+    %ul
+      %li It's about digital products or services
+      %li It's about satisfying people's needs 
+      %li It's about shaping a unique interaction technique
+      %li it's about providing an enjoyable user experience
+      
+
+%section.slide
+  %header
+    Interaction Modes - Mouse 
+  %article
+    =image_tag "lesson5/mouse.jpg", :resize => true
+
+%section.slide
+  %header
+    Interaction Modes - Keyboard
+  %article
+    =image_tag "lesson5/keyboard.jpg", :resize => true
+
+%section.slide
+  %header
+    Interaction Modes - Touch
+  %article
+    =image_tag "lesson5/touch.jpg", :resize => true
+
+%section.slide
+  %header
+    Mouse events 
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/mouse.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li mousedown
+          %li mousemove
+          %li mouseup
+          %li mouseover
+          %li mouseout
+
+%section.slide
+  %header
+    Keyboard events
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/keyboard.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li keydown
+          %li keypress
+          %li keyup
+
+%section.slide
+  %header
+    Touch events
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/touch.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li touchstart
+          %li touchmove
+          %li touchend
+
 %section.slide
   %header
     Touch Events
     %span.smaller
       %a(href="http://dvcs.w3.org/hg/webevents/raw-file/tip/touchevents.html") W3C
   %article
-    %p Mobile browsers wait about 300ms between the first tap and firing the click event. The reason for waiting is to detect a double tap.
-    %p onclick events don't provide the best experience for touch devices
     Touch events:
     %ul
       %li
@@ -430,6 +710,8 @@
       %li
         %strong.red touchend
         \: a finger is removed from a DOM element
+
+
 %section.slide
   %header
     Touches Lists
@@ -526,9 +808,159 @@
           }
         });
       }, 15);
+
+%section.slide
+  %header Interaction Modes
+  %article
+    %p 3 interaction modes
+    %p 3 set of events 
+    %br
+    %p What's the best way to handle them ? 
+    %ul
+      %li Sometimes we can group under the same approach
+      %li Sometimes we must handle then independently
+
+%section.slide
+  %header 
+    Events sequence
+    %span.smaller
+      =example_url_tag("touchEvents")
+  %article
+    %p What happens when you touch the screen of a touch device ?
+    .row
+      .threeColumn
+        .autobox
+          %strong Click
+          %ul
+            %li touchstart
+            %li (mouseout)
+            %li mouseover
+            %li mousemove (once)
+            %li mousedown
+            %li mouseup
+            %li click
+            %li touchend
+      .threeColumn
+        .autobox
+          %strong Double tap
+          %ul
+            %li touchstart
+            %li touchend
+            %li touchstart
+            %li touchend
+      .threeColumn
+        .autobox
+          %strong Move finger
+          %ul
+            %li touchstart
+            %li touchmove
+            %li touchmove
+            %li ...
+            %li touchmove
+            %li touchend
+
+%section.slide
+  %header 
+    Support both mouse and touch events
+    %span.smaller
+      =example_url_tag("touchDrag")
+  %article
+    :coderay
+      #!javascript
+      var square = $('.square');
+
+      square.on('touchstart', function(e){
+        setOffset(e);
+        square.on('touchmove', drag);
+      });
+      
+      square.on('touchend', function(e) { 
+        square.off('touchmove');
+      });
+      
+      square.on('mousedown', function(e) {
+        setOffset(e);
+        square.on('mousemove', drag);
+      });
+
+      square.on('mouseup', function(e) { 
+        square.off('mousemove'); 
+      });
       
 %section.slide
-  %header Best practices for touch events
+  %header 
+    Disable mouse events when touch is detected
+    %span.smaller
+      =example_url_tag("touchDrag")
+  %article
+    :coderay
+      #!javascript
+      square.on('touchstart', function(e){
+        setOffset(e);
+        square.on('touchmove', drag);
+        square.off('mousedown');
+      });
+
+%section.slide
+  %header
+    Event equivalencies
+  %article
+    %table.large
+      %thead
+        %tr
+          %th Mouse
+          %th Keyboard
+          %th Touch
+      %tbody
+        %tr
+          %td mousedown
+          %td keydown
+          %td touchstart
+        %tr
+          %td mousemove
+          %td keydown/press
+          %td touchmove
+        %tr
+          %td mouseup
+          %td keyup
+          %td touchend
+        
+%section.slide
+  %header Tricky Parts
+  %article
+    %p Multi touch is only available for touch devices
+    %p Some devices may fire multiple types of events simultaneously
+    %p Browsers on touch devices also generate click events because websites depend on them
+    %p No hover events for touch devices
+    %p Multiple interaction modes must be well designed and tested 
+
+%section.slide
+  %header
+    Multiple interaction modes
+  %article
+    =image_tag "lesson5/nokia-e71.jpeg", :resize => true
+
+%section.slide
+  %header
+    Multiple interaction modes
+  %article
+    =image_tag "lesson5/ipad-keyboard.jpg", :resize => true
+
+%section.slide
+  %header
+    Click event
+  %article
+    %p Click is not just a mouse event 
+    %p Click is synthesized by the browser
+    %p It means "Activate" the element
+    %p Works well in most of the situations
+    %p It doesn't give the best UX on touch devices
+    %br
+    %p => About 300ms delay between the touchend and the click event
+    
+
+%section.slide
+  %header Some hits for touch events
   %article
     Disable zooming
     :coderay
@@ -542,14 +974,51 @@
         ...
       });
     %p 
-      Asynchronously handle touch information (timer or 
-      %a(href="http://paulirish.com/2011/requestanimationframe-for-smart-animating/") animation frame
-      )
-    %p Must listen both touch and click events
+      Asynchronously handle touch information (timer or animation frame)
     %p 
       jQuery Mobile provide 
-      %a(href="http://jquerymobile.com/test/docs/api/events.html") virtual click events 
+      %a(href="http://jquerymobile.com/test/docs/api/events.html") virtual click, tap and swipe events
 
+.background(data-background = "bg-lesson5-escher")
+
+%section.slide
+  %header
+    =html5_styling_tag("Cascading Style Sheets Level 3")      
+    %span.smaller
+      %a(href="http://www.w3.org/Style/CSS/current-work") W3C
+  %article
+    %p CSS is the default styling language for every markup-based document
+    %p The version of CSS in current use is CSS2.1
+    %p CSS3 consists of several modules that are worked out and implemented independently
+    %p CSS3 is under active development 
+    %p 
+      What's available in the browsers ? 
+      %a(href="http://caniuse.com/#cats=CSS") Can I Use
+
+%section.slide
+  %header
+    =html5_styling_tag("The horror of the CSS3 prefixes")      
+  %article
+  
+    %p Browsers specific prefixes for the CSS properties are used for implementing experimental properties
+    %p 
+      Prefixes allow browsers to modify the "experimental" properties 
+      (
+      %a(href="http://www.alistapart.com/articles/prefix-or-posthack/") read more
+      )
+    :coderay
+      #!css
+      E { 
+        -moz-transform: function(value); /* Firefox */
+        -ms-transform: function(value);  /* IE */
+        -o-transform: function(value);  /* Opera */ 
+        -webkit-transform: function(value); /*Webkit*/
+        transform: function(value); 
+      }
+    %br
+    %p 
+      One workaround: 
+      %a(href="http://sass-lang.com/") mixins with SASS 
 %section.slide
   %header CSS Selectors
   %article
@@ -580,29 +1049,702 @@
 
 %section.slide
   %header
-  
+    CSS2 DOM Selectors 
+    %span.smaller
+      %a(href="http://www.w3.org/TR/CSS2/selector.html#pattern-matching") W3C
   %article
-  
-    
-%section.slide
-  %header Optimization for mobile html5
-  %article
-    http://www.html5rocks.com/en/mobile/optimization-and-performance/
-    
-%section.slide
-  %header
-    Fastclick
-  %article
-    http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
-    http://code.google.com/mobile/articles/fast_buttons.html  
-%section.slide
-  %header
-    Canvas
-  %article
-    Tainiting the canvas: https://developer.mozilla.org/en/CORS_Enabled_Image
+    %table
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td Universal
+          %td *
+          %td Match any element
+        %tr
+          %td Type
+          %td E
+          %td Match any E element
+        %tr
+          %td Class
+          %td .title
+          %td Match any element whose class attribute contains title
+        %tr
+          %td ID
+          %td #header
+          %td Match any element with an id equal to header
+        %tr
+          %td Descendant
+          %td E F
+          %td Match any F that is a descendant of E
+        %tr
+          %td Child
+          %td E > F
+          %td Match any F that is a child of E
+        %tr
+          %td Adjacent
+          %td E + F
+          %td Match any F that has is immediately preceded by a sibling E
 
 %section.slide
-  %header 
-    SAS
+  %header
+    CSS2 DOM Selectors - Example
   %article
-    Explain how to use SASS for the problem of the prefixes
+    :coderay
+      #!css
+      
+      .title { font-weight: bold; }
+      
+      #header { position: fixed; }
+      
+      #header .title { color: #f00; }
+      
+      p.important { color: #f00; }
+       
+%section.slide
+  %header
+    CSS2 DOM Selectors 
+    %span.smaller
+      %a(href="http://www.w3.org/TR/CSS2/selector.html#pattern-matching") W3C
+  %article
+    %table(border = 1)
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td Attribute
+          %td E[attr]
+          %td Match any E that has attribute attr
+        %tr
+          %td Exact Attribute
+          %td E[attr='val']
+          %td Match any E that has attribute attr to be equal to val
+        %tr
+          %td Partial Attribute
+          %td E[attr~='val']
+          %td Match any E where val is one of the value in the list of space-separated values of attr
+        %tr
+          %td Lanuage Attribute
+          %td E[attr|='val']
+          %td Match any E where attr is a hyped-separated list of values that beging with val
+          
+%section.slide
+  %header
+    CSS2 DOM Selectors - Example
+  %article
+    :coderay
+      #!html
+      <ul>
+        <li><a href="" lang="en-GB" data-options="internal">Internal</a></li>
+        <li><a href="" lang="es-ES" data-options="internal hybrid">Hybrid</a></li>
+        <li><a href="" lang="es-MX" data-options="external">External</a></li>
+      </ul>
+    :coderay
+      #!css
+      
+      /* Color red all anchors with the data-options attribute */
+      a[data-options] { color: #f00; }
+          
+      /* Color red all anchors where data-options equals internal */
+      a[data-options='internal'] { color: #f00; }
+      
+      /* Color red all anchros where data-options contains internal */
+      a[data-options~='internal'] { color: #f00; }
+
+      /* Color red all anchors where lang stars with es */
+      a[lang|='es'] { color: #f00; }
+      
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 DOM Selectors ")      
+    %span.smaller
+      %a(href="http://www.w3.org/TR/2009/PR-css3-selectors-20091215") W3C
+  %article
+    %table
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td Beginning
+          %td E[attr^='val']
+          %td Match any E whose attr attribute starts with val
+        %tr
+          %td Ending
+          %td E[attr$='val']
+          %td Match any E whose attr attribute ends with val
+        %tr
+          %td Arbitrary
+          %td E[attr*='val']
+          %td Match any E whose attr attribute contains the substring val
+        %tr
+          %td Multiple
+          %td E[attr^='val1'][attr*='val2']
+          %td Match any E where attr starts with val1 and contains the substring val2
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 DOM Selectors ")      
+    %span.smaller
+      =example_url_tag("cssSelectors")
+
+  %article
+    :coderay
+      #!css
+
+      a[href^='mailto'] {
+        background: url('data:image/png;base64,...') no-repeat left center;
+        padding-left: 20px;
+      }
+
+      a[href^='http'] {
+        background: url('data:image/png;base64,...') no-repeat left center;
+        padding-left: 20px;
+      }
+
+      a[href$='.pdf'] {
+        background: url('data:image/png;base64,...') no-repeat left center;
+        padding-left: 20px;
+      }
+
+      a[href$='.doc'] {
+        background: url('data:image/png;base64,...') no-repeat left center;
+        padding-left: 20px;
+      }
+
+      a[href*='.rss'] {
+        background: url('data:image/gif;base64,...') no-repeat left center;
+        padding-left: 20px;
+      }
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Sibling Combinator")      
+    %span.smaller
+      %a(href="http://www.w3.org/TR/CSS2/selector.html#pattern-matching") W3C
+  %article
+    %table
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td Descendant
+          %td E F
+          %td Match any F that is a descendant of E
+        %tr
+          %td Child
+          %td E > F
+          %td Match any F that is a child of E
+        %tr
+          %td Adjacent
+          %td E + F
+          %td Match any F that is immediately preceded by a sibling E
+        %tr
+          %td 
+            %strong General
+          %td 
+            %strong E ~ F
+          %td 
+            %strong Match any F that is preceded by a sibling E regardless of whether it is immediately adjacent
+
+:css
+  p.text1 + p.text2 { font-weight: bold; }
+  p.text1 ~ p.text2 {font-style: italic; }
+  
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Sibling Combinator - Example")         
+  %article
+    .row  
+      .twoColumn
+        .autobox
+          HTML
+          :coderay
+            #!haml
+            %p.text2 This text is not affected by the rules
+            %p.text1 This text has no style
+            %p.text2 This text is affected by both rules
+            %div 
+              %p This text is on a different level
+            %p.text2 This text is affected by the second rule
+      .twoColumn
+        .autobox
+          CSS
+          :coderay
+            #!haml
+            p.text1 + p.text2 { font-weight: bold; }
+            p.text1 ~ p.text2 {font-style: italic; }
+                  
+    .vmargin.singlespace    
+      %p.text2 This text is not affected by the rules
+      %p.text1 This text has no style
+      %p.text2 This text is affected by both rules
+      %div 
+        %p This text is on a different level
+      %p.text2 This text is affected by the second rule
+    
+
+
+%section.slide
+  %header
+    CSS2 Pseudo-selectors 
+    %span.smaller
+      %a(href="http://www.w3.org/TR/CSS2/selector.html#pattern-matching") W3C
+  %article
+    %table
+      %p 
+        Pseudo-selectors match elements based on information that is not available in the document tree but comes from the state 
+        of the elements or their relative position
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td First Child
+          %td E:first-child
+          %td Match E where E is the first child of its parent
+        %tr
+          %td Link
+          %td 
+            %div E:link 
+            %div E:visited
+          %td Match anchor E that is not visited or already visited
+        %tr
+          %td Dynamic 
+          %td 
+            %div E:active 
+            %div E:hover 
+            %div E:focus
+          %td Match E during certain user actions
+        %tr
+          %td Language 
+          %td E:lang(fr) 
+          %td Match all E that are in language 'fr'
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Pseudo-selectors")         
+     
+    %span.smaller
+      %a(href="http://www.w3.org/TR/CSS2/selector.html#pattern-matching") W3C
+  %article
+    %table.smaller
+      %thead
+        %tr
+          %th Selector
+          %th Pattern
+          %th Description
+      %tbody
+        %tr
+          %td First/Last Child
+          %td 
+            %div E:first-child
+            %div E:last-child
+          %td Match E where E is the first/last child of its parent
+        %tr
+          %td nth Child
+          %td 
+            %div E:nth-child(n)
+            %div E:nth-last-child(n)
+          %td Match E that is the nth child or nth child counting from the last of its parent
+        %tr
+          %td Only Child
+          %td E:only-child
+          %td Match E that that has no siblings
+        %tr
+          %td First/Last Sibling
+          %td 
+            %div E:first-of-type
+            %div E:last-of-type
+          %td Match E where E is the first/last child of its parent
+        %tr
+          %td nth Sibling
+          %td 
+            %div E:nth-of-type(n)
+            %div E:nth-last-of-type(n)
+          %td Match E that is the nth sibling or nth sibling counting from the last
+        %tr
+          %td Only Sibling
+          %td E:only-of-type
+          %td Match E that that has no siblings of the same type of E
+        %tr
+          %td First line
+          %td E:first-line
+          %td Match the content of the first line of text of element E
+        %tr
+          %td First letter
+          %td E:first-line
+          %td Match the first letter of text of element E             
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Pseudo-selectors")
+    %span.smaller
+      =example_url_tag("cssSelectors")
+  %article
+    :coderay
+      #!css
+        /* Enlarge first line of paragraph text*/
+        p:first-line {font-size: 1.5em;}
+
+        /* Enlarge first letter of the paragraph */
+        p:first-letter {
+          font-size:250%;
+          font-weight:bold;
+        }
+
+        /* Enlarge first letter of the paragraph */
+        p:nth-child(2n+1) {
+          font-style: italic;
+        }
+
+        /* Indent the first line of paragraph except the first one*/
+        p + p { text-indent: 1.5em; }
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 2D Transformations")
+  %article
+    %p Transformation property:
+    .row
+      .twoColumn
+        :coderay
+          #!css
+          E { transform: function(value); }
+      .twoColumn
+        :coderay
+          #!css
+          E { 
+            -moz-transform: function(value); /* Firefox */
+            -ms-transform: function(value);  /* IE */
+            -o-transform: function(value);  /* Opera */ 
+            -webkit-transform: function(value); /*Webkit*/
+            transform: function(value); 
+          }
+    functions: 
+    %ul 
+      %li rotate( angle )
+      %li translate( translateX, translateY)
+      %li skew( skewX, skewY )
+      %li scale( scaleX, scaleY )
+
+
+:css
+  .deck-container .transform-rotate {
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ie-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-color: red;
+    color: white;
+    padding: 10px 20px 10px 20px;
+  }
+  .deck-container .transform-skew {
+    -webkit-transform: skew(-20deg, 10deg);
+    -o-transform: skew(-20deg, 10deg);
+    -ie-transform: skew(-20deg, 10deg);
+    -moz-transform: skew(-20deg, 10deg);
+    transform: skew(-20deg, 10deg);
+    background-color: red;
+    color: white;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .deck-container .transform-scale {
+    -webkit-transform: scale(2, 0.5);
+    -o-transform: scale(2, 0.5);
+    -ie-transform: scale(2, 0.5)
+    -moz-transform: scale(2, 0.5);
+    transform: scale(2, 0.5);
+    background-color: red;
+    color: white;
+    padding: 10px 20px 10px 20px;
+  }
+
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 2D Transformations")
+  %article
+    .transform-rotate
+      :coderay
+        #!css
+        transform: rotate(-45deg);
+    %br
+    %br
+    %br
+    %br
+    .transform-skew
+      :coderay
+        #!css
+        transform: skew(-20deg, 10deg);
+    
+    %br
+    .transform-scale
+      :coderay
+        #!css
+        transform: scale(2,0.5);
+
+:css
+  .transform-rotate-origin-up {
+    -webkit-transform: rotate(-20deg);
+    -o-transform: rotate(-45deg);
+    -ie-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: left bottom;
+    -o-transform-origin: left bottom;
+    -ie-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    transform-origin: left bottom;
+    color: red;
+    display: inline-block;
+  }
+  .transform-rotate-origin-down {
+    -webkit-transform: rotate(20deg);
+    -o-transform: rotate(-45deg);
+    -ie-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: right bottom;
+    -o-transform-origin: right bottom;
+    -ie-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    transform-origin: left bottom;
+    color: red;
+    display: inline-block;
+  }
+          
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 2D Transformations")
+  %article
+    %p Elements retain their position in the flow but they are rendered according to the transformations
+    %p You can change the default origin of the transformation (default is the center)
+    :coderay
+      #!css
+      E { 
+        transform: rotate(45deg);
+        transform-origin: left top;
+      }
+    %br
+    %br  
+    This text will will soon 
+    .transform-rotate-origin-up 
+      rotate up
+    .transform-rotate-origin-down 
+      and  down
+
+:css
+  .deck-container .transition-color {
+    background-color: black;
+    -webkit-transition: background-color 4s;
+  }
+  .deck-container .transition-color:hover {
+    background-color: silver;
+  }
+  
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Transitions")
+  %article
+    %p Create a smooth transition between two states of an element
+    %p A transition is trigger when a new value is set for a CSS property
+    
+    :coderay
+      #!css
+      .mytext {
+        background-color: black;
+        transition: background-color 4s;
+      }
+      .mytext:hover {
+        background-color: silver;
+      }
+    %br
+    %br
+    .transition-color
+      Move over this text and the color will change
+      
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Transitions")
+  %article
+    :coderay
+      #!css
+        E { 
+          transition-property: keyword; 
+          transition-duration: time;
+          transition-timing-function: keyword;
+          transition-delay: time;
+        }
+    %ul  
+      %li 
+        %strong transition-property
+        \: all | none | CSS property
+      %li 
+        %strong transition-duration
+        \: time in ms | s
+      %li 
+        %strong transition-timing-function
+        \: ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(...)
+      %li 
+        %strong transition-delay
+        \: time in ms | s
+
+:css
+  .deck-container .transition-move {
+    background-color: green;
+    font-size: 100%;
+    color: white;
+    padding-left: 10px;
+    -webkit-transition: background-color 4s, padding-left 4s, font-size 4s;
+  }
+  .deck-container .transition-move:hover {
+    background-color: red;
+    font-size: 200%;
+    padding-left: 400px;
+  }
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Multiple Transitions")
+  %article
+    %p Create a smooth transition between two states of an element
+    %p A transition is trigger when a new value is set for a CSS property
+
+    :coderay
+      #!css
+      .mytext {
+        background-color: green;
+        font-size: 100%;
+        color: white;
+        padding-left: 10px;
+        transition: background-color 4s, padding-left 4s, font-size 4s;
+      }
+      .mytext:hover {
+        background-color: red;
+        font-size: 200%;
+        padding-left: 400px;
+      }
+    %br
+    .transition-move
+      Animate me!
+:css
+  @-webkit-keyframes 'expand' {
+    from { border-color: black; }
+    50% { border-width: 10px; }
+    100% { 
+      border-color: silver; 
+      width: 150px;
+      background-color: green;
+      -webkit-transform: rotate(90deg);
+      }
+  }
+  .deck-container .animation-expand {
+    display: block;
+    border: 4px solid black;
+    background-color: red;
+    height: 100px;
+    width: 100px;
+    -webkit-animation: expand 6s ease 0 infinite alternate;
+  }
+  
+  
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Animations")
+  %article
+    .row
+      .twoColumn
+        :coderay
+          #!css
+          @keyframes 'expand' {
+            from { border-color: black; }
+            50% { border-width: 10px; }
+            100% { 
+              border-color: silver; 
+              width: 150px;
+              background-color: green;
+              transform: rotate(90deg);
+              }
+          }
+      .twoColumn
+        :coderay
+          #!css
+          .square {
+            display: block;
+            border: 4px solid black;
+            background-color: red;
+            height: 100px;
+            width: 100px;
+            -webkit-animation: expand 6s ease 0 infinite alternate;
+          }
+    %br
+    %br
+    .animation-expand
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Animations")
+  %article
+    :coderay
+      #!css
+        @keyframes 'name' {
+          keyframe {
+            property: value
+          }
+        }
+    %ul  
+      %li 
+        %strong name
+        \: name of the animation
+      %li 
+        %strong keyframe
+        \: from | to | 0% | 100% | x%
+
+%section.slide
+  %header
+    =html5_styling_tag("CSS3 Animations")
+  %article
+    :coderay
+      #!css
+        E { 
+          animation-name: name;
+          animation-duration: time;
+          animation-timing-function: keyword;
+          animation-delay: time;
+          animation-iteration-count: count;
+          animation-direction: keyword;
+        }
+    %ul  
+      %li 
+        %strong animation-name
+        \: name of the keyframe
+      %li 
+        %strong transition-duration
+        \: time in ms | s
+      %li 
+        %strong transition-timing-function
+        \: ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(...)
+      %li 
+        %strong transition-delay
+        \: time in ms | s    
+      %li 
+        %strong transition-count
+        \: 0, 1, ... | infinite   
+      %li 
+        %strong transition-direction
+        \: normal | alternate

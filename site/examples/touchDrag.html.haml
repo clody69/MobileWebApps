@@ -1,0 +1,120 @@
+=example_header_tag "Touch Drag", "touchDrag"
+
+%p
+  In this example we allow the user to drag a cube around on the screen of the device by listening to the 
+  mouse and touch events. The example works on a pc or with a touch device. 
+   
+%p
+  Using CSS we define the red square: 
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    .square {
+      height: 100px;
+    	width: 100px;
+    	background-color: red;
+    	position: absolute;
+    	top: 15px;
+    	left: 15px;
+    	color: white;
+    	text-align: center;
+    }
+%p 
+  For the touch interaction we must bind to the 
+  %span.terminal touchstat
+  and 
+  %span.terminal touchend 
+  events. Once we receive a 
+  %span.terminal touchstart
+  event, we start tracking the movements of the finger using the 
+  %span.terminal
+    touchmove
+  event.
+
+%p 
+  Note that in certain browsers or devices, it's better to disable the 
+  %span.terminal
+    mousedown
+  event when you are sure the user is interacting with a touch device.
+  
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+    var square = $('.square');
+
+    square.on('touchstart', function(e){
+      setOffset(e);
+      square.on('touchmove', drag);
+      //square.off('mousedown');
+    });
+    square.on('touchend', function(e) {
+      square.off('touchmove');
+    });
+
+%p
+  To support the mouse interaction, we listen to the 
+  %span.terminal mousedown
+  and
+  %span.terminal mouseup
+  events. We use the 
+  %span.terminal mousemove
+  event to track the movement of the mouse and update the position of the cube.
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+    square.on('mousedown', function(e) {
+      setOffset(e);
+      square.on('mousemove', drag);
+    });
+
+    square.on('mouseup', function(e) {
+       square.off('mousemove');
+     });
+
+%p
+  The main logic for updating the position of the cube is shown below. Note that touch and mouse events
+  have two different ways for retrieving the position of the event. This difference has been captured
+  withing the 
+  %span.terminal
+    getPos
+  function.
+  
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+    var offsetX, offsetY;
+
+    function getPos(e) {
+     var coord = [];
+     if (e.originalEvent.touches && e.originalEvent.touches.length) {
+       coord[0] = e.originalEvent.touches[0].clientX;
+       coord[1] = e.originalEvent.touches[0].clientY;
+    	} else
+    	{
+       coord[0] = e.clientX;
+       coord[1] = e.clientY;
+    	}
+     return coord;
+    }
+
+    function setOffset(e) {
+     var coord = getPos(e);
+     offsetX = coord[0] - square.position().left;
+     offsetY = coord[1] - square.position().top;
+    }
+
+    function drag(e) {
+     var coord = getPos(e);
+     square.css('left', coord[0] - offsetX + 'px');
+     square.css('top', coord[1] - offsetY + 'px');
+    	return false;        
+    }
