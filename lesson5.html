@@ -61,7 +61,7 @@ Mobile Web Appplications Development with HTML5
 <img src='imgs/HTML5_logo.png' />
 <br />
 <h1 class='subtitle'>
-Lecture 3: CSS3
+Lecture 5: CSS3 & Touch
 </h1>
 <br />
 <div class='smaller centered'>
@@ -69,29 +69,145 @@ Lecture 3: CSS3
 Claudio Riva
 </h3>
 <h3>
-Aalto University March 2012
+Aalto University - Spring 2012
 </h3>
 </div>
 </section>
 
+<div class='background' data-background='bg-lesson5-dali-time'></div>
 <section class='slide section-title'>
-<h1>Lecture 4: CSS3</h1>
+<h1>Lecture 5: CSS3 & Touch</h1>
 <div class='agenda'>
 <p>Media Queries</p>
-<p>Overflow: scroll</p>
-<p>Position: fixed</p>
-<p>Orientation changes</p>
-<p>Selectors</p>
-<p>Borders and Box Effects</p>
-<p>Color and Opacity</p>
-<p>Gradients</p>
-<p>2D Transitions</p>
-<p>Transitions and Animations</p>
-<p>3D Transformations</p>
-<p>Flexible Box Layout</p>
-<p>Touch events</p>
-http://www.html5rocks.com/en/mobile/touch/
+<p>Position: fixed & Overflow: scroll</p>
+<p>Touch Interaction</p>
+<p>CSS3 Selectors</p>
+<p>CSS3 Transformations</p>
+<p>CSS3 Transitions & Animations</p>
 </div>
+</section>
+<section class='slide'>
+<header>
+The problem
+</header>
+<article>
+<div class='slide'>
+<div class="CodeRay">
+  <div class="code"><pre>GET / HTTP/1.1&#x000A;Host: example.com&#x000A;Connection: keep-alive&#x000A;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.79 Safari/535.11</pre></div>
+</div>
+</div>
+<br />
+<div class='slide'>
+<div class="CodeRay">
+  <div class="code"><pre>User-Agent: Mozilla/5.0 (iPhone Simulator; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3        &#x000A;</pre></div>
+</div>
+</div>
+<div class='slide'>
+<div class="CodeRay">
+  <div class="code"><pre>User-Agent: Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13&#x000A;</pre></div>
+</div>
+</div>
+<div class='slide'>
+<div class="CodeRay">
+  <div class="code"><pre>User-Agent: Opera/9.80 (Linux armv7l; U; en) Presto/2.9.201 Version/11.50&#x000A;</pre></div>
+</div>
+</div>
+<div class='slide'>
+<div class="CodeRay">
+  <div class="code"><pre>Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+3 categories and 3 UX factors
+</header>
+<article>
+<strong>3 main categories of devices</strong>
+<ul>
+<li>Desktop/laptops</li>
+<li>Tablets</li>
+<li>Mobile devices (from smartphones to dumbphones)</li>
+</ul>
+<strong>3 main factors affect UX</strong>
+<ul>
+<li>Screen resolution (size, orientation, dpi)</li>
+<li>User interaction (mouse, keyboard, touch, voice)</li>
+<li>Performance (CPU power, memory capacity, GPU, bandwidth)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Desktop/Laptop
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/laptop.jpg' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>Large screen</li>
+<li>High performance</li>
+<li>High bandwidth</li>
+<li>Multiple browsers with different capabilities</li>
+<li>Mouse and keyboard interaction (but not always)</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Tablet
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/touch.jpg' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>Large screen</li>
+<li>Close to smartphones for user interaction</li>
+<li>Two orientations</li>
+<li>Smooth animations and graphics (often equipped with powerful GPU)</li>
+<li>High to medium performance</li>
+<li>High to medium bandwidth</li>
+<li>Primarily used with the default browser (but not always)</li>
+<li>Touch interaction (but not always)</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Smartphones & Featurephones
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/operamini.png' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>Small screen</li>
+<li>One or two orientations</li>
+<li>Limited animations and graphics</li>
+<li>Medium-low performance</li>
+<li>2G/3G bandwidth</li>
+<li>Native and proxy browsing</li>
+<li>Touch interaction (but not always)</li>
+<li>Multi-tasking users on the move that require fast and responsive UI</li>
+<li>Task oriented UI</li>
+<li>Online/offline experience</li>
+</ul>
+</div>
+</div>
+</article>
 </section>
 <section class='slide'>
 <header>Device Screen Width</header>
@@ -170,6 +286,57 @@ http://www.html5rocks.com/en/mobile/touch/
 </article>
 </section>
 <section class='slide'>
+<header>Screen Resolution Alert on April 11</header>
+<article>
+<div class='image-wrap'><a href='http://gs.statcounter.com/press/screen-resolution-alert-for-web-developers'><img src='imgs/lesson5/statcounter-news.png' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>Screen Resolution Trends</header>
+<article>
+<div class='image-wrap'><a href='http://gs.statcounter.com/#resolution-ww-monthly-201103-201203'><img src='imgs/lesson5/StatCounter-resolution.jpg' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>Mobile OS Market Share (based on browser)</header>
+<article>
+<div class='image-wrap'><a href='http://marketshare.hitslink.com/operating-system-market-share.aspx?qprid=8&qpcustomd=1'><img src='imgs/lesson5/os_marketshare.png' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>Popular screen resolutions for mobile</header>
+<article>
+<ul>
+<li>
+<strong>480 x 320</strong>
+: old iPhones, mid-range Android and Nokia devices
+</li>
+<li>
+<strong>320 x 240</strong>
+: low-end Android and older Nokia Symbian phones
+</li>
+<li>
+<strong>800 x 480</strong>
+: new Nokia and Android devices
+</li>
+<li>
+<strong>960 x 640</strong>
+: iPhone 4
+</li>
+<li>
+<strong>1024 x 768</strong>
+: iPad and Android tablets
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Top Mobile Browsers Trends</header>
+<article>
+<div class='image-wrap'><a href='http://gs.statcounter.com/#mobile_browser-ww-monthly-201103-201203'><img src='imgs/lesson5/StatCounter-mobile_browser.jpg' /></a></div>
+</article>
+</section>
+<section class='slide'>
 <header>
 What is the Viewport ?
 </header>
@@ -226,6 +393,9 @@ Viewport Meta Tag
 <section class='slide'>
 <header>
 <img src = 'imgs/html5/HTML5_Styling_64.png'>Media Queries</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/css3-mediaqueries'>W3C</a>
+</span>
 </header>
 <article>
 <p>Query syntax for serving the most appropriate styles based on the device characteristics</p>
@@ -242,23 +412,11 @@ Enables us:
 <a href='http://2010.dconstruct.org'>An example</a>
 </li>
 <li>
+<a href='http://lanyrd.com/'>Another example</a>
+</li>
+<li>
 <a href='http://www.mediaqueri.es'>Other examples</a>
 </li>
-</ul>
-</article>
-</section>
-<section class='slide'>
-<header>
-Use responsive design carefully
-</header>
-<article>
-Layout of the page is important but building a mobile web site (app) includes also:
-<ul>
-<li>Optimizing performance</li>
-<li>Avoiding heavy JS libraries</li>
-<li>Reducing latency</li>
-<li>Reducing loading time</li>
-<li>Task-oriented UI</li>
 </ul>
 </article>
 </section>
@@ -269,19 +427,19 @@ Layout of the page is important but building a mobile web site (app) includes al
 <li>
 Link external stylesheet
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">&lt;link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file.css</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">&lt;logic</span></span><span class="error">&gt;</span> <span class="tag">&lt;media&gt;</span> and ( <span class="tag">&lt;expression&gt;</span>)&quot;<span class="error">&gt;</span></pre></div>
+  <div class="code"><pre><span class="tag">&lt;link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file.css</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">logic media and ( expression)</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span></pre></div>
 </div>
 </li>
 <li>
 Import external stylesheet
 <div class="CodeRay">
-  <div class="code"><pre><span class="directive">@media</span> <span class="type">url</span>(<span class="string"><span class="delimiter">'</span><span class="content">file.css</span><span class="delimiter">'</span></span>) <span class="error">l</span><span class="error">o</span><span class="error">g</span><span class="error">i</span><span class="error">c</span> <span class="error">&lt;</span><span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> ( <span class="error">&lt;</span><span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>&gt; );</pre></div>
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">url</span>(<span class="string"><span class="delimiter">'</span><span class="content">file.css</span><span class="delimiter">'</span></span>) <span class="error">l</span><span class="error">o</span><span class="error">g</span><span class="error">i</span><span class="error">c</span> <span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> ( <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> );</pre></div>
 </div>
 </li>
 <li>
 Embedded in a stylesheet
 <div class="CodeRay">
-  <div class="code"><pre><span class="directive">@media</span> <span class="error">&lt;</span><span class="type">logic</span>&gt; <span class="error">&lt;</span><span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span>&gt; ( <span class="error">&lt;</span><span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>&gt; ) { <span class="error">&lt;</span><span class="type">rules</span>&gt; }</pre></div>
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">logic</span> <span class="error">m</span><span class="error">e</span><span class="error">d</span><span class="error">i</span><span class="error">a</span> ( <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>) { <span class="type">rules</span> }</pre></div>
 </div>
 </li>
 </ul>
@@ -309,7 +467,7 @@ Embedded in a stylesheet
 </li>
 </ul>
 <div class="CodeRay">
-  <div class="code"><pre><span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;<span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">min-width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;<span class="directive">@media</span> <span class="error">&lt;</span><span class="type">media</span>&gt; <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-width</span>: <span class="error">&lt;</span><span class="type">value</span>&gt;} { <span class="error">&lt;</span><span class="key">rules</span>&gt; }&#x000A;</pre></div>
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">width</span>: <span class="type">value</span>} { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">min-width</span>: <span class="type">value</span>} { <span class="key">rules</span> }&#x000A;<span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-width</span>: <span class="type">value</span>} { <span class="key">rules</span> }&#x000A;</pre></div>
 </div>
 </article>
 </section>
@@ -366,7 +524,38 @@ Device Media Query Example
 </section>
 <section class='slide'>
 <header>Device Orientation</header>
+<article>
+<ul>
+<li>
+<strong>Orientation</strong>
+<ul>
+<li>
+<span class='terminal'>landscape</span>
+(viewport width > viewport height )
+</li>
+<li>
+<span class='terminal'>portrait</span>
+(viewport height >= viewport width )
+</li>
+</ul>
+</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@media</span> <span class="type">media</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">orientation</span>: <span class="type">value</span>} { <span class="key">rules</span> }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Orientation Media Query Example
+<span class='smaller'>
+<a href='cssMediaQueriesOrientation.html'>cssMediaQueriesOrientation</a>
+</span>
+</header>
 <article></article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">li</span> { &#x000A;  <span class="key">float</span>: <span class="value">left</span>;&#x000A;  <span class="key">border</span>: <span class="value">thin</span> <span class="value">solid</span> <span class="value">black</span>;&#x000A;  <span class="key">list-style-type</span>: <span class="value">none</span>;&#x000A;  <span class="key">padding</span>: <span class="float">10px</span> <span class="float">20px</span>;&#x000A;  <span class="key">text-align</span>: <span class="value">center</span>;&#x000A;  <span class="key">max-width</span>: <span class="float">100px</span>;&#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>: <span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">t</span><span class="error">r</span><span class="error">a</span><span class="error">i</span><span class="error">t</span>) {&#x000A;  <span class="type">li</span> { <span class="key">float</span>: <span class="value">none</span>; }&#x000A;}&#x000A;&#x000A;&#x000A;</pre></div>
+</div>
 </section>
 <section class='slide'>
 <header>Device Pixel Ratio</header>
@@ -386,16 +575,51 @@ Device Media Query Example
 </article>
 </section>
 <section class='slide'>
-<header>CSS for each device layout</header>
-<article class='small'>
+<header>Avoid hiding elements if possible</header>
+<article>
 <div class="CodeRay">
-  <div class="code"><pre><span class="comment">/* Smartphones (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">480px</span>) { ...  }&#x000A;&#x000A;<span class="comment">/* Smartphones (landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">321px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Smartphones (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (landscape)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">l</span><span class="error">a</span><span class="error">n</span><span class="error">d</span><span class="error">s</span><span class="error">c</span><span class="error">a</span><span class="error">p</span><span class="error">e</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">t</span><span class="error">r</span><span class="error">a</span><span class="error">i</span><span class="error">t</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Desktops and laptops */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1224px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Large screens  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1824px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPhone 4 */</span> &#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>), <span class="error">s</span><span class="error">c</span><span class="error">r</span><span class="error">e</span><span class="error">e</span><span class="error">n</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>) { ... }&#x000A;&#x000A;&#x000A;</pre></div>
+  <div class="code"><pre><span class="class">.container</span> {&#x000A;  <span class="key">background</span>: <span class="value">white</span> <span class="string"><span class="delimiter">url(</span><span class="content">'background.jpg'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span>;        &#x000A;}&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> {<span class="type">max-device-width</span>: <span class="float">400px</span>} {&#x000A;  .<span class="key">container</span> {&#x000A;    <span class="key">display</span>: <span class="value">none</span>;&#x000A;  }</pre></div>
+</div>
+<p>Assets are downloaded even if hidden. This is consuming bandwidth and cache.</p>
+</article>
+</section>
+<section class='slide'>
+<header>Best practices</header>
+<article>
+<p>Define first the basic stylesheet for mobile users and include the one for desktop/tablets through media queries</p>
+<p>Legacy browsers will get the basic stylesheet</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">basic.css</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">screen</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>&#x000A;<span class="tag">&lt;link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">desktop.css</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">media</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">screen and (min-device-width: 480px)</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span></pre></div>
+</div>
+<br />
+<p>Same is valid for high definition graphics</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">E</span> { <span class="key">background-image</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'background-lowres.png'</span><span class="delimiter">)</span></span>; }&#x000A;<span class="directive">@media</span> <span class="type">all</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span>: <span class="float">1</span><span class="float">.5</span>) {&#x000A;  <span class="type">background-image</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'background-highres.png'</span><span class="delimiter">)</span></span>;&#x000A;  <span class="comment">/* Ensure the images are not displayed bigger than their element */</span>&#x000A;  <span class="type">background-size</span>: <span class="float">100%</span> <span class="float">100%</span>;&#x000A;}&#x000A;</pre></div>
 </div>
 </article>
 </section>
 <section class='slide'>
-<header>Overflow: scroll</header>
-<article></article>
+<header>CSS for each device layout</header>
+<article class='small'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">/* Smartphones (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">480px</span>) { ...  }&#x000A;&#x000A;<span class="comment">/* Smartphones (landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">321px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Smartphones (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">320px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait and landscape) */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (landscape)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">l</span><span class="error">a</span><span class="error">n</span><span class="error">d</span><span class="error">s</span><span class="error">c</span><span class="error">a</span><span class="error">p</span><span class="error">e</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPads (portrait)  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">768px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">a</span><span class="error">x</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1024px</span>) <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">o</span><span class="error">r</span><span class="error">i</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> : <span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">t</span><span class="error">r</span><span class="error">a</span><span class="error">i</span><span class="error">t</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Desktops and laptops */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1224px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* Large screens  */</span>&#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">w</span><span class="error">i</span><span class="error">d</span><span class="error">t</span><span class="error">h</span> : <span class="float">1824px</span>) { ... }&#x000A;&#x000A;<span class="comment">/* iPhone 4 */</span> &#x000A;<span class="directive">@media</span> <span class="type">screen</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">-</span><span class="error">w</span><span class="error">e</span><span class="error">b</span><span class="error">k</span><span class="error">i</span><span class="error">t</span><span class="error">-</span><span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>), <span class="error">s</span><span class="error">c</span><span class="error">r</span><span class="error">e</span><span class="error">e</span><span class="error">n</span> <span class="error">a</span><span class="error">n</span><span class="error">d</span> (<span class="error">m</span><span class="error">i</span><span class="error">n</span><span class="error">-</span><span class="error">d</span><span class="error">e</span><span class="error">v</span><span class="error">i</span><span class="error">c</span><span class="error">e</span><span class="error">-</span><span class="error">p</span><span class="error">i</span><span class="error">x</span><span class="error">e</span><span class="error">l</span><span class="error">-</span><span class="error">r</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span> : <span class="float">1</span><span class="float">.5</span>) { ... }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Use responsive design carefully
+</header>
+<article>
+Layout of the page is important but building a mobile web site (app) includes also:
+<ul>
+<li>Optimizing performance</li>
+<li>Avoiding heavy JS libraries</li>
+<li>Reducing latency</li>
+<li>Reducing loading time</li>
+<li>Task-oriented UI</li>
+</ul>
+</article>
 </section>
 <section class='slide'>
 <header>
@@ -449,7 +673,11 @@ defines how a box should be displayed with overflowing content
 </span>
 enables native scrolling of an elemnent
 </p>
-<p>Supported on iOS 5</p>
+<p>
+Supported on iOS 5 (Check also
+<a href='http://cubiq.org/iscroll-4'>iScroll</a>
+)
+</p>
 </div>
 <div class="CodeRay">
   <div class="code"><pre><span class="class">.scroll</span> {&#x000A;  <span class="key">height</span>: <span class="float">150px</span>;&#x000A;  <span class="key">overflow-y</span>: <span class="value">scroll</span>;&#x000A;  <span class="key">-webkit-overflow-scrolling</span>: <span class="value">touch</span>;&#x000A;  <span class="key">border-top</span>: <span class="float">1px</span> <span class="value">solid</span> <span class="value">black</span>;&#x000A;}</pre></div>
@@ -465,17 +693,114 @@ enables native scrolling of an elemnent
 </div>
 </article>
 </section>
+<div class='background' data-background='bg-lesson5-dali-touch'></div>
 <section class='slide'>
 <header>
-iScroll
+Interaction Design
 </header>
-<article></article>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/coffeepot_for_masochists.jpg' class='resize' /></div>
+</article>
 </section>
 <section class='slide'>
 <header>
-Handling Orientation Changes
+Interaction Design
 </header>
-<article></article>
+<article>
+<div class='small'>
+<blockquote>Interaction design is about shaping digital things for people’s use</blockquote>
+</div>
+<br />
+<ul>
+<li>It's about digital products or services</li>
+<li>It's about satisfying people's needs</li>
+<li>It's about shaping a unique interaction technique</li>
+<li>it's about providing an enjoyable user experience</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Interaction Modes - Mouse
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/mouse.jpg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Interaction Modes - Keyboard
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/keyboard.jpg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Interaction Modes - Touch
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/touch.jpg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Mouse events
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/mouse.jpg' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>mousedown</li>
+<li>mousemove</li>
+<li>mouseup</li>
+<li>mouseover</li>
+<li>mouseout</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Keyboard events
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/keyboard.jpg' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>keydown</li>
+<li>keypress</li>
+<li>keyup</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Touch events
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs/lesson5/touch.jpg' class='resize' /></div>
+</div>
+<div class='twoColumn'>
+<ul>
+<li>touchstart</li>
+<li>touchmove</li>
+<li>touchend</li>
+</ul>
+</div>
+</div>
+</article>
 </section>
 <section class='slide'>
 <header>
@@ -485,8 +810,6 @@ Touch Events
 </span>
 </header>
 <article>
-<p>Mobile browsers wait about 300ms between the first tap and firing the click event. The reason for waiting is to detect a double tap.</p>
-<p>onclick events don't provide the best experience for touch devices</p>
 Touch events:
 <ul>
 <li>
@@ -585,7 +908,171 @@ Example of Multi-touch App
 </article>
 </section>
 <section class='slide'>
-<header>Best practices for touch events</header>
+<header>Interaction Modes</header>
+<article>
+<p>3 interaction modes</p>
+<p>3 set of events</p>
+<br />
+<p>What's the best way to handle them ?</p>
+<ul>
+<li>Sometimes we can group under the same approach</li>
+<li>Sometimes we must handle then independently</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Events sequence
+<span class='smaller'>
+<a href='touchEvents.html'>touchEvents</a>
+</span>
+</header>
+<article>
+<p>What happens when you touch the screen of a touch device ?</p>
+<div class='row'>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>Click</strong>
+<ul>
+<li>touchstart</li>
+<li>(mouseout)</li>
+<li>mouseover</li>
+<li>mousemove (once)</li>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>touchend</li>
+</ul>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>Double tap</strong>
+<ul>
+<li>touchstart</li>
+<li>touchend</li>
+<li>touchstart</li>
+<li>touchend</li>
+</ul>
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<strong>Move finger</strong>
+<ul>
+<li>touchstart</li>
+<li>touchmove</li>
+<li>touchmove</li>
+<li>...</li>
+<li>touchmove</li>
+<li>touchend</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Support both mouse and touch events
+<span class='smaller'>
+<a href='touchDrag.html'>touchDrag</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> square = <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">.square</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;square.on(<span class="string"><span class="delimiter">'</span><span class="content">touchstart</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e){&#x000A;  setOffset(e);&#x000A;  square.on(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, drag);&#x000A;});&#x000A;&#x000A;square.on(<span class="string"><span class="delimiter">'</span><span class="content">touchend</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) { &#x000A;  square.off(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>);&#x000A;});&#x000A;&#x000A;square.on(<span class="string"><span class="delimiter">'</span><span class="content">mousedown</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  setOffset(e);&#x000A;  square.on(<span class="string"><span class="delimiter">'</span><span class="content">mousemove</span><span class="delimiter">'</span></span>, drag);&#x000A;});&#x000A;&#x000A;square.on(<span class="string"><span class="delimiter">'</span><span class="content">mouseup</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) { &#x000A;  square.off(<span class="string"><span class="delimiter">'</span><span class="content">mousemove</span><span class="delimiter">'</span></span>); &#x000A;});&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Disable mouse events when touch is detected
+<span class='smaller'>
+<a href='touchDrag.html'>touchDrag</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>square.on(<span class="string"><span class="delimiter">'</span><span class="content">touchstart</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e){&#x000A;  setOffset(e);&#x000A;  square.on(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, drag);&#x000A;  square.off(<span class="string"><span class="delimiter">'</span><span class="content">mousedown</span><span class="delimiter">'</span></span>);&#x000A;});&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Event equivalencies
+</header>
+<article>
+<table class='large'>
+<thead>
+<tr>
+<th>Mouse</th>
+<th>Keyboard</th>
+<th>Touch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mousedown</td>
+<td>keydown</td>
+<td>touchstart</td>
+</tr>
+<tr>
+<td>mousemove</td>
+<td>keydown/press</td>
+<td>touchmove</td>
+</tr>
+<tr>
+<td>mouseup</td>
+<td>keyup</td>
+<td>touchend</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section class='slide'>
+<header>Tricky Parts</header>
+<article>
+<p>Multi touch is only available for touch devices</p>
+<p>Some devices may fire multiple types of events simultaneously</p>
+<p>Browsers on touch devices also generate click events because websites depend on them</p>
+<p>No hover events for touch devices</p>
+<p>Multiple interaction modes must be well designed and tested</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Multiple interaction modes
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/nokia-e71.jpeg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Multiple interaction modes
+</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson5/ipad-keyboard.jpg' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Click event
+</header>
+<article>
+<p>Click is not just a mouse event</p>
+<p>Click is synthesized by the browser</p>
+<p>It means "Activate" the element</p>
+<p>Works well in most of the situations</p>
+<p>It doesn't give the best UX on touch devices</p>
+<br />
+<p>=> About 300ms delay between the touchend and the click event</p>
+</article>
+</section>
+<section class='slide'>
+<header>Some hits for touch events</header>
 <article>
 Disable zooming
 <div class="CodeRay">
@@ -596,14 +1083,52 @@ Prevent scrolling
   <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#canvas</span><span class="delimiter">&quot;</span></span>).bind(<span class="string"><span class="delimiter">'</span><span class="content">touchmove</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  e.preventDefault();&#x000A;  ...&#x000A;});</pre></div>
 </div>
 <p>
-Asynchronously handle touch information (timer or
-<a href='http://paulirish.com/2011/requestanimationframe-for-smart-animating/'>animation frame</a>
-)
+Asynchronously handle touch information (timer or animation frame)
 </p>
-<p>Must listen both touch and click events</p>
 <p>
 jQuery Mobile provide
-<a href='http://jquerymobile.com/test/docs/api/events.html'>virtual click events</a>
+<a href='http://jquerymobile.com/test/docs/api/events.html'>virtual click, tap and swipe events</a>
+</p>
+</article>
+</section>
+<div class='background' data-background='bg-lesson5-escher'></div>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>Cascading Style Sheets Level 3</img>
+<span class='smaller'>
+<a href='http://www.w3.org/Style/CSS/current-work'>W3C</a>
+</span>
+</header>
+<article>
+<p>CSS is the default styling language for every markup-based document</p>
+<p>The version of CSS in current use is CSS2.1</p>
+<p>CSS3 consists of several modules that are worked out and implemented independently</p>
+<p>CSS3 is under active development</p>
+<p>
+What's available in the browsers ?
+<a href='http://caniuse.com/#cats=CSS'>Can I Use</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>The horror of the CSS3 prefixes</img>
+</header>
+<article>
+<p>Browsers specific prefixes for the CSS properties are used for implementing experimental properties</p>
+<p>
+Prefixes allow browsers to modify the "experimental" properties
+(
+<a href='http://www.alistapart.com/articles/prefix-or-posthack/'>read more</a>
+)
+</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">E</span> { &#x000A;  <span class="key">-moz-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); <span class="comment">/* Firefox */</span>&#x000A;  <span class="key">-ms-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>);  <span class="comment">/* IE */</span>&#x000A;  <span class="key">-o-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>);  <span class="comment">/* Opera */</span> &#x000A;  <span class="key">-webkit-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); <span class="comment">/*Webkit*/</span>&#x000A;  <span class="key">transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); &#x000A;}</pre></div>
+</div>
+<br />
+<p>
+One workaround:
+<a href='http://sass-lang.com/'>mixins with SASS</a>
 </p>
 </article>
 </section>
@@ -643,38 +1168,732 @@ Versions
 </article>
 </section>
 <section class='slide'>
-<header></header>
-<article></article>
-</section>
-<section class='slide'>
-<header>Optimization for mobile html5</header>
+<header>
+CSS2 DOM Selectors
+<span class='smaller'>
+<a href='http://www.w3.org/TR/CSS2/selector.html#pattern-matching'>W3C</a>
+</span>
+</header>
 <article>
-http://www.html5rocks.com/en/mobile/optimization-and-performance/
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Universal</td>
+<td>*</td>
+<td>Match any element</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>E</td>
+<td>Match any E element</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>.title</td>
+<td>Match any element whose class attribute contains title</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>#header</td>
+<td>Match any element with an id equal to header</td>
+</tr>
+<tr>
+<td>Descendant</td>
+<td>E F</td>
+<td>Match any F that is a descendant of E</td>
+</tr>
+<tr>
+<td>Child</td>
+<td>E > F</td>
+<td>Match any F that is a child of E</td>
+</tr>
+<tr>
+<td>Adjacent</td>
+<td>E + F</td>
+<td>Match any F that has is immediately preceded by a sibling E</td>
+</tr>
+</tbody>
+</table>
 </article>
 </section>
 <section class='slide'>
 <header>
-Fastclick
+CSS2 DOM Selectors - Example
 </header>
 <article>
-http://assanka.net/content/tech/2011/08/26/fastclick-native-like-tapping-for-touch-apps/
-http://code.google.com/mobile/articles/fast_buttons.html
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.title</span> { <span class="key">font-weight</span>: <span class="value">bold</span>; }&#x000A;&#x000A;<span class="constant">#header</span> { <span class="key">position</span>: <span class="value">fixed</span>; }&#x000A;&#x000A;<span class="constant">#header</span> <span class="class">.title</span> { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A;&#x000A;<span class="type">p</span><span class="class">.important</span> { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A; </pre></div>
+</div>
 </article>
 </section>
 <section class='slide'>
 <header>
-Canvas
+CSS2 DOM Selectors
+<span class='smaller'>
+<a href='http://www.w3.org/TR/CSS2/selector.html#pattern-matching'>W3C</a>
+</span>
 </header>
 <article>
-Tainiting the canvas: https://developer.mozilla.org/en/CORS_Enabled_Image
+<table border='1'>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Attribute</td>
+<td>E[attr]</td>
+<td>Match any E that has attribute attr</td>
+</tr>
+<tr>
+<td>Exact Attribute</td>
+<td>E[attr='val']</td>
+<td>Match any E that has attribute attr to be equal to val</td>
+</tr>
+<tr>
+<td>Partial Attribute</td>
+<td>E[attr~='val']</td>
+<td>Match any E where val is one of the value in the list of space-separated values of attr</td>
+</tr>
+<tr>
+<td>Lanuage Attribute</td>
+<td>E[attr|='val']</td>
+<td>Match any E where attr is a hyped-separated list of values that beging with val</td>
+</tr>
+</tbody>
+</table>
 </article>
 </section>
 <section class='slide'>
 <header>
-SAS
+CSS2 DOM Selectors - Example
 </header>
 <article>
-Explain how to use SASS for the problem of the prefixes
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;ul&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">en-GB</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-options</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">internal</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Internal<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">es-ES</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-options</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">internal hybrid</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Hybrid<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;  <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">es-MX</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">data-options</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">external</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>External<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>&#x000A;<span class="tag">&lt;/ul&gt;</span></pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">/* Color red all anchors with the data-options attribute */</span>&#x000A;<span class="type">a</span>[<span class="attribute-name">data-options</span>] { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A;    &#x000A;<span class="comment">/* Color red all anchors where data-options equals internal */</span>&#x000A;<span class="type">a</span>[<span class="attribute-name">data-options='internal'</span>] { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A;&#x000A;<span class="comment">/* Color red all anchros where data-options contains internal */</span>&#x000A;<span class="type">a</span>[<span class="attribute-name">data-options~='internal'</span>] { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A;&#x000A;<span class="comment">/* Color red all anchors where lang stars with es */</span>&#x000A;<span class="type">a</span>[<span class="attribute-name">lang|='es'</span>] { <span class="key">color</span>: <span class="color">#f00</span>; }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 DOM Selectors </img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/2009/PR-css3-selectors-20091215'>W3C</a>
+</span>
+</header>
+<article>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beginning</td>
+<td>E[attr^='val']</td>
+<td>Match any E whose attr attribute starts with val</td>
+</tr>
+<tr>
+<td>Ending</td>
+<td>E[attr$='val']</td>
+<td>Match any E whose attr attribute ends with val</td>
+</tr>
+<tr>
+<td>Arbitrary</td>
+<td>E[attr*='val']</td>
+<td>Match any E whose attr attribute contains the substring val</td>
+</tr>
+<tr>
+<td>Multiple</td>
+<td>E[attr^='val1'][attr*='val2']</td>
+<td>Match any E where attr starts with val1 and contains the substring val2</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 DOM Selectors </img>
+<span class='smaller'>
+<a href='cssSelectors.html'>cssSelectors</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">a</span>[<span class="attribute-name">href^='mailto'</span>] {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'data:image/png;base64,...'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="value">left</span> <span class="value">center</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">20px</span>;&#x000A;}&#x000A;&#x000A;<span class="type">a</span>[<span class="attribute-name">href^='http'</span>] {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'data:image/png;base64,...'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="value">left</span> <span class="value">center</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">20px</span>;&#x000A;}&#x000A;&#x000A;<span class="type">a</span>[<span class="attribute-name">href$='.pdf'</span>] {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'data:image/png;base64,...'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="value">left</span> <span class="value">center</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">20px</span>;&#x000A;}&#x000A;&#x000A;<span class="type">a</span>[<span class="attribute-name">href$='.doc'</span>] {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'data:image/png;base64,...'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="value">left</span> <span class="value">center</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">20px</span>;&#x000A;}&#x000A;&#x000A;<span class="type">a</span>[<span class="attribute-name">href*='.rss'</span>] {&#x000A;  <span class="key">background</span>: <span class="string"><span class="delimiter">url(</span><span class="content">'data:image/gif;base64,...'</span><span class="delimiter">)</span></span> <span class="value">no-repeat</span> <span class="value">left</span> <span class="value">center</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">20px</span>;&#x000A;}&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Sibling Combinator</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/CSS2/selector.html#pattern-matching'>W3C</a>
+</span>
+</header>
+<article>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Descendant</td>
+<td>E F</td>
+<td>Match any F that is a descendant of E</td>
+</tr>
+<tr>
+<td>Child</td>
+<td>E > F</td>
+<td>Match any F that is a child of E</td>
+</tr>
+<tr>
+<td>Adjacent</td>
+<td>E + F</td>
+<td>Match any F that is immediately preceded by a sibling E</td>
+</tr>
+<tr>
+<td>
+<strong>General</strong>
+</td>
+<td>
+<strong>E ~ F</strong>
+</td>
+<td>
+<strong>Match any F that is preceded by a sibling E regardless of whether it is immediately adjacent</strong>
+</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    p.text1 + p.text2 { font-weight: bold; }
+    p.text1 ~ p.text2 {font-style: italic; }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Sibling Combinator - Example</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+HTML
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%p</span><span class="class">.text2</span> This text is not affected by the rules&#x000A;<span class="tag">%p</span><span class="class">.text1</span> This text has no style&#x000A;<span class="tag">%p</span><span class="class">.text2</span> This text is affected by both rules&#x000A;<span class="tag">%div</span> &#x000A;  <span class="tag">%p</span> This text is on a different level&#x000A;<span class="tag">%p</span><span class="class">.text2</span> This text is affected by the second rule</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+CSS
+<div class="CodeRay">
+  <div class="code"><pre>p.text1 + p.text2 { font-weight: bold; }&#x000A;p.text1 ~ p.text2 {font-style: italic; }&#x000A;      </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class='vmargin singlespace'>
+<p class='text2'>This text is not affected by the rules</p>
+<p class='text1'>This text has no style</p>
+<p class='text2'>This text is affected by both rules</p>
+<div>
+<p>This text is on a different level</p>
+</div>
+<p class='text2'>This text is affected by the second rule</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+CSS2 Pseudo-selectors
+<span class='smaller'>
+<a href='http://www.w3.org/TR/CSS2/selector.html#pattern-matching'>W3C</a>
+</span>
+</header>
+<article>
+<table>
+<p>
+Pseudo-selectors match elements based on information that is not available in the document tree but comes from the state
+of the elements or their relative position
+</p>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Child</td>
+<td>E:first-child</td>
+<td>Match E where E is the first child of its parent</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>
+<div>E:link</div>
+<div>E:visited</div>
+</td>
+<td>Match anchor E that is not visited or already visited</td>
+</tr>
+<tr>
+<td>Dynamic</td>
+<td>
+<div>E:active</div>
+<div>E:hover</div>
+<div>E:focus</div>
+</td>
+<td>Match E during certain user actions</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>E:lang(fr)</td>
+<td>Match all E that are in language 'fr'</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Pseudo-selectors</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/CSS2/selector.html#pattern-matching'>W3C</a>
+</span>
+</header>
+<article>
+<table class='smaller'>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First/Last Child</td>
+<td>
+<div>E:first-child</div>
+<div>E:last-child</div>
+</td>
+<td>Match E where E is the first/last child of its parent</td>
+</tr>
+<tr>
+<td>nth Child</td>
+<td>
+<div>E:nth-child(n)</div>
+<div>E:nth-last-child(n)</div>
+</td>
+<td>Match E that is the nth child or nth child counting from the last of its parent</td>
+</tr>
+<tr>
+<td>Only Child</td>
+<td>E:only-child</td>
+<td>Match E that that has no siblings</td>
+</tr>
+<tr>
+<td>First/Last Sibling</td>
+<td>
+<div>E:first-of-type</div>
+<div>E:last-of-type</div>
+</td>
+<td>Match E where E is the first/last child of its parent</td>
+</tr>
+<tr>
+<td>nth Sibling</td>
+<td>
+<div>E:nth-of-type(n)</div>
+<div>E:nth-last-of-type(n)</div>
+</td>
+<td>Match E that is the nth sibling or nth sibling counting from the last</td>
+</tr>
+<tr>
+<td>Only Sibling</td>
+<td>E:only-of-type</td>
+<td>Match E that that has no siblings of the same type of E</td>
+</tr>
+<tr>
+<td>First line</td>
+<td>E:first-line</td>
+<td>Match the content of the first line of text of element E</td>
+</tr>
+<tr>
+<td>First letter</td>
+<td>E:first-line</td>
+<td>Match the first letter of text of element E</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Pseudo-selectors</img>
+<span class='smaller'>
+<a href='cssSelectors.html'>cssSelectors</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="comment">/* Enlarge first line of paragraph text*/</span>&#x000A;  <span class="type">p</span><span class="pseudo-class">:first-line</span> {<span class="key">font-size</span>: <span class="float">1.5em</span>;}&#x000A;&#x000A;  <span class="comment">/* Enlarge first letter of the paragraph */</span>&#x000A;  <span class="type">p</span><span class="pseudo-class">:first-letter</span> {&#x000A;    <span class="key">font-size</span>:<span class="float">250%</span>;&#x000A;    <span class="key">font-weight</span>:<span class="value">bold</span>;&#x000A;  }&#x000A;&#x000A;  <span class="comment">/* Enlarge first letter of the paragraph */</span>&#x000A;  <span class="type">p</span><span class="pseudo-class">:nth-child</span>(<span class="float">2</span><span class="type">n</span>+<span class="float">1</span>) {&#x000A;    <span class="key">font-style</span>: <span class="value">italic</span>;&#x000A;  }&#x000A;&#x000A;  <span class="comment">/* Indent the first line of paragraph except the first one*/</span>&#x000A;  <span class="type">p</span> + <span class="type">p</span> { <span class="key">text-indent</span>: <span class="float">1.5em</span>; }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 2D Transformations</img>
+</header>
+<article>
+<p>Transformation property:</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">E</span> { <span class="key">transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); }</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">E</span> { &#x000A;  <span class="key">-moz-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); <span class="comment">/* Firefox */</span>&#x000A;  <span class="key">-ms-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>);  <span class="comment">/* IE */</span>&#x000A;  <span class="key">-o-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>);  <span class="comment">/* Opera */</span> &#x000A;  <span class="key">-webkit-transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); <span class="comment">/*Webkit*/</span>&#x000A;  <span class="key">transform</span>: <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>(<span class="value">value</span>); &#x000A;}</pre></div>
+</div>
+</div>
+</div>
+functions:
+<ul>
+<li>rotate( angle )</li>
+<li>translate( translateX, translateY)</li>
+<li>skew( skewX, skewY )</li>
+<li>scale( scaleX, scaleY )</li>
+</ul>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    .deck-container .transform-rotate {
+      -webkit-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ie-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      background-color: red;
+      color: white;
+      padding: 10px 20px 10px 20px;
+    }
+    .deck-container .transform-skew {
+      -webkit-transform: skew(-20deg, 10deg);
+      -o-transform: skew(-20deg, 10deg);
+      -ie-transform: skew(-20deg, 10deg);
+      -moz-transform: skew(-20deg, 10deg);
+      transform: skew(-20deg, 10deg);
+      background-color: red;
+      color: white;
+      padding: 10px 20px 10px 20px;
+    }
+    
+    .deck-container .transform-scale {
+      -webkit-transform: scale(2, 0.5);
+      -o-transform: scale(2, 0.5);
+      -ie-transform: scale(2, 0.5)
+      -moz-transform: scale(2, 0.5);
+      transform: scale(2, 0.5);
+      background-color: red;
+      color: white;
+      padding: 10px 20px 10px 20px;
+    }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 2D Transformations</img>
+</header>
+<article>
+<div class='transform-rotate'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">transform</span>: <span class="error">r</span><span class="error">o</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">e</span>(<span class="float">-45</span><span class="type">deg</span>);</pre></div>
+</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class='transform-skew'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">transform</span>: <span class="error">s</span><span class="error">k</span><span class="error">e</span><span class="error">w</span>(<span class="float">-20</span><span class="type">deg</span>, <span class="float">10</span><span class="type">deg</span>);&#x000A;</pre></div>
+</div>
+</div>
+<br />
+<div class='transform-scale'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">transform</span>: <span class="error">s</span><span class="error">c</span><span class="error">a</span><span class="error">l</span><span class="error">e</span>(<span class="float">2</span>,<span class="float">0</span><span class="class">.5</span>);&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    .transform-rotate-origin-up {
+      -webkit-transform: rotate(-20deg);
+      -o-transform: rotate(-45deg);
+      -ie-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-transform-origin: left bottom;
+      -o-transform-origin: left bottom;
+      -ie-transform-origin: left bottom;
+      -moz-transform-origin: left bottom;
+      transform-origin: left bottom;
+      color: red;
+      display: inline-block;
+    }
+    .transform-rotate-origin-down {
+      -webkit-transform: rotate(20deg);
+      -o-transform: rotate(-45deg);
+      -ie-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-transform-origin: right bottom;
+      -o-transform-origin: right bottom;
+      -ie-transform-origin: left bottom;
+      -moz-transform-origin: left bottom;
+      transform-origin: left bottom;
+      color: red;
+      display: inline-block;
+    }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 2D Transformations</img>
+</header>
+<article>
+<p>Elements retain their position in the flow but they are rendered according to the transformations</p>
+<p>You can change the default origin of the transformation (default is the center)</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">E</span> { &#x000A;  <span class="key">transform</span>: <span class="error">r</span><span class="error">o</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">e</span>(<span class="float">45</span><span class="value">deg</span>);&#x000A;  <span class="key">transform-origin</span>: <span class="value">left</span> <span class="value">top</span>;&#x000A;}</pre></div>
+</div>
+<br />
+<br />
+This text will will soon
+<div class='transform-rotate-origin-up'>
+rotate up
+</div>
+<div class='transform-rotate-origin-down'>
+and  down
+</div>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    .deck-container .transition-color {
+      background-color: black;
+      -webkit-transition: background-color 4s;
+    }
+    .deck-container .transition-color:hover {
+      background-color: silver;
+    }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Transitions</img>
+</header>
+<article>
+<p>Create a smooth transition between two states of an element</p>
+<p>A transition is trigger when a new value is set for a CSS property</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.mytext</span> {&#x000A;  <span class="key">background-color</span>: <span class="value">black</span>;&#x000A;  <span class="key">transition</span>: <span class="value">background-color</span> <span class="float">4s</span>;&#x000A;}&#x000A;<span class="class">.mytext</span><span class="pseudo-class">:hover</span> {&#x000A;  <span class="key">background-color</span>: <span class="value">silver</span>;&#x000A;}</pre></div>
+</div>
+<br />
+<br />
+<div class='transition-color'>
+Move over this text and the color will change
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Transitions</img>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="type">E</span> { &#x000A;    <span class="key">transition-property</span>: <span class="value">keyword</span>; &#x000A;    <span class="key">transition-duration</span>: <span class="value">time</span>;&#x000A;    <span class="key">transition-timing-function</span>: <span class="value">keyword</span>;&#x000A;    <span class="key">transition-delay</span>: <span class="value">time</span>;&#x000A;  }</pre></div>
+</div>
+<ul>
+<li>
+<strong>transition-property</strong>
+: all | none | CSS property
+</li>
+<li>
+<strong>transition-duration</strong>
+: time in ms | s
+</li>
+<li>
+<strong>transition-timing-function</strong>
+: ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(...)
+</li>
+<li>
+<strong>transition-delay</strong>
+: time in ms | s
+</li>
+</ul>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    .deck-container .transition-move {
+      background-color: green;
+      font-size: 100%;
+      color: white;
+      padding-left: 10px;
+      -webkit-transition: background-color 4s, padding-left 4s, font-size 4s;
+    }
+    .deck-container .transition-move:hover {
+      background-color: red;
+      font-size: 200%;
+      padding-left: 400px;
+    }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Multiple Transitions</img>
+</header>
+<article>
+<p>Create a smooth transition between two states of an element</p>
+<p>A transition is trigger when a new value is set for a CSS property</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.mytext</span> {&#x000A;  <span class="key">background-color</span>: <span class="value">green</span>;&#x000A;  <span class="key">font-size</span>: <span class="float">100%</span>;&#x000A;  <span class="key">color</span>: <span class="value">white</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">10px</span>;&#x000A;  <span class="key">transition</span>: <span class="value">background-color</span> <span class="float">4s</span>, <span class="value">padding-left</span> <span class="float">4s</span>, <span class="value">font-size</span> <span class="float">4s</span>;&#x000A;}&#x000A;<span class="class">.mytext</span><span class="pseudo-class">:hover</span> {&#x000A;  <span class="key">background-color</span>: <span class="value">red</span>;&#x000A;  <span class="key">font-size</span>: <span class="float">200%</span>;&#x000A;  <span class="key">padding-left</span>: <span class="float">400px</span>;&#x000A;}</pre></div>
+</div>
+<br />
+<div class='transition-move'>
+Animate me!
+</div>
+</article>
+</section>
+<style type='text/css'>
+  /*<![CDATA[*/
+    @-webkit-keyframes 'expand' {
+      from { border-color: black; }
+      50% { border-width: 10px; }
+      100% { 
+        border-color: silver; 
+        width: 150px;
+        background-color: green;
+        -webkit-transform: rotate(90deg);
+        }
+    }
+    .deck-container .animation-expand {
+      display: block;
+      border: 4px solid black;
+      background-color: red;
+      height: 100px;
+      width: 100px;
+      -webkit-animation: expand 6s ease 0 infinite alternate;
+    }
+  /*]]>*/
+</style>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Animations</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="directive">@keyframes</span> <span class="string"><span class="delimiter">'</span><span class="content">expand</span><span class="delimiter">'</span></span> {&#x000A;  <span class="key">from</span> { <span class="key">border-color</span>: <span class="value">black</span>; }&#x000A;  <span class="float">50%</span> { <span class="key">border-width</span>: <span class="float">10px</span>; }&#x000A;  <span class="float">100%</span> { &#x000A;    <span class="key">border-color</span>: <span class="value">silver</span>; &#x000A;    <span class="key">width</span>: <span class="float">150px</span>;&#x000A;    <span class="key">background-color</span>: <span class="value">green</span>;&#x000A;    <span class="key">transform</span>: <span class="error">r</span><span class="error">o</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">e</span>(<span class="float">90</span><span class="value">deg</span>);&#x000A;    }&#x000A;}</pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="class">.square</span> {&#x000A;  <span class="key">display</span>: <span class="value">block</span>;&#x000A;  <span class="key">border</span>: <span class="float">4px</span> <span class="value">solid</span> <span class="value">black</span>;&#x000A;  <span class="key">background-color</span>: <span class="value">red</span>;&#x000A;  <span class="key">height</span>: <span class="float">100px</span>;&#x000A;  <span class="key">width</span>: <span class="float">100px</span>;&#x000A;  <span class="key">-webkit-animation</span>: <span class="value">expand</span> <span class="float">6s</span> <span class="value">ease</span> <span class="float">0</span> <span class="value">infinite</span> <span class="value">alternate</span>;&#x000A;}</pre></div>
+</div>
+</div>
+</div>
+<br />
+<br />
+<div class='animation-expand'></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Animations</img>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="directive">@keyframes</span> <span class="string"><span class="delimiter">'</span><span class="content">name</span><span class="delimiter">'</span></span> {&#x000A;    <span class="key">keyframe</span> {&#x000A;      <span class="key">property</span>: <span class="value">value</span>&#x000A;    }&#x000A;  }</pre></div>
+</div>
+<ul>
+<li>
+<strong>name</strong>
+: name of the animation
+</li>
+<li>
+<strong>keyframe</strong>
+: from | to | 0% | 100% | x%
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = 'imgs/html5/HTML5_Styling_64.png'>CSS3 Animations</img>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="type">E</span> { &#x000A;    <span class="key">animation-name</span>: <span class="value">name</span>;&#x000A;    <span class="key">animation-duration</span>: <span class="value">time</span>;&#x000A;    <span class="key">animation-timing-function</span>: <span class="value">keyword</span>;&#x000A;    <span class="key">animation-delay</span>: <span class="value">time</span>;&#x000A;    <span class="key">animation-iteration-count</span>: <span class="value">count</span>;&#x000A;    <span class="key">animation-direction</span>: <span class="value">keyword</span>;&#x000A;  }</pre></div>
+</div>
+<ul>
+<li>
+<strong>animation-name</strong>
+: name of the keyframe
+</li>
+<li>
+<strong>transition-duration</strong>
+: time in ms | s
+</li>
+<li>
+<strong>transition-timing-function</strong>
+: ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(...)
+</li>
+<li>
+<strong>transition-delay</strong>
+: time in ms | s
+</li>
+<li>
+<strong>transition-count</strong>
+: 0, 1, ... | infinite
+</li>
+<li>
+<strong>transition-direction</strong>
+: normal | alternate
+</li>
+</ul>
 </article>
 </section>
 
