@@ -1,0 +1,906 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Appplications Development with HTML5
+|
+Aalto University March 2012
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Coloring for code. To be included before the custom css like course and screen -->
+<link href='css/coderay.css' rel='stylesheet' />
+<!-- Core and extension CSS files -->
+<link href='deckjs/core/deck.core.css' rel='stylesheet' />
+<link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
+<link href='deckjs/extensions/menu/deck.menu.css' rel='stylesheet' />
+<link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
+<link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
+<link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
+<!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
+<!-- Theme CSS files (menu swaps these out) -->
+<link href='css/course.css' id='style-theme-link' rel='stylesheet' />
+<link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
+<link href='css/screen.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
+<script src='js/jquery.min.js'></script>
+<!-- Custom CSS just for this page -->
+<script src='js/modernizr.custom.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='background'>
+<div class='background front active' id='bg-default'></div>
+<div class='background back' id='bg-default'></div>
+</div>
+<article class='deck-container'>
+<section class='slide main-title'>
+<h1>
+Mobile Web Appplications Development with HTML5
+</h1>
+<img src='imgs/HTML5_logo.png' />
+<br />
+<h1 class='subtitle'>
+Lecture 6: Web Sockets & Web Workers
+</h1>
+<br />
+<div class='smaller centered'>
+<h3>
+Claudio Riva
+</h3>
+<h3>
+Aalto University - Spring 2012
+</h3>
+</div>
+</section>
+
+<div class='background' data-background='bg-lesson6'></div>
+<section class='slide section-title'>
+<h1>Lesson 6: Web Sockets and Web Workers</h1>
+<div class='agenda'>
+<p>Push Technology</p>
+<p>Web Sockets</p>
+<p>Server-Sent Events</p>
+<p>Web Workers</p>
+</div>
+</section>
+<section class='slide'>
+<header>
+Push Technology
+</header>
+<article>
+<p>HTTP request/response protocol is designed for pulling information from a server and doesn't fit well for real-time communication</p>
+<p>Typical applications that need server push: Instant messaging, E-mail, Auctions, Betting, Gaming, Sport results, Sensor monitoring</p>
+<div class='singlespace'>
+<p>Workarounds</p>
+</div>
+<ul>
+<li>Frequent requests (=> excessive load on the server)</li>
+<li>Long polling (=> keep many connections open in waiting state)</li>
+<li>Flash XMLSocket relays</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/websockets/'>W3C</a>
+</span>
+</header>
+<article>
+<blockquote>
+<p class='smallest'>
+Full-duplex, bi-directional communication over the Web.  Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
+</p>
+</blockquote>
+<div class='code_block larger'>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Socket object</span>&#x000A;<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://echo.websocket.org?encoding=text</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="comment">// Send</span>&#x000A;socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;<span class="comment">// Callbacks</span>&#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { socket.send(<span class="string"><span class="delimiter">'</span><span class="content">Hello, WebSocket</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { alert(event.data); }&#x000A;socket.<span class="function">onclose</span> = <span class="keyword">function</span>(event) { alert(<span class="string"><span class="delimiter">'</span><span class="content">closed</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets</img>
+</header>
+<article>
+Websockets interface:
+<ul>
+<li>
+<strong class='terminal red'>
+binaryType
+</strong>
+:
+<span class='terminal'>
+blob | arraybuffer
+</span>
+</li>
+<li>
+<strong class='terminal red'>
+send
+</strong><span class='terminal red'>(DOMString | ArrayBuffer | Blob)</span>: send the message over the socket
+</li>
+<li>
+<strong class='terminal red'>
+onopen
+</strong>
+: callback when the socket is ready (important!)
+</li>
+<li>
+<strong class='terminal red'>
+onmessage
+</strong>
+: callback when a message is received on the socket
+</li>
+<li>
+<strong class='terminal red'>
+onclose
+</strong>
+: callback when the socket is closed
+</li>
+<li>
+<strong class='terminal red'>
+onerror
+</strong>
+: callback when there is a communication error
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header></header>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebSockets - Benefits</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<ul>
+<li>connection handshake uses HTTP infrastructure</li>
+<li>no extra ports (works across firewalls)</li>
+<li>no overhead</li>
+<li>very low latency</li>
+<li>clean browser interface</li>
+</ul>
+</div>
+<div class='twoColumn'>
+<pre class='smaller'>Request URL:ws://localhost:8080/
+Request Method:GET
+Status Code:101 Switching Protocols
+<strong>Request Headers</strong>
+Connection:Upgrade
+Cookie:
+Host:localhost:8080
+Origin:null
+Sec-WebSocket-Key:0/D8yRVfxGk/G4i4ye2MDA==
+Sec-WebSocket-Version:13
+Upgrade:websocket
+(Key3):00:00:00:00:00:00:00:00
+<strong>Response Headers</strong>
+Connection:Upgrade
+Sec-WebSocket-Accept:yBMC36LCd79X4ByuhFJfYJ3VS+Y=
+Upgrade:websocket
+(Challenge Response):00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</pre>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Echo Example
+<span class='smaller'>
+<a href='websocketsEcho.html'>websocketsEcho</a>
+</span>
+</header>
+<article>
+HTML
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%div</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%input</span><span class="constant">#wsMessage</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">text</span><span class="delimiter">'</span></span>)&#x000A;<span class="tag">%a</span><span class="constant">#wsSend</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">'</span><span class="content">button</span><span class="delimiter">'</span></span>)&#x000A;  Send&#x000A;<span class="constant">#console</span></pre></div>
+</div>
+Javascript
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> WebSocket = window.WebSocket || window.MozWebSocket;&#x000A;  &#x000A;  <span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">'</span><span class="content">ws://echo.websocket.org/echo?encoding=text</span><span class="delimiter">'</span></span>);&#x000A;  &#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#wsSend</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>() { socket.send( <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#wsMessage</span><span class="delimiter">'</span></span>).val() ); })&#x000A;    &#x000A;  socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).append(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;CONNECTED&lt;/p&gt;</span><span class="delimiter">'</span></span>); };&#x000A;  &#x000A;  socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).append(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span> + event.data + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>); }&#x000A;  &#x000A;  socket.<span class="function">onerror</span> = <span class="keyword">function</span>(event) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).append(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;ERROR: </span><span class="delimiter">'</span></span> + event.data + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>); }&#x000A;});&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Sending/Receiving a JSON Object</header>
+<article>
+<ul>
+<li>
+Sending a JSON object
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> msg = { <span class="key">nickname</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">John</span><span class="delimiter">&quot;</span></span>, <span class="key">message</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello World!</span><span class="delimiter">&quot;</span></span> };&#x000A;socket.send( JSON.stringify(msg) );</pre></div>
+</div>
+</li>
+<li>
+Receiving a JSON object
+<div class="CodeRay">
+  <div class="code"><pre>socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) {&#x000A;  <span class="keyword">var</span> msg = <span class="predefined">$</span>.parseJSON( event.data );&#x000A;  console.log( msg.nickname );&#x000A;  console.log( msg.message );&#x000A;}&#x000A;</pre></div>
+</div>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Sending blob or arraybuffer</header>
+<article>
+<ul>
+<li>
+To send a file(blob) from the browser to the server:
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%input</span>(<span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fileSelect</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">multiple</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span>)</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#fileSelect</span><span class="delimiter">&quot;</span></span>).live(<span class="string"><span class="delimiter">'</span><span class="content">change</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) {&#x000A;  <span class="predefined">$</span>.each(<span class="local-variable">this</span>.files, <span class="keyword">function</span> (i,file){&#x000A;  socket.send(file);&#x000A;  }&#x000A;}</pre></div>
+</div>
+</li>
+<li>
+To send array buffer from browser to server
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> s = <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello</span><span class="delimiter">&quot;</span></span>;&#x000A;<span class="keyword">var</span> ba = <span class="keyword">new</span> Uint8Array(size);&#x000A;<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="integer">0</span>; i &lt; size; i++) {&#x000A;  ba[i] = s.charCodeAt(i);&#x000A;}&#x000A;socket.send(ba.buffer);&#x000A;</pre></div>
+</div>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Receiving blob or arraybuffer</header>
+<article>
+<ul>
+<li>
+To receive a blob from the server:
+<div class="CodeRay">
+  <div class="code"><pre>socket.binaryType = <span class="string"><span class="delimiter">'</span><span class="content">blob</span><span class="delimiter">'</span></span>;&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span> (e) {&#x000A;  <span class="comment">// e.data is Blob object.</span>&#x000A;};&#x000A;</pre></div>
+</div>
+</li>
+<li>
+To receive an array buffer from the server
+<div class="CodeRay">
+  <div class="code"><pre>socket.binaryType = <span class="string"><span class="delimiter">'</span><span class="content">arraybuffer</span><span class="delimiter">'</span></span>;&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span> (e) {&#x000A;  <span class="comment">// e.data is ArrayBuffer object.</span>&#x000A;};&#x000A;&#x000A;<span class="comment">//To access arraybuffer as uint8 array,</span>&#x000A;<span class="keyword">var</span> ba = <span class="keyword">new</span> Uint8Array(e.data);&#x000A;<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="integer">0</span>; i &lt; ba.length; i++) {&#x000A;  ba[i];&#x000A;}&#x000A;</pre></div>
+</div>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>The Server Side</header>
+<article>
+<p>LAMP stack and HTTP request/response not suitable</p>
+<p>Coping with large number of open socket connections</p>
+<p>Requires high concurrency at low performance cost (non-bocking IO)</p>
+<p>
+Common frameworks based on
+<a href='http://en.wikipedia.org/wiki/Event_loop'>event loop:</a>
+<ul>
+<li>
+<a href='http://nodejs.org/'>Node.js</a>
+</li>
+<li>
+<a href='http://socket.io'>Socket.IO</a>
+</li>
+<li>
+<a href='http://www.eclipse.org/jetty/'>Jetty (Java)</a>
+</li>
+<li>
+<a href='http://rubyeventmachine.com/'>Ruby / Event Machine</a>
+</li>
+<li>
+<a href='https://github.com/rlotun/txWebSocket'>Python / Twisted</a>
+</li>
+</ul>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Echo Server with Ruby Event Machine
+<span class='smaller'>
+<a href='websocketsEchoEM.html'>websocketsEchoEM</a>
+</span>
+</header>
+<article>
+<ul>
+<li>Event-driven I/O (Reactor pattern)</li>
+<li>Extremly high scalability, performance and stability</li>
+<li>Hide complexity of high-performance threaded network programming</li>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">em-websocket</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="constant">EventMachine</span>.run {&#x000A;    <span class="constant">EventMachine</span>::<span class="constant">WebSocket</span>.start(<span class="symbol">:host</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">0.0.0.0</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:port</span> =&gt; <span class="integer">8080</span>) <span class="keyword">do</span> |ws|&#x000A;        ws.onopen { &#x000A;          puts <span class="string"><span class="delimiter">&quot;</span><span class="content">WebSocket connection open</span><span class="delimiter">&quot;</span></span>&#x000A;&#x000A;          <span class="comment"># publish message to the client</span>&#x000A;          ws.send <span class="string"><span class="delimiter">&quot;</span><span class="content">Hello Client</span><span class="delimiter">&quot;</span></span>&#x000A;        }&#x000A;        ws.onclose { puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Connection closed</span><span class="delimiter">&quot;</span></span> }&#x000A;        ws.onmessage { |msg|&#x000A;          puts <span class="string"><span class="delimiter">&quot;</span><span class="content">Recieved message: </span><span class="inline"><span class="inline-delimiter">#{</span>msg<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;          ws.send <span class="string"><span class="delimiter">&quot;</span><span class="content">Pong: </span><span class="inline"><span class="inline-delimiter">#{</span>msg<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>&#x000A;        }&#x000A;    <span class="keyword">end</span>&#x000A;}&#x000A;</pre></div>
+</div>
+
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Channels with Ruby Event Machine
+</header>
+<article>
+<p>Interface to push items to a number of subscribers</p>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">#Create a new channel</span>&#x000A;channel = <span class="constant">EM</span>::<span class="constant">Channel</span>.new&#x000A;&#x000A;<span class="comment">#Subscribe to the channel</span>&#x000A;sid = channel.subscribe{ |msg| p [<span class="symbol">:got</span>, msg] }&#x000A;&#x000A;<span class="comment">#Push a message on the channel to all subscribers</span>&#x000A;channel.push(<span class="string"><span class="delimiter">'</span><span class="content">hello world</span><span class="delimiter">'</span></span>)&#x000A;channel.unsubscribe(sid)</pre></div>
+</div>
+<p>The subscribe's callback function is used when pushing the message to the subscriber</p>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat Client
+<span class='smaller'>
+<a href='websocketsChatEM.html'>websocketsChatEM</a>
+</span>
+</header>
+<article>
+HTML
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%input</span><span class="constant">#nickname</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Nickname</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%input</span><span class="constant">#message</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">'</span><span class="content">text</span><span class="delimiter">'</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">placeholder</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Start chat here</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="tag">%a</span><span class="constant">#send</span>(<span class="attribute-name">data-role</span> = <span class="string"><span class="delimiter">'</span><span class="content">button</span><span class="delimiter">'</span></span>)&#x000A;  Send&#x000A;<span class="constant">#console</span></pre></div>
+</div>
+JS
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string"><span class="delimiter">&quot;</span><span class="content">ws://</span><span class="delimiter">&quot;</span></span> + location.hostname + <span class="string"><span class="delimiter">&quot;</span><span class="content">:8080</span><span class="delimiter">&quot;</span></span>);&#x000A;&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#send</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">var</span> msg = {<span class="key">nickname</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#nickname</span><span class="delimiter">'</span></span>).val(), <span class="key">message</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val()};&#x000A;  socket.send( JSON.stringify(msg) );&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;})  &#x000A;socket.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;CONNECTED&lt;/p&gt;</span><span class="delimiter">'</span></span>); };&#x000A;socket.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) {&#x000A;  <span class="keyword">var</span> msg = <span class="predefined">$</span>.parseJSON(event.data);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span> + msg.timestamp + <span class="string"><span class="delimiter">'</span><span class="content"> &lt;strong&gt;</span><span class="delimiter">'</span></span> + msg.nickname + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/strong&gt;: </span><span class="delimiter">'</span></span> + msg.message + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>);&#x000A;}&#x000A;socket.<span class="function">onerror</span> = <span class="keyword">function</span>(event) { <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;ERROR: </span><span class="delimiter">'</span></span> + event.data + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>); }&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat Server
+<span class='smaller'>
+<a href='websocketsChatEM.html'>websocketsChatEM</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="constant">EventMachine</span>.run {&#x000A;  <span class="instance-variable">@channel</span> = <span class="constant">EM</span>::<span class="constant">Channel</span>.new&#x000A;  <span class="instance-variable">@users</span> = {}&#x000A;  <span class="instance-variable">@messages</span> = []&#x000A;&#x000A;  <span class="constant">EventMachine</span>::<span class="constant">WebSocket</span>.start(<span class="symbol">:host</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">0.0.0.0</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:port</span> =&gt; <span class="integer">8080</span>) <span class="keyword">do</span> |ws|&#x000A;    ws.onopen { ... }&#x000A;    ws.onmessage { |msg| ... }&#x000A;    ws.onclose { ... }&#x000A;  <span class="keyword">end</span>&#x000A;&#x000A;  <span class="comment">#Run a Sinatra server for serving index.html</span>&#x000A;  <span class="keyword">class</span> <span class="class">App</span> &lt; <span class="constant">Sinatra</span>::<span class="constant">Base</span>&#x000A;    set <span class="symbol">:public_folder</span>, settings.root&#x000A;    &#x000A;    get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;      send_file <span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>&#x000A;    <span class="keyword">end</span>&#x000A;  <span class="keyword">end</span>&#x000A;  <span class="constant">App</span>.run!&#x000A;} &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat Server - ws.onopen
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>ws.onopen {&#x000A;  <span class="comment">#Subscribe the new user to the channel with the callback function for the push action</span>&#x000A;  new_user = <span class="instance-variable">@channel</span>.subscribe { |msg| ws.send msg }&#x000A;  &#x000A;  <span class="comment">#Add the new user to the user list</span>&#x000A;  <span class="instance-variable">@users</span>[ws.object_id] = new_user&#x000A;  &#x000A;  <span class="comment">#Push the last messages to the user</span>&#x000A;  <span class="instance-variable">@messages</span>.each <span class="keyword">do</span> |message|&#x000A;    ws.send message&#x000A;  <span class="keyword">end</span>&#x000A;  &#x000A;  <span class="comment">#Broadcast the notification to all users</span>&#x000A;  <span class="instance-variable">@channel</span>.push  ({&#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">nickname</span><span class="delimiter">&quot;</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>, &#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">New user joined. </span><span class="inline"><span class="inline-delimiter">#{</span><span class="instance-variable">@users</span>.length<span class="inline-delimiter">}</span></span><span class="content"> users in chat</span><span class="delimiter">&quot;</span></span>, &#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">timestamp</span><span class="delimiter">&quot;</span></span> =&gt; timestamp }.to_json)&#x000A;}</pre></div>
+</div>
+
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat Server - ws.onmessage
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>ws.onmessage { |msg|&#x000A;  &#x000A;  <span class="comment">#Add the timestamp to the message</span>&#x000A;  message = <span class="constant">JSON</span>.parse(msg).merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;  &#x000A;  <span class="comment">#append the message at the end of the queue</span>&#x000A;  <span class="instance-variable">@messages</span> &lt;&lt; message&#x000A;  <span class="instance-variable">@messages</span>.shift <span class="keyword">if</span> <span class="instance-variable">@messages</span>.length &gt; <span class="integer">10</span>&#x000A;&#x000A;  <span class="comment">#Broadcast the message to all users connected to the channel</span>&#x000A;  <span class="instance-variable">@channel</span>.push message&#x000A;}&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat Server - ws.onclose
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>ws.onclose { &#x000A;  <span class="instance-variable">@channel</span>.unsubscribe(<span class="instance-variable">@users</span>[ws.object_id])&#x000A;  <span class="instance-variable">@users</span>.delete(ws.object_id)&#x000A;  &#x000A;  <span class="comment">#Broadcast the notification to all users</span>&#x000A;  <span class="instance-variable">@channel</span>.push ({&#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">nickname</span><span class="delimiter">&quot;</span></span> =&gt; <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>, &#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">One user left. </span><span class="inline"><span class="inline-delimiter">#{</span><span class="instance-variable">@users</span>.length<span class="inline-delimiter">}</span></span><span class="content"> users in chat</span><span class="delimiter">&quot;</span></span>, &#x000A;    <span class="string"><span class="delimiter">&quot;</span><span class="content">timestamp</span><span class="delimiter">&quot;</span></span> =&gt; timestamp}.to_json)&#x000A;}&#x000A;</pre></div>
+</div>
+
+</article>
+</section>
+<section class='slide'>
+<header>
+Generic Server
+<span class='smaller'>
+<a href='websocketsDrawEM.html'>websocketsDrawEM</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre> ws.onopen {&#x000A;    <span class="comment">#Subscribe the new user to the channel with the callback function for the push action</span>&#x000A;    new_user = <span class="instance-variable">@channel</span>.subscribe { |msg| ws.send msg }&#x000A;    &#x000A;    <span class="comment">#Add the new user to the user list</span>&#x000A;    <span class="instance-variable">@users</span>[ws.object_id] = new_user&#x000A;    &#x000A;    <span class="comment">#Push the last messages to the user</span>&#x000A;    <span class="instance-variable">@messages</span>.each <span class="keyword">do</span> |message|&#x000A;      ws.send message&#x000A;    <span class="keyword">end</span>&#x000A; }&#x000A;  ws.onmessage { |msg|&#x000A;    <span class="comment">#append the message at the end of the queue</span>&#x000A;    <span class="instance-variable">@messages</span> &lt;&lt; msg&#x000A;    <span class="instance-variable">@messages</span>.shift <span class="keyword">if</span> <span class="instance-variable">@messages</span>.length &gt; <span class="integer">10</span>&#x000A;&#x000A;    <span class="comment">#Broadcast the message to all users connected to the channel</span>&#x000A;    <span class="instance-variable">@channel</span>.push msg&#x000A;  }&#x000A;  ws.onclose { &#x000A;    <span class="instance-variable">@channel</span>.unsubscribe(<span class="instance-variable">@users</span>[ws.object_id])&#x000A;    <span class="instance-variable">@users</span>.delete(ws.object_id)&#x000A;  }       </pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Websockets + canvas + orientation ?
+<span class='smaller'>
+<a href='websocketsDriveEM.html'>websocketsDriveEM</a>
+</span>
+</header>
+<article></article>
+</section>
+<section class='slide'>
+<header>Protocol Versions and Browser Support</header>
+<article class='smaller'>
+<div class='row'>
+<div class='twoColumn'>
+<ul>
+<li>
+<strong>Hixie-75</strong>
+<ul>
+<li>Chrome 4.0 + 5.0</li>
+<li>Safari 5.0.0</li>
+</ul>
+</li>
+<li>
+<strong>HyBi-00/Hixie-76</strong>
+<ul>
+<li>Chrome 6.0 - 13.0</li>
+<li>Safari 5.0.2 + 5.1</li>
+<li>iOS 4.2 + iOS 5</li>
+<li>Firefox 4.0 - support for WebSockets disabled.</li>
+<li>Opera 11 - with support disabled.</li>
+</ul>
+</li>
+<li>
+<strong>HyBi-07+</strong>
+<ul>
+<li>Chrome 14.0</li>
+<li>Firefox 6.0 - prefixed: MozWebSocket</li>
+<li>IE 9 + IE 10 - via downloadable Silverlight extension</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<li>
+<strong>HyBi-10</strong>
+<ul>
+<li>Chrome 14.0 + 15.0</li>
+<li>Firefox 7.0 + 8.0 + 9.0 + 10.0 - prefixed: MozWebSocket</li>
+<li>IE 10 (from Windows 8 developer preview)</li>
+</ul>
+</li>
+<li>
+<strong>HyBi-17/RFC 6455</strong>
+<ul>
+<li>Chrome 16</li>
+<li>Firefox 11</li>
+</ul>
+</li>
+<p>
+To enable support in Opera, type his in the address bar:
+<span class='terminal'>
+opera:config#Enable%20WebSockets
+</span>
+</p>
+<p>
+To enable support in Firefox old version, type
+<span class='terminal'>about:config</span>
+and enable
+<span class='terminal'>network.websockets</span>
+</p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Pusher.com
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<p>
+<strong>Pusher</strong>
+is a simple hosted API for quickly, easily and securely adding realtime bi-directional functionality via WebSockets to web and mobile apps, or any other Internet connected device.
+</p>
+<p>Founded in 2009. Team is 7 members.</p>
+<p>+40 billion messages delivered.</p>
+<p>WebSocket as a service</p>
+<p>Based on EM-WebSocket</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='image-wrap'><img src='imgs//lesson6/pusher_diagram.png' /></div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Basic interface for pusher
+</header>
+<article>
+<ul>
+<li>
+<strong class='red'>
+Channels
+</strong>
+: each application has a number of channels, and every client can choose which channels it connects to.
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Subscribe</span>&#x000A;<span class="keyword">var</span> channel = pusher.subscribe(channelName);&#x000A;<span class="comment">//Unsubscribe</span>&#x000A;pusher.unsubscribe(channelName);  </pre></div>
+</div>
+</li>
+<li>
+<strong class='red'>
+Events
+</strong>
+: are 'named messages' that are sent to all clients that are registered to a channel
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Bind to an event on a channel</span>&#x000A;channel.bind(eventName, callback);&#x000A;<span class="comment">//Bind to an event on any channel</span>&#x000A;pusher.bind(eventName, callback);</pre></div>
+</div>
+</li>
+<li>
+<strong class='red'>
+Publisher (server)
+</strong>
+: Publish an event to a channel on the server side
+<div class="CodeRay">
+  <div class="code"><pre><span class="constant">Pusher</span>[<span class="string"><span class="delimiter">'</span><span class="content">test-channel</span><span class="delimiter">'</span></span>].trigger(<span class="string"><span class="delimiter">'</span><span class="content">test_event</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">{&quot;hello&quot;:&quot;world&quot;}</span><span class="delimiter">'</span></span>)</pre></div>
+</div>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat using Pusher - Client
+<span class='smaller'>
+<a href='websocketsChatPusher.html'>websocketsChatPusher</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> pusher = <span class="keyword">new</span> Pusher(<span class="string"><span class="delimiter">'</span><span class="content">8dc1dcd216474ec35b02</span><span class="delimiter">'</span></span>); &#x000A;<span class="keyword">var</span> chatChannel = pusher.subscribe(<span class="string"><span class="delimiter">'</span><span class="content">chat</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;chatChannel.bind(<span class="string"><span class="delimiter">'</span><span class="content">say</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(msg) {&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span> + msg.timestamp + <span class="string"><span class="delimiter">'</span><span class="content"> &lt;strong&gt;</span><span class="delimiter">'</span></span> + msg.nickname + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/strong&gt;: </span><span class="delimiter">'</span></span> + msg.message + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>);&#x000A;});&#x000A;&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#send</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>(event) {&#x000A;  event.preventDefault();&#x000A;  <span class="keyword">var</span> msg = {<span class="key">nickname</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#nickname</span><span class="delimiter">'</span></span>).val(), <span class="key">message</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val()};&#x000A;  &#x000A;  <span class="predefined">$</span>.post( <span class="string"><span class="delimiter">'</span><span class="content">http://</span><span class="delimiter">'</span></span> + location.host + <span class="string"><span class="delimiter">'</span><span class="content">/say</span><span class="delimiter">'</span></span>,msg,<span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;})  &#x000A;&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat using Pusher - Server
+<span class='smaller'>
+<a href='websocketsChatPusher.html'>websocketsChatPusher</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>require <span class="string"><span class="delimiter">'</span><span class="content">sinatra</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>&#x000A;require <span class="string"><span class="delimiter">'</span><span class="content">pusher</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="constant">Pusher</span>.app_id = <span class="string"><span class="delimiter">'</span><span class="content">13324</span><span class="delimiter">'</span></span>&#x000A;<span class="constant">Pusher</span>.key = <span class="string"><span class="delimiter">'</span><span class="content">8dc1dcd216474ec35b02</span><span class="delimiter">'</span></span>&#x000A;<span class="constant">Pusher</span>.secret = <span class="string"><span class="delimiter">'</span><span class="content">6ae6292fa86e2a559643</span><span class="delimiter">'</span></span>&#x000A;&#x000A;<span class="keyword">def</span> <span class="function">timestamp</span>&#x000A;  <span class="constant">Time</span>.now.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%H:%M:%S</span><span class="delimiter">&quot;</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span> &#x000A;  <span class="comment">#Serve the chat client</span>&#x000A;  <span class="constant">File</span>.read(<span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>)&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/say</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  message = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;&#x000A;  <span class="comment">#Use the REST Pusher API so pass the message that needs to be broadcasted</span>&#x000A;  <span class="comment">#to all clients that are connected to the chat channel</span>&#x000A;  <span class="constant">Pusher</span>[<span class="string"><span class="delimiter">'</span><span class="content">chat</span><span class="delimiter">'</span></span>].trigger(<span class="string"><span class="delimiter">'</span><span class="content">say</span><span class="delimiter">'</span></span>, message)&#x000A;<span class="keyword">end</span>&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">Server-sent Events</img>
+</header>
+<article>
+<ul>
+<li>Possiblity to subscribe to a stream of updates that are generated by a server</li>
+<li>Only support one-way notificaions from the server</li>
+<li>Simpler to use than WebSockets</li>
+<li>Based on HTTP protocol (can be emulated in JS if not available)</li>
+<li>Automatic reconnect and resumable with event IDs</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre><span class="comment">//Subscribe to the updates</span>&#x000A;<span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(<span class="string"><span class="delimiter">'</span><span class="content">/events</span><span class="delimiter">'</span></span>);&#x000A;&#x000A;source.<span class="function">onopen</span> = <span class="keyword">function</span>(event) { console.log(<span class="string"><span class="delimiter">&quot;</span><span class="content">CONNECTED</span><span class="delimiter">&quot;</span></span>); }&#x000A;source.<span class="function">onmessage</span> = <span class="keyword">function</span> (event) { console.log(event.data); }&#x000A;source.<span class="function">onerror</span> = <span class="keyword">function</span>(event) { console.log(event.data); }&#x000A;source.addEventListener(<span class="string"><span class="delimiter">'</span><span class="content">login</span><span class="delimiter">'</span></span>, <span class="keyword">function</span>(e) { console.log(e.data); }, <span class="predefined-constant">false</span>);&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">Message Format</img>
+</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>data: this is a simple message&#x000A;&lt;blank line&gt;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>data: This is a message&#x000A;data: on multiple lines&#x000A;&lt;blank line&gt;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>id: 25&#x000A;data: This is a message with an id&#x000A;&lt;blank line&gt;</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<div class="CodeRay">
+  <div class="code"><pre>id: 25&#x000A;event: news&#x000A;data: This message is of type news&#x000A;&lt;blank line&gt;</pre></div>
+</div>
+<div class="CodeRay">
+  <div class="code"><pre>data: {&#x000A;data: &quot;msg&quot;: &quot;A JSON message&quot;,&#x000A;data: &quot;id&quot;: 12345&#x000A;data: }&#x000A;&lt;blank line&gt;&#x000A;</pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Sinatra Streaming API
+</header>
+<article>
+<p>It allows us to stream repsonses until the client closes the connection:</p>
+<div class='row'>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  stream <span class="keyword">do</span> |out|&#x000A;    out &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">It's gonna be legen -</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;    sleep <span class="float">0.5</span>&#x000A;    out &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content"> (wait for it) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;    sleep <span class="integer">1</span>&#x000A;    out &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">- dary!</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>&#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>            </pre></div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class="CodeRay">
+  <div class="code"><pre>set <span class="symbol">:server</span>, <span class="symbol">:thin</span>&#x000A;connections = []&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment"># keep stream open</span>&#x000A;  stream <span class="symbol">:keep_open</span> { |out| connections &lt;&lt; out }&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment"># write to all open streams</span>&#x000A;  connections.each { |out| &#x000A;    out &lt;&lt; params[<span class="symbol">:message</span>] &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span> &#x000A;  }&#x000A;  <span class="string"><span class="delimiter">&quot;</span><span class="content">message sent</span><span class="delimiter">&quot;</span></span>&#x000A;<span class="keyword">end</span></pre></div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat using SSE - Server
+<span class='smaller'>
+<a href='websocketsChatSSE.html'>websocketsChatSSE</a>
+</span>
+</header>
+<article class='small'>
+<div class="CodeRay">
+  <div class="code"><pre>users = []&#x000A;messages = []&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  send_file <span class="string"><span class="delimiter">'</span><span class="content">index.html</span><span class="delimiter">'</span></span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;get <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>, provides: <span class="string"><span class="delimiter">'</span><span class="content">text/event-stream</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  stream <span class="symbol">:keep_open</span> <span class="keyword">do</span> |out|&#x000A;    users &lt;&lt; out&#x000A;    &#x000A;    <span class="comment">#callback is fired when the stream is closed. </span>&#x000A;    out.callback { users.delete(out) } &#x000A;  <span class="keyword">end</span>&#x000A;<span class="keyword">end</span>&#x000A;&#x000A;post <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span> <span class="keyword">do</span>&#x000A;  <span class="comment">#Add the timestamp to the message</span>&#x000A;  message = params.merge( {<span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> =&gt; timestamp}).to_json&#x000A;&#x000A;  <span class="comment">#append the message at the end of the queue</span>&#x000A;  messages &lt;&lt; message&#x000A;  messages.shift <span class="keyword">if</span> messages.length &gt; <span class="integer">10</span>&#x000A;&#x000A;  users.each { |out| out &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">data: </span><span class="inline"><span class="inline-delimiter">#{</span>message<span class="inline-delimiter">}</span></span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>}&#x000A;<span class="keyword">end</span> &#x000A;</pre></div>
+</div>
+
+</article>
+</section>
+<section class='slide'>
+<header>
+Chat using SSE - Client
+<span class='smaller'>
+<a href='websocketsChatSSE.html'>websocketsChatSSE</a>
+</span>
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> es = <span class="keyword">new</span> EventSource(<span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>);&#x000A;es.<span class="function">onmessage</span> = <span class="keyword">function</span>(e) { &#x000A;  <span class="keyword">var</span> msg = <span class="predefined">$</span>.parseJSON(event.data);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#console</span><span class="delimiter">'</span></span>).prepend(<span class="string"><span class="delimiter">'</span><span class="content">&lt;p&gt;</span><span class="delimiter">'</span></span> + msg.timestamp + <span class="string"><span class="delimiter">'</span><span class="content"> &lt;strong&gt;</span><span class="delimiter">'</span></span> + msg.nickname + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/strong&gt;: </span><span class="delimiter">'</span></span> + msg.message + <span class="string"><span class="delimiter">'</span><span class="content">&lt;/p&gt;</span><span class="delimiter">'</span></span>);&#x000A;}&#x000A;&#x000A;<span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#send</span><span class="delimiter">'</span></span>).click(<span class="keyword">function</span>(event) {&#x000A;  event.preventDefault();&#x000A;  <span class="keyword">var</span> msg = {<span class="key">nickname</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#nickname</span><span class="delimiter">'</span></span>).val(), <span class="key">message</span>: <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val()};&#x000A;  &#x000A;  <span class="predefined">$</span>.post( <span class="string"><span class="delimiter">'</span><span class="content">/chat</span><span class="delimiter">'</span></span>,msg,<span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>);&#x000A;  <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">#message</span><span class="delimiter">'</span></span>).val(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);&#x000A;})  &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+<img src = "imgs/html5/HTML5_Connectivity_64.png">WebWorkers</img>
+<span class='smaller'>
+<a href='http://www.w3.org/TR/workers/'>W3C</a>
+</span>
+</header>
+<article>
+<ul>
+<li>Javascript is single-threaded environment (one thread for UI events, data processing and DOM manipulation)</li>
+<li>Web Workers introduce an API for spawning background scripts for long-running scripts without blocking the UI</li>
+<li>Two types: Dedicated workers and shared workers</li>
+<li>Communication across threads happens via messages</li>
+</ul>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+main.js
+<div class="CodeRay">
+  <div class="code"><pre><span class="keyword">var</span> worker = <span class="keyword">new</span> Worker(<span class="string"><span class="delimiter">'</span><span class="content">worker.js</span><span class="delimiter">'</span></span>);&#x000A;worker.postMessage(<span class="string"><span class="delimiter">'</span><span class="content">Hello Worker</span><span class="delimiter">'</span></span>);&#x000A;worker.<span class="function">onmessage</span> = <span class="keyword">function</span> (e) {&#x000A;  console.log(e.data); &#x000A;}</pre></div>
+</div>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+worker.js
+<div class="CodeRay">
+  <div class="code"><pre>  <span class="local-variable">this</span>.<span class="function">onmesage</span> = <span class="keyword">function</span>(e) {&#x000A;    postMessage(<span class="string"><span class="delimiter">'</span><span class="content">You said</span><span class="delimiter">'</span></span> + e.data);&#x000A;  } </pre></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Javascript Event Loop
+</header>
+<article>
+<div class='image-wrap'><img src='imgs//lesson6/event-loop-js.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Webworkers and Main Thread
+</header>
+<article>
+<div class='image-wrap'><img src='imgs//lesson6/event-loop-worker.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+What a worker can do and not do
+</header>
+<article class='small'>
+<div class='row'>
+<div class='twoColumn'>
+<div class='autobox'>
+What a worker can do:
+<ul>
+<li>Post and listen for messages</li>
+<li>Close the worker</li>
+<li>Access navigator and location objects</li>
+<li>XMLHttpRequest</li>
+<li>Use timers</li>
+<li>Application cache</li>
+<li>importScripts()</li>
+<li>Websockets and server-sent events</li>
+<li>IndexedDB</li>
+<li>Spawn other workers</li>
+</ul>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+What a worker cannot do:
+<ul>
+<li>Access the DOM</li>
+<li>Access the window object</li>
+<li>Access the document object</li>
+<li>Access the parent object</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Mandelbrot Renderer
+</header>
+<article>
+<div class='image-wrap'><a href='http://www.framexpeditions.com/~alex2/teaching/mandelbrot/'><img src='imgs//lesson6/mandelbrot.png' class='resize' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>
+The worker
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre>self.<span class="function">onmessage</span> = <span class="keyword">function</span> (event) {&#x000A;  <span class="keyword">var</span> data = event.data;&#x000A;  <span class="keyword">var</span> max_iter = data.max_iter;&#x000A;  <span class="keyword">var</span> escape = data.escape * data.escape;&#x000A;  data.values = [];&#x000A;  <span class="keyword">for</span> (<span class="keyword">var</span> j = data.j_start; j &lt; data.j_end; j++) {&#x000A;    <span class="keyword">var</span> c_j = data.r_min + (data.r_max - data.r_min) * (j-data.j_start) / data.height;&#x000A;    <span class="keyword">for</span> (<span class="keyword">var</span> i = data.i_start; i &lt; data.i_end; i++) {&#x000A;      <span class="keyword">var</span> c_i = data.c_min + (data.c_max - data.c_min) * (i-data.i_start) / data.width;&#x000A;      <span class="keyword">var</span> z_j = <span class="integer">0</span>, z_i = <span class="integer">0</span>;&#x000A;      <span class="keyword">for</span> (iter = <span class="integer">0</span>; z_j*z_j + z_i*z_i &lt; escape &amp;&amp; iter &lt; max_iter; iter++) {&#x000A;  <span class="comment">// z -&gt; z^2 + c</span>&#x000A;  <span class="keyword">var</span> tmp = z_j*z_j - z_i*z_i + c_i;&#x000A;  z_i = <span class="integer">2</span> * z_j * z_i + c_j;&#x000A;  z_j = tmp;&#x000A;      }&#x000A;      <span class="keyword">if</span> (iter == max_iter) {&#x000A;  iter = -<span class="integer">1</span>;&#x000A;      }&#x000A;      data.values.push(iter);&#x000A;    }&#x000A;  }&#x000A;  self.postMessage(data);&#x000A;}&#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Main Thread
+</header>
+<article>
+<div class="CodeRay">
+  <div class="code"><pre><span class="function">init</span> : <span class="keyword">function</span>(options){&#x000A;  <span class="keyword">var</span> me=<span class="local-variable">this</span>;&#x000A;  <span class="local-variable">this</span>.workers = [];&#x000A;&#x000A;  <span class="local-variable">this</span>.nb_workers=options.nbworkers;&#x000A;&#x000A;  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="integer">0</span>; i &lt; <span class="local-variable">this</span>.nb_workers; i++) {&#x000A;    <span class="keyword">var</span> worker = <span class="keyword">new</span> Worker(<span class="string"><span class="delimiter">&quot;</span><span class="content">worker.js</span><span class="delimiter">&quot;</span></span>);&#x000A;    worker.label=<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>+i;&#x000A;    worker.<span class="function">onmessage</span> = <span class="keyword">function</span>(event) {&#x000A;      me.received_block(event.target, event.data)&#x000A;    }&#x000A;    worker.idle = <span class="predefined-constant">true</span>;&#x000A;    <span class="local-variable">this</span>.workers.push(worker);&#x000A;  }&#x000A;  ...&#x000A;}      &#x000A;<span class="function">process_block</span>: <span class="keyword">function</span>(worker) {&#x000A;  ...&#x000A;  worker.postMessage(data);&#x000A;  ...&#x000A;}  &#x000A;</pre></div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>
+Message passing
+</header>
+<article>
+<p>Messages passed between threads are copied not shared</p>
+<p>Object is serialized and de-serialized each time</p>
+<p>
+Supported objects by postMessage:
+<ul>RegExp</ul>
+<ul>Blob, File and FileList</ul>
+<ul>ImageData</ul>
+</p>
+<p>Transfarable objects for high-performance operations (only in Chrome 17)</p>
+</article>
+</section>
+
+<!-- Elements -->
+<a class='deck-next-link' href='#' title='Next'>→</a>
+<a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+<p class='deck-status'>
+<span class='deck-status-current'></span>
+/
+<span class='deck-status-total'></span>
+</p>
+<a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+<script src='deckjs/core/deck.core.js'></script>
+<script src='deckjs/extensions/menu/deck.menu.js'></script>
+<script src='deckjs/extensions/goto/deck.goto.js'></script>
+<script src='deckjs/extensions/status/deck.status.js'></script>
+<script src='deckjs/extensions/navigation/deck.navigation.js'></script>
+<script src='deckjs/extensions/hash/deck.hash.js'></script>
+<!-- /%script(src="deckjs/extensions/scale/deck.scale.js") -->
+<!-- /%script(src="deckjs/extensions/notes/deck.notes.js") -->
+<script src='js/main.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(document).bind('deck.change', function(event, from, to) {
+     
+      //alert('Moving from slide ' + from + ' to ' + to);
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
+      if (t==undefined) { t = "bg-default"; }
+      if (f==undefined) { f = "bg-default"; }
+             
+      
+      var front = $('#background > .front').first();
+      var back = $('#background > .back').first();
+    
+      if (front.hasClass('active')) {
+        if (front.attr('id') == t) { return; }
+    
+        back.attr('id',t);
+        front.removeClass('active');
+        back.addClass('active');
+        front.css('opacity',0);
+      } else {
+        if (back.attr('id') == t) { return; }
+    
+        front.attr('id',t);
+        back.removeClass('active');
+        front.addClass('active');
+        front.css('opacity',1);
+      }
+      
+      //last.attr('id',active.attr('id'));
+      //last.css('opacity',1);
+      //active.remove();
+      //$("#background").append('<div class="background active" id="'+t+'" style="opacity: 0; "></div>')
+      //$("#"+t).css('opacity',1);
+      //var el = $("#"+t);
+    
+      //active.removeClass('active').addClass('last');
+      //last.removeClass('last').addClass('active');
+      
+      //last.dequeue();
+      //active.dequeue();
+             
+      //active.css('opacity',0);
+      //alert(last.attr('id'));
+      //active.fadeOut('slow');
+      //last.fadeIn('slow', function() {
+      //});
+      
+      //last.fadeIn('slow');
+      //$("#"+t).css('opacity',1);
+      //last.css('opacity',1);
+      //el = $("#"+t);
+      //el.animate({opacity: 1.0}, 1000);
+    
+      //if (t==undefined && f == undefined) {
+      //} else if (t == f) {
+      //}
+      //else if (t != undefined) {
+      //  $('#background').css("background-image", "url(" + t + ")").fadeIn('slow');
+      //} else if (t == undefined) {
+      //  $('#background').fadeOut('slow');
+      //}
+    });
+      //current = $('body').css("background-image");
+      //alert(current);
+  //]]>
+</script>
+<!-- .slide-footer -->
+<!-- =META['title'] -->
+<!-- \- -->
+<!-- =META['author'] -->
+</article>
+</body>
+</html>
