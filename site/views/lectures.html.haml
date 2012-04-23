@@ -155,6 +155,7 @@
         %li=example_url_tag('deviceGeolocation')
         %li=example_url_tag('videoTest')
 
+
   .lecture
     =lecture_tag("Lab 4: Device Access", "16:00-17:45","", "lab4.html")
     .description
@@ -164,7 +165,10 @@
   .header
     Monday 16th April 2012
   .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/40634468?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
     =lecture_tag("Lecture 5: CSS3 & Touch", "14:15-15:45","", "lecture5_2012_1.html")
+    
     .description
       %p 
         In this lecture we'll give an overview of the new elements of CSS3 (like media queries, transitions, animations) 
@@ -195,16 +199,23 @@
           %li=example_url_tag('touchDrag')
           %li=example_url_tag('cssSelectors')
           
-            
+          
   .lecture
     =lecture_tag("Lab 5: Ruby on Rails 3", "16:00-17:45", "Guest Lecture: Lauri Jutila and Matias Korhonen, Kisko Labs")
     .description
-      %p This lecture will introduce the basics of Ruby on Rails 3.
+      %p 
+        This lecture will introduce the basics of Ruby on Rails 3.
+      
+        =docs_tag("Ruby on Rails - KiskoLabs.pdf")
+
+        The example that was used in the lab is available on github at: 
+        %a(href="https://github.com/ljuti/aalto-on-rails") Aalto on Rails
+        
 .lecture_block
   .header
     Monday 23rd April 2012
   .lecture
-    =lecture_tag("Lecture 6: Websockets & Webworkers", "14:15-15:45")
+    =lecture_tag("Lecture 6: Websockets & Webworkers", "14:15-15:45","", "lecture6_2012_1.html")
     .description
       %p 
         In this lecture we focus on the real-time communication API that is now supported in HTML5: 
@@ -213,10 +224,25 @@
           %li Web Sockets
           %li Server-Sent Events 
           %li Web Workers
+
+      =docs_tag("lecture6.pdf")
+
+      Examples:
+      %ul
+        %li=example_url_tag('websocketsEcho')
+        %li=example_url_tag('websocketsEchoEM')
+        %li=example_url_tag('websocketsChatEM')
+        %li=example_url_tag('websocketsDrawEM')
+        %li=example_url_tag('websocketsDriveEM')
+        %li=example_url_tag('websocketsChatPusher')
+        %li=example_url_tag('websocketsChatSSE')
+
   .lecture
     =lecture_tag("Lab 6: Designing REST interfaces", "16:00-17:45", "Guest Lecture: Lauri Jutila and Matias Korhonen, Kisko Labs")
     .description
       %p This lecture will dive into the principles of REST design and how to create RESTful interfaces with Ruby on Rails
+
+
 
 .lecture_block
   .header
