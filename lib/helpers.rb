@@ -1,6 +1,15 @@
 
 module PresentationHelper
   
+  def team_title_tag(title, team, team_url, demo_url="")
+    url = "<strong>#{title}</strong> (<a href='#{team_url}'>#{team}</a>)"
+    if demo_url != ""
+      url +=": <strong><a href='#{demo_url}'>Live demo</a></strong>"
+    end
+    url
+  end
+  
+  
   def lecture_title_tag(title, lecture)
     "<h2>#{title} (<a href='#{lecture}.html'>Slides</a>)</h2>"
   end
