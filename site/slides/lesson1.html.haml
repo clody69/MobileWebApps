@@ -48,7 +48,7 @@
 =title_slide_tag("Lecture 1: Introduction")
 
 %section.slide
-  %header The Web is Dead!
+  %header The Web was Dead!
   %article
     .row
       .twoColumn
@@ -56,14 +56,48 @@
       .twoColumn.slide
         = image_tag "mobile-applications.jpg", :resize => true
 
+%section.slide
+  %header The Web is Dead Again!
+  %article
+    .autobox.smaller        
+      %blockquote 
+        %p I think the biggest mistake we made as a company is betting too much on HTML5 as opposed to native
+        %p 
+          %cite Mark Zuckerberg, Facebook CEO
+    = image_tag "mark-html5.jpeg", :nowrap => true
 
 %section.slide
-  %header An App for Every Task
+  %header What Went Wrong ? 
   %article
-    .item
-      = image_tag "iphone-facebook-2-application.jpg", :nowrap => true
-      = image_tag "twitter-web-app.jpg", :nowrap => true
-      = image_tag "weather-app.jpg", :nowrap => true
+    .row
+      .twoColumn
+        = image_tag "facebook-old.jpeg", :nowrap => true
+      .twoColumn
+        .autobox
+          %ul
+            %li.slide No client-side rendering
+            %li.slide No templating
+            %li.slide No local storage of data
+            %li.slide No tolerance for high-latency
+            %li.slide No JSON API
+            %li.slide No mobile optimization
+            
+%section.slide
+  %header What Really Went Wrong ?
+  %article
+    .autobox.smaller        
+      %blockquote 
+        %p 
+          He still claimed their biggest mistake was betting on HTML5 when their real biggest mistake was 
+          %b incompetent execution
+        %p 
+          %cite Yehuda Katz
+
+%section.slide
+  %header Interest in developing for various mobile platforms
+  %article
+    =image_tag "html5-dev-interest.png", :resize => true
+
 
 %section.slide
   %header More Time is Spent on Mobile Apps
@@ -73,39 +107,6 @@
         =image_tag "mobile-app-chart.jpg"
       .twoColumn
         =image_tag "mobile-app-chart-2.jpg"
-
-%section.slide
-  %header 
-    The Apple Mobile App Economy
-    %span.smaller
-      %a(href="http://www.asymco.com/2012/02/19/app-developers-get-12-for-each-ios-device-sold/") Asymco
-
-  %article
-    %ul
-      %li.slide
-        How many total apps have been downloaded on iOS ? 
-      %p.slide 25 billion
-      %li.slide
-        What's the gross sales from apps in Q4-11 ? 
-      %p.slide $1 billion
-      %li.slide
-        How much was paid to developers in Q4-11 ? 
-      %p.slide $700 million
-      %li.slide
-        On average how many apps were downloaded per unit sold ?
-      %p.slide 75 apps
-      %li.slide
-        What's the minimum payout to developers per unit sold ? 
-      %p.slide $12
-    
-%section.slide
-  %header App Downloads on iTunes
-  %article
-    .row
-      .twoColumn
-        =image_tag "lesson1/itunes-apps-download-total.png"
-      .twoColumn
-        =image_tag "lesson1/itunes-apps-download-rate.png"
 
            
 %section.slide
@@ -123,62 +124,24 @@
           %li.slide
             Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
           %li.slide
-            Many apps are built in HTML5 and wrapped with a native shell
+            Many apps have an HTML5 heart wrapped in a native shell
       .twoColumn
         #thewebisdead_wrapper
           .autoimage#thewebisdead
             = image_tag "the-web-is-dead.jpg",  :caption => "Wired August 2010", :url => "http://www.wired.com/magazine/2010/08/ff_webrip/all/1", :resize => true
 
 %section.slide
-  %header Evolution of the Web (Browsers)
+  %header But it's true that: 
   %article
-    =image_tag "evolution-web.png", :caption => "Web Evolution", :url => "http://evolutionofweb.appspot.com/"
-
-
-%section.slide
-  %header Shifting from the "Document Web" to the "App Web"
-  %article
-    .row
-      .twoColumn.slide
-        .autobox
-          %p 
-            Hyperlinked documents
-          %p
-            Page reloading
-          %p 
-            Static pages
-          %p 
-            Web servers
-          %p 
-            Static content
-      .twoColumn.slide
-        .autobox
-          %p 
-            Interactive web apps
-          %p
-            Asynchronous API calls
-          %p 
-            HTML + CSS + JS
-          %p 
-            Data hubs (web apis)
-          %p 
-            Real-time communication
-    .vmargin
-      %p.slide
-        Web apps are built with open standards that are refered as "Web Technologies"
+    %p.slide Building web apps is more like craftsmanship
+    %p.slide Performance was/is (sometimes) not enough
+    %p.slide Browser support (especially on mobile) is fragmented
+    %p.slide Web is evolving fast
+    %p.slide It's the only cross-platform mobile platform       
+          
 
 %section.slide
-  %header The Classic Web Architecture
-  %article
-    =image_tag "lesson1/web-arch-classic.png", :resize => true
-  
-%section.slide
-  %header Towards a New Web Architecture  
-  %article
-    =image_tag "lesson1/web-arch-new.png", :resize => true
-
-%section.slide
-  %header Shom me a "Mobile Web App"
+  %header What the heck is a "Mobile Web App" ?
   %article
     =image_tag "lesson1/ft.png", :resize => true
 
@@ -207,6 +170,38 @@
   %header LinkedIn App
   %article      
     =image_tag "lesson1/linkedin.png", :resize => true
+
+%section.slide
+  %header Cut the Rope
+  %article      
+    =image_tag "lesson1/cut-the-rope.png", :resize => true,  :url => "http:/cuttherope.ie"
+
+%section.slide
+  %header Nokia Mobile Maps
+  %article
+    .item
+      =image_tag "lesson1/nokiamaps-ipad.png", :nowrap => true, :resize => true, :url => "http://m.maps.nokia.com"
+      &nbsp
+      &nbsp
+      &nbsp
+      =image_tag "lesson1/nokiamaps-iphone.png",  :nowrap => true, :resize => true, :url => "http://m.maps.nokia.com"
+
+%section.slide
+  %header Nokia Mobile Maps
+  %article   
+    .row
+      .threeColumn
+        .autobox
+          .small Nokia N9 - 400€
+          =image_tag "lesson1/nokiamaps-n9.png",  :nowrap => true, :resize => true
+      .threeColumn
+        .autobox
+          .small HTC Desire C - 250€
+          =image_tag "lesson1/nokiamaps-htc.png",  :nowrap => true, :resize => true
+      .threeColumn
+        .autobox
+          .small Samsung Galaxy Y - 120€
+          =image_tag "lesson1/nokiamaps-samsung.png",  :nowrap => true, :resize => true
 
 %section.slide
   %header Developing Native Apps for Multiple Platforms
@@ -264,27 +259,96 @@
         =image_tag "smartphone-browser-share.png", :resize => true
       .twoColumn.slide
         =image_tag "smartphone-html5-share.png", :resize => true
+
 %section.slide
-  %header What is HTML5 ? 
+  %header Evolution of the Web (Browsers)
   %article
+    =image_tag "evolution-web.png", :caption => "Web Evolution", :url => "http://evolutionofweb.appspot.com/"
+
+%section.slide
+  %header Shifting from the "Document Web" to the "App Web"
+  %article
+    .row
+      .twoColumn.slide
+        .autobox
+          %p 
+            Hyperlinked documents
+          %p
+            Page reloading
+          %p 
+            Static pages
+          %p 
+            Web servers
+          %p 
+            Static content
+      .twoColumn.slide
+        .autobox
+          %p 
+            Interactive web apps
+          %p
+            Asynchronous API calls
+          %p 
+            HTML + CSS + JS
+          %p 
+            Data hubs (web apis)
+          %p 
+            Real-time communication
+    .vmargin
+      %p.slide
+        Web apps are built with open standards that are refered as "Web Technologies"
+
+%section.slide
+  %header The Classic Web Architecture
+  %article
+    =image_tag "lesson1/web-arch-classic.png", :resize => true
+
+%section.slide
+  %header Towards a New Web Architecture  
+  %article
+    =image_tag "lesson1/web-arch-new.png", :resize => true
+
+
+%section.slide
+  %header What is HTML version 5 ? 
+  %article.small
     %p 
-      %strong 1998
+      %strong 1998 
       \- W3C decided they will stop evolving HTML beyond version 4.01 
-    %p  
-      %strong 2000
+    %p 
+      %strong 1999 
+      \- HTML 4.01 becomes a recommendation
+    %p 
+      %strong 2000 
       \- W3C released XHTML 1.0 and force the world to use XML
-    %p   
-      %strong 2002
+    %p 
+      %strong 2002 
       \- W3C released first draft of XHTML 2.0, no backwards compatibility
-    %p  
-      %strong 2004
-      \- WHATWG started working on HTML v5 (Opera, Mozilla and Apple)
-    %p  
-      %strong 2006
+    %p 
+      %strong 2004 
+      \- WHATWG started working on 
+      %b HTML v5  
+      (Opera, Mozilla and Apple)
+    %p 
+      %strong 2006 
       \- W3C agrees to use WHATWG proposal for HTML5
     %p 
-      %strong 2009
+      %strong 2009 
       \- W3C stops works on XHTML 2.0 and resources are diverted to HTML5
+    %p 
+      %strong 2012 
+      \- HTML5 gets forked up
+    %p 
+      %strong 2014 
+      \- 
+      %b HTML 5.0 
+      will become a recommendation (according to W3C)
+    %p 
+      %strong 2016 
+      \- W3C 
+      %a(href="http://dev.w3.org/html5/decision-policy/html5-2014-plan.html") plans 
+      to release 
+      %b HTML 5.1
+        
 
 %section.slide
   %header Philposphy of HTML5
@@ -297,12 +361,18 @@
         %li Support web applications
         %li Define an open standard (opposed to Flash)
         %li Don't break the Web
-    %p 
-      %a(href="http://www.whatwg.org/specs/web-apps/current-work/multipage/") HTML5 Spec at WHATWG
-    %p
-      %a(href="http://www.w3.org/standards/webdesign/") Some additional sepcs at W3C
-       
-     
+
+%section.slide
+  %header HTML5 Living Spec at WHATWG
+  %article
+    =image_tag "lesson1/html5-whatwg.png", :resize => true, :url => "http://www.whatwg.org/specs/web-apps/current-work/multipage/"
+
+%section.slide
+  %header HTML5 Specs at W3C
+  %article
+    =image_tag "lesson1/html5-w3c.png", :resize => true, :url => "http://www.w3.org/standards/webdesign/"
+
+
       
 %section.slide
   %header HTML5     
@@ -455,7 +525,9 @@
       %p.slide Some are proxy based
       %p.slide Most have little documentation
       %p.slide Most have little debugging support
-      %p.slide Focus, cursor, touch or multi-touch based
+      %p.slide Various input methods (focus, cursor, touch, multi-touch)
+      %p.slide API support      
+      
 %section.slide
   %header Mobile HTML5 Compatibility Table
   %article
@@ -463,48 +535,30 @@
 %section.slide
   %header Mobile Web Challenges
   %article
-    .autobox
-      %p.slide Server-side detection
-      %p.slide Responsive design
-      %p.slide Mobile usability
-      %p.slide Best experience based on context
-      %p.slide Performance optimization
-      %p.slide The viewport and pixel density
-      %p.slide Data URI - inlining content
+    .twoColumn
+      .autobox
+        %p.slide Adaptation and Optimization
+        %p.slide Responsive design and server-side detection 
+        %p.slide Mobile usability
+        %p.slide Touch vs Click
+        %p.slide The viewport, full screen and pixel density
+    .twoColumn
+      .autobox
+        %p.slide Semantic HTML5
+        %p.slide Mobile Web is slow      
+        %ul.slide
+          %li Reduce HTTP request
+          %li Leverage CSS3 and GPU
+          %li Inline images 
+          %li Optimize JS performance
+          %li Hybrid apps
+
 %section.slide
   %header HTML5 Frameworks & Tools
-  %article.larger.centered
-    .item.emphasizebox 
-      %span
-        UI
-      =image_tag "jquery.png", :nowrap => true, :url => "http://jquerymobile.com/"
-      =image_tag "sencha.png", :nowrap => true, :url => "http://www.sencha.com/"
-      =image_tag "jqtouch.png", :nowrap => true, :url => "http://jqtouch.com/"
-      =image_tag "sproutcore.png", :nowrap => true, :url => "http://sproutcore.com/"
-    .item.emphasizebox 
-      %span
-        Helpers
-      =image_tag "backbonejs.png", :nowrap => true, :url => "http://documentcloud.github.com/backbone/"
-      =image_tag "modernizr.png", :nowrap => true, :url => "http://www.modernizr.com/"
-      =image_tag "handlebarsjs.png", :nowrap => true, :url => "http://www.handlebarsjs.com/"
-    .item.emphasizebox 
-      %span
-        Dev Tools 
-      =image_tag "coffescript.png", :nowrap => true, :url => "http://coffeescript.org/"  
-      =image_tag "sass.png", :nowrap => true, :url => "http://sass-lang.com/"
-      =image_tag "haml.png", :nowrap => true, :url => "http://haml-lang.com/"
-    .item.emphasizebox 
-      %span
-        Backend
-      =image_tag "rails.png", :nowrap => true, :url => "http://rubyonrails.org"
-      =image_tag "sinatra.png", :nowrap => true, :url => "http://www.sinatrarb.com"
-      =image_tag "nodejs.png", :nowrap => true, :url => "http://nodejs.org"
-      =image_tag "django.png", :nowrap => true, :url => "https://www.djangoproject.com/"
-    .item.emphasizebox 
-      %span
-        Database
-      =image_tag "mongodb.png", :nowrap => true, :url => "http://www.mongodb.org/"
-      =image_tag "couchdb.png", :nowrap => true, :url => "http://couchdb.apache.org/"
+  %article
+    =image_tag "lesson1/html5_arch.png", :resize => false
+
+
 %section.slide
   %header 
     jQuery Mobile Example
@@ -600,31 +654,6 @@
         =image_tag "senchaSimple-ipad.png", :resize => true
 
 %section.slide
-  %header Hey dude, native is better! 
-  %article
-    %ul
-      %li
-        .slide Is HTML5 a silver bullet ? 
-        .slide No, but silver bullets don't exist.
-      %li 
-        .slide HTML5 performance is not goot enough ? 
-        .slide Sometimes, it is not enough.
-      %li
-        .slide HTML5 is more efficient to develop ? 
-        .slide Yes, sometimes. Look at FT case.
-      %li
-        .slide HTML5 lacks good tools
-        .slide Changing fast (check Sencha)
-      %li
-        .slide HTML5 doesn't have an appstore
-        .slide Hybrid apps
-      %li
-        .slide Can HTML5 help in development cost saving ? 
-        .slide Possibly
-        
-        
-
-%section.slide
   %header Organization of the course
   %article
     %p
@@ -683,43 +712,13 @@
         %li
           Noppa
 
-%section.slide
-  %header The Staff
-  %article
-    %p
-      %strong
-        Claudio Riva
-      , Nokia, Main Instructor
-    %p
-      %strong
-        Antti Vuorela
-      , Futurice, Course Assistant
-    %p 
-      %strong
-        Kimmo Karhu
-      , Aalto University, Assignment Coordinator
-    %p
-      %strong 
-        Häkan Mitts
-      , Aalto University, Program Coordinator
-    %p
-      %strong Mikael Blomberg
-      , SC5, jQuery and Backbone Instructor
-    %p
-      %strong 
-        Matias Korhonen
-      , Kisko Labs, Ruby On Rails Instructor
-    %p
-      %strong
-        Lauri Jutila
-      , Kisko Labs, Ruby on Rails Instructor
   
 .background(data-background = "bg-stones")
         
 %section.slide.section-title
   %h1 The Fundamentals
   .agenda
-    %p Git 
+    %p Git & GitHub
     %p Javascript & Json
     %p jQuery
     %p Ruby & Sinatra
@@ -770,7 +769,7 @@
         .autobox
           %p Link a local to a remote branch
           %pre  
-            got branch --track local remote
+            git branch --track local remote
           %p Fetch changes from remotes
           %pre  
             git fetch <remote> <branch>
@@ -789,6 +788,25 @@
         Must Read: 
       %a(href="http://gitref.org") Git Reference        
 
+%section.slide
+  %header GitHub
+  %article
+    %p A social hub for:
+    %ul
+      %li Source code repository
+      %li Issues
+      %li Wiki
+      %li Pull requests
+
+    %p It's important that you learn how to
+    %ul
+      %li 
+        %a(href="https://help.github.com/articles/fork-a-repo") Branch
+      %li 
+        %a(href="https://help.github.com/articles/using-pull-requests") Create Pull Requests
+    %p 
+      %strong.red Commit early and commit often.
+      
 %section.slide
   %header
     Javascript Event Loop
@@ -1374,32 +1392,3 @@
           .article
             %p= article.body
         
-%section.slide
-  %header Tools
-  %article.small.singlespace
-    %p
-      Browsers on PC with debugging capability:
-      %ul
-        %li Google Chrome 
-        %li Firefox + Firebug
-        %li 
-          Safari (
-          %a(href="http://www.iwebinspector.com/") iWebInspector
-          )
-    %p
-      Mobile Browser Emulators (
-      %a(href="http://www.mobilexweb.com/emulators") guide
-      ):
-      %ul
-        %li iOS Browser: XCode contains iPhone/iPad emulators
-        %li Android SDK
-        %li 
-          %a(href="http://www.opera.com/developer/tools/") Opera Mobile Emulator + Dragonfly
-    %p 
-      Devices:
-      %ul
-        %li iPhone/iPad: iOS browser
-        %li Android: native browser, Firefox 11, Chrome for Andorid, Opera Mobile
-        %li Nokia N9: native browser, Firefox 10, Opera Mobile
-    %p 
-      %a(href="http://adobe.com/go/shadow") Adobe Shadow

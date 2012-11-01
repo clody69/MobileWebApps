@@ -1,84 +1,248 @@
-=title_slide_tag("Lab 1: Assignment Kick-Off")
+=title_slide_tag("Lab 1: The Challenge")
 
 .background(data-background = "bg-lab1")
 %section.slide.section-title
-  %h1 Assignment Kick-Off
+  %h1 The Challenge
   .agenda
-    %p Overview of the assignment (Claudio)
-    %p GitHub (Kimmo)
-    %p Teams (Håkan)
-    %p Dev Environment (Antti)
-    %p Course Examples (Claudio)
+    %p Overview of the assignment
+    %p Way of Working
+    %p Teams 
+    %p Devevelopment Environment
+    %p Course Examples
     
 %section.slide
-  %header Assignment: Goals
+  %header Congratulations!
   %article
-    %ul
-      %li 
-        Build a mobile web application with the following criteria: 
-        %ul
-          %li Using at least one of the HTML5 key API (e.g. canvas, local data storage, sockets)
-          %li Using at least one mobile device feature (e.g. GPS, camera, sensors, media)
-          %li Using some client/server communication (e.g. REST) 
-      %li Complete freedom to choose the topic of the web app
-      %li Mimic a real-life assignment
+    .big You have been hired!
 
 %section.slide
-  %header Assignment: Team
+  %header The Challenge
   %article
+    %p Build a Mobile Web App
     %ul
-      %li Work as a team
-      %li Nominate a team leader (to be the contact person)
-      %li Weekly status report in GitHub (deadline is Sunday night)
+      %li Using some of the HTML5 API (e.g. canvas, local storage, websockets)
+      %li Using some of the mobile device features (e.g. GPS, camera, sensors)
+      %li Make it working on selected mobile devices
+      %li Using some client/server communication (e.g. REST, websockets)
+    %p Build it as a team
+    %ul
+      %li Work in sub-teams
+      %li One delivery
 
 %section.slide
-  %header Assignment: Proposal
-  %article
-    %ul
-      %li Name of the team
-      %li Team leader
-      %li List of GitHub accounts
-      %li Description of the web app
-      %li Key use cases
-      %li List of client/server technologies
-      %li Target devices
-      %li How it fulfills the 3 assignment criteria
-      %li Max 1 page
-    %p Send the proposal to Håkan by 19 March 2012
-
-%section.slide
-  %header Assignment: Schedule
+  %header Schedule
   %article
     %ul 
       %li
-        %strong 12 March 
+        %strong 2 Nov 
         \: Kick-off
       %li  
-        %strong 19 March
-        \: Proposal ready
-      %li  
-        %strong 23 April
+        %strong 30 Nov
         \: Mid-term review
       %li
-        %strong 15 & 22 May
-        \: Final review (demo day)
-  
+        %strong 17 Dec
+        \: Demo day (final review)
+
 %section.slide
   %header Evaluation Criteria
   %article
     %ul
-      %li Number of implemented use cases
+      %li Functionality
       %li Usability of the application (e.g. touch interactions)
       %li Application design and code style
-      %li Extra credits for a PhoneGap version that runs on other devices than the primary target devices
+      %li Extra credits for a PhoneGap version or additional achievements
+     
+    
+%section.slide
+  %header Meet the customer 
+  %article 
+    = image_tag "foreca_logo.png", :url => "http://www.foreca.com"
+    &nbsp
+    &nbsp
+    %p.slide World provider for digital weather services
+    %p.slide Our customer already has a website
+    %p.slide Our customer already has mobile app for several platforms
+    &nbsp
+    %p.slide 
+      Now they want a 
+      %strong cool 
+      mobile web app based on HTML5
+    
+%section.slide
+  %header The Android App 
+  %article 
+    .item
+      = image_tag "lesson1/foreca-android-1.jpeg", :resize => true, :nowrap => true
+      = image_tag "lesson1/foreca-android-2.jpeg", :resize => true, :nowrap => true
+      = image_tag "lesson1/foreca-android-3.jpeg", :resize => true, :nowrap => true
+  
+%section.slide
+  %header Your current skills
+  %article
+    %p.slide Who knows the basic of Web Development ? 
+    %p.slide Who is proficient with Javascript ?
+    %p.slide Who is proficient with CSS ?
+    %p.slide Who has server-side development skills ?
+    %p.slide Who knows Ruby and Ruby on Rails ?
+  
+  
+%section.slide
+  %header Way of Working
+  %article
+    %p 
+      All code, documentation and discussions on GitHub at:
+      %a(href="https://github.com/aaltowebapps/ForecaApp") https://github.com/aaltowebapps/ForecaApp
+    %ul 
+      %li Keep everyone informed
+      %li Branch often and commit often 
+      %li Comment on the pull requests
+      %li Don't be shy in the discussions
+    .slide
+      Everyone has the right (and obligation) to:
+      %ul
+        %li Commit code to master 
+        %li Create a pull request before merging a big feature
+        %li Create and assign issues
       
 %section.slide
-  %header Recap of next steps
+  %header The sub-teams
   %article
+    %p Small sub-teams are responsible for implementing the features
+    %p 2-3 members for each sub-team
+    Sub-teams are responsible for 
+    %ul
+      %li Concepting and designing a new feature
+      %li Creating a new branch
+      %li Implementing the feature
+      %li Creating a pull request
+      %li Merging with master
+    
+%section.slide
+  %header Some special roles
+  %article
+    Key contact points for 
+    %ul
+      %li Overseeing a particular area of the development
+      %li Status reporting
+      %li Initiating discussions
+    .slide
+      Roles:
+      %ul
+        %li Project manager
+        %li A UI designer
+        %li A client architect
+        %li A server architect
+        %li A quality manager
+
+%section.slide
+  %header The Foreca API
+  %article
+  
+%section.slide
+  %header Homework
+  %article
+    %ul
+      %li Create a Github account
+      %li Send the account to me: clody69@gmail.com
+      %li Clone: git@github.com:aaltowebapps/ForecaApp.git
+      %li Start coding!
+
+
+.background(data-background = "bg-tools")
+%section.slide.section-title
+  %h1 Development Tools
+  .agenda
+    %p Browsers
+    %p HTML/CSS/JS/Ruby Editor
+    %p Git Client
+    %p Ruby
+    %p Device Emulators 
+    %p Real Devices
+
+%section.slide
+  %header Browsers on PC
+  %article
+    %p With debugging support (important)
+    Webkit-based browsers are recommended
+    %ul
+      %li Same engine used in most mobile devices
+      %li Good development tools
+      %li Google Chrome or Apple Safari
+    Alternatives:
+    %ul
+      %li Firefox + Firebug
+      %li Opera
+      %li 
+        %a(href="http://www.opera.com/developer/tools/mobile/") Opera Mobile Emulator
+
+%section.slide
+  %header Emulators and Remote Debugging
+  %article
+    iOS (Mac)
+    %ul
+      %li Apple Xcode emulator
+      %li Safari + Remote Web Inspector (for iOS6 onwards)
+      %li 
+        Safari (
+        %a(href="http://www.iwebinspector.com/") iWebInspector
+        )
+    %p Android SDK
+    %p 
+      %a(href="http://www.opera.com/developer/tools/") Opera Mobile Emulator + Dragonfly
+    %p 
+      %a(href="https://hacks.mozilla.org/2012/08/remote-debugging-on-firefox-for-android") Remote Debugging on Firefox for Android
+    %p Firefox and Fennec
+    %p 
+      %a(href="http://html.adobe.com/edge/inspect/") Adobe Edge Inspect $$$
+
+%section.slide
+  %header Code Editor
+  %article
+    %p Any editor with support for HTML/CSS/JS
+    %p Aptana Studio (Win, Mac, Linux)
+    %p TextMate / TextWranger (Mac)
+    %p Notepad++ (Windows)
+
+%section.slide
+  %header Git
+  %article
+    Mac
+    %ul 
+      %li Install Git with Homebrew (see instructions on GitHub course examples)
+      %li 
+        %a(href="http://code.google.com/p/git-osx-installer") Git OSX Installer 
+      %li
+        %a(href="http://www.sourcetreeapp.com") SourceTree
+      %li
+        %a(href="http://mac.github.com") GitHub for Mac
+    Windows
+    %ul
+      %li
+        %a(href="http://code.google.com/p/msysgit") msysGit
+    Linux
+    %ul
+      %li Use package manager (sudo apt-get install git-core)
+      
+%section.slide
+  %header Configuring Git for GitHub
+  %article
+    %p 
+      See GitHub instructions
+      %a(href="https://help.github.com/articles/set-up-git") https://help.github.com/articles/set-up-git
+    &nbsp
+    Steps:
     %ol
-      %li You setup the GitHub accounts
-      %li You send the proposal to Håkan before 19 March
-      %li We send the confirmation the proposal has been accepted
-      %li We send the GitHub repository that you will use
-      %li You publish the weekly status updates on GitHub
-      %li You show the results at the demo day
+      %li Install a Git client
+      %li Set up a SSH key
+      %li Set up your info
+      
+%section.slide
+  %header Ruby
+  %article
+    %p Ruby version 1.8.7 or later is required for course examples that have a server component
+    %p Bundler is also required 
+    %p 
+      Check the instructions at the 
+      %a(href="https://github.com/aaltowebapps/MobileWebAppsExamples") course examples git
+  
+  
