@@ -120,13 +120,13 @@ Lecture 1: Introduction
 Claudio Riva
 </h3>
 <h3>
-Aalto University - Spring 2012
+Aalto University - Fall 2012
 </h3>
 </div>
 </section>
 
 <section class='slide'>
-<header>The Web is Dead!</header>
+<header>The Web was Dead!</header>
 <article>
 <div class='row'>
 <div class='twoColumn'>
@@ -139,13 +139,61 @@ Aalto University - Spring 2012
 </article>
 </section>
 <section class='slide'>
-<header>An App for Every Task</header>
+<header>The Web is Dead Again!</header>
 <article>
-<div class='item'>
-<img src='imgs/iphone-facebook-2-application.jpg' />
-<img src='imgs/twitter-web-app.jpg' />
-<img src='imgs/weather-app.jpg' />
+<div class='autobox smaller'>
+<blockquote>
+<p>I think the biggest mistake we made as a company is betting too much on HTML5 as opposed to native</p>
+<p>
+<cite>Mark Zuckerberg, Facebook CEO</cite>
+</p>
+</blockquote>
 </div>
+<img src='imgs/mark-html5.jpeg' />
+</article>
+</section>
+<section class='slide'>
+<header>What Went Wrong ?</header>
+<article>
+<div class='row'>
+<div class='twoColumn'>
+<img src='imgs/facebook-old.jpeg' />
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<ul>
+<li class='slide'>No client-side rendering</li>
+<li class='slide'>No templating</li>
+<li class='slide'>No local storage of data</li>
+<li class='slide'>No tolerance for high-latency</li>
+<li class='slide'>No JSON API</li>
+<li class='slide'>No mobile optimization</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>What Really Went Wrong ?</header>
+<article>
+<div class='autobox smaller'>
+<blockquote>
+<p>
+He still claimed their biggest mistake was betting on HTML5 when their real biggest mistake was
+<b>incompetent execution</b>
+</p>
+<p>
+<cite>Yehuda Katz</cite>
+</p>
+</blockquote>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Interest in developing for various mobile platforms</header>
+<article>
+<div class='image-wrap'><img src='imgs/html5-dev-interest.png' class='resize' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -157,51 +205,6 @@ Aalto University - Spring 2012
 </div>
 <div class='twoColumn'>
 <div class='image-wrap'><img src='imgs/mobile-app-chart-2.jpg' /></div>
-</div>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>
-The Apple Mobile App Economy
-<span class='smaller'>
-<a href='http://www.asymco.com/2012/02/19/app-developers-get-12-for-each-ios-device-sold/'>Asymco</a>
-</span>
-</header>
-<article>
-<ul>
-<li class='slide'>
-How many total apps have been downloaded on iOS ?
-</li>
-<p class='slide'>25 billion</p>
-<li class='slide'>
-What's the gross sales from apps in Q4-11 ?
-</li>
-<p class='slide'>$1 billion</p>
-<li class='slide'>
-How much was paid to developers in Q4-11 ?
-</li>
-<p class='slide'>$700 million</p>
-<li class='slide'>
-On average how many apps were downloaded per unit sold ?
-</li>
-<p class='slide'>75 apps</p>
-<li class='slide'>
-What's the minimum payout to developers per unit sold ?
-</li>
-<p class='slide'>$12</p>
-</ul>
-</article>
-</section>
-<section class='slide'>
-<header>App Downloads on iTunes</header>
-<article>
-<div class='row'>
-<div class='twoColumn'>
-<div class='image-wrap'><img src='imgs/lesson1/itunes-apps-download-total.png' /></div>
-</div>
-<div class='twoColumn'>
-<div class='image-wrap'><img src='imgs/lesson1/itunes-apps-download-rate.png' /></div>
 </div>
 </div>
 </article>
@@ -225,7 +228,7 @@ HTML5 brings a lot of new cool stuff for web developers
 Companies like Google, Apple, Adobe, Microsoft are embracing HTML5
 </li>
 <li class='slide'>
-Many apps are built in HTML5 and wrapped with a native shell
+Many apps have an HTML5 heart wrapped in a native shell
 </li>
 </ul>
 </div>
@@ -240,75 +243,17 @@ Many apps are built in HTML5 and wrapped with a native shell
 </article>
 </section>
 <section class='slide'>
-<header>Evolution of the Web (Browsers)</header>
+<header>But it's true that:</header>
 <article>
-<div class='image-wrap'><img src='imgs/evolution-web.png' /><div class='caption'><a href='http://evolutionofweb.appspot.com/'>Web Evolution</a></div></div>
+<p class='slide'>Building web apps is more like craftsmanship</p>
+<p class='slide'>Performance was/is (sometimes) not enough</p>
+<p class='slide'>Browser support (especially on mobile) is fragmented</p>
+<p class='slide'>Web is evolving fast</p>
+<p class='slide'>It's the only cross-platform mobile platform</p>
 </article>
 </section>
 <section class='slide'>
-<header>Shifting from the "Document Web" to the "App Web"</header>
-<article>
-<div class='row'>
-<div class='twoColumn slide'>
-<div class='autobox'>
-<p>
-Hyperlinked documents
-</p>
-<p>
-Page reloading
-</p>
-<p>
-Static pages
-</p>
-<p>
-Web servers
-</p>
-<p>
-Static content
-</p>
-</div>
-</div>
-<div class='twoColumn slide'>
-<div class='autobox'>
-<p>
-Interactive web apps
-</p>
-<p>
-Asynchronous API calls
-</p>
-<p>
-HTML + CSS + JS
-</p>
-<p>
-Data hubs (web apis)
-</p>
-<p>
-Real-time communication
-</p>
-</div>
-</div>
-</div>
-<div class='vmargin'>
-<p class='slide'>
-Web apps are built with open standards that are refered as "Web Technologies"
-</p>
-</div>
-</article>
-</section>
-<section class='slide'>
-<header>The Classic Web Architecture</header>
-<article>
-<div class='image-wrap'><img src='imgs/lesson1/web-arch-classic.png' class='resize' /></div>
-</article>
-</section>
-<section class='slide'>
-<header>Towards a New Web Architecture</header>
-<article>
-<div class='image-wrap'><img src='imgs/lesson1/web-arch-new.png' class='resize' /></div>
-</article>
-</section>
-<section class='slide'>
-<header>Shom me a "Mobile Web App"</header>
+<header>What the heck is a "Mobile Web App" ?</header>
 <article>
 <div class='image-wrap'><img src='imgs/lesson1/ft.png' class='resize' /></div>
 </article>
@@ -343,6 +288,49 @@ Great and responsive UI design
 <header>LinkedIn App</header>
 <article>
 <div class='image-wrap'><img src='imgs/lesson1/linkedin.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>Cut the Rope</header>
+<article>
+<div class='image-wrap'><a href='http:/cuttherope.ie'><img src='imgs/lesson1/cut-the-rope.png' class='resize' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>Nokia Mobile Maps</header>
+<article>
+<div class='item'>
+<a href='http://m.maps.nokia.com'><img src='imgs/lesson1/nokiamaps-ipad.png' class='resize' /></a>
+&nbsp
+&nbsp
+&nbsp
+<a href='http://m.maps.nokia.com'><img src='imgs/lesson1/nokiamaps-iphone.png' class='resize' /></a>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Nokia Mobile Maps</header>
+<article>
+<div class='row'>
+<div class='threeColumn'>
+<div class='autobox'>
+<div class='small'>Nokia N9 - 400€</div>
+<img src='imgs/lesson1/nokiamaps-n9.png' class='resize' />
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<div class='small'>HTC Desire C - 250€</div>
+<img src='imgs/lesson1/nokiamaps-htc.png' class='resize' />
+</div>
+</div>
+<div class='threeColumn'>
+<div class='autobox'>
+<div class='small'>Samsung Galaxy Y - 120€</div>
+<img src='imgs/lesson1/nokiamaps-samsung.png' class='resize' />
+</div>
+</div>
+</div>
 </article>
 </section>
 <section class='slide'>
@@ -427,11 +415,83 @@ Smartphone Browsers Shares
 </article>
 </section>
 <section class='slide'>
-<header>What is HTML5 ?</header>
+<header>Evolution of the Web (Browsers)</header>
 <article>
+<div class='image-wrap'><img src='imgs/evolution-web.png' /><div class='caption'><a href='http://evolutionofweb.appspot.com/'>Web Evolution</a></div></div>
+</article>
+</section>
+<section class='slide'>
+<header>Shifting from the "Document Web" to the "App Web"</header>
+<article>
+<div class='row'>
+<div class='twoColumn slide'>
+<div class='autobox'>
+<p>
+Hyperlinked documents
+</p>
+<p>
+Page reloading
+</p>
+<p>
+Static pages
+</p>
+<p>
+Web servers
+</p>
+<p>
+Static content
+</p>
+</div>
+</div>
+<div class='twoColumn slide'>
+<div class='autobox'>
+<p>
+Interactive web apps
+</p>
+<p>
+Asynchronous API calls
+</p>
+<p>
+HTML + CSS + JS
+</p>
+<p>
+Data hubs (web apis)
+</p>
+<p>
+Real-time communication
+</p>
+</div>
+</div>
+</div>
+<div class='vmargin'>
+<p class='slide'>
+Web apps are built with open standards that are refered as "Web Technologies"
+</p>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>The Classic Web Architecture</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/web-arch-classic.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>Towards a New Web Architecture</header>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/web-arch-new.png' class='resize' /></div>
+</article>
+</section>
+<section class='slide'>
+<header>What is HTML version 5 ?</header>
+<article class='small'>
 <p>
 <strong>1998</strong>
 - W3C decided they will stop evolving HTML beyond version 4.01
+</p>
+<p>
+<strong>1999</strong>
+- HTML 4.01 becomes a recommendation
 </p>
 <p>
 <strong>2000</strong>
@@ -443,7 +503,9 @@ Smartphone Browsers Shares
 </p>
 <p>
 <strong>2004</strong>
-- WHATWG started working on HTML v5 (Opera, Mozilla and Apple)
+- WHATWG started working on
+<b>HTML v5</b>
+(Opera, Mozilla and Apple)
 </p>
 <p>
 <strong>2006</strong>
@@ -452,6 +514,23 @@ Smartphone Browsers Shares
 <p>
 <strong>2009</strong>
 - W3C stops works on XHTML 2.0 and resources are diverted to HTML5
+</p>
+<p>
+<strong>2012</strong>
+- HTML5 gets forked up
+</p>
+<p>
+<strong>2014</strong>
+-
+<b>HTML 5.0</b>
+will become a recommendation (according to W3C)
+</p>
+<p>
+<strong>2016</strong>
+- W3C
+<a href='http://dev.w3.org/html5/decision-policy/html5-2014-plan.html'>plans</a>
+to release
+<b>HTML 5.1</b>
 </p>
 </article>
 </section>
@@ -468,12 +547,18 @@ Philosophy of HTML5
 <li>Don't break the Web</li>
 </ul>
 </p>
-<p>
-<a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/'>HTML5 Spec at WHATWG</a>
-</p>
-<p>
-<a href='http://www.w3.org/standards/webdesign/'>Some additional sepcs at W3C</a>
-</p>
+</article>
+</section>
+<section class='slide'>
+<header>HTML5 Living Spec at WHATWG</header>
+<article>
+<div class='image-wrap'><a href='http://www.whatwg.org/specs/web-apps/current-work/multipage/'><img src='imgs/lesson1/html5-whatwg.png' class='resize' /></a></div>
+</article>
+</section>
+<section class='slide'>
+<header>HTML5 Specs at W3C</header>
+<article>
+<div class='image-wrap'><a href='http://www.w3.org/standards/webdesign/'><img src='imgs/lesson1/html5-w3c.png' class='resize' /></a></div>
 </article>
 </section>
 <section class='slide'>
@@ -675,7 +760,8 @@ Philosophy of HTML5
 <p class='slide'>Some are proxy based</p>
 <p class='slide'>Most have little documentation</p>
 <p class='slide'>Most have little debugging support</p>
-<p class='slide'>Focus, cursor, touch or multi-touch based</p>
+<p class='slide'>Various input methods (focus, cursor, touch, multi-touch)</p>
+<p class='slide'>API support</p>
 </div>
 </article>
 </section>
@@ -688,61 +774,34 @@ Philosophy of HTML5
 <section class='slide'>
 <header>Mobile Web Challenges</header>
 <article>
+<div class='twoColumn'>
 <div class='autobox'>
-<p class='slide'>Server-side detection</p>
-<p class='slide'>Responsive design</p>
+<p class='slide'>Adaptation and Optimization</p>
+<p class='slide'>Responsive design and server-side detection</p>
 <p class='slide'>Mobile usability</p>
-<p class='slide'>Best experience based on context</p>
-<p class='slide'>Performance optimization</p>
-<p class='slide'>The viewport and pixel density</p>
-<p class='slide'>Data URI - inlining content</p>
+<p class='slide'>Touch vs Click</p>
+<p class='slide'>The viewport, full screen and pixel density</p>
+</div>
+</div>
+<div class='twoColumn'>
+<div class='autobox'>
+<p class='slide'>Semantic HTML5</p>
+<p class='slide'>Mobile Web is slow</p>
+<ul class='slide'>
+<li>Reduce HTTP request</li>
+<li>Leverage CSS3 and GPU</li>
+<li>Inline images</li>
+<li>Optimize JS performance</li>
+<li>Hybrid apps</li>
+</ul>
+</div>
 </div>
 </article>
 </section>
 <section class='slide'>
 <header>HTML5 Frameworks & Tools</header>
-<article class='larger centered'>
-<div class='item emphasizebox'>
-<span>
-UI
-</span>
-<a href='http://jquerymobile.com/'><img src='imgs/jquery.png' /></a>
-<a href='http://www.sencha.com/'><img src='imgs/sencha.png' /></a>
-<a href='http://jqtouch.com/'><img src='imgs/jqtouch.png' /></a>
-<a href='http://sproutcore.com/'><img src='imgs/sproutcore.png' /></a>
-</div>
-<div class='item emphasizebox'>
-<span>
-Helpers
-</span>
-<a href='http://documentcloud.github.com/backbone/'><img src='imgs/backbonejs.png' /></a>
-<a href='http://www.modernizr.com/'><img src='imgs/modernizr.png' /></a>
-<a href='http://www.handlebarsjs.com/'><img src='imgs/handlebarsjs.png' /></a>
-</div>
-<div class='item emphasizebox'>
-<span>
-Dev Tools
-</span>
-<a href='http://coffeescript.org/'><img src='imgs/coffescript.png' /></a>
-<a href='http://sass-lang.com/'><img src='imgs/sass.png' /></a>
-<a href='http://haml-lang.com/'><img src='imgs/haml.png' /></a>
-</div>
-<div class='item emphasizebox'>
-<span>
-Backend
-</span>
-<a href='http://rubyonrails.org'><img src='imgs/rails.png' /></a>
-<a href='http://www.sinatrarb.com'><img src='imgs/sinatra.png' /></a>
-<a href='http://nodejs.org'><img src='imgs/nodejs.png' /></a>
-<a href='https://www.djangoproject.com/'><img src='imgs/django.png' /></a>
-</div>
-<div class='item emphasizebox'>
-<span>
-Database
-</span>
-<a href='http://www.mongodb.org/'><img src='imgs/mongodb.png' /></a>
-<a href='http://couchdb.apache.org/'><img src='imgs/couchdb.png' /></a>
-</div>
+<article>
+<div class='image-wrap'><img src='imgs/lesson1/html5_arch.png' /></div>
 </article>
 </section>
 <section class='slide'>
@@ -799,37 +858,6 @@ Sencha Example
 <div class='image-wrap'><img src='imgs/senchaSimple-ipad.png' class='resize' /></div>
 </div>
 </div>
-</article>
-</section>
-<section class='slide'>
-<header>Hey dude, native is better!</header>
-<article>
-<ul>
-<li>
-<div class='slide'>Is HTML5 a silver bullet ?</div>
-<div class='slide'>No, but silver bullets don't exist.</div>
-</li>
-<li>
-<div class='slide'>HTML5 performance is not goot enough ?</div>
-<div class='slide'>Sometimes, it is not enough.</div>
-</li>
-<li>
-<div class='slide'>HTML5 is more efficient to develop ?</div>
-<div class='slide'>Yes, sometimes. Look at FT case.</div>
-</li>
-<li>
-<div class='slide'>HTML5 lacks good tools</div>
-<div class='slide'>Changing fast (check Sencha)</div>
-</li>
-<li>
-<div class='slide'>HTML5 doesn't have an appstore</div>
-<div class='slide'>Hybrid apps</div>
-</li>
-<li>
-<div class='slide'>Can HTML5 help in development cost saving ?</div>
-<div class='slide'>Possibly</div>
-</li>
-</ul>
 </article>
 </section>
 <section class='slide'>
@@ -912,56 +940,11 @@ Noppa
 </p>
 </article>
 </section>
-<section class='slide'>
-<header>The Staff</header>
-<article>
-<p>
-<strong>
-Claudio Riva
-</strong>
-, Nokia, Main Instructor
-</p>
-<p>
-<strong>
-Antti Vuorela
-</strong>
-, Futurice, Course Assistant
-</p>
-<p>
-<strong>
-Kimmo Karhu
-</strong>
-, Aalto University, Assignment Coordinator
-</p>
-<p>
-<strong>
-Häkan Mitts
-</strong>
-, Aalto University, Program Coordinator
-</p>
-<p>
-<strong>Mikael Blomberg</strong>
-, SC5, jQuery and Backbone Instructor
-</p>
-<p>
-<strong>
-Matias Korhonen
-</strong>
-, Kisko Labs, Ruby On Rails Instructor
-</p>
-<p>
-<strong>
-Lauri Jutila
-</strong>
-, Kisko Labs, Ruby on Rails Instructor
-</p>
-</article>
-</section>
 <div class='background' data-background='bg-stones'></div>
 <section class='slide section-title'>
 <h1>The Fundamentals</h1>
 <div class='agenda'>
-<p>Git</p>
+<p>Git & GitHub</p>
 <p>Javascript & Json</p>
 <p>jQuery</p>
 <p>Ruby & Sinatra</p>
@@ -1006,7 +989,7 @@ git branch -a</pre>
 <div class='threeColumn'>
 <div class='autobox'>
 <p>Link a local to a remote branch</p>
-<pre>got branch --track local remote</pre>
+<pre>git branch --track local remote</pre>
 <p>Fetch changes from remotes</p>
 <pre>git fetch <remote> <branch></pre>
 <p>Push changes to remotes</p>
@@ -1025,6 +1008,30 @@ Must Read:
 </strong>
 <a href='http://gitref.org'>Git Reference</a>
 </div>
+</article>
+</section>
+<section class='slide'>
+<header>GitHub</header>
+<article>
+<p>A social hub for:</p>
+<ul>
+<li>Source code repository</li>
+<li>Issues</li>
+<li>Wiki</li>
+<li>Pull requests</li>
+</ul>
+<p>It's important that you learn how to</p>
+<ul>
+<li>
+<a href='https://help.github.com/articles/fork-a-repo'>Branch</a>
+</li>
+<li>
+<a href='https://help.github.com/articles/using-pull-requests'>Create Pull Requests</a>
+</li>
+</ul>
+<p>
+<strong class='red'>Commit early and commit often.</strong>
+</p>
 </article>
 </section>
 <section class='slide'>
@@ -1575,48 +1582,8 @@ HAML - Shortcuts
 <header>HAML - Ruby Evaluation</header>
 <article class='large'>
 <div class="CodeRay">
-  <div class="code"><pre><span class="tag">%h1</span> My Blog&#x000A;- <span class="keyword">for</span> article <span class="keyword">in</span> <span class="instance-variable">@articles</span>&#x000A;  <span class="class">.post</span>&#x000A;    <span class="class">.title</span>&#x000A;      <span class="tag">%h1</span>= article.title&#x000A;    <span class="class">.date</span>&#x000A;      =article.date.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d %m %Y</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="class">.article</span>&#x000A;      <span class="tag">%p</span>= article.body&#x000A;  </pre></div>
+  <div class="code"><pre><span class="tag">%h1</span> My Blog&#x000A;- <span class="keyword">for</span> article <span class="keyword">in</span> <span class="instance-variable">@articles</span>&#x000A;  <span class="class">.post</span>&#x000A;    <span class="class">.title</span>&#x000A;      <span class="tag">%h1</span>= article.title&#x000A;    <span class="class">.date</span>&#x000A;      =article.date.strftime(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d %m %Y</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="class">.article</span>&#x000A;      <span class="tag">%p</span>= article.body</pre></div>
 </div>
-</article>
-</section>
-<section class='slide'>
-<header>Tools</header>
-<article class='small singlespace'>
-<p>
-Browsers on PC with debugging capability:
-<ul>
-<li>Google Chrome</li>
-<li>Firefox + Firebug</li>
-<li>
-Safari (
-<a href='http://www.iwebinspector.com/'>iWebInspector</a>
-)
-</li>
-</ul>
-</p>
-<p>
-Mobile Browser Emulators (
-<a href='http://www.mobilexweb.com/emulators'>guide</a>
-):
-<ul>
-<li>iOS Browser: XCode contains iPhone/iPad emulators</li>
-<li>Android SDK</li>
-<li>
-<a href='http://www.opera.com/developer/tools/'>Opera Mobile Emulator + Dragonfly</a>
-</li>
-</ul>
-</p>
-<p>
-Devices:
-<ul>
-<li>iPhone/iPad: iOS browser</li>
-<li>Android: native browser, Firefox 11, Chrome for Andorid, Opera Mobile</li>
-<li>Nokia N9: native browser, Firefox 10, Opera Mobile</li>
-</ul>
-</p>
-<p>
-<a href='http://adobe.com/go/shadow'>Adobe Shadow</a>
-</p>
 </article>
 </section>
 

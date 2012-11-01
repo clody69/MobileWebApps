@@ -389,7 +389,7 @@ span.terminal, p.terminal, .terminal {
 }
 
 /* line 323, ../../sass/documentation.scss */
-.content-wrapper .sponsor {
+.content-wrapper .sponsor, #footer .sponsor {
   display: -moz-box;
   -moz-box-pack: center;
   -moz-box-align: center;
@@ -408,7 +408,7 @@ span.terminal, p.terminal, .terminal {
 }
 
 /* line 345, ../../sass/documentation.scss */
-.content-wrapper .sponsor img {
+.content-wrapper .sponsor img, #footer .sponsor img {
   max-width: 200px;
   max-height: 100px;
   height: auto !important;
