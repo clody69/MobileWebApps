@@ -31,7 +31,7 @@ module PresentationHelper
   end
   def docs_tag(*docs)
     h = "<p>Documents: "
-    docs.collect! { |doc| "<a href='docs/#{doc}'>#{doc}</a>" }
+    docs.collect! { |doc| "<a href='docs/#{doc}'>#{doc.split('/').last}</a>" }
     h += docs.join(', ')
     h += "</p>"
   end

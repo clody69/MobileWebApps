@@ -1,7 +1,146 @@
 %a(name="Lectures") 
-%h1 Lectures
+%h1 Lectures - Fall 2012
 %p Here you find the schedule of the lectures and labs. The links to the material of the course will be available on this page.
 
+.lecture_block
+  .header
+    Friday 2nd November 2012
+  .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/52874035?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 1: Introduction", "8:15-10:00", "", "lecture1_2012_2.html")
+    .description
+      %p 
+        This lecture gives an introduction to the mobile application ecosystem and looks at the pros and cons
+        of using Web technologies for building mobile applications, especially focusing on HTML5. 
+      %p
+        We also introduce 
+        some basic elements of web development that will be necessary throughout the course (i.e. Sinatra, 
+        Javascript, Ruby, etc).
+        
+      =docs_tag("2012_2/lecture1.pdf")
+      
+      Examples:
+      %ul
+        %li=example_url_tag('jQuerySimple')
+        %li=example_url_tag('senchaSimple')
+        
+  .lecture
+    =lecture_tag("Lab 1: The Challenge", "10:15-12:00", "", "lab1_2012_2.html")
+    .description
+      %p 
+        We'll introduce the course assignment: goals, expectations, evaluation method, schedule and way of working. 
+      
+      =docs_tag("2012_2/lab1.pdf")
+    .right
+
+
+.lecture_block
+  .header
+    Friday 9th November 2012
+  .lecture
+    =lecture_tag("Lab 2: Concepting the Web App", "8:15-10:00", "Håkan Mitts", "")
+
+    .description
+      %p 
+        During this lecture we will review at the various ideas and concepts for the weather webapp. Prepare the concepts in advance.
+
+  .lecture
+    =lecture_tag("Lab 2: jQuery Mobile", "10:15-12:00", "Guest Lecture: Mikael Blomberg, SC5")
+    .description
+      %p This lab is focused on learning jQuery and jQuery Mobile through examples and hands-on exercises.
+
+.lecture_block
+  .header
+    Friday 16th November 2012
+  .lecture
+    =lecture_tag("Lecture 3: Templating and MVC", "8:15-10:00")
+
+    .description
+      %p
+        In this lecture we'll explore the advantages of using a templating method for creating the views 
+        of the application. We also explore the benefits of Backbone.js for simplifying the design of the 
+        web client. We cover the following topics:
+        %ul
+          %li Introduction to client-side templating
+          %li Example with Handlerbar.js
+          %li MVC architecture for webapps
+          %li Introduction to Backbone.js
+          %li Example of MVC web app
+
+  .lecture
+    =lecture_tag("Lab 3: The First Mobile Web App", "10:15-12:00")
+    .description
+      %p This lab will be focused on building our first webapp through several examples. 
+
+.lecture_block
+  .header
+    Friday 23rd November 2012
+  .lecture
+    =lecture_tag("Lecture 4: CSS3 and Responsive Design", "8:15-10:00")
+    .description
+      %p 
+        In this lecture we'll give an overview of the new elements of CSS3 (like media queries, transitions, animations), 
+        how to support touch interactions and the principles of responsive design.
+      
+  .lecture
+    =lecture_tag("Lab 4: Structuring your web app", "10:15-12:00")
+    .description
+      %p In this lab we'll look at various techniques and frameworks how to structure a webapp
+
+.lecture_block
+  .header
+    Friday 30th November 2012
+  .lecture
+    =lecture_tag("Lecture 5: HTML5 APIs", "8:15-10:00")
+    
+    .description
+      %p 
+        In this lecture we explore the APIs for drawing on the canvas, for reading from the file system, for using the new 
+        XMLHttpRequest Level 2, for accessing the camera, accelerometers and geolocation and, for playing audio/video files.
+
+  .lecture
+    =lecture_tag("Lab 5: Work on the challenge","10:15:12:00")
+    .description
+      %p This lab will be used for working on the webapp challenge
+        
+.lecture_block
+  .header
+    Friday 7th December 2012
+  .lecture
+    =lecture_tag("Lecture 6: Websockets & Webworkers", "8:15-10:00")
+    .description
+      %p 
+        In this lecture we focus on the real-time communication API that is now supported in HTML5: 
+        %ul
+          %li Push Technology
+          %li Web Sockets
+          %li Server-Sent Events 
+          %li Web Workers
+
+  .lecture
+    =lecture_tag("Lab 6: Lab exercise", "10:15-12:00")
+    .description
+      %p This lab will be use for practical exercises on specific topics. 
+  
+.lecture_block
+  .header
+    Friday 14th December 2012
+  .lecture
+    =lecture_tag("Lecture 7: Developing native web apps with HTML5", "8:15-10:00")
+    .description
+      %p 
+        In this lecture we introduce the technologies for creating native applications by embedding an HTML5 web view. 
+        In particular we'll focus on PhoneGap. 
+  .lecture
+    =lecture_tag("Lab 7: Work on the Challenge", "10:15-12:00")
+    .description
+      %p 
+        This lab will be used for working on the webapp challenge
+
+
+%h1 Lectures - Spring 2012
+%p Below you find the material for the lectures and labs of the Spring 2012 edition of the course. 
 
 .lecture_block
   .header
@@ -19,7 +158,7 @@
         some basic elements of web development that will be necessary throughout the course (i.e. Sinatra, 
         Javascript, Ruby, etc).
         
-      =docs_tag("lecture1.pdf")
+      =docs_tag("2012_1/lecture1.pdf")
       
       Examples:
       %ul
@@ -33,7 +172,7 @@
         We'll introduce the course assignment: goals, expectations, evaluation method, schedule and way of working. 
         We'll also form the teams and check your development environment.
       
-      =docs_tag("lab1.pdf", "webapps_development_tools.pdf", "Group work instructions.pptx")
+      =docs_tag("2012_1/lab1.pdf", "webapps_development_tools.pdf", "Group work instructions.pptx")
     .right
     
 .lecture_block
@@ -59,7 +198,7 @@
           %li Offline usage
           %li Detecting connectivity changes
 
-      =docs_tag("lecture2.pdf")
+      =docs_tag("2012_1/lecture2.pdf")
       
       Examples:
       %ul
@@ -80,7 +219,7 @@
     .description
       %p This lab is focused on learning jQuery and jQuery Mobile through examples and hands-on exercises.
 
-      =docs_tag("jQuery Mobile - Mikael Blomberg.pdf")
+      =docs_tag("2012_1/jQuery Mobile - Mikael Blomberg.pdf")
       
       Examples: 
       %a(href="https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/lab2JQueryMobile") jQuery Examples
@@ -110,7 +249,7 @@
           %li Introduction to Backbone.js
           %li Example of MVC web app
       
-      =docs_tag("lecture3.pdf")
+      =docs_tag("2012_1/lecture3.pdf")
 
       Examples:
       %ul
@@ -144,7 +283,7 @@
           %li GeoLocation API
           %li Audio & Video
   
-      =docs_tag("lecture4.pdf")
+      =docs_tag("2012_1/lecture4.pdf")
 
       Examples:
       %ul
@@ -185,7 +324,7 @@
           %li CSS3 Transitions
           %li CSS3 Animations
          
-        =docs_tag("lecture5.pdf")
+        =docs_tag("2012_1/lecture5.pdf")
 
         Examples:
         %ul
@@ -206,7 +345,7 @@
       %p 
         This lecture will introduce the basics of Ruby on Rails 3.
       
-        =docs_tag("Ruby on Rails - KiskoLabs.pdf")
+        =docs_tag("2012_1/Ruby on Rails - KiskoLabs.pdf")
 
         The example that was used in the lab is available on github at: 
         %a(href="https://github.com/ljuti/aalto-on-rails") Aalto on Rails
@@ -227,7 +366,7 @@
           %li Server-Sent Events 
           %li Web Workers
 
-      =docs_tag("lecture6.pdf")
+      =docs_tag("2012_1/lecture6.pdf")
 
       Examples:
       %ul
@@ -245,7 +384,7 @@
       %p 
         This lecture will dive into the principles of REST design and how to create RESTful interfaces with Ruby on Rails
 
-        =docs_tag("REST and stuff like that.pdf")
+        =docs_tag("2012_1/REST and stuff like that.pdf")
         
 .lecture_block
   .header
