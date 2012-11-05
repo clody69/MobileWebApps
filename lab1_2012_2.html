@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Appplications Development with HTML5
+|
+Aalto University March 2012
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024, user-scalable=no' name='viewport' />
+<!-- Coloring for code. To be included before the custom css like course and screen -->
+<link href='css/coderay.css' rel='stylesheet' />
+<!-- Core and extension CSS files -->
+<link href='deckjs/core/deck.core.css' rel='stylesheet' />
+<link href='deckjs/extensions/goto/deck.goto.css' rel='stylesheet' />
+<link href='deckjs/extensions/menu/deck.menu.css' rel='stylesheet' />
+<link href='deckjs/extensions/navigation/deck.navigation.css' rel='stylesheet' />
+<link href='deckjs/extensions/status/deck.status.css' rel='stylesheet' />
+<link href='deckjs/extensions/hash/deck.hash.css' rel='stylesheet' />
+<!-- /%link(href="deckjs/extensions/scale/deck.scale.css" rel="stylesheet") -->
+<!-- / %link(href="deckjs/extensions/notes/deck.notes.css" rel="stylesheet") -->
+<!-- Theme CSS files (menu swaps these out) -->
+<link href='css/course.css' id='style-theme-link' rel='stylesheet' />
+<link href='deckjs/themes/transition/horizontal-slide.css' id='transition-theme-link' rel='stylesheet' />
+<link href='css/screen.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
+<script src='js/jquery.min.js'></script>
+<!-- Custom CSS just for this page -->
+<script src='js/modernizr.custom.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='background'>
+<div class='background front active' id='bg-default'></div>
+<div class='background back' id='bg-default'></div>
+</div>
+<article class='deck-container'>
+<section class='slide main-title'>
+<h1>
+Mobile Web Appplications Development with HTML5
+</h1>
+<img src='imgs/HTML5_logo.png' />
+<br />
+<h1 class='subtitle'>
+Lab 1: The Challenge
+</h1>
+<br />
+<div class='smaller centered'>
+<h3>
+Claudio Riva
+</h3>
+<h3>
+Aalto University - Fall 2012
+</h3>
+</div>
+</section>
+
+<div class='background' data-background='bg-lab1'></div>
+<section class='slide section-title'>
+<h1>The Challenge</h1>
+<div class='agenda'>
+<p>Overview of the assignment</p>
+<p>Way of Working</p>
+<p>Teams</p>
+<p>Devevelopment Environment</p>
+<p>Course Examples</p>
+</div>
+</section>
+<section class='slide'>
+<header>Congratulations!</header>
+<article>
+<div class='big'>You have been hired!</div>
+</article>
+</section>
+<section class='slide'>
+<header>The Challenge</header>
+<article>
+<p>Build a Mobile Web App</p>
+<ul>
+<li>Using some of the HTML5 API (e.g. canvas, local storage, websockets)</li>
+<li>Using some of the mobile device features (e.g. GPS, camera, sensors)</li>
+<li>Make it working on selected mobile devices</li>
+<li>Using some client/server communication (e.g. REST, websockets)</li>
+</ul>
+<p>Build it as a team</p>
+<ul>
+<li>Work in sub-teams</li>
+<li>One delivery</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Schedule</header>
+<article>
+<ul>
+<li>
+<strong>2 Nov</strong>
+: Kick-off
+</li>
+<li>
+<strong>30 Nov</strong>
+: Mid-term review
+</li>
+<li>
+<strong>17 Dec</strong>
+: Demo day (final review)
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Evaluation Criteria</header>
+<article>
+<ul>
+<li>Functionality</li>
+<li>Usability of the application (e.g. touch interactions)</li>
+<li>Application design and code style</li>
+<li>Extra credits for a PhoneGap version or additional achievements</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Meet the customer</header>
+<article>
+<div class='image-wrap'><a href='http://www.foreca.com'><img src='imgs/foreca_logo.png' /></a></div>
+&nbsp
+&nbsp
+<p class='slide'>World provider for digital weather services</p>
+<p class='slide'>Our customer already has a website</p>
+<p class='slide'>Our customer already has mobile app for several platforms</p>
+&nbsp
+<p class='slide'>
+Now they want a
+<strong>cool</strong>
+mobile web app based on HTML5
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>The Android App</header>
+<article>
+<div class='item'>
+<img src='imgs/lesson1/foreca-android-1.jpeg' class='resize' />
+<img src='imgs/lesson1/foreca-android-2.jpeg' class='resize' />
+<img src='imgs/lesson1/foreca-android-3.jpeg' class='resize' />
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>Your current skills</header>
+<article>
+<p class='slide'>Who knows the basic of Web Development ?</p>
+<p class='slide'>Who is proficient with Javascript ?</p>
+<p class='slide'>Who is proficient with CSS ?</p>
+<p class='slide'>Who has server-side development skills ?</p>
+<p class='slide'>Who knows Ruby and Ruby on Rails ?</p>
+</article>
+</section>
+<section class='slide'>
+<header>Way of Working</header>
+<article>
+<p>
+All code, documentation and discussions on GitHub at:
+<a href='https://github.com/aaltowebapps/ForecaApp'>https://github.com/aaltowebapps/ForecaApp</a>
+</p>
+<ul>
+<li>Keep everyone informed</li>
+<li>Branch often, merge asap, commit often</li>
+<li>Comment on the pull requests</li>
+<li>Don't be shy in the discussions</li>
+</ul>
+<div class='slide'>
+Everyone has the right (and obligation) to:
+<ul>
+<li>Commit code to master</li>
+<li>Create a pull request before merging a big feature</li>
+<li>Create and assign issues</li>
+</ul>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>The sub-teams</header>
+<article>
+<p>Small sub-teams are responsible for implementing the features</p>
+<p>2-3 members for each sub-team</p>
+Sub-teams are responsible for
+<ul>
+<li>Concepting and designing a new feature</li>
+<li>Creating a new branch</li>
+<li>Implementing the feature</li>
+<li>Creating a pull request</li>
+<li>Merging with master</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Some special roles</header>
+<article>
+Key contact points for
+<ul>
+<li>Overseeing a particular area of the development</li>
+<li>Status reporting</li>
+<li>Initiating discussions</li>
+</ul>
+<div class='slide'>
+Roles:
+<ul>
+<li>Project manager</li>
+<li>A UI designer</li>
+<li>A client architect</li>
+<li>A server architect</li>
+<li>A quality manager</li>
+</ul>
+</div>
+</article>
+</section>
+<section class='slide'>
+<header>The Foreca API</header>
+<article>
+<a href='https://github.com/aaltowebapps/ForecaApp/wiki'>Summary of Foreca API</a>
+</article>
+</section>
+<section class='slide'>
+<header>Homework 1</header>
+<article>
+<ol>
+<li>Create a Github account</li>
+<li>Send the account to me: clody69@gmail.com</li>
+<li>Clone: git@github.com:aaltowebapps/ForecaApp.git</li>
+<li>Start coding!</li>
+</ol>
+</article>
+</section>
+<section class='slide'>
+<header>Homework 2</header>
+<article class='small'>
+<ol>
+<li>
+Study the
+<a href='https://github.com/aaltowebapps/ForecaApp/wiki'>Foreca API</a>
+</li>
+<li>
+Try to concept the Foreca Mobile Web App
+<ul>
+<li class='slide'>
+Content
+<ul>
+<li>How to structure it ?</li>
+<li>What's essential and what's not ?</li>
+<li>How to present it on a small device and a tablet ?</li>
+</ul>
+</li>
+<li class='slide'>
+Interaction
+<ul>
+<li>How will the user interact with the content ? For doing what ?</li>
+<li>What about the navigation ?</li>
+<li>How will it differ between a handheld device, tablet and PC ?</li>
+</ul>
+</li>
+<li class='slide'>
+Mobility
+<ul>
+<li>What mobile capabilities can improve the experience ?</li>
+<li>Geolocation ?</li>
+<li>Sensors ?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</article>
+</section>
+<div class='background' data-background='bg-tools'></div>
+<section class='slide section-title'>
+<h1>Development Tools</h1>
+<div class='agenda'>
+<p>Browsers & Emulators</p>
+<p>HTML/CSS/JS/Ruby Editor</p>
+<p>Git Client</p>
+<p>Ruby</p>
+</div>
+</section>
+<section class='slide'>
+<header>Browsers on PC</header>
+<article>
+<p>With debugging support (important)</p>
+Webkit-based browsers are recommended
+<ul>
+<li>Same engine used in most mobile devices</li>
+<li>Good development tools</li>
+<li>Google Chrome or Apple Safari</li>
+</ul>
+Alternatives:
+<ul>
+<li>Firefox + Firebug</li>
+<li>Opera</li>
+<li>
+<a href='http://www.opera.com/developer/tools/mobile/'>Opera Mobile Emulator</a>
+</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Emulators and Remote Debugging</header>
+<article>
+iOS (Mac)
+<ul>
+<li>Apple Xcode emulator</li>
+<li>Safari + Remote Web Inspector (for iOS6 onwards)</li>
+<li>
+Safari (
+<a href='http://www.iwebinspector.com/'>iWebInspector</a>
+)
+</li>
+</ul>
+<p>Android SDK</p>
+<p>
+<a href='http://www.opera.com/developer/tools/'>Opera Mobile Emulator + Dragonfly</a>
+</p>
+<p>
+<a href='https://hacks.mozilla.org/2012/08/remote-debugging-on-firefox-for-android'>Remote Debugging on Firefox for Android</a>
+</p>
+<p>Firefox and Fennec</p>
+<p>
+<a href='http://html.adobe.com/edge/inspect/'>Adobe Edge Inspect $$$</a>
+</p>
+</article>
+</section>
+<section class='slide'>
+<header>Code Editor</header>
+<article>
+<p>Any editor with support for HTML/CSS/JS</p>
+<p>Aptana Studio (Win, Mac, Linux)</p>
+<p>TextMate / TextWranger (Mac)</p>
+<p>Notepad++ (Windows)</p>
+</article>
+</section>
+<section class='slide'>
+<header>Git</header>
+<article>
+Mac
+<ul>
+<li>Install Git with Homebrew (see instructions on GitHub course examples)</li>
+<li>
+<a href='http://code.google.com/p/git-osx-installer'>Git OSX Installer</a>
+</li>
+<li>
+<a href='http://www.sourcetreeapp.com'>SourceTree</a>
+</li>
+<li>
+<a href='http://mac.github.com'>GitHub for Mac</a>
+</li>
+</ul>
+Windows
+<ul>
+<li>
+<a href='http://code.google.com/p/msysgit'>msysGit</a>
+</li>
+</ul>
+Linux
+<ul>
+<li>Use package manager (sudo apt-get install git-core)</li>
+</ul>
+</article>
+</section>
+<section class='slide'>
+<header>Configuring Git for GitHub</header>
+<article>
+<p>
+See GitHub instructions
+<a href='https://help.github.com/articles/set-up-git'>https://help.github.com/articles/set-up-git</a>
+</p>
+&nbsp
+Steps:
+<ol>
+<li>Install a Git client</li>
+<li>Set up a SSH key</li>
+<li>Set up your info</li>
+</ol>
+</article>
+</section>
+<section class='slide'>
+<header>Ruby</header>
+<article>
+<p>Ruby version 1.8.7 or later is required for course examples that have a server component</p>
+<p>Bundler is also required</p>
+<p>
+Check the instructions at the
+<a href='https://github.com/aaltowebapps/MobileWebAppsExamples'>course examples git</a>
+</p>
+</article>
+</section>
+
+<!-- Elements -->
+<a class='deck-next-link' href='#' title='Next'>→</a>
+<a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+<p class='deck-status'>
+<span class='deck-status-current'></span>
+/
+<span class='deck-status-total'></span>
+</p>
+<a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+<script src='deckjs/core/deck.core.js'></script>
+<script src='deckjs/extensions/menu/deck.menu.js'></script>
+<script src='deckjs/extensions/goto/deck.goto.js'></script>
+<script src='deckjs/extensions/status/deck.status.js'></script>
+<script src='deckjs/extensions/navigation/deck.navigation.js'></script>
+<script src='deckjs/extensions/hash/deck.hash.js'></script>
+<!-- /%script(src="deckjs/extensions/scale/deck.scale.js") -->
+<!-- /%script(src="deckjs/extensions/notes/deck.notes.js") -->
+<script src='js/main.js'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(document).bind('deck.change', function(event, from, to) {
+     
+      //alert('Moving from slide ' + from + ' to ' + to);
+      var f = $.deck('getSlide', from).closest('section').prevAll('.background:first').attr("data-background");
+      var t = $.deck('getSlide', to).closest('section').prevAll('.background:first').attr("data-background");
+      if (t==undefined) { t = "bg-default"; }
+      if (f==undefined) { f = "bg-default"; }
+             
+      
+      var front = $('#background > .front').first();
+      var back = $('#background > .back').first();
+    
+      if (front.hasClass('active')) {
+        if (front.attr('id') == t) { return; }
+    
+        back.attr('id',t);
+        front.removeClass('active');
+        back.addClass('active');
+        front.css('opacity',0);
+      } else {
+        if (back.attr('id') == t) { return; }
+    
+        front.attr('id',t);
+        back.removeClass('active');
+        front.addClass('active');
+        front.css('opacity',1);
+      }
+      
+      //last.attr('id',active.attr('id'));
+      //last.css('opacity',1);
+      //active.remove();
+      //$("#background").append('<div class="background active" id="'+t+'" style="opacity: 0; "></div>')
+      //$("#"+t).css('opacity',1);
+      //var el = $("#"+t);
+    
+      //active.removeClass('active').addClass('last');
+      //last.removeClass('last').addClass('active');
+      
+      //last.dequeue();
+      //active.dequeue();
+             
+      //active.css('opacity',0);
+      //alert(last.attr('id'));
+      //active.fadeOut('slow');
+      //last.fadeIn('slow', function() {
+      //});
+      
+      //last.fadeIn('slow');
+      //$("#"+t).css('opacity',1);
+      //last.css('opacity',1);
+      //el = $("#"+t);
+      //el.animate({opacity: 1.0}, 1000);
+    
+      //if (t==undefined && f == undefined) {
+      //} else if (t == f) {
+      //}
+      //else if (t != undefined) {
+      //  $('#background').css("background-image", "url(" + t + ")").fadeIn('slow');
+      //} else if (t == undefined) {
+      //  $('#background').fadeOut('slow');
+      //}
+    });
+      //current = $('body').css("background-image");
+      //alert(current);
+  //]]>
+</script>
+<!-- .slide-footer -->
+<!-- =META['title'] -->
+<!-- \- -->
+<!-- =META['author'] -->
+</article>
+</body>
+</html>
