@@ -13,11 +13,29 @@ Mobile Web Applications Develeopment with HTML5
 </title>
 <meta content='A course on developing mobile web applications with HTML5' name='description' />
 <meta content='Claudio Riva' name='author' />
-<meta content='width=1024, user-scalable=no' name='viewport' />
+<meta content='width=1024' name='viewport' />
 <!-- Core and extension CSS files -->
 <link href='css/documentation.css' rel='stylesheet' />
 <link href='css/coderay_dark.css' rel='stylesheet' />
 <!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
 </head>
 <body>
 <div id='main'>
@@ -34,19 +52,22 @@ Mobile Web Applications Development with HTML5
 <a href='index.html#'>Home</a>
 </li>
 <li>
-<a href='index.html#Lectures'>Lectures</a>
+<a href='lectures.html'>Lectures</a>
 </li>
 <li>
 <a href='index.html#Schedule'>Schedule</a>
 </li>
 <li>
-<a href='index.html#Examples'>Examples</a>
+<a href='examples.html'>Examples</a>
 </li>
 <li>
-<a href='index.html#Assignment'>Assignment</a>
+<a href='talks.html'>Talks</a>
 </li>
 <li>
-<a href='index.html#Resources'>Resources</a>
+<a href='resources.html'>Resources</a>
+</li>
+<li>
+<a href='course_2012_1.html'>Spring 2012</a>
 </li>
 <li>
 <a href='index.html#About'>About</a>
@@ -54,11 +75,12 @@ Mobile Web Applications Development with HTML5
 </ul>
 </div>
 <div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
 <div class='content-wrapper'>
-<h1>Client templating with Handlerbar.js</h1><div class='actions'><a href='https://github.com/clody69/MobileWebAppsExamples/tree/master/templateHanderlbarBlog'>Browse Source Code</a></div>
+<h1>Client templating with Handlerbars.js</h1><div class='actions'><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/templateHandlebarBlog'>Browse Source Code</a></div>
 <p>
 In this example we experiment with the client-side templating mechanism of
-<a href='http://www.handlebarsjs.com'>Handlerbar.js</a>
+<a href='http://www.handlebarsjs.com'>Handlerbars.js</a>
 As a starting point we use the example
 <a href='htmljQueryStorageBlog.html'>htmljQueryStorageBlog</a>
 and we modify the way the list of post entries is generated. Instead of generating the list on the server side,
@@ -71,7 +93,7 @@ we do the following:
 </ol>
 </p>
 <p>
-The first step is to download the latest Handlerbar.js javascript code from
+The first step is to download the latest Handlerbars.js javascript code from
 <a href='https://github.com/wycats/handlebars.js/downloads'>here</a>
 (we download the full script, not just the runtime) and store it in the<span class='terminal'>
 <!-- public -->
@@ -85,7 +107,7 @@ Then we add the script in the head of the HTML document:
 views/layout.haml
 </div>
 <div class="CodeRay">
-  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.6.4.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">handlebars-1.0.0.beta.6.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;    ...</pre></div>
+  <div class="code"><pre><span class="doctype">!!! 5</span>&#x000A;<span class="tag">%html</span>&#x000A;  <span class="tag">%head</span>&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">charset</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">utf-8</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IE=edge,chrome=1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">http-equiv</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">X-UA-Compatible</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%meta</span>(<span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">viewport</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">content</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%link</span>(<span class="attribute-name">rel</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">stylesheet</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/jquery-1.8.2.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%script</span>(<span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">handlebars-1.0.rc.1.js</span><span class="delimiter">&quot;</span></span>)&#x000A;    <span class="tag">%title</span>&#x000A;      Form Blog&#x000A;    ...&#x000A;</pre></div>
 </div>
 </div>
 <p>
@@ -124,7 +146,7 @@ server.rb
 </div>
 </div>
 <p>
-Now we modify the views of the web app. First we add the Handlerbar.js template to the HTML document:
+Now we modify the views of the web app. First we add the Handlerbars.js template to the HTML document:
 </p>
 <div class='code_block'>
 <div class='code_header'>
@@ -152,7 +174,7 @@ id="articlesList"
 </p>
 <p>
 We are done with the changes on the server-side, now we move on the client-side. The first change is to add the code
-for compiling the Handlerbar.js templates and storing them in a array:
+for compiling the Handlerbars.js templates and storing them in a array:
 </p>
 <div class='code_block'>
 <div class='code_header'>
@@ -244,10 +266,9 @@ terminal
 <div id='footer'>
 <div class='sponsor'>
 <a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
-<a href='http://aaltovg.com'><img src='imgs/aaltovg.png' /></a>
-<a href='http://aaltoes.com/'><img src='imgs/aaltoes.png' /></a>
 <a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
-<a href='http://www.f-secure.com/'><img src='imgs/f-secure.png' /></a>
+<a href='http://www.sc5.io'><img src='imgs/SC5.jpg' /></a>
+<a href='http://corporate.foreca.com/en/'><img src='imgs/foreca.png' /></a>
 </div>
 </div>
 </body>
