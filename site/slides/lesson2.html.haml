@@ -336,9 +336,9 @@
           %meta(charset="utf-8")
           %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
           %meta(name="viewport" content="width=device-width, initial-scale=1")
-          %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css")
-          %script(type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js")
-          %script(type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js")
+          %link(rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
+          %script(type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js")
+          %script(type="text/javascript" src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
           %title
             Form Blog
         %body
@@ -394,18 +394,6 @@
           %textarea(name="content" rows = "5" placeholder = "Content")
           %input(type = "email" name="email" placeholder = "Email")              
           %button#postEntry(type = "submit") Posts
-%section.slide
-  %header 
-    Don't Repeat Yourself (DRY)
-  %article
-    %blockquote
-      .smaller
-        %p Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
-        %p
-          %cite  Andy Hunt and Dave Thomas, The Pragmatic Programmer
-    
-    %p Don't use the same code (or similar code) in multiple places of the application
-    %p Avoid repetition
 
 %section.slide
   %header
@@ -579,7 +567,7 @@
                 if ($this.data('before') !== $this.html()) {
                     $this.data('before', $this.html());
                     $this.trigger('change');
-                    //alert($this.attr('data-id'));
+
                     var msg = {};
                     msg['id'] = $this.attr('data-id');
                     msg[$this.attr('data-name')] = $this.html();
@@ -594,7 +582,7 @@
             #!ruby
             post '/update' do
               #Symbolize the params keys
-              article = params.inject({}) { |h,(k,v)| h[k.to_sym] = v; h }
+              article = params.inject({}) {|h,(k,v)| h[k.to_sym] = v; h}
             
               #Update the timestamp
               article[:timestamp] = timestamp
@@ -924,7 +912,7 @@
   %article
     %ul
       %li Safari desktop browser (Mac and Windows) have no limit
-      %li Mobile Safari has a 10MB limit
+      %li Mobile Safari had 10MB limit and with iOS6 it has been increased to 25MB 
       %li Chrome has a 5MB limit
       %li Android browser has no limit
       %li Firefox desktop has no limit

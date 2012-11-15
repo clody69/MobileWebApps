@@ -45,18 +45,19 @@
         =image_tag('lesson3/mvc-traditional.png')
       .twoColumn
         .autobox.smaller
-          Model
-          :coderay
-            #!ruby
-            $articles = [{ :title => "Welcome", :content => "My first post",
-              :email => "hello@blog.com", :timestamp => "1.1.2012 10:20:30"}]
-          
           Router + Controller
           :coderay
             #!ruby
             get '/' do 
               haml :index, :layout => :layout
             end
+
+          Model
+          :coderay
+            #!ruby
+            $articles = [{ :title => "Welcome", :content => "My first post",
+              :email => "hello@blog.com", :timestamp => "1.1.2012 10:20:30"}]
+          
 
           Template
           :coderay
@@ -529,7 +530,7 @@
       var book = library.create({title: "Hello", author: "myself"});
       var book = library.create({title: "Stories", author: "myself"}, {wait: true});
       library.models;
-      JSON.stringify(library.toJSON);
+      JSON.stringify(library.toJSON());
       library.fetch();
       library.reset();
       //Add and Remove don't trigger Backbone.sync
@@ -578,7 +579,7 @@
               end
               article[:timestamp] = timestamp
               article[:id] = $articles.length
-              $articles.unshift(article)
+              $articles[article[:id].to_i] = article
               article.to_json  
             end
       .twoColumn
@@ -611,6 +612,13 @@
   %article
     :coderay
       #!javascript
+      var Article = Backbone.Model.extend ({ });
+
+      var Articles = Backbone.Collection.extend ({
+        model: Article,
+        url: '/articles'
+      });
+      
       articles.fetch();
       articles.length;
       articles.add([{title: "First Post"}, {title: "Second post"}]);
@@ -682,7 +690,8 @@
       
       var i = new itemView();
       i.el;
-      i.render().el;
+      i.render();
+      i.el;
       $("#articlesList").html(i.render().el);
 
 %section.slide
