@@ -25,7 +25,7 @@ task :render do
   
   %w(jQuerySimple senchaSimple websocketsEcho deviceGeolocation deviceOrientation cssMediaQueriesViewport 
     cssMediaQueriesDevice canvasTouch mvcBackboneLocalBlog canvasSmile cssMediaQueriesOrientation cssPositionFixed 
-    cssOverflowScroll touchEvents touchDrag cssSelectors).each { |file| 
+    cssOverflowScroll touchEvents touchDrag cssSelectors responsiveFluidLayout responsiveFontSizing responsiveMatchMedia responsiveTestViewport).each { |file| 
     dst = "public/examples/#{file}"
     FileUtils.mkdir_p(dst)
     FileUtils.cp_r Dir.glob("../examples/#{file}/*.html"), dst

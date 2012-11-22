@@ -1,0 +1,37 @@
+=example_header_tag "Responsive Match Media", "responsiveMatchMedia"
+
+%p
+  In this example we demonstrate how to execute a media query from Javascript. We take a mobile up approach 
+  and in the basic page the list of albums doesn't contain the thumbnails. We assume this is the most optimal design 
+  for small mobile devices with a viewport width of less than 50em. For devices with a wider display we can 
+  show the thumbnails. We do that by inserting the src elements in the DOM tree using JS. 
+  
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!haml
+    %ul.albums(data-role="listview")
+      %li(data-img = "cover1.jpg")
+        Nirvana
+      %li(data-img = "cover2.jpg")
+        The Beatles
+      %li(data-img = "cover3.jpg")
+        Madonna
+    %li(data-img = "cover4.jpg")
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!javascript
+    $(function() {
+      if(window.matchMedia(" (min-width: 50em) ").matches) {
+        $("[data-img]").each(function(i,val) {
+          var img = new Image();
+          img.src = $(val).data('img');
+          $(val).prepend(img);
+        })
+        $('.albums').listview('refresh');
+      }
+    });

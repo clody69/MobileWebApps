@@ -437,6 +437,8 @@ h1, h2 {
   font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
 }
 
+.CodeRay .error { color:#F00; background-color:transparent; }
+
 .deck-container {
 
   .autobox {   /* Centered area with auto-adapting width */

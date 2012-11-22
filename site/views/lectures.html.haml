@@ -65,8 +65,9 @@
   .header
     Friday 16th November 2012
   .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/53784548?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
     =lecture_tag("Lecture 2: Building a Mobile Web App", "8:15-10:00", "", "lecture2_2012_2.html")
-
     .description
       %p 
         This lecture introduces the basics for creating a mobile web application with HTML5 and jQuery. 
@@ -81,6 +82,9 @@
           %li Local storage
           %li Offline usage
           %li Detecting connectivity changes
+      
+      =docs_tag("2012_2/lecture2.pdf")
+
       Examples:
       %ul
         %li=example_url_tag('htmlFormBlog')
@@ -94,6 +98,8 @@
         %li=example_url_tag('htmljQueryOfflineDetectBlog')
 
   .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/53761355?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
     =lecture_tag("Lecture 3: Templating and MVC", "10:15-12:00", "", "lecture3_2012_2.html")
 
     .description
@@ -107,6 +113,9 @@
           %li MVC architecture for webapps
           %li Introduction to Backbone.js
           %li Example of MVC web app
+      
+      =docs_tag("2012_2/lecture3.pdf")
+      
       Examples:
       %ul
         %li=example_url_tag('templateHandlebarBlog')
@@ -117,16 +126,32 @@
   .header
     Friday 23rd November 2012
   .lecture
-    =lecture_tag("Lecture 4: CSS3 and Responsive Design", "8:15-10:00")
+    =lecture_tag("Lecture 4: CSS3 and Responsive Design", "8:15-10:00", "", "lecture4_2012_2.html")
     .description
       %p 
         In this lecture we'll give an overview of the new elements of CSS3 (like media queries, transitions, animations), 
         how to support touch interactions and the principles of responsive design.
+
+        =docs_tag("2012_2/lecture4.pdf")
+        Examples:
+        %ul
+          %li=example_url_tag('responsiveFluidLayout')
+          %li=example_url_tag('responsiveFontSizing')
+          %li=example_url_tag('responsiveMatchMedia')          
+          %li=example_url_tag('cssMediaQueriesViewport')
+          %li=example_url_tag('cssMediaQueriesDevice')
+          %li=example_url_tag('cssMediaQueriesOrientation')
+          %li=example_url_tag('cssPositionFixed')
+          %li=example_url_tag('cssOverflowScroll')
+          %li=example_url_tag('canvasTouch')
+          %li=example_url_tag('touchEvents')
+          %li=example_url_tag('touchDrag')
+          %li=example_url_tag('cssSelectors')
       
   .lecture
-    =lecture_tag("Lab 4: Structuring your web app", "10:15-12:00")
+    =lecture_tag("Lab 4: Learn Backbone.js", "10:15-12:00", "", "lab4_2012_2.html")
     .description
-      %p In this lab we'll look at various techniques and frameworks how to structure a webapp
+      %p In this lab we'll do an hands-on exercise for learning Backbone.js
 
 .lecture_block
   .header

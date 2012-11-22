@@ -1,0 +1,82 @@
+=example_header_tag "Fluid Layout", "responsiveFluidLayout"
+
+%p
+  In this example we experiment with a two column fluid layout. We use the CSS table layout for defining one 
+  fixed column (the aside) and one fluid one (the article). The images are also set to be fluid, so they adapt to 
+  the size of their containers. 
+
+.code_block
+  .code_header
+    index.html.haml
+  :coderay_raw
+    #!haml
+    %body
+      %header
+        %h1 The Greatest Book Ever
+      %article
+        %h2 
+          Chapter 1
+          %span.smaller Lorem ipsum 
+        %figure
+          %img(src="mountain.jpg")
+        %p Lorem ipsum ...
+        %p Aliquam erat ...
+      %aside 
+        %section
+          %h2 Chapters
+          %ul
+            %li Chapter 1
+            %li Chapter 2
+            %li Chapter 3
+            %li Chapter 4
+            %li Chapter 5
+        %section
+          %figure
+            %img(src="smile.jpg")
+        %section
+          %h2 Other Info
+          %ul 
+            %li Info1
+            %li Info2
+            %li Info3
+            %li Info4
+            %li Info5
+            
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    body {
+      font-size: 16px;
+    }
+    h1 {
+      font-size: 2em; /* 32px */
+    }
+    h2 {
+      font-size: 1.5em; /* 24px */
+    }
+    span {
+      font-size: 1em; display: block; 
+    }
+    span.smaller {
+      font-size: .6666em; /* 16px / 24px */
+    }
+    
+    aside { 
+      display: table-cell;
+      width: 300px;
+    }
+    article {
+      display: table-cell;
+    }
+    
+    figure img {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    ul, ol { list-style: none; }
+    li { list-style-type: none; }
+    aside h2 { border-bottom: 2px solid gray}
+    aside li { font-size: 1.2em; padding: .2em 0;}

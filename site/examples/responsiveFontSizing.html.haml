@@ -1,0 +1,61 @@
+=example_header_tag "Responsive Font Sizing", "responsiveFontSizing"
+
+%p
+  Sizing the fonts is the first place where to add fluidity to a Web design. There are multiple ways for sizing
+  the fonts: 
+%ul 
+  %li
+    %strong pixels
+    \: specifying the exact pixel size of the fonts gives the greatest control how the text is displayed by 
+    the browser. However, there are few problems with this approach. First, pixel based styling of the fonts 
+    doesn't cascade. Therefore, you must specify the exact pixel size of all the elements in the page. Second, 
+    on devices with different screen sizes and pixel densities the result can be greatly different. 
+  %li 
+    %strong ems
+    \: the em unit is becoming the most common way of sizing fonts due to its flexibility. One em equals to 
+    the current font size. For example, if the text of the body is set to 16px, then 1em = 16px and 2em = 32px.
+    Font sizing with em cascades from parent to children and is resizable by the browser. Paradoxically, one 
+    caveat of ems is that it 
+    %em cascades
+    \, so the font size of an element depends on the parent which depends on its parent. Sometimes this can lead 
+    to an unexpected behaviour when it's not properly controlled.
+  %li
+    %strong percentages
+    \: behaves like ems but ems is more common.
+  %li
+    %strong rems
+    \: rems behaves like ems with the difference that it always refers to the font-size of the root element. 
+    While there is a good support for rems on desktop browser, the support on mobile browsers is lacking.
+%p
+  In this example we style the font-size of the headers using ems. Test it in the browser and try to resize the
+  font. The text will resize while keeping the proportions. Note the difference between span and span.smaller
+  
+.code_block
+  .code_header
+    index.html  
+  :coderay_raw
+    #!html
+    <body>
+      <h1>Lorem Ipsum</h1>
+      <div class='container'>
+        <div>
+          <h2>Chapter 1<span>Lorem ipsum</span></h2>
+          <p>Lorem ipsum ...</p>
+        </div>
+        <div>
+          <h2>Chapter 2<span class='smaller'>Aliquam erat</span></h2>
+          <p>Aliquam erat ...</p>
+        </div>
+      </div>
+    </body>
+
+.code_block
+  .code_header
+    index.html.haml  
+  :coderay_raw
+    #!css
+    body { font-size: 16px; }
+    h1 { font-size: 2em; } /* 32px */
+    h2 { font-size: 1.5em; } /* 24px */
+    span { font-size: 1em; }
+    span.smaller { font-size: .6666em; } /* 16px / 24px */

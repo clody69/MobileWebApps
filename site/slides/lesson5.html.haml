@@ -1,66 +1,67 @@
-=title_slide_tag("Lecture 5: CSS3 & Touch")
+=title_slide_tag("Lecture 5: CSS3 & Responsive Design")
 
 .background(data-background = "bg-lesson5-dali-time")
 
 %section.slide.section-title
-  %h1 Lecture 5: CSS3 & Touch 
+  %h1 Lecture 5: CSS3 & Responsive Design 
   .agenda
+    %p Progressive Enhancement & Responsive Design
     %p Media Queries
     %p Position: fixed & Overflow: scroll
     %p Touch Interaction
-    %p CSS3 Selectors
-    %p CSS3 Transformations
-    %p CSS3 Transitions & Animations
+    %p CSS3
 
 
 %section.slide
   %header
-    The problem
+    Desktop First
   %article
-    .slide
-      :coderay
-        #!plain
-
-        GET / HTTP/1.1
-        Host: example.com
-        Connection: keep-alive
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.79 Safari/535.11
-    %br
-    .slide
-      :coderay
-        #!plain
-        User-Agent: Mozilla/5.0 (iPhone Simulator; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3        
-
-    .slide
-      :coderay
-        #!plain
-        User-Agent: Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13
-
-    .slide
-      :coderay
-        #!plain
-        User-Agent: Opera/9.80 (Linux armv7l; U; en) Presto/2.9.201 Version/11.50
-
-    .slide
-      :coderay
-        #!plain
-        Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
-
+    Historically the workflow for web design started with desktop first
+    %ul
+      %li Tools like Photoshop, Fireworks, Dreamweaver
+      %li Printed-page metaphor. 
+      %li 
+        Optimized for a specific width: 
+        %a(href="http://960.gs/") 960px
+      %li Optimized for a specific browser(s)
+      %li Optimized for one input method: mouse
+      %li Aim at identical experiences cross-browser and cross-platform
+    
 %section.slide
   %header
-    3 categories and 3 UX factors
+    Then Mobile Came
   %article
-    %strong 3 main categories of devices
+    %p.slide 
+      %strong 1.2 billion Mobile Web Users (2011)
+    %p.slide 
+      20-25% Web users are only mobile (
+      %a(href="http://gs.statcounter.com/?PHPSESSID=72j5itboe5rsca04fahrqqegd6#mobile_vs_desktop-ww-monthly-201208-201210-map") mobile vs desktop
+      ) 
+    %p.slide How to adapt desktop web sites to mobile
+    %ul
+      %li.slide Do nothing => awful experience
+      %li.slide 
+        Separated Mobile Experience 
+        %ul
+          %li 4 different sites (desktop, tablet, touch, non-touch)
+          %li Mobile users are often penalized (content, interaction and performance)
+%section.slide
+  %header
+    Device Categories and UX Factors
+  %article
+    %strong Devices
     %ul
       %li Desktop/laptops
       %li Tablets 
-      %li Mobile devices (from smartphones to dumbphones)
-    %strong 3 main factors affect UX
+      %li Smart phones
+      %li Feature phones 
+    %strong Main factors affect UX
     %ul
       %li Screen resolution (size, orientation, dpi)
       %li User interaction (mouse, keyboard, touch, voice)
-      %li Performance (CPU power, memory capacity, GPU, bandwidth)
-
+      %li Performance (CPU power, memory capacity, GPU, network)
+      %li Default browser
+      
 %section.slide
   %header
     Desktop/Laptop
@@ -96,7 +97,26 @@
 
 %section.slide
   %header
-    Smartphones & Featurephones
+    Smartphones
+  %article
+    .row
+      .twoColumn
+        =image_tag "lesson5/galaxy_s3.jpg", :resize => true
+      .twoColumn
+        %ul
+          %li Small screen but high-definition
+          %li Handheld device
+          %li Used while on the move
+          %li Two orientations
+          %li Smooth animations and graphics (often equipped with powerful GPU)
+          %li Medium performance 
+          %li 3G/Wifi/EDGE/LTE network
+          %li Primarily used with the default browser (but not always)
+          %li Touch interaction
+
+%section.slide
+  %header
+    Feature phones
   %article
     .row
       .twoColumn
@@ -108,90 +128,276 @@
           %li Limited animations and graphics
           %li Medium-low performance 
           %li 2G/3G bandwidth
-          %li Native and proxy browsing
+          %li Limited native and proxy browsing
           %li Touch interaction (but not always)
           %li Multi-tasking users on the move that require fast and responsive UI
           %li Task oriented UI 
-          %li Online/offline experience
+          %li Online/offline experience      
+%section.slide
+  %header
+    Design for Mobile First
+  %article
+    .row.slide
+      .twoColumn
+        =image_tag "lesson5/mobilefirst-gd.jpg", :resize => true
+      .twoColumn
+        .autobox
+          %p 
+            %strong Graceful Degradation
+          .small
+            %p Design for desktop on as many browsers and platforms as possible
+            %p 
+              Account for possible 
+              %em degradation
+              and ensure functionality (e.g. remove content)
+          
+    .row.slide
+      .twoColumn
+        =image_tag "lesson5/mobilefirst-pe.jpg", :resize => true
+      .twoColumn
+        .autobox
+          %p 
+            %strong Progressive Enhancement
+          .small
+            %p First create a baseline experience that focuses on semantic markup, structure and content
+            %p Second start layering presentation and interactivity to provide a richer experience for more capable browsers
+
 
           
+%section.slide
+  %header
+    Content Parity
+  %article
+    %p One Web Experience 
+    %p
+      %strong Give people what they want regardless of how they access the Web
+    %p The same content is accessible to all devices
+    %p Content has structure and semantic
+    %p 
+      Less-capable browser will only get the content (e.g. 
+      %a(href="http://jquerymobile.com") jQueryMobile
+      )
+%section.slide
+  %header
+    Progressive Enhancement
+    %span.smaller
+      %a(href="http://easy-readers.net/books/adaptive-web-design/") More Info
+  %article
+    %p.slide 
+      \... is about ensuring the content is available to and usable by anyone regardless of the location, browser, device or capabilities.
+    .slide
+      \... is about accessibility because of special needs:
+      %ul
+        %li when watching a website on a phone I'm limited by the screen resolution
+        %li when browsing on a touch device I'm limited by the precision of my fingertips
+    %p.slide 
+      \... is about crafting experiences that serve the users by giving access to content without technical restrictions
+    %p.slide
+      \... is about leveraging the fault tolerance of web browsers
+    %p.slide 
+      \... is about applying latest technologies in an intelligent way, layer-upon-layer
+
+%section.slide
+  %header
+    Layers of User Experience
+  %article.small
+    .row.vmargin
+      .threeColumn
+        %p 
+          %strong Interactivity
+      .twoThirds
+        .autobox
+          Add interactivity to the page through Javascript by listening to events and manipulating the DOM tree
+          %pre
+            :escaped
+              $("img").click( function(e) { ... });
+            
+    .row.vmargin
+      .threeColumn
+        %p 
+          %strong Audio and visual
+      .twoThirds
+        .autobox
+          The elements of the page can be styled and enriched with CSS and inline images.
+          %pre
+            :escaped
+              p {color: red; font-weight: bold; }
+    .row.vmargin
+      .threeColumn
+        %p 
+          %strong Semantics
+      .twoThirds
+        .autobox
+          The various elements and attributes in a page provide an additional meaning and context to the text
+          %pre
+            :escaped
+              <
+            %strong.red><
+              h1
+            :escaped
+              ><
+            %strong.red><
+              a href
+            :escaped 
+              \="..." 
+            %strong.red><
+              title
+            :escaped
+              \="Hello"><
+            %strong.red><
+              img src
+            :escaped
+              \="..." 
+            %strong.red>< 
+              alt
+            :escaped
+              \="A nice picture"></a></h1>
+        
+    .row.vmargin
+      .threeColumn
+        %p
+          %strong Text
+      .twoThirds
+        .autobox
+          The basic form of HTML content is text
+          %pre
+            :escaped
+              <h1><a href="..." title="Hello"><img src="..." alt="A nice picture"></a></h1>        
+        
+%section.slide
+  %header
+    Responsive Design
+  %article
+    .twoColumn
+      =image_tag "lesson5/responsive_design.png", :resize => true
+    .twoColumn
+      .autobox
+        %p 
+          %a(href="http://www.alistapart.com/articles/responsive-web-design/") Responsive Web Design
+          by Ethan Marcotte
+        %p Demonstrated how to build a responsive design for multiple screen resolutions with:
+        %ul 
+          %li Media Queries
+          %li Fluid Grids
+          %li Scalable Images
+        %p 
+          Some examples: 
+          %a(href="http://2010.dconstruct.org") 1
+          ,
+          %a(href="http://lanyrd.com/") 2
+          , and
+          %a(href="http://www.mediaqueri.es") 3
+        
 %section.slide
   %header Device Screen Width
   %article
     .row
       .twoThirds
-        =image_tag "lesson5/atlas_screen_width.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/20/hac"
+        =image_tag "lesson5/atlas_screen_width.png", :url => "https://deviceatlas.com/device-data/explorer#properties/19/20"
       .threeColumn
         .autobox
-          %p 240px (28%)
-          %p 128px (23%)
-          %p 176px (13%)
-          %p 480px (7%)
-        
+          %p 240px (26%)
+          %p 128px (19%)
+          %p 176px (12%)
+          %p 480px (10%)
+
 %section.slide
   %header Device Screen Height
   %article
   .row
     .twoThirds
-      =image_tag "lesson5/atlas_screen_height.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/properties/19/21/hac"
+      =image_tag "lesson5/atlas_screen_height_2.png", :url => "https://deviceatlas.com/device-data/explorer#properties/19/21"
     .threeColumn
       .autobox
-        %p 320px (23%)
-        %p 160px (15.5%)
-        %p 220px (12.4%)
-        %p 128px (7.6%)
+        %p 320px (21%)
+        %p 160px (14%)
+        %p 220px (11%)
+        %p 800px (7%)
 
 %section.slide
-  %header Device Screen Height over Time
+  %header Device Screen Width over Time
   %article
   .row
     .twoThirds
-      =image_tag "lesson5/atlas_screen_width_year.png", :url => "http://deviceatlas.com/resourcecentre/explore+deviceatlas+data/data+explorer#_/compare/16/1136968/19/20"
+      =image_tag "lesson5/atlas_screen_width_year_2.png"
     .threeColumn
       .autobox
         %p 
           %strong.red 2012
-          \:  176, 
-          %strong 240
-          , 320, 360, 
-          %strong 480
-          ,
-          %strong 540
-          , 600, 640, 
-          %strong 720
-          , 768, 780, 800, 1024, 1280, 1920
-        %p 
-          %strong.red 2011
-          \:  120, 128, 160, 176, 220, 
-          %strong 240
-          ,
-          %strong 320
-          , 360, 400, 
-          %strong 480
-          , 540, 600, 640, 720, 768, 800, 840, 960, 1024, 1240, 1280  
+          \:  
+          128, 
+          144,
+          176,
+          220,
+          %strong 240,
+          %strong 320,
+          360,
+          430,
+          %strong 480,
+          540,
+          600,
+          640,
+          %strong 720,
+          768,
+          780,
+          %strong 800,
+          976,
+          1024,
+          1080,
+          1280,
+          1366,
+          1920,
+          2560  
+
+%section.slide
+  %header Nokia 113 (the smallest)
+  %article
+    .twoColumn
+      =image_tag "lesson5/nokia-113.jpg", :url => "http://www.gsmarena.com/nokia_113-4758.php"
+    .twoColumn
+      .autobox
+        %p.slide
+          128 x 160 pixels
+        %p.slide
+          1.8 inches display (114 ppi)
+        %p.slide
+          33€
+        %p.slide
+          Does it have a browser ? 
+        %p.slide
+          Yes, it does.
+%section.slide
+  %header Samsung Google Nexus 10 (the biggest)
+  %article
+    .twoColumn
+      =image_tag "lesson5/google-nexus-10.png", :url => "http://www.gsmarena.com/samsung_google_nexus_10-5084.php"
+    .twoColumn
+      .autobox
+        %p.slide
+          2560 x 1600 pixels
+        %p.slide
+          10.1 inches display (299 ppi)
+        %p.slide
+          999,90€
+        %p.slide
+          Does it have a browser ? 
+        %p.slide
+          Yes, it does.
+
+
 
 %section.slide
   %header Screen Resolution Market Share
   %article
-    =image_tag "lesson5/screen-resolution.png", :url => "http://netmarketshare.com/report.aspx?qprid=17"
-
-%section.slide
-  %header Screen Resolution Alert on April 11
-  %article
-    =image_tag "lesson5/statcounter-news.png", :url => "http://gs.statcounter.com/press/screen-resolution-alert-for-web-developers"
-
-%section.slide
-  %header Screen Resolution Trends
-  %article
-    =image_tag "lesson5/StatCounter-resolution.jpg", :url => "http://gs.statcounter.com/#resolution-ww-monthly-201103-201203"
+    =image_tag "lesson5/screen-resolution-2.png", :url => "http://netmarketshare.com/report.aspx?qprid=17"
 
 %section.slide
   %header Mobile OS Market Share (based on browser)
   %article
-    =image_tag "lesson5/os_marketshare.png", :url => "http://marketshare.hitslink.com/operating-system-market-share.aspx?qprid=8&qpcustomd=1"
-  
+    =image_tag "lesson5/os_marketshare_2.png", :url => "http://marketshare.hitslink.com/operating-system-market-share.aspx?qprid=8&qpcustomd=1"
+
 %section.slide
-  %header Popular screen resolutions for mobile
+  %header Popular screen resolutions for mobile 
   %article
     %ul 
       %li 
@@ -207,14 +413,210 @@
         %strong 960 x 640
         \: iPhone 4 
       %li 
+        %strong 1136 x 640
+        \: iPhone 5 
+      %li 
         %strong 1024 x 768
         \: iPad and Android tablets
+      %li
+        %strong 1280 x 768
+        \: Lumia 920
+
 
 %section.slide
-  %header Top Mobile Browsers Trends
-  %article
-    =image_tag "lesson5/StatCounter-mobile_browser.jpg", :url => "http://gs.statcounter.com/#mobile_browser-ww-monthly-201103-201203"
+  %header Layouts Options
+  %article.small
+    %strong Fixed-width
+    %ul
+      %li The most common is 960px
+      %li It gives an illusion of controlling the available space
+      %li It gives a bad experience on narrower or wider screens
+    .slide
+      %strong Fluid Layouts
+      %ul
+        %li Dimensions are based on percentages, not fixed measurements
+        %li Not enough to scale from small to wide displays. 
+    .slide
+      Elastic layouts
+      %ul
+        %li Dimensions are determined by type size (
+        %span.terminal<> em
+        )
+        %li Good for readability (e.g. by fixing width to 55em)
+        %li Suffers from the fixed-width issues
+    .slide
+      Hybrid layouts
+      %ul
+        %li A combination of the previous methods
 
+%section.slide
+  %header Sizing the fonts
+  %article.small
+    %p
+      First place where to add 
+      %em fluidity 
+      to a Web design
+    %ul 
+      %li
+        %strong pixels
+        %ul 
+          %li not cascading from parent to children
+          %li issues with zooming, different screen sizes and pixel densities
+      %li 
+        %strong ems
+        %ul
+          %li most common method
+          %li cascading
+          %li 1 em = current font size ( current = context where em is used)
+      %li
+        %strong percentages
+        %ul
+          %li behaves like em
+      %li
+        %strong rems
+        %ul
+          %li behaves like ems but always refers to the root element
+          %li not well supported on mobile
+
+%section.slide
+  %header 
+    Font Sizing 
+    %span.smaller
+      =example_url_tag("responsiveFontSizing")
+  
+  %article
+    :coderay
+      #!html
+      <body>
+        <h1>Lorem Ipsum</h1>
+        <div class='container'>
+          <div>
+            <h2>Chapter 1<span>Lorem ipsum</span></h2>
+            <p>Lorem ipsum ...</p>
+          </div>
+          <div>
+            <h2>Chapter 2<span class='smaller'>Aliquam erat</span></h2>
+            <p>Aliquam erat ...</p>
+          </div>
+        </div>
+      </body>
+
+    :coderay
+      #!css
+      body { font-size: 16px; }
+      h1 { font-size: 2em; } /* 32px */
+      h2 { font-size: 1.5em; } /* 24px */
+      span { font-size: 1em; }
+      span.smaller { font-size: .6666em; } /* 16px / 24px */
+      
+%section.slide
+  %header Grid layout
+  %article
+    Break the page in columns based on the content (text, image, video)
+    %ul 
+      %li Bring order, consistency and harmony to the page
+      %li Make easier for the user to find content
+    .slide
+      How to build your own fluid grid:
+      %ul 
+        %li Start with a fixed layout
+        %li Break the page in columns of equally fixed size
+        %li Add the structure to your page
+        %li Make images fluid
+        %li Mix fixed and fluid widths for the columns
+
+%section.slide
+  %header 
+    Fluid Layout 
+    %span.smaller
+      =example_url_tag("responsiveFluidLayout")
+
+  %article
+    .twoColumn
+      :coderay
+        #!haml
+        %body
+          %header
+            %h1 The Greatest Book Ever
+          %article
+            %h2 
+              Chapter 1
+            %figure
+              %img(src="mountain.jpg")
+            ...
+          %aside 
+            %section
+              %h2 Chapters
+                ...
+            %section
+              %figure
+                %img(src="smile.jpg")
+
+            %section
+                ...
+    .twoColumn
+      :coderay
+        #!css
+        article {
+          display: table-cell;
+        }
+
+        aside { 
+          display: table-cell;
+          width: 300px;
+        }
+        
+        figure img {
+          width: 100%;
+          max-width: 100%;
+        }
+
+%section.slide
+  %header
+    Popular Frameworks (many and more)
+  %article
+    .row
+      .twoColumn
+        .autobox
+          %p 
+            %strong Grid-frameworks
+          %p
+            %a(href="http://twitter.github.com/bootstrap/index.html") Bootstrap
+          %p 
+            %a(href="http://semantic.gs/") The Semantic Grid System
+          %p 
+            %a(href="http://lessframework.com/") Less Framework
+          %p 
+            %a(href="http://foundation.zurb.com/") Foundation 3
+      .twoColumn
+        .autobox
+          %p 
+            %strong HTML5 Boilerplates
+          %p 
+            %a(href="http://thatcoolguy.github.com/gridless-boilerplate/") Gridless
+          %p 
+            %a(href="http://stuffandnonsense.co.uk/projects/320andup/") 320 and up
+          %p 
+            %a(href="http://html5boilerplate.com/") HTML5 Boilerplate
+    .row.centered.vmargin
+      %a(href="http://lab.maltewassermann.com/viewport-resizer/") Responsive Design Testing Tool
+
+
+%section.slide
+  %header
+    =html5_styling_tag("Media Queries")
+    %span.smaller
+      %a(href="http://www.w3.org/TR/css3-mediaqueries") W3C
+
+  %article
+    %p Query syntax for serving the most appropriate styles based on the device characteristics
+
+    Enables us:
+    %ul 
+      %li to create device-independent websites
+      %li to optimize the visitor's experience
+      %li to avoid multiple sites per device (one code base)
+      %li to serve the mobile optimized versions (i.e. smaller images)
     
 %section.slide
   %header
@@ -237,72 +639,100 @@
       .twoColumn
         =image_tag 'lesson5/mobile_layoutviewport.jpg', :resize => true
 
+%section.slide
+  %header
+    Device pixel vs CSS pixel
+  %article
+    %p 
+      %strong.red Device pixel
+      \: physical pixels of the device (e.g. 1024px wide screen)
+    %p
+      %strong.red CSS pixel
+      \: virtual pixels of the Web page (e.g. 960px or 2000px wide page)
+  
+    CSS pixels do not necesarilly map to physical pixels
+    %ul
+      %li zooming alters the ratio between physical and virtual pixels
+      %li high-resolution display (e.g. Retina) 
+%section.slide
+  %header
+    Device pixel vs CSS pixel
+  %article
+    .row
+      .twoColumn
+        =image_tag 'lesson5/viewport-zoom-2.jpg', :resize => true
+      .twoColumn
+        =image_tag 'lesson5/viewport-zoom.jpg', :resize => true
+
+
+%section.slide
+  %header
+    Layout viewport vs visual viewport
+  %article
+    %p
+      %strong.red Layout viewport
+      \: refers to the large image where the page is rendered. It doesn't change in size or shape.
+    %p
+      %strong.red Visual viewport
+      \: refers to the smaller frame that we can use to look at the bigger image. With the small frame
+      we can back away, or move closer or change the orientation we use for looking at the large image.
+%section.slide
+  %header
+    Layout viewport vs visual viewport
+  %article
+    .row
+      .twoColumn
+        =image_tag 'lesson5/mobile_layoutviewport.jpg', :resize => true
+      .twoColumn
+        =image_tag 'lesson5/mobile_visualviewport.jpg', :resize => true
 
 %section.slide
   %header
     Viewport Meta Tag
   %article
-    .row
-      .twoColumn
-        .autoimage.bordered
-          =image_tag('lesson2/firstapp-no-viewport.png')
-      .twoColumn
-        .autoimage.bordered
-          =image_tag('lesson2/firstapp-viewport.png')
-    .row
-      :coderay
-        #!html
-        <meta name="viewport" content="width=device-width; user-scalable=0;" />        
+    The viewport meta tag allows us to control: 
+    %ul
+      %li size of the layout viewport
+      %li scaling
+    :coderay
+      #!html
+      <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;" />        
+
         
 %section.slide
   %header
-    =html5_styling_tag("Media Queries")
-    %span.smaller
-      %a(href="http://www.w3.org/TR/css3-mediaqueries") W3C
-      
+    Viewport Meta Tag
   %article
-    %p Query syntax for serving the most appropriate styles based on the device characteristics
-     
-    Enables us:
-    %ul 
-      %li to create device-independent websites
-      %li to optimize the visitor's experience
-      %li to avoid multiple sites per device
-      %li to server the mobile optimized versions (i.e. smaller images)
-    %a(href="http://www.alistapart.com/articles/responsive-web-design/") Responsive Web Design
-    %ul
-      %li
-        %a(href="http://2010.dconstruct.org") An example
-      %li
-        %a(href="http://lanyrd.com/") Another example
-      %li
-        %a(href="http://www.mediaqueri.es") Other examples
+    .twoColumn
+      .autoimage.bordered
+        =image_tag('lesson2/firstapp-no-viewport.png')
+    .twoColumn
+      .autoimage.bordered
+        =image_tag('lesson2/firstapp-viewport.png')
+        
 
 
 %section.slide
   %header Media Queries Syntax
   %article
     %ul
+    %li 
+      Embedded in a stylesheet
+      :coderay
+        #!css
+        @media [ not | only ] type [ and ] ( expression) { rules }
       %li 
         Link external stylesheet
         :coderay
           #!html
-          <link href="file.css" rel="stylesheet" media="logic media and ( expression)">
+          <link href="file.css" rel="stylesheet" media="[not|only] type [and] ( expression)">
       %li 
         Import external stylesheet
         :coderay
           #!css
-          @media url('file.css') logic media and ( expression );
-      %li 
-        Embedded in a stylesheet
-        :coderay
-          #!css
-          @media logic media ( expression) { rules }
-    %p 
-      %strong Logic
-      \: only | not
+          @media url('file.css') [not|only] type [and] ( expression );
     %p
-      %strong Media
+      %strong type
       \: all | screen | projection | print ...
 
 %section.slide
@@ -317,9 +747,9 @@
         \: height of the browser viewport including the scroll bars
     :coderay
       #!css
-      @media media and {width: value} { rules }
-      @media media and {min-width: value} { rules }
-      @media media and {max-width: value} { rules }
+      @media type and {width: value} { rules }
+      @media type and {min-width: value} { rules }
+      @media type and {max-width: value} { rules }
 
 %section.slide
   %header 
@@ -472,30 +902,35 @@
         .container {
           display: none;
         }
-    %p Assets are downloaded even if hidden. This is consuming bandwidth and cache.
+    %p Assets are downloaded even if hidden. 
+    %p This approach is consuming bandwidth and cache.
 
 %section.slide
   %header Best practices
   %article
-    %p Define first the basic stylesheet for mobile users and include the one for desktop/tablets through media queries
-    %p Legacy browsers will get the basic stylesheet
+    %strong Mobile up
+    %ul
+      %li Build the mobile experience first
+      %li Use media queries to enrich and adjust the layout for larger screens
+      %li With this approach browser that don't support media queries will get the basic stylesheet
     :coderay
       #!html
       <link href="basic.css" rel="stylesheet" media="screen">
       <link href="desktop.css" rel="stylesheet" media="screen and (min-device-width: 480px)">
     %br
-    %p Same is valid for high definition graphics
-    :coderay
-      #!css
-      E { background-image: url('background-lowres.png'); }
-      @media all and (min-device-pixel-ratio: 1.5) {
-        background-image: url('background-highres.png');
-        /* Ensure the images are not displayed bigger than their element */
-        background-size: 100% 100%;
-      }
+    .slide
+      Same concept applies for high definition graphics. 
+      :coderay
+        #!css
+        E { background-image: url('background-lowres.png'); }
+
+        @media all and (min-device-pixel-ratio: 1.5) {
+          background-image: url('background-highres.png');   
+          background-size: 100% 100%; /* Ensure the images are not displayed bigger than their element */
+        }
       
 %section.slide
-  %header CSS for each device layout
+  %header Breakpoints
   %article.small
     :coderay
       #!css
@@ -526,17 +961,192 @@
       /* iPhone 4 */ 
       @media screen and (-webkit-min-device-pixel-ratio : 1.5), screen and (min-device-pixel-ratio : 1.5) { ... }
 
+
 %section.slide
   %header
-    Use responsive design carefully
+    Hiding/showing images
+    %span.smaller
+      =example_url_tag("responsiveMatchMedia")
   %article
-    Layout of the page is important but building a mobile web site (app) includes also:
+    .row
+      .twoColumn
+        :coderay
+          #!haml
+          %ul.albums(data-role="listview")
+            %li
+              %img(src="cover1.jpg")
+              Nirvana
+            %li
+              %img(src="cover2.jpg")
+              The Beatles
+            %li
+              %img(src="cover3.jpg")
+              Madonna
+            %li
+              %img(src="cover4.jpg")
+              Lady Gaga
+      .twoColumn
+        :coderay
+          #!haml
+              %ul.albums(data-role="listview")
+                %li(data-img = "cover1.jpg")
+                  Nirvana
+                %li(data-img = "cover2.jpg")
+                  The Beatles
+                %li(data-img = "cover3.jpg")
+                  Madonna
+              %li(data-img = "cover4.jpg")
+    .row.centered.vmargin
+      %p Large images can impact the loading performance
+      
+%section.slide
+  %header 
+    matchMedia
+    %span.smaller
+      %a(href="http://dev.w3.org/csswg/cssom-view/#the-mediaquerylist-interface") W3C
+  %article
+    %p 
+      %strong.red matchMedia 
+      %span allows us to execute a CSS media query from Javascript and receive information if the query is a match or not
+    :coderay
+      #!javascript
+      $(function() {
+        if(window.matchMedia(" (min-width: 50em) ").matches) {
+          $("[data-img]").each(function(i,val) {
+            var img = new Image();
+            img.src = $(val).data('img');
+            $(val).prepend(img);
+          })
+          $('.albums').listview('refresh');
+        }
+      });
+%section.slide
+  %header
+    Responsive Images
+    %span.smaller
+      %a(href="http://picture.responsiveimages.org/") W3C Proposal
+  %article
+    %p A method for specifying multiple sources for an image through the CSS media queries
+    
+    %p Not yet supported in browsers. 
+    :coderay
+      #!html
+      <picture width="500" height="500">
+        <source media="(min-width: 45em)"
+        			 srcset="large-1.jpg 1x, large-2.jpg 2x">
+        <source media="(min-width: 18em)" 
+        			 srcset="med-1.jpg 1x, med-2.jpg 2x">
+        <source srcset="small-1.jpg 1x, small-2.jpg 2x">
+        <img src="fallback.jpg" >
+      </picture>
+    
+%section.slide
+  %header
+    Limitations of responsive design 
+  %article
+    Responsive design excels on the visual layout but it doesn't do well:
     %ul 
-      %li Optimizing performance
-      %li Avoiding heavy JS libraries
+      %li Content adaptation
+      %li Performance optimizations (e.g. images)
+      %li Optimizing heavy JS code
+      %li Targeting low-end devices (the majority)
       %li Reducing latency
       %li Reducing loading time
-      %li Task-oriented UI
+
+%section.slide
+  %header
+    Optimization
+  %article
+    %ul
+      %li 
+        Look at the user agent string, interpret it via a device detection repository (e.g. 
+        %a(href="http://wurfl.sourceforge.net/") WURFL
+        \) and 
+        decide what to serve to that particular client (server-side)
+      %li.slide 
+        Test on the client-side what features are available (e.g. with 
+        %a(href="http://modernizr.com/") Modernizr
+        \) and 
+        %ul 
+          %li take some actions on the client-side based on that information
+          %li inform the server that will take care of serving the right content
+%section.slide
+  %header
+    User Agent String
+  %article
+    .slide
+      :coderay
+        #!plain
+
+        GET / HTTP/1.1
+        Host: example.com
+        Connection: keep-alive
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.79 Safari/535.11
+    %br
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Mozilla/5.0 (iPhone Simulator; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3        
+
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13
+
+    .slide
+      :coderay
+        #!plain
+        User-Agent: Opera/9.80 (Linux armv7l; U; en) Presto/2.9.201 Version/11.50
+
+    .slide
+      :coderay
+        #!plain
+        Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+
+%section.slide
+  %header The headache with the iPad mini
+  %article.small
+    .threeColumn
+      .autobox.vmargin
+        =image_tag "lesson5/ipadmini2.png", :resize => true  
+        .centered.vmargin
+          %p
+            %strong 
+              Everything on the iPad mini looks 
+              %span.red 20% 
+              smaller and there is no client or server side detection possible.
+    .twoThirds
+      .autobox
+        %strong iPad2
+        %ul 
+          %li 
+            Display: 768 x 1024, 
+            %strong 9.7" 
+            \(
+            %strong 132ppi
+            \)
+          %li Viewport: 768 x 1024
+          %li Device pixel ratio: 1
+          %li 
+            .tiny
+              :coderay
+                #!plain
+                Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+        %strong iPad mini
+        %ul
+          %li 
+            Display: 768 x 1024, 
+            %strong 7.9" 
+            \(
+            %strong 162ppi
+            \)
+          %li Viewport: 768 x 1024
+          %li Device pixel ratio: 1
+          %li 
+            .tiny
+              :coderay
+                #!plain
+                Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A406 Safari/8536.25
 
 %section.slide
   %header 
@@ -570,6 +1180,7 @@
               ...
       .twoColumn
         =image_tag "lesson5/positionfixed.png", :resize => true
+
 
 %section.slide
   %header 
