@@ -497,19 +497,25 @@ h1, h2 {
 }
 
 /* line 440, ../../sass/screen.scss */
+.CodeRay .error {
+  color: #F00;
+  background-color: transparent;
+}
+
+/* line 442, ../../sass/screen.scss */
 .deck-container {
   /* Column Layouts - use in <div> tags to put content in columns  */
 }
-/* line 442, ../../sass/screen.scss */
+/* line 444, ../../sass/screen.scss */
 .deck-container .autobox {
   /* Centered area with auto-adapting width */
   display: block;
 }
-/* line 446, ../../sass/screen.scss */
+/* line 448, ../../sass/screen.scss */
 .deck-container .autoslide {
   text-align: left;
 }
-/* line 449, ../../sass/screen.scss */
+/* line 451, ../../sass/screen.scss */
 .deck-container .centered {
   /* Firefox */
   display: -moz-box;
@@ -529,7 +535,7 @@ h1, h2 {
   box-orient: vertical;
   text-align: center;
 }
-/* line 453, ../../sass/screen.scss */
+/* line 455, ../../sass/screen.scss */
 .deck-container .centered-inline {
   /* Firefox */
   display: -moz-box;
@@ -548,7 +554,7 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 457, ../../sass/screen.scss */
+/* line 459, ../../sass/screen.scss */
 .deck-container .justified {
   /* Firefox */
   width: 100%;
@@ -568,44 +574,44 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 461, ../../sass/screen.scss */
+/* line 463, ../../sass/screen.scss */
 .deck-container .item {
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 10px;
 }
-/* line 465, ../../sass/screen.scss */
+/* line 467, ../../sass/screen.scss */
 .deck-container .item img {
   display: inline;
   vertical-align: middle;
   margin: 0px;
 }
-/* line 470, ../../sass/screen.scss */
+/* line 472, ../../sass/screen.scss */
 .deck-container .item span {
   display: inline-block;
   text-align: right;
   vertical-align: middle;
   padding: 0 50px;
 }
-/* line 478, ../../sass/screen.scss */
+/* line 480, ../../sass/screen.scss */
 .deck-container .column {
   margin: 0 10px;
   overflow: hidden;
   float: left;
   display: inline;
 }
-/* line 484, ../../sass/screen.scss */
+/* line 486, ../../sass/screen.scss */
 .deck-container .row {
   margin: auto;
   overflow: hidden;
 }
-/* line 489, ../../sass/screen.scss */
+/* line 491, ../../sass/screen.scss */
 .deck-container .row .row {
   margin: 0 -10px;
   width: auto;
   display: inline-block;
 }
-/* line 496, ../../sass/screen.scss */
+/* line 498, ../../sass/screen.scss */
 .deck-container .twoColumn {
   width: 550px;
   margin: 0 0px;
@@ -628,11 +634,11 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 502, ../../sass/screen.scss */
+/* line 504, ../../sass/screen.scss */
 .deck-container .twoColumn img {
   max-width: 500px;
 }
-/* line 508, ../../sass/screen.scss */
+/* line 510, ../../sass/screen.scss */
 .deck-container .threeColumn {
   width: 320px;
   margin: 0 0px;
@@ -655,11 +661,11 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 514, ../../sass/screen.scss */
+/* line 516, ../../sass/screen.scss */
 .deck-container .threeColumn img {
   max-width: 320px;
 }
-/* line 519, ../../sass/screen.scss */
+/* line 521, ../../sass/screen.scss */
 .deck-container .twoThirds {
   /* spans two columns in a three column layout */
   width: 640px;
@@ -683,16 +689,16 @@ h1, h2 {
   -o-box-orient: horizontal;
   box-orient: horizontal;
 }
-/* line 525, ../../sass/screen.scss */
+/* line 527, ../../sass/screen.scss */
 .deck-container .twoThirds img {
   max-width: 640px;
 }
-/* line 532, ../../sass/screen.scss */
+/* line 534, ../../sass/screen.scss */
 .deck-container .autoimage {
   display: inline-block;
   margin: 10px;
 }
-/* line 538, ../../sass/screen.scss */
+/* line 540, ../../sass/screen.scss */
 .deck-container .caption, .deck-container .caption a {
   font-variant: small-caps;
   text-align: left;
@@ -700,37 +706,37 @@ h1, h2 {
   padding-top: -5px;
   color: black;
 }
-/* line 545, ../../sass/screen.scss */
+/* line 547, ../../sass/screen.scss */
 .deck-container .image-wrap {
   margin: 0px;
 }
-/* line 547, ../../sass/screen.scss */
+/* line 549, ../../sass/screen.scss */
 .deck-container .image-wrap img {
   margin: 0px;
 }
-/* line 551, ../../sass/screen.scss */
+/* line 553, ../../sass/screen.scss */
 .deck-container .resize {
   width: auto !important;
   height: auto !important;
   max-height: 500px;
   max-width: 900px;
 }
-/* line 559, ../../sass/screen.scss */
+/* line 561, ../../sass/screen.scss */
 .deck-container .half {
   width: 50%;
 }
-/* line 562, ../../sass/screen.scss */
+/* line 564, ../../sass/screen.scss */
 .deck-container .quarter {
   width: 25%;
 }
-/* line 565, ../../sass/screen.scss */
+/* line 567, ../../sass/screen.scss */
 .deck-container .caption {
   font-variant: small-caps;
   text-align: left;
   padding-top: -5px;
   color: black;
 }
-/* line 572, ../../sass/screen.scss */
+/* line 574, ../../sass/screen.scss */
 .deck-container .emphasizebox {
   background: rgba(0, 204, 255, 0.05);
   padding: 15px;
@@ -739,23 +745,23 @@ h1, h2 {
   -webkit-border-radius: 30px;
   border: 2px solid rgba(0, 204, 255, 0.1);
 }
-/* line 581, ../../sass/screen.scss */
+/* line 583, ../../sass/screen.scss */
 .deck-container .bordered {
   /* use in <div> tags to make a highlighted block */
   border: 2px solid #3f3f3f;
 }
-/* line 585, ../../sass/screen.scss */
+/* line 587, ../../sass/screen.scss */
 .deck-container .vmargin {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 589, ../../sass/screen.scss */
+/* line 591, ../../sass/screen.scss */
 .deck-container .hmargin {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-/* line 597, ../../sass/screen.scss */
+/* line 599, ../../sass/screen.scss */
 .deck-container table {
   margin: 0 0 1.5em;
   border-collapse: separate;
@@ -763,14 +769,14 @@ h1, h2 {
   border-bottom: 1px solid #CCC;
 }
 
-/* line 606, ../../sass/screen.scss */
+/* line 608, ../../sass/screen.scss */
 .deck-container th, .deck-container td {
   padding: .25em 1em .25em 0;
   border-top: 1px solid #CCC;
   vertical-align: top;
   text-align: left;
 }
-/* line 612, ../../sass/screen.scss */
+/* line 614, ../../sass/screen.scss */
 .deck-container th {
   font-weight: bold;
 }

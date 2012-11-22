@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='lectures.html'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='examples.html'>Examples</a>
+</li>
+<li>
+<a href='talks.html'>Talks</a>
+</li>
+<li>
+<a href='resources.html'>Resources</a>
+</li>
+<li>
+<a href='course_2012_1.html'>Spring 2012</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Responsive Font Sizing</h1><div class='actions'><a href='examples/responsiveFontSizing'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/responsiveFontSizing'>Browse Source Code</a></div>
+<p>
+Sizing the fonts is the first place where to add fluidity to a Web design. There are multiple ways for sizing
+the fonts:
+</p>
+<ul>
+<li>
+<strong>pixels</strong>
+: specifying the exact pixel size of the fonts gives the greatest control how the text is displayed by
+the browser. However, there are few problems with this approach. First, pixel based styling of the fonts
+doesn't cascade. Therefore, you must specify the exact pixel size of all the elements in the page. Second,
+on devices with different screen sizes and pixel densities the result can be greatly different.
+</li>
+<li>
+<strong>ems</strong>
+: the em unit is becoming the most common way of sizing fonts due to its flexibility. One em equals to
+the current font size. For example, if the text of the body is set to 16px, then 1em = 16px and 2em = 32px.
+Font sizing with em cascades from parent to children and is resizable by the browser. Paradoxically, one
+caveat of ems is that it
+<em>cascades</em>
+, so the font size of an element depends on the parent which depends on its parent. Sometimes this can lead
+to an unexpected behaviour when it's not properly controlled.
+</li>
+<li>
+<strong>percentages</strong>
+: behaves like ems but ems is more common.
+</li>
+<li>
+<strong>rems</strong>
+: rems behaves like ems with the difference that it always refers to the font-size of the root element.
+While there is a good support for rems on desktop browser, the support on mobile browsers is lacking.
+</li>
+</ul>
+<p>
+In this example we style the font-size of the headers using ems. Test it in the browser and try to resize the
+font. The text will resize while keeping the proportions. Note the difference between span and span.smaller
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;body&gt;</span>&#x000A;  <span class="tag">&lt;h1&gt;</span>Lorem Ipsum<span class="tag">&lt;/h1&gt;</span>&#x000A;  <span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">'</span><span class="content">container</span><span class="delimiter">'</span></span><span class="tag">&gt;</span>&#x000A;    <span class="tag">&lt;div&gt;</span>&#x000A;      <span class="tag">&lt;h2&gt;</span>Chapter 1<span class="tag">&lt;span&gt;</span>Lorem ipsum<span class="tag">&lt;/span&gt;</span><span class="tag">&lt;/h2&gt;</span>&#x000A;      <span class="tag">&lt;p&gt;</span>Lorem ipsum ...<span class="tag">&lt;/p&gt;</span>&#x000A;    <span class="tag">&lt;/div&gt;</span>&#x000A;    <span class="tag">&lt;div&gt;</span>&#x000A;      <span class="tag">&lt;h2&gt;</span>Chapter 2<span class="tag">&lt;span</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">'</span><span class="content">smaller</span><span class="delimiter">'</span></span><span class="tag">&gt;</span>Aliquam erat<span class="tag">&lt;/span&gt;</span><span class="tag">&lt;/h2&gt;</span>&#x000A;      <span class="tag">&lt;p&gt;</span>Aliquam erat ...<span class="tag">&lt;/p&gt;</span>&#x000A;    <span class="tag">&lt;/div&gt;</span>&#x000A;  <span class="tag">&lt;/div&gt;</span>&#x000A;<span class="tag">&lt;/body&gt;</span>&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="type">body</span> { <span class="key">font-size</span>: <span class="float">16px</span>; }&#x000A;<span class="type">h1</span> { <span class="key">font-size</span>: <span class="float">2em</span>; } <span class="comment">/* 32px */</span>&#x000A;<span class="type">h2</span> { <span class="key">font-size</span>: <span class="float">1.5em</span>; } <span class="comment">/* 24px */</span>&#x000A;<span class="type">span</span> { <span class="key">font-size</span>: <span class="float">1em</span>; }&#x000A;<span class="type">span</span><span class="class">.smaller</span> { <span class="key">font-size</span>: <span class="float">.6666em</span>; } <span class="comment">/* 16px / 24px */</span></pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.sc5.io'><img src='imgs/SC5.jpg' /></a>
+<a href='http://corporate.foreca.com/en/'><img src='imgs/foreca.png' /></a>
+</div>
+</div>
+</body>
+</html>

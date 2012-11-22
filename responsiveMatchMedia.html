@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> ><! <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<meta charset='utf-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<title>
+Mobile Web Applications Develeopment with HTML5
+</title>
+<meta content='A course on developing mobile web applications with HTML5' name='description' />
+<meta content='Claudio Riva' name='author' />
+<meta content='width=1024' name='viewport' />
+<!-- Core and extension CSS files -->
+<link href='css/documentation.css' rel='stylesheet' />
+<link href='css/coderay_dark.css' rel='stylesheet' />
+<!-- /%link(href="css/pygments.css" rel="stylesheet") -->
+<script type='text/javascript'>
+  //<![CDATA[
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29188416-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+</head>
+<body>
+<div id='main'>
+<div id='header-wrapper'>
+<div class='basic' id='header'>
+<div class='title'>
+Mobile Web Applications Development with HTML5
+</div>
+</div>
+</div>
+<div id='menu'>
+<ul>
+<li>
+<a href='index.html#'>Home</a>
+</li>
+<li>
+<a href='lectures.html'>Lectures</a>
+</li>
+<li>
+<a href='index.html#Schedule'>Schedule</a>
+</li>
+<li>
+<a href='examples.html'>Examples</a>
+</li>
+<li>
+<a href='talks.html'>Talks</a>
+</li>
+<li>
+<a href='resources.html'>Resources</a>
+</li>
+<li>
+<a href='course_2012_1.html'>Spring 2012</a>
+</li>
+<li>
+<a href='index.html#About'>About</a>
+</li>
+</ul>
+</div>
+<div id='wrapper'>
+<a class='twitter-follow-button' data-show-count='false' data-show-screen-name='false' data-size='large' href='https://twitter.com/aaltowebapps'>Follow @aaltowebapps</a>
+<div class='content-wrapper'>
+<h1>Responsive Match Media</h1><div class='actions'><a href='examples/responsiveMatchMedia'>Try it</a><a href='https://github.com/aaltowebapps/MobileWebAppsExamples/tree/master/responsiveMatchMedia'>Browse Source Code</a></div>
+<p>
+In this example we demonstrate how to execute a media query from Javascript. We take a mobile up approach
+and in the basic page the list of albums doesn't contain the thumbnails. We assume this is the most optimal design
+for small mobile devices with a viewport width of less than 50em. For devices with a wider display we can
+show the thumbnails. We do that by inserting the src elements in the DOM tree using JS.
+</p>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="tag">%ul</span><span class="class">.albums</span>(<span class="attribute-name">data-role</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">listview</span><span class="delimiter">&quot;</span></span>)&#x000A;  <span class="tag">%li</span>(<span class="attribute-name">data-img</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">cover1.jpg</span><span class="delimiter">&quot;</span></span>)&#x000A;    Nirvana&#x000A;  <span class="tag">%li</span>(<span class="attribute-name">data-img</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">cover2.jpg</span><span class="delimiter">&quot;</span></span>)&#x000A;    The Beatles&#x000A;  <span class="tag">%li</span>(<span class="attribute-name">data-img</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">cover3.jpg</span><span class="delimiter">&quot;</span></span>)&#x000A;    Madonna&#x000A;<span class="tag">%li</span>(<span class="attribute-name">data-img</span> = <span class="string"><span class="delimiter">&quot;</span><span class="content">cover4.jpg</span><span class="delimiter">&quot;</span></span>)&#x000A;</pre></div>
+</div>
+</div>
+<div class='code_block'>
+<div class='code_header'>
+index.html.haml
+</div>
+<div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>(<span class="keyword">function</span>() {&#x000A;  <span class="keyword">if</span>(window.matchMedia(<span class="string"><span class="delimiter">&quot;</span><span class="content"> (min-width: 50em) </span><span class="delimiter">&quot;</span></span>).matches) {&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">[data-img]</span><span class="delimiter">&quot;</span></span>).each(<span class="keyword">function</span>(i,val) {&#x000A;      <span class="keyword">var</span> img = <span class="keyword">new</span> Image();&#x000A;      img.src = <span class="predefined">$</span>(val).data(<span class="string"><span class="delimiter">'</span><span class="content">img</span><span class="delimiter">'</span></span>);&#x000A;      <span class="predefined">$</span>(val).prepend(img);&#x000A;    })&#x000A;    <span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">.albums</span><span class="delimiter">'</span></span>).listview(<span class="string"><span class="delimiter">'</span><span class="content">refresh</span><span class="delimiter">'</span></span>);&#x000A;  }&#x000A;});</pre></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div id='footer'>
+<div class='sponsor'>
+<a href='http://www.aalto.fi/'><img src='imgs/aaltouni.png' /></a>
+<a href='http://www.nokia.com/'><img src='imgs/nokia.png' /></a>
+<a href='http://www.sc5.io'><img src='imgs/SC5.jpg' /></a>
+<a href='http://corporate.foreca.com/en/'><img src='imgs/foreca.png' /></a>
+</div>
+</div>
+</body>
+</html>
