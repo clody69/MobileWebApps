@@ -122,10 +122,13 @@
         %li=example_url_tag('mvcBackboneBlog')
         %li=example_url_tag('mvcBackboneLocalBlog')
 
+
 .lecture_block
   .header
     Friday 23rd November 2012
   .lecture
+    .video
+      %iframe(src="http://player.vimeo.com/video/54268454?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
     =lecture_tag("Lecture 4: CSS3 and Responsive Design", "8:15-10:00", "", "lecture4_2012_2.html")
     .description
       %p 
@@ -157,23 +160,36 @@
   .header
     Friday 30th November 2012
   .lecture
-    =lecture_tag("Lecture 5: HTML5 APIs", "8:15-10:00")
+    .video
+      %iframe(src="http://player.vimeo.com/video/54636432?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 5: HTML5 APIs", "8:15-10:00", "", "lecture5_2012_2.html")
+
     
     .description
       %p 
         In this lecture we explore the APIs for drawing on the canvas, for reading from the file system, for using the new 
         XMLHttpRequest Level 2, for accessing the camera, accelerometers and geolocation and, for playing audio/video files.
+      Examples:
+      %ul
+        %li=example_url_tag('canvasSmile')
+        %li=example_url_tag('canvasInstagram')
+        %li=example_url_tag('fileApiTests')
+        %li=example_url_tag('deviceOrientation')
+        %li=example_url_tag('deviceGeolocation')
+        %li=example_url_tag('videoTest')
 
   .lecture
     =lecture_tag("Lab 5: Work on the challenge","10:15:12:00")
     .description
       %p This lab will be used for working on the webapp challenge
-        
+
 .lecture_block
   .header
     Friday 7th December 2012
   .lecture
-    =lecture_tag("Lecture 6: Websockets & Webworkers", "8:15-10:00")
+    .video
+      %iframe(src="http://player.vimeo.com/video/55469170?title=0&amp;byline=0&amp;portrait=0" width="400" height="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen)
+    =lecture_tag("Lecture 6: Websockets & Webworkers", "8:15-10:00", "", "lecture6_2012_2.html")
     .description
       %p 
         In this lecture we focus on the real-time communication API that is now supported in HTML5: 
@@ -182,9 +198,17 @@
           %li Web Sockets
           %li Server-Sent Events 
           %li Web Workers
-
+      Examples:
+      %ul
+        %li=example_url_tag('websocketsEcho')
+        %li=example_url_tag('websocketsEchoEM')
+        %li=example_url_tag('websocketsChatEM')
+        %li=example_url_tag('websocketsDrawEM')
+        %li=example_url_tag('websocketsDriveEM')
+        %li=example_url_tag('websocketsChatPusher')
+        %li=example_url_tag('websocketsChatSSE')
   .lecture
-    =lecture_tag("Lab 6: Lab exercise", "10:15-12:00")
+    =lecture_tag("Lab 6: Lab exercise", "10:15-12:00", "", "lab6_2012_2.html")
     .description
       %p This lab will be use for practical exercises on specific topics. 
   
@@ -192,11 +216,10 @@
   .header
     Friday 14th December 2012
   .lecture
-    =lecture_tag("Lecture 7: Developing native web apps with HTML5", "8:15-10:00")
+    =lecture_tag("Lab 6: Lab exercise", "8:15-10:00", "", "lab6_2012_2.html")
     .description
-      %p 
-        In this lecture we introduce the technologies for creating native applications by embedding an HTML5 web view. 
-        In particular we'll focus on PhoneGap. 
+      %p This lab will be use for practical exercises on specific topics. 
+
   .lecture
     =lecture_tag("Lab 7: Work on the Challenge", "10:15-12:00")
     .description

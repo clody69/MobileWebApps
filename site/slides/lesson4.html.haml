@@ -1,7 +1,7 @@
-=title_slide_tag("Lecture 4: Canvas, File & Device Access")
+=title_slide_tag("Lecture 5: Canvas, File & Device Access")
 
 %section.slide.section-title
-  %h1 Lecture 4: Canvas, File & Device Access
+  %h1 Lecture 5: Canvas, File & Device Access
   .agenda
     %p Canvas API
     %p Bytes, Blobs and File API
@@ -11,6 +11,7 @@
     %p Audio & Video
 
 .background(data-background = "bg-lesson4-starry-night")
+
 
 %section.slide
   %header
@@ -780,25 +781,6 @@
       %li 
         %a(href="http://www.professorcloud.com/svg-to-canvas/") SVG to Canvas
     
-%section.slide
-  %header
-    What can you do with a canvas ? 
-  %article
-    An App that 
-    %ul
-      %li.slide is #1 in 79 countries
-      %li.slide has been downloaded 35+ million times just 6 weeks after launch
-      %li.slide generates $1 million+ revenues/day
-      %li.slide has 15+ million users
-      %li.slide generates 3,000 drawings per second
-      %li.slide generated 2 billion drawings since launch (15 Feb 2012)
-      %li.slide reached 1 million users in 9 days
-
-%section.slide
-  %header
-    Draw Something
-  %article
-    =image_tag "lesson4/drawsomething.png", :resize => true
 
 .background(data-background = "bg-lesson4-disk")
 
@@ -970,7 +952,10 @@
   $(function () {
     $("#fileSelect").live('change', function(e) {
       $.each(this.files, function (i,file){
-        console.log(file.name, file.size, file.type, file.lastModifiedDate);
+        console.log("File Name: " + file.name);
+        console.log("File Size: " + file.size);
+        console.log("File Type: " + file.type);
+        console.log("Last Modified: " + file.lastModifiedDate);
       });
     });
   });
@@ -1203,7 +1188,7 @@
 %section.slide
   %header
     %span.terminal FileReader.readAsText()    
-    %span.smaller
+    %span
       =example_url_tag("fileAPITests")    
   %article
     :coderay
@@ -1218,7 +1203,7 @@
 %section.slide
   %header
     %span.terminal FileReader.readAsDataURL()
-    %span.smaller
+    %span
       =example_url_tag("fileAPITests")      
   %article
     :coderay
@@ -1231,7 +1216,10 @@
           reader.readAsDataURL(this.files[0]);         
  
 %section.slide
-  %header What works on mobile ?
+  %header 
+    What works on mobile ? (Check 
+    %a(href="http://caniuse.com/#search=file%20") CanIuse
+    \)
   %article
     =image_tag('lesson4/file-api-browsers.png', :resize=>true)
     .autobox.smaller
@@ -1266,8 +1254,8 @@
       multipart/form-data
   %article
     %p Content type for submitting forms that contain binary data
-    %p Works with all browsers (except iOS)
-    .vmargin
+    %p Works with all mobile browsers (except < iOS6)
+    .vmargin.smaller
       :coderay
         #!haml    
         %form(id="uploadFormPost" action="/uploadFormData" method="post" data-ajax='false' enctype="multipart/form-data")
@@ -1295,7 +1283,7 @@
       More powerful API will come with 
       %span.terminal
         %a(href="http://dev.w3.org/2011/webrtc/editor/getusermedia.html") getUserMedia
-    %p Only implemented in Android Browser 3.0 onwards and Firefox for Android 11
+    %p Only implemented in Android Browser 3.0, Firefox for Android 11 and iOS6 onwards
     %p 
       Based on the extension of the 
       %span.terminal accept 
