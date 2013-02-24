@@ -567,7 +567,7 @@ span.terminal, p.terminal, .terminal {
 /*------------------------------------------------------------------------------
     Not Footer
 ------------------------------------------------------------------------------*/
-/* line 487, ../../sass/documentation.scss */
+/* line 488, ../../sass/documentation.scss */
 #wrapper {
   padding: 50px 25px;
   overflow: hidden;
@@ -583,17 +583,17 @@ span.terminal, p.terminal, .terminal {
   border-radius: 20px;
 }
 
-/* line 501, ../../sass/documentation.scss */
+/* line 504, ../../sass/documentation.scss */
 #ads-wrapper {
   margin: -190px auto 0px auto;
 }
 
-/* line 505, ../../sass/documentation.scss */
+/* line 508, ../../sass/documentation.scss */
 .ads {
   margin: 7px 7px;
 }
 
-/* line 511, ../../sass/documentation.scss */
+/* line 514, ../../sass/documentation.scss */
 .content-wrapper {
   width: 100%;
   position: relative;
@@ -603,28 +603,28 @@ span.terminal, p.terminal, .terminal {
   margin-top: 10px;
 }
 
-/* line 520, ../../sass/documentation.scss */
+/* line 523, ../../sass/documentation.scss */
 .content-wrapper dl {
   margin-left: 10px;
 }
 
-/* line 524, ../../sass/documentation.scss */
+/* line 527, ../../sass/documentation.scss */
 .content-wrapper dt {
   color: #666;
 }
 
-/* line 529, ../../sass/documentation.scss */
+/* line 532, ../../sass/documentation.scss */
 .content-wrapper ul,
 .content-wrapper ol {
   margin-left: 1.5em;
 }
 
-/* line 533, ../../sass/documentation.scss */
+/* line 536, ../../sass/documentation.scss */
 .content-wrapper ul {
   list-style-type: disc;
 }
 
-/* line 537, ../../sass/documentation.scss */
+/* line 540, ../../sass/documentation.scss */
 .content-wrapper img {
   max-width: 100%;
   border: 1px solid #dddddd;
@@ -633,17 +633,17 @@ span.terminal, p.terminal, .terminal {
   box-shadow: 1px 1px 3px #ddd;
 }
 
-/* line 546, ../../sass/documentation.scss */
+/* line 549, ../../sass/documentation.scss */
 .content-wrapper .description {
   margin-left: 20px;
 }
 
-/* line 550, ../../sass/documentation.scss */
+/* line 553, ../../sass/documentation.scss */
 .content-wrapper .verseblock-content {
   padding: 3px;
 }
 
-/* line 559, ../../sass/documentation.scss */
+/* line 562, ../../sass/documentation.scss */
 .content-wrapper .verseblock-content,
 .content-wrapper .sectionbody .dlist dt,
 .content-wrapper p > tt,
@@ -664,17 +664,17 @@ p code {
   display: inline-block;
 }
 
-/* line 574, ../../sass/documentation.scss */
+/* line 577, ../../sass/documentation.scss */
 .content-wrapper .sectionbody .dlist dt {
   margin-top: 10px;
 }
 
-/* line 578, ../../sass/documentation.scss */
+/* line 581, ../../sass/documentation.scss */
 .content-wrapper .verseblock-content {
   padding: 3px;
 }
 
-/* line 582, ../../sass/documentation.scss */
+/* line 585, ../../sass/documentation.scss */
 .content-wrapper .intro {
   color: #868686;
 }
@@ -683,7 +683,7 @@ p code {
 /*------------------------------------------------------------------------------
      Pre/Code Styles
 ------------------------------------------------------------------------------*/
-/* line 591, ../../sass/documentation.scss */
+/* line 594, ../../sass/documentation.scss */
 code {
   white-space: nowrap;
 }
@@ -691,13 +691,13 @@ code {
 /*------------------------------------------------------------------------------
     More Info Expander
 ------------------------------------------------------------------------------*/
-/* line 598, ../../sass/documentation.scss */
+/* line 601, ../../sass/documentation.scss */
 .more-info {
   margin: 10px 0;
   position: relative;
 }
 
-/* line 602, ../../sass/documentation.scss */
+/* line 605, ../../sass/documentation.scss */
 .more-info > h4 {
   background-image: url("../images/dropdown_sprites.jpg");
   background-repeat: no-repeat;
@@ -707,27 +707,27 @@ code {
   font-weight: normal;
 }
 
-/* line 610, ../../sass/documentation.scss */
+/* line 613, ../../sass/documentation.scss */
 .more-info h4.compressed {
   background-position: 0 0;
 }
 
-/* line 613, ../../sass/documentation.scss */
+/* line 616, ../../sass/documentation.scss */
 .more-info:hover h4.compressed {
   background-position: 0 -23px;
 }
 
-/* line 616, ../../sass/documentation.scss */
+/* line 619, ../../sass/documentation.scss */
 .more-info h4.expanded {
   background-position: 0 -46px;
 }
 
-/* line 619, ../../sass/documentation.scss */
+/* line 622, ../../sass/documentation.scss */
 .more-info:hover h4.expanded {
   background-position: 0 -69px;
 }
 
-/* line 623, ../../sass/documentation.scss */
+/* line 626, ../../sass/documentation.scss */
 .more-info .more-content {
   display: none;
   -webkit-border-radius: 3px;
@@ -742,12 +742,12 @@ code {
   margin: 15px 0 30px;
 }
 
-/* line 637, ../../sass/documentation.scss */
+/* line 640, ../../sass/documentation.scss */
 .more-info .more-content h4 {
   margin-top: 1em;
 }
 
-/* line 641, ../../sass/documentation.scss */
+/* line 644, ../../sass/documentation.scss */
 .more-info .more-content pre {
   margin-left: 0px;
 }
@@ -755,7 +755,7 @@ code {
 /****************************/
 /*       List Module        */
 /****************************/
-/* line 649, ../../sass/documentation.scss */
+/* line 652, ../../sass/documentation.scss */
 .list-module h2 {
   border: solid #cacaca;
   border-width: 1px;
@@ -782,7 +782,7 @@ code {
   margin: 0px;
 }
 
-/* line 675, ../../sass/documentation.scss */
+/* line 678, ../../sass/documentation.scss */
 .list-module .list-body {
   border: solid #cacaca;
   border-width: 0px 1px 1px 1px;
@@ -798,7 +798,7 @@ code {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* line 690, ../../sass/documentation.scss */
+/* line 693, ../../sass/documentation.scss */
 .list-module .list-body .icon {
   display: block;
   height: 28px;
@@ -809,7 +809,7 @@ code {
   background: transparent url(images/popular_guide_sprites.png) 0 0 no-repeat;
 }
 
-/* line 700, ../../sass/documentation.scss */
+/* line 703, ../../sass/documentation.scss */
 .list-module a {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #e9ecee;
@@ -818,7 +818,7 @@ code {
   display: block;
 }
 
-/* line 708, ../../sass/documentation.scss */
+/* line 711, ../../sass/documentation.scss */
 .list-module a:hover {
   border-top: 1px solid #fafafb;
   border-bottom: 1px solid #e5e8ea;
@@ -826,29 +826,29 @@ code {
   text-decoration: none;
 }
 
-/* line 715, ../../sass/documentation.scss */
+/* line 718, ../../sass/documentation.scss */
 .list-module a h3 {
   color: #4183C4;
 }
 
-/* line 719, ../../sass/documentation.scss */
+/* line 722, ../../sass/documentation.scss */
 .list-module a:hover h3 {
   text-decoration: underline;
 }
 
-/* line 723, ../../sass/documentation.scss */
+/* line 726, ../../sass/documentation.scss */
 .list-module ul {
   list-style-type: none;
   margin: 0px;
 }
 
-/* line 728, ../../sass/documentation.scss */
+/* line 731, ../../sass/documentation.scss */
 .list-module h3 {
   margin: 0px;
   font-size: 13px;
 }
 
-/* line 733, ../../sass/documentation.scss */
+/* line 736, ../../sass/documentation.scss */
 .list-module .list-body a p {
   color: #666;
   margin: 0px;
@@ -858,13 +858,13 @@ code {
 /****************************/
 /*  Expandable List Module  */
 /****************************/
-/* line 744, ../../sass/documentation.scss */
+/* line 747, ../../sass/documentation.scss */
 div.expandable > ul h3 {
   display: table;
   width: 100%;
 }
 
-/* line 749, ../../sass/documentation.scss */
+/* line 752, ../../sass/documentation.scss */
 div.expandable > ul h3 > a {
   display: table-cell;
   background-color: #e1e1e1;
@@ -877,7 +877,7 @@ div.expandable > ul h3 > a {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#e1e1e1');
 }
 
-/* line 761, ../../sass/documentation.scss */
+/* line 764, ../../sass/documentation.scss */
 div.expandable > ul h3 > a:hover {
   background-color: #e1e1e1;
   background-image: -moz-linear-gradient(top, #e1e1e1, #d1d1d1);
@@ -889,7 +889,7 @@ div.expandable > ul h3 > a:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e1e1e1', EndColorStr='#d1d1d1');
 }
 
-/* line 773, ../../sass/documentation.scss */
+/* line 776, ../../sass/documentation.scss */
 div.expandable > ul h3 > a.collapsed,
 div.expandable > ul h3 > a.expanded {
   background-image: url(/shared/images/expand-arrows.png);
@@ -900,12 +900,12 @@ div.expandable > ul h3 > a.expanded {
   padding: 8px 11px;
 }
 
-/* line 782, ../../sass/documentation.scss */
+/* line 785, ../../sass/documentation.scss */
 div.expandable > ul h3 > a.expanded {
   background-position: -38px -3px;
 }
 
-/* line 786, ../../sass/documentation.scss */
+/* line 789, ../../sass/documentation.scss */
 div.expandable > ul h3 > a.collapsed:hover {
   background-image: url(/shared/images/expand-arrows.png);
   background-position: 0px -43px;
@@ -915,7 +915,7 @@ div.expandable > ul h3 > a.collapsed:hover {
   padding: 8px 11px;
 }
 
-/* line 795, ../../sass/documentation.scss */
+/* line 798, ../../sass/documentation.scss */
 div.expandable > ul h3 > a.expanded:hover {
   background-position: -38px -43px;
 }
